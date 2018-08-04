@@ -89,16 +89,16 @@ message Issues {
 // Analyzer and tag metadata
 message AnalyzerTag {
   // @inject_tag:db:"analyzer_shortcode"
-  string AnalyzerShortcode = 1;
+  string analyzer_shortcode = 1;
 
   // @inject_tag:db:"tag_slug"
-  string TagSlug = 2;
+  string tag_slug = 2;
 }
 
 // Analyzer and issue metadata
 message AnalyzerIssue {
-  string AnalyzerShortcode = 1;
-  string IssueName = 2;
+  string analyzer_shortcode = 1;
+  string issue_name = 2;
 }
 
 // Enums
