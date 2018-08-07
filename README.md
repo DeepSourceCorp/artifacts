@@ -1,7 +1,8 @@
 # Contracts
 
-Contract defenitions of DeepSource
+Contract definitions for services in DeepSource.
 
-### Available contracts
+### Running tests
+ - Install [uber/prototool](https://github.com/uber/prototool) and make sure it's available in your path.
+ - Run `make test`.
 
-- Pokedex
