@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package beacon;
 
+// placeholder message
+message Empty {}
+
 // Stream authorization request message
 message StreamAuthRequest {
     // The Beacon API key for the team or user account
@@ -39,14 +42,6 @@ message Event {
 
     // Count of these events, aggregated over a time period
     int64 count = 3;
-
-    // ISO-8601 date-time string in UTC, denoting the starting time of the
-    // first tracked event in this collection
-    string start_time = 4;
-
-    // ISO-8601 date-time string in UTC, denoting the starting time of the
-    // last tracked event in this collection
-    string end_time = 5;
 }
 
 // A batch of events sent to Beacon server
@@ -63,4 +58,20 @@ message Batch {
 
     // list of events that are to be sent in this batch
     repeated Event events = 3;
+
+    // ISO-8601 date-time string in UTC, denoting the starting time of the
+    // first tracked event in this batch
+    string start_time = 4;
+
+    // ISO-8601 date-time string in UTC, denoting the starting time of the
+    // last tracked event in this batch
+    string end_time = 5;
+}
+
+service Beacon {
+    // make an initialization request for a stream
+    rpc InitializeStream (StreamAuthRequest) returns (StreamAuthResponse) {}
+
+    // flush a batch to the server
+    rpc Transmit (Batch) returns (Empty) {}
 }
