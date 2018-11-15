@@ -1,7 +1,7 @@
 python,BAN-B101,assert_used,warning,minor,security,"Usage of `assert` statement in application logic is discouraged. `assert` is removed with compiling to optimised byte code (`python -o` producing *.pyo files).Consider raising an exception instead. Ideally, `assert` statement should be used only in tests."
 python,BAN-B102,exec_used,warning,major,security,"Usage of `exec` statement is strongly discouraged, since it opens up possibilities of unauthorized code execution if the staments are not escaped properly."
-python,BAN-B103,set_bad_file_permissions,warning,minor,security,
-python,BAN-B104,hardcoded_bind_all_interfaces,warning,major,security,
+python,BAN-B103,set_bad_file_permissions,warning,minor,security,A particularly permissive control flag was used with `chmod`.
+python,BAN-B104,hardcoded_bind_all_interfaces,warning,major,security,"Binding to all network interfaces can potentially open up a service to traffic on unintended interfaces, that may not be properly documented or secured. "
 python,BAN-B105,hardcoded_password_string,warning,minor,security,
 python,BAN-B106,hardcoded_password_funcarg,warning,minor,security,
 python,BAN-B107,hardcoded_password_default,warning,minor,security,
@@ -199,42 +199,44 @@ python,FLK8-F405,"name may be undefined, or defined from star imports: module",w
 Confirm that the variable is defined in the star imports. If it is, explicitly import it instead of importing `*`. If not, then define the variable."
 python,FLK8-F406,‘from module import *’ only allowed at module level,warning,major,bug-risk,"Importing `*` is generally discouraged, but if there's a need regardless, such imports should only be done on module level."
 python,FLK8-F407,an undefined __future__ feature name was imported,warning,critical,bug-risk,The imported name does not exist in the `__future__` package.
-python,FLK8-F601,dictionary key name repeated with different values,warning,major,bug-risk,
-python,FLK8-F602,dictionary key variable name repeated with different values,warning,major,bug-risk,
-python,FLK8-F621,too many expressions in an assignment with star-unpacking,warning,major,bug-risk,
-python,FLK8-F622,"two or more starred expressions in an assignment (a, *b, *c = d)",warning,major,bug-risk,
-python,FLK8-F631,"assertion test is a tuple, which are always True",warning,major,bug-risk,
-python,FLK8-F701,a break statement outside of a while or for loop,,,,
-python,FLK8-F702,a continue statement outside of a while or for loop,,,,
-python,FLK8-F703,a continue statement in a finally block in a loop,,,,
-python,FLK8-F704,a yield or yield from statement outside of a function,,,,
-python,FLK8-F705,a return statement with arguments inside a generator,,,,
-python,FLK8-F706,a return statement outside of a function/method,,,,
-python,FLK8-F707,an except: block as not the last exception handler,,,,
+python,FLK8-F601,Dictionary key name repeated with different values,warning,major,bug-risk,All dictionary keys should be unique.
+python,FLK8-F602,Dictionary key variable name repeated with different values,warning,major,bug-risk,All dictionary keys should be unique.
+python,FLK8-F621,Too many expressions in an assignment with star-unpacking,warning,major,bug-risk,
+python,FLK8-F622,"Two or more starred expressions in an assignment (a, *b, *c = d)",warning,major,bug-risk,
+python,FLK8-F631,"Assertion test is a tuple, which are always True",warning,major,bug-risk,"A tuple with at least one element is always truthy, so the assertion will always pass. Remove the parentheses."
+python,FLK8-F701,A break statement outside of a while or for loop,warning,major,bug-risk,break statement should not be used outside a loop.
+python,FLK8-F702,A continue statement outside of a while or for loop,warning,major,bug-risk,continue statement should not be used outside a loop.
+python,FLK8-F703,A continue statement in a finally block in a loop,warning,minor,bug-risk,"continue statement doesn't have any effect in the finally block, and can be removed."
+python,FLK8-F704,A yield or yield from statement outside of a function,warning,major,bug-risk,yield should not be used outside of a function.
+python,FLK8-F705,A return statement with arguments inside a generator,warning,major,bug-risk,A return statement with arguments should not be used inside a generator.
+python,FLK8-F706,A return statement outside of a function/method,warning,major,bug-risk,Return statement should not be used outside of a function or method.
+python,FLK8-F707,An except: block as not the last exception handler,warning,major,bug-risk,A bare exception catcher should always be the last block in a `try...except`.
 python,FLK8-F721,doctest syntax error syntax error in forward type annotation,,,,
 python,FLK8-F722,doctest syntax error syntax error in forward type annotation,,,,
-python,FLK8-F811,redefinition of unused name from line N,warning,minor,bug-risk,"A module has been imported twice, and the original import is unused. One of the imports should be removed and you should ensure that it is being used in the file."
-python,FLK8-F812,list comprehension redefines name from line N,warning,minor,bug-risk,A list comprehension is using the same name as another variable defined in the module. Either change the variable name in the list comprehension or change it in the module.
-python,FLK8-F821,undefined name name,error,critical,bug-risk,The variable name is not defined where it is used.
-python,FLK8-F822,undefined name name in __all__,error,critical,bug-risk,An undefined module was specified in the `__all__` list. Ensure that it is specified in your file or remove the variable from `__all__`.
-python,FLK8-F823,local variable name … referenced before assignment,warning,major,bug-risk,Local variables should be defined before the are referenced.
-python,FLK8-F831,duplicate argument name in function definition,,,,
-python,FLK8-F841,local variable name is assigned to but never used,,,,
-python,FLK8-F901,raise NotImplemented should be raise NotImplementedError,,,,
-python,FLK8-W191,indentation contains tabs,,,,
-python,FLK8-W291,trailing whitespace,,,,
-python,FLK8-W292,no newline at end of file,,,,
-python,FLK8-W293,blank line contains whitespace,,,,
-python,FLK8-W391,blank line at end of file,,,,
-python,FLK8-W503,line break before binary operator,,,,
-python,FLK8-W504,line break after binary operator,,,,
-python,FLK8-W505,doc line too long (82 > 79 characters),,,,
-python,FLK8-W601,".has_key() is deprecated, use 'in'",,,,
-python,FLK8-W602,deprecated form of raising exception,,,,
-python,FLK8-W603,"<>' is deprecated, use '!='",,,,
-python,FLK8-W604,"backticks are deprecated, use 'repr()'",,,,
-python,FLK8-W605,invalid escape sequence 'x',,,,
-python,FLK8-W606,async' and 'await' are reserved keywords starting with Python 3.7,,,,
+python,FLK8-F811,Redefinition of unused name from line N,warning,minor,bug-risk,"A module has been imported twice, and the original import is unused. One of the imports should be removed and you should ensure that it is being used in the file."
+python,FLK8-F812,List comprehension redefines name from line N,warning,minor,bug-risk,A list comprehension is using the same name as another variable defined in the module. Either change the variable name in the list comprehension or change it in the module.
+python,FLK8-F821,Undefined name name,error,critical,bug-risk,The variable name is not defined where it is used.
+python,FLK8-F822,Undefined name name in __all__,error,critical,bug-risk,An undefined module was specified in the `__all__` list. Ensure that it is specified in your file or remove the variable from `__all__`.
+python,FLK8-F823,Local variable name … referenced before assignment,warning,major,bug-risk,Local variables should be defined before the are referenced.
+python,FLK8-F831,Duplicate argument name in function definition,warning,major,bug-risk,Two or more parameters in a function definition have the same name. All names in the function definition should be distinct.
+python,FLK8-F841,Local variable name is assigned to but never used,warning,minor,bug-risk,A local variable in your function was defined but is not being used. This local variable should be removed.
+python,FLK8-F901,`raise NotImplemented` should be `raise NotImplementedError`,warning,major,bug-risk,"`NotImplemented` signals to the runtime that it should ask someone else to satisfy the operation. In the expression `a == b`, if `a.__eq__(b)` returns `NotImplemented`, then Python tries `b.__eq__(a)`. If `b` knows enough to return `True` or `False`, then the expression can succeed. If it doesn't, then the runtime will fall back to the built-in behavior (which is based on identity for `==` and `!=`).
+
+Raising an exception would break out of the sort unless caught, whereas `NotImplemented` doesn't get raised and can be used in further tests."
+python,FLK8-W191,Indentation contains tabs,info,minor,style,Indentation has tabs when only spaces are expected. Change all tabs to spaces.
+python,FLK8-W291,Trailing whitespace,info,minor,style,There should be no whitespace after the final character in a line.
+python,FLK8-W292,No newline at end of file,info,minor,style,Files should end with a newline.
+python,FLK8-W293,Blank line contains whitespace,info,minor,style,Blank lines should not contain any tabs or spaces.
+python,FLK8-W391,Blank line at end of file,info,minor,style,"There should be one, and only one, blank line at the end of each file. This warning will occur when there are two or more blank lines."
+python,FLK8-W503,Line break before binary operator,info,minor,style,Line breaks should occur after the binary operator to keep all variable names aligned.
+python,FLK8-W504,Line break after binary operator,info,minor,style,
+python,FLK8-W505,Doc line too long (82 > 79 characters),info,minor,style,Docstring line lengths are recommended to be no greater than 79 characters.
+python,FLK8-W601,".has_key() is deprecated, use 'in'",warning,major,code-smell,`.has_key()` was deprecated in Python 2. It is recommended to use the in operator instead.
+python,FLK8-W602,deprecated form of raising exception,warning,major,code-smell,"The `raise Exception, message` form of raising exceptions is deprecated. Use the new form, `raise Exception(message)`."
+python,FLK8-W603,"<>' is deprecated, use '!='",warning,major,code-smell,`<>` has been deprecated and removed in Python 3. Replace instances of `<>` with `!=`.
+python,FLK8-W604,"backticks are deprecated, use 'repr()'",warning,major,code-smell,Backticks were deprecated and removed in Python 3. Use the built-in function `repr()` instead.
+python,FLK8-W605,invalid escape sequence 'x',warning,major,bug-risk,"As of Python 3.6, a backslash-character pair that is not a valid escape sequence now generates a DeprecationWarning. Although this will eventually become a SyntaxError, that will not be for several Python releases."
+python,FLK8-W606,async' and 'await' are reserved keywords starting with Python 3.7,warning,major,bug-risk,Using these symbols as names can break your code in future.
 python,PYL-C0102,blacklisted-name,,,,
 python,PYL-C0103,invalid-name,,,,
 python,PYL-C0111,missing-docstring,,,,
@@ -445,7 +447,6 @@ python,PYL-W0601,global-variable-undefined,,,,
 python,PYL-W0602,global-variable-not-assigned,,,,
 python,PYL-W0603,global-statement,,,,
 python,PYL-W0604,global-at-module-level,,,,
-python,PYL-W0611,unused-import,,,,
 python,PYL-W0612,unused-variable,,,,
 python,PYL-W0613,unused-argument,,,,
 python,PYL-W0614,unused-wildcard-import,,,,
