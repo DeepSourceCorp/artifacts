@@ -59,7 +59,18 @@ type AnalysisResult struct {
 			Lines []string `json:"lines"`
 		} `json:"source_code"`
 	} `json:"issues"`
-	IsPassed  bool        `json:"is_passed"`
+	IsPassed bool `json:"is_passed"`
+	Metrics  []struct {
+		MetricCode     string `json:"metric_code"`
+		Scope          string `json:"scope"`
+		ProjectMetrics struct {
+			Value map[string]int `json:"value"`
+		} `json:"project_scope,omitempty"`
+		FileMetrics []struct {
+			Path  string         `json:"path"`
+			Value map[string]int `json:"value"`
+		} `json:"file_scope,omitempty"`
+	} `json:"metrics"`
 	ExtraData interface{} `json:"extra_data"`
 }
 
@@ -76,4 +87,32 @@ type AnalysisResultCeleryTask struct {
 	Task    string            `json:"task"`
 	KWArgs  AnalysisStatusMsg `json:"kwargs"`
 	Retries int               `json:"retries"`
+}
+
+type BeaconResult struct {
+	Files []struct {
+		Path int8 `json:"path"`
+		Q1   int8 `json:"q1"`
+		Q3   int8 `json:"q2"`
+		Q7   int8 `json:"q7"`
+		Q15  int8 `json:"q15"`
+		Q30  int8 `json:"q30"`
+		Q60  int8 `json:"q60"`
+		Q180 int8 `json:"a180"`
+	} `json:"files"`
+}
+
+type BeaconStatusMsg struct {
+	RunID     string       `json:"run_id"`
+	RunType   string       `json:"beacon"`
+	ProjectID string       `json:"project_id"`
+	Status    Status       `json:"status"`
+	Result    BeaconResult `json:"result"`
+}
+
+type BeaconResultCeleryTask struct {
+	ID      string          `json:"id"`
+	Task    string          `json:"task"`
+	KWArgs  BeaconStatusMsg `json:"kwargs"`
+	Retries int             `json:"retries"`
 }
