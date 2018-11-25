@@ -49,6 +49,6 @@ type AnalysisRun struct {
 // Beacon type is the expected structure of a beacon task
 // to be received
 type BeaconRun struct {
-	RunID           string `json:"run_id"`
-	BaeconProjectID string `json:"beacon_project_id"`
+	RunID     string `json:"run_id"`
+	ProjectID string `json:"project_id"`
 }

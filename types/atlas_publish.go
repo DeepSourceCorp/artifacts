@@ -59,18 +59,18 @@ type AnalysisResult struct {
 			Lines []string `json:"lines"`
 		} `json:"source_code"`
 	} `json:"issues"`
-	IsPassed bool `json:"is_passed"`
-	Metrics  []struct {
+	Metrics []struct {
 		MetricCode     string `json:"metric_code"`
 		Scope          string `json:"scope"`
 		ProjectMetrics struct {
-			Value map[string]int `json:"value"`
+			Value map[string]float32 `json:"value"`
 		} `json:"project_scope,omitempty"`
 		FileMetrics []struct {
-			Path  string         `json:"path"`
-			Value map[string]int `json:"value"`
+			Path  string             `json:"path"`
+			Value map[string]float32 `json:"value"`
 		} `json:"file_scope,omitempty"`
 	} `json:"metrics"`
+	IsPassed  bool        `json:"is_passed"`
 	ExtraData interface{} `json:"extra_data"`
 }
 
