@@ -60,15 +60,10 @@ type AnalysisResult struct {
 		} `json:"source_code"`
 	} `json:"issues"`
 	Metrics []struct {
-		MetricCode     string `json:"metric_code"`
-		Scope          string `json:"scope"`
-		ProjectMetrics struct {
-			Value map[string]float32 `json:"value"`
-		} `json:"project_scope,omitempty"`
-		FileMetrics []struct {
-			Path  string             `json:"path"`
-			Value map[string]float32 `json:"value"`
-		} `json:"file_scope,omitempty"`
+		MetricCode     string             `json:"metric_code"`
+		Scope          string             `json:"scope"`
+		ProjectMetrics map[string]float32 `json:"project_metrics,omitempty"`
+		FileMetrics    map[string]float32 `json:"file_metrics,omitempty"`
 	} `json:"metrics"`
 	IsPassed  bool        `json:"is_passed"`
 	ExtraData interface{} `json:"extra_data"`
