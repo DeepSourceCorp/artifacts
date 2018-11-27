@@ -34,11 +34,8 @@ type AnalysisRun struct {
 		CPULimit    string `json:"cpu_limit"`
 		MemoryLimit string `json:"memory_limit"`
 	}
-	Processors struct {
-		SourceCodeLoad bool `json:"source_code_load"`
-		Beacon         bool `json:"beacon"`
-	} `json:"processors"`
-	Filters []struct {
+	Processors []string `json:"processors"`
+	Filters    []struct {
 		Name       string   `json:"name"`
 		Expression string   `json:"expression"`
 		Variables  []string `json:"variables"`
