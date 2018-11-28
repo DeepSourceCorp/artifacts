@@ -62,7 +62,7 @@ type AnalysisResult struct {
 	Metrics []struct {
 		MetricCode string  `json:"metric_code"`
 		Value      float64 `json:"value"`
-	} `json:"metrics"`
+	} `json:"metrics,omitempty"`
 	IsPassed bool `json:"is_passed"`
 	FileMeta struct {
 		Deleted []string `json:"deleted"`
