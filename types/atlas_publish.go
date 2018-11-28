@@ -30,9 +30,6 @@ type RepoResultCeleryTask struct {
 }
 
 type AnalysisResult struct {
-	Config struct {
-		SourceCodeLoad bool `json:"source_code_load"`
-	} `json:"config"`
 	Issues []struct {
 		IssueCode string `json:"issue_code"`
 		IssueText string `json:"issue_text"`
@@ -49,23 +46,28 @@ type AnalysisResult struct {
 				} `json:"end"`
 			} `json:"position"`
 		} `json:"location"`
-		SourceCode struct {
-			Begin struct {
-				Line int `json:"line"`
-			} `json:"begin"`
-			End struct {
-				Line int `json:"line"`
-			} `json:"end"`
-			Lines []string `json:"lines"`
-		} `json:"source_code"`
+		ProcessedData struct {
+			SourceCode struct {
+				Begin struct {
+					Line int `json:"line"`
+				} `json:"begin"`
+				End struct {
+					Line int `json:"line"`
+				} `json:"end"`
+				Lines []string `json:"lines"`
+			} `json:"source_code,omitempty"`
+			IsIgnored bool `json:"is_ignored,omitempty"`
+		} `json:"processed_data,omitempty"`
 	} `json:"issues"`
 	Metrics []struct {
-		MetricCode     string             `json:"metric_code"`
-		Scope          string             `json:"scope"`
-		ProjectMetrics map[string]float32 `json:"project_metrics,omitempty"`
-		FileMetrics    map[string]float32 `json:"file_metrics,omitempty"`
+		MetricCode string  `json:"metric_code"`
+		Value      float64 `json:"value"`
 	} `json:"metrics"`
-	IsPassed  bool        `json:"is_passed"`
+	IsPassed bool `json:"is_passed"`
+	FileMeta struct {
+		Deleted []string `json:"deleted"`
+		Renamed []string `json:"renamed"`
+	} `json:"file_meta"`
 	ExtraData interface{} `json:"extra_data"`
 }
 
@@ -77,6 +79,7 @@ type AnalysisStatusMsg struct {
 	CheckSeq        string         `json:"check_seq"`
 	Result          AnalysisResult `json:"result"`
 }
+
 type AnalysisResultCeleryTask struct {
 	ID      string            `json:"id"`
 	Task    string            `json:"task"`

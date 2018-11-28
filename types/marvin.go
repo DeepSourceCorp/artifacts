@@ -8,7 +8,6 @@ type MarvinConfig struct {
 	RMQExchange     string `toml:"rmqExchange"`
 	RMQRoutingKey   string `toml:"rmqRoutingKey"`
 	CheckSeq        string `toml:"checkSeq"`
-	SourceCodeLoad  bool   `toml:"sourceCodeLoad"`
 	TaskType        string `toml:"taskType"`
 	TaskShortcode   string `toml:"taskShortcode"`
 	TaskCommand     string `toml:"taskCommand"`
@@ -19,4 +18,5 @@ type MarvinConfig struct {
 type AnalysisConfig struct {
 	Files           []string `json:"files"`
 	ExcludePatterns []string `json:"exclude_patterns"`
+	Processors      []string `json:"processors"`
 }

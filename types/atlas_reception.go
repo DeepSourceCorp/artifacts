@@ -27,20 +27,17 @@ type AnalysisRun struct {
 		DefaultHash  string `json:"default_hash"`
 		CheckoutHash string `json:"checkout_hash"`
 	} `json:"vcs_meta"`
-	AnalyzerMeta struct {
-		Shortcode   string `json:"name"`
-		Command     string `json:"command"`
-		Version     string `json:"version"`
-		CPULimit    string `json:"cpu_limit"`
-		MemoryLimit string `json:"memory_limit"`
-	}
-	Processors []string `json:"processors"`
-	Filters    []struct {
-		Name       string   `json:"name"`
-		Expression string   `json:"expression"`
-		Variables  []string `json:"variables"`
-		Mutations  []string `json:"mutations"`
-	} `json:"filters"`
+	Checks []struct {
+		CheckSeq     string `json:"check_seq"`
+		AnalyzerMeta struct {
+			Shortcode   string `json:"name"`
+			Command     string `json:"command"`
+			Version     string `json:"version"`
+			CPULimit    string `json:"cpu_limit"`
+			MemoryLimit string `json:"memory_limit"`
+		} `json:"analyzer_meta"`
+		Processors []string `json:"processors"`
+	} `json:"checks"`
 }
 
 // Beacon type is the expected structure of a beacon task
