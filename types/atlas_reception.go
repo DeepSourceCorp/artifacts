@@ -21,7 +21,6 @@ type AnalysisRun struct {
 	VCSMeta struct {
 		Name         string `json:"name"`
 		Provider     string `json:"provider"`
-		RepoURL      string `json:"repo_url"`
 		Owner        string `json:"owner"`
 		Repository   string `json:"repository"`
 		DefaultHash  string `json:"default_hash"`
