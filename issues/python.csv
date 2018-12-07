@@ -29,6 +29,7 @@ python,BAN-B312,telnetlib,warning,major,security,,FALSE
 python,BAN-B313,xml_bad_cElementTree,warning,major,security,,FALSE
 python,BAN-B314,xml_bad_ElementTree,warning,major,security,,FALSE
 python,BAN-B315,xml_bad_expatreader,warning,major,security,,FALSE
+
 python,BAN-B316,xml_bad_expatbuilder,warning,major,security,,FALSE
 python,BAN-B317,xml_bad_sax,warning,major,security,,FALSE
 python,BAN-B318,xml_bad_minidom,warning,major,security,,FALSE
@@ -557,3 +558,5 @@ python,PYL-W1659,xreadlines-attribute,,,,,
 python,PYL-W1660,deprecated-sys-function,,,,,
 python,PYL-W1661,exception-escape,,,,,
 python,PYL-W1662,comprehension-escape,,,,,
+python,PYDEP-001,uninstalled-imports,,,,,
+python,PYDEP-002,unused-module,,,,,
