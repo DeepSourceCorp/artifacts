@@ -11,70 +11,86 @@ python,BAN-B108,hardcoded_tmp_directory,warning,minor,security,"Hardcoded temp d
 Reason:
 Malicious users that can predict the file name and write to directory containing the temporary file can effectively hijack the temporary file by creating a symlink with the name of the temporary file before the program creates the file itself. This allows a malicious user to supply malicious data or cause actions by the program to affect attacker chosen files.
 ",FALSE
-python,BAN-B110,try_except_pass,warning,minor,security,,FALSE
-python,BAN-B112,try_except_continue,warning,minor,security,,FALSE
-python,BAN-B201,flask_debug_true,warning,critical,security,,FALSE
-python,BAN-B301,pickle,warning,major,security,,FALSE
-python,BAN-B302,marshal,warning,major,security,,FALSE
-python,BAN-B303,md5,warning,minor,security,,FALSE
-python,BAN-B304,ciphers,warning,major,security,,FALSE
-python,BAN-B305,cipher_modes,warning,major,security,,FALSE
-python,BAN-B306,mktemp_q,warning,major,security,,FALSE
-python,BAN-B307,eval,warning,major,security,,FALSE
-python,BAN-B308,mark_safe,warning,major,security,,FALSE
-python,BAN-B309,httpsconnection,warning,major,security,,FALSE
-python,BAN-B310,urllib_urlopen,warning,major,security,,FALSE
-python,BAN-B311,random,warning,minor,security,,FALSE
-python,BAN-B312,telnetlib,warning,major,security,,FALSE
-python,BAN-B313,xml_bad_cElementTree,warning,major,security,,FALSE
-python,BAN-B314,xml_bad_ElementTree,warning,major,security,,FALSE
-python,BAN-B315,xml_bad_expatreader,warning,major,security,,FALSE
+python,BAN-B110,try_except_pass,warning,minor,security,"Catching generic exceptions and silently ignoring them is considered bad practice in general, but also presents a potential security issue. A larger than normal volume of errors from a service can indicate an attempt is being made to disrupt or interfere with it. Thus errors should, at the very least, be logged.",FALSE
+python,BAN-B112,try_except_continue,warning,minor,security,"Catching generic exceptions and silently ignoring them in a loop is considered bad practice in general, but also presents a potential security issue. A larger than normal volume of errors from a service can indicate an attempt is being made to disrupt or interfere with it. Thus errors should, at the very least, be logged.",FALSE
+python,BAN-B201,flask_debug_true,warning,critical,security,Running Flask applications in debug mode results in the Werkzeug debugger being enabled. This includes a feature that allows arbitrary code execution. Documentation for both Flask and Werkzeug strongly suggests that debug mode should never be enabled on production systems.,FALSE
+python,BAN-B301,pickle,warning,major,security,"Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.",FALSE
+python,BAN-B302,marshal,warning,major,security,Deserialization with the marshal module is possibly dangerous.,FALSE
+python,BAN-B303,md5,warning,minor,security,"Use of insecure MD2, MD4, MD5, or SHA1 hash functions should be avoided. Using more secure algorithms like SHA256 or SHA512.",FALSE
+python,BAN-B304,ciphers,warning,major,security,Use of insecure cipher or cipher mode. Replace with a known secure cipher such as AES.,FALSE
+python,BAN-B305,cipher_modes,warning,major,security,Use of insecure cipher or cipher mode. Replace with a known secure cipher such as AES.,FALSE
+python,BAN-B306,mktemp_q,warning,major,security,Use of insecure and deprecated function (mktemp).,FALSE
+python,BAN-B307,eval,warning,major,security,Use of possibly insecure function - consider using safer `ast.literal_eval`.,FALSE
+python,BAN-B308,mark_safe,warning,major,security,Use of `mark_safe()` may expose cross-site scripting vulnerabilities and should be reviewed.,FALSE
+python,BAN-B309,httpsconnection,warning,major,security,Use of `HTTPSConnection` on older versions of Python prior to 2.7.9 and 3.4.3 do not provide security. Please see [this report](https://wiki.openstack.org/wiki/OSSN/OSSN-0033) for details.,FALSE
+python,BAN-B310,urllib_urlopen,warning,major,security,Audit url open for permitted schemes. Allowing use of ‘file:’’ or custom schemes is often unexpected.,FALSE
+python,BAN-B311,random,warning,minor,security,Standard pseudo-random generators are not suitable for security/cryptographic purposes.,FALSE
+python,BAN-B312,telnetlib,warning,major,security,Telnet-related functions are being called. Telnet is considered insecure. Use SSH or some other encrypted protocol.,FALSE
+python,BAN-B313,xml_bad_cElementTree,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.,FALSE
+python,BAN-B314,xml_bad_ElementTree,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.,FALSE
+python,BAN-B315,xml_bad_expatreader,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.,FALSE
+python,BAN-B316,xml_bad_expatbuilder,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.,FALSE
+python,BAN-B317,xml_bad_sax,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.,FALSE
+python,BAN-B318,xml_bad_minidom,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.,FALSE
+python,BAN-B319,xml_bad_pulldom,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.,FALSE
+python,BAN-B320,xml_bad_etree,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.,FALSE
+python,BAN-B321,ftplib,warning,major,security,FTP-related functions are being called. FTP is considered insecure. Use SSH/SFTP/SCP or some other encrypted protocol.,FALSE
+python,BAN-B322,input,warning,major,security,"The input method in Python 2 will read from standard input, evaluate and run the resulting string as python source code. This is similar, though in many ways worse, then using `eval`. On Python 2, use `raw_input` instead, `input` is safe in Python 3.",FALSE
+python,BAN-B323,unverified_context,warning,major,security,"By default, Python will create a secure, verified ssl context for use in such classes as `HTTPSConnection`. However, it still allows using an insecure context via the `_create_unverified_context` that reverts to the previous behavior that does not validate certificates or perform hostname checks.",FALSE
+python,BAN-B324,hashlib_new_insecure_functions,warning,major,security,"Use of insecure MD2, MD4, MD5, or SHA1 hash functions should be avoided. Using more secure algorithms like SHA256 or SHA512.",FALSE
+python,BAN-B325,tempnam,warning,major,security,Use of `os.tempnam()` and `os.tmpnam()` is vulnerable to symlink attacks. Consider using `tmpfile()` instead.,FALSE
+python,BAN-B401,import_telnetlib,warning,major,security,A telnet-related module is being imported. Telnet is considered insecure. Use SSH or some other encrypted protocol.,FALSE
+python,BAN-B402,import_ftplib,warning,major,security,A FTP-related module is being imported. FTP is considered insecure. Use SSH/SFTP/SCP or some other encrypted protocol.,FALSE
+python,BAN-B403,import_pickle,warning,minor,security,"Consider possible security implications associated with these modules: `pickle`, `cPickle`, `dill`.",FALSE
+python,BAN-B404,import_subprocess,warning,minor,security,Consider possible security implications associated with the `subprocess` module.,FALSE
+python,BAN-B405,import_xml_etree,warning,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called.",FALSE
+python,BAN-B406,import_xml_sax,warning,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called.",FALSE
+python,BAN-B407,import_xml_expat,warning,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called.",FALSE
+python,BAN-B408,import_xml_minidom,warning,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called.",FALSE
+python,BAN-B409,import_xml_pulldom,warning,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called.",FALSE
+python,BAN-B410,import_lxml,warning,minor,security,Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package.,FALSE
+python,BAN-B411,import_xmlrpclib,warning,major,security,XMLRPC is particularly dangerous as it is also concerned with communicating data over a network. Use `defused.xmlrpc.monkey_patch()` function to monkey-patch xmlrpclib and mitigate remote XML attacks.,FALSE
+python,BAN-B412,import_httpoxy,warning,major,security,"httpoxy is a set of vulnerabilities that affect application code running in CGI, or CGI-like environments. The use of CGI for web applications should be avoided to prevent this class of attack. More details are available at [httpoxy.org](https://httpoxy.org/).",FALSE
+python,BAN-B413,import_pycrypto,warning,major,security,pycrypto library is known to have publicly disclosed [buffer overflow vulnerability](https://github.com/dlitz/pycrypto/issues/176). It is no longer actively maintained and has been deprecated in favor of pyca/cryptography library.,FALSE
+python,BAN-B414,import_pycryptodome,warning,major,security,"pycryptodome is a direct fork of pycrypto that has not fully addressed the issues inherent in PyCrypto. It seems to exist, mainly, as an API compatible continuation of pycrypto and should be deprecated in favor of pyca/cryptography which has more support among the Python community.",FALSE
+python,BAN-B501,request_with_no_cert_validation,warning,major,security,Encryption in general is typically critical to the security of many applications. Using TLS can greatly increase security by guaranteeing the identity of the party you are communicating with. This is accomplished by one or both parties presenting trusted certificates during the connection initialization phase of TLS.,FALSE
+python,BAN-B502,ssl_with_bad_version,warning,major,security,"Several highly publicized exploitable flaws have been discovered in all versions of SSL and early versions of TLS. It is strongly recommended that use of the following known broken protocol versions be avoided:
 
-python,BAN-B316,xml_bad_expatbuilder,warning,major,security,,FALSE
-python,BAN-B317,xml_bad_sax,warning,major,security,,FALSE
-python,BAN-B318,xml_bad_minidom,warning,major,security,,FALSE
-python,BAN-B319,xml_bad_pulldom,warning,major,security,,FALSE
-python,BAN-B320,xml_bad_etree,warning,major,security,,FALSE
-python,BAN-B321,ftplib,warning,major,security,,FALSE
-python,BAN-B322,input,warning,major,security,,FALSE
-python,BAN-B323,unverified_context,warning,major,security,,FALSE
-python,BAN-B324,hashlib_new_insecure_functions,warning,major,security,,FALSE
-python,BAN-B325,tempnam,warning,major,security,,FALSE
-python,BAN-B401,import_telnetlib,warning,major,security,,FALSE
-python,BAN-B402,import_ftplib,warning,major,security,,FALSE
-python,BAN-B403,import_pickle,warning,minor,security,,FALSE
-python,BAN-B404,import_subprocess,warning,minor,security,,FALSE
-python,BAN-B405,import_xml_etree,warning,minor,security,,FALSE
-python,BAN-B406,import_xml_sax,warning,minor,security,,FALSE
-python,BAN-B407,import_xml_expat,warning,minor,security,,FALSE
-python,BAN-B408,import_xml_minidom,warning,minor,security,,FALSE
-python,BAN-B409,import_xml_pulldom,warning,minor,security,,FALSE
-python,BAN-B410,import_lxml,warning,minor,security,,FALSE
-python,BAN-B411,import_xmlrpclib,warning,major,security,,FALSE
-python,BAN-B412,import_httpoxy,warning,major,security,,FALSE
-python,BAN-B413,import_pycrypto,warning,major,security,,FALSE
-python,BAN-B414,import_pycryptodome,warning,major,security,,FALSE
-python,BAN-B501,request_with_no_cert_validation,warning,major,security,,FALSE
-python,BAN-B502,ssl_with_bad_version,warning,major,security,,FALSE
-python,BAN-B503,ssl_with_bad_defaults,warning,minor,security,,FALSE
-python,BAN-B504,ssl_with_no_version,warning,minor,security,,FALSE
-python,BAN-B505,weak_cryptographic_key,warning,major,security,,FALSE
-python,BAN-B506,yaml_load,warning,minor,security,,FALSE
-python,BAN-B507,ssh_no_host_key_verification,warning,major,security,,FALSE
-python,BAN-B601,paramiko_calls,warning,major,security,,FALSE
-python,BAN-B602,subprocess_popen_with_shell_equals_true,warning,major,security,,FALSE
-python,BAN-B603,subprocess_without_shell_equals_true,warning,minor,security,,FALSE
-python,BAN-B604,any_other_function_with_shell_equals_true,warning,major,security,,FALSE
-python,BAN-B605,start_process_with_a_shell,warning,minor,security,,FALSE
-python,BAN-B606,start_process_with_no_shell,warning,minor,security,,FALSE
-python,BAN-B607,start_process_with_partial_path,warning,minor,security,,FALSE
-python,BAN-B608,hardcoded_sql_expressions,warning,major,security,,FALSE
-python,BAN-B609,linux_commands_wildcard_injection,warning,major,security,,FALSE
-python,BAN-B610,django_extra_used,warning,minor,security,,FALSE
-python,BAN-B611,django_rawsql_used,warning,minor,security,,FALSE
-python,BAN-B701,jinja2_autoescape_false,warning,critical,security,,FALSE
-python,BAN-B702,use_of_mako_templates,warning,major,security,,FALSE
-python,BAN-B703,django_mark_safe,warning,minor,security,,FALSE
+ - SSL v2
+ - SSL v3
+ - TLS v1
+ - TLS v1.1",FALSE
+python,BAN-B503,ssl_with_bad_defaults,warning,minor,security,"Several highly publicized exploitable flaws have been discovered in all versions of SSL and early versions of TLS. It is strongly recommended that use of the following known broken protocol versions be avoided:
+
+ - SSL v2
+ - SSL v3
+ - TLS v1
+ - TLS v1.1",FALSE
+python,BAN-B504,ssl_with_no_version,warning,minor,security,"Several highly publicized exploitable flaws have been discovered in all versions of SSL and early versions of TLS. It is strongly recommended that use of the following known broken protocol versions be avoided:
+
+ - SSL v2
+ - SSL v3
+ - TLS v1
+ - TLS v1.1",FALSE
+python,BAN-B505,weak_cryptographic_key,warning,major,security,"As computational power increases, so does the ability to break ciphers with smaller key lengths. The recommended key length size for RSA and DSA algorithms is 2048 and higher. 1024 bits and below are now considered breakable. EC key length sizes are recommended to be 224 and higher with 160 and below considered breakable.",FALSE
+python,BAN-B506,yaml_load,warning,minor,security,"The yaml.load function provides the ability to construct an arbitrary Python object, which may be dangerous if you receive a YAML document from an untrusted source. The function `yaml.safe_load` limits this ability to simple Python objects like integers or lists.",FALSE
+python,BAN-B507,ssh_no_host_key_verification,warning,major,security,"Encryption in general is typically critical to the security of many applications. Using SSH can greatly increase security by guaranteeing the identity of the party you are communicating with. This is accomplished by one or both parties presenting trusted host keys during the connection initialization phase of SSH.
+
+When paramiko methods are used, host keys are verified by default.",FALSE
+python,BAN-B601,paramiko_calls,warning,major,security,Paramiko is a Python library designed to work with the SSH2 protocol for secure (encrypted and authenticated) connections to remote machines. It is intended to run commands on a remote host. These commands are run within a shell on the target and are thus vulnerable to various shell injection attacks. Use of Paramiko’s “exec_command” or “invoke_shell” methods should be reviewed to ensure that the input is sanitized.,FALSE
+python,BAN-B602,subprocess_popen_with_shell_equals_true,warning,major,security,"Python possesses many mechanisms to invoke an external executable. However, doing so may present a security issue if appropriate care is not taken to sanitize any user provided or variable input. Subprocess invocation using a command shell is dangerous as it is vulnerable to various shell injection attacks. Great care should be taken to sanitize all input in order to mitigate this risk. Calls of this type are identified by a parameter of ‘shell=True’ being given.",FALSE
+python,BAN-B603,subprocess_without_shell_equals_true,warning,minor,security,"Spawning of a subprocess without the use of a command shell is not vulnerable to shell injection attacks, but care should still be taken to ensure validity of input.",FALSE
+python,BAN-B604,any_other_function_with_shell_equals_true,warning,major,security,Method calls for the presence of a keyword parameter shell equalling true can be vulnerable to shell injection issues. This issue is intended to catch custom wrappers to vulnerable methods that may have been created.,FALSE
+python,BAN-B605,start_process_with_a_shell,warning,minor,security,Spawning of a subprocess using a command shell is dangerous as it is vulnerable to various shell injection attacks. Great care should be taken to sanitize all input in order to mitigate this risk. Calls of this type are identified by the use of certain commands which are known to use shells. ,FALSE
+python,BAN-B606,start_process_with_no_shell,warning,minor,security,"Spawning of a subprocess in a way that doesn’t use a shell is generally safe, but it maybe useful for penetration testing workflows to track where external system calls are used.",FALSE
+python,BAN-B607,start_process_with_partial_path,warning,minor,security,Python possesses many mechanisms to invoke an external executable. If the desired executable path is not fully qualified relative to the filesystem root then this may present a potential security risk.,FALSE
+python,BAN-B608,hardcoded_sql_expressions,warning,major,security,"An SQL injection attack consists of insertion or “injection” of a SQL query via the input data given to an application. It is a very common attack vector. Unless care is taken to sanitize and control the input data when building such SQL statement strings, an injection attack becomes possible.",FALSE
+python,BAN-B609,linux_commands_wildcard_injection,warning,major,security,The use of partially qualified paths may result in unintended consequences if an unexpected file or symlink is placed into the path location given. This becomes particularly dangerous when combined with commands used to manipulate file permissions or copy data off of a system.,FALSE
+python,BAN-B610,django_extra_used,warning,minor,security,"Use of `extra` in Django querysets should be audited, since unsanitized strings can open up security vulnerabilities.",FALSE
+python,BAN-B611,django_rawsql_used,warning,minor,security,"Use of `extra` in Django querysets should be audited, since unsanitized strings can open up security vulnerabilities.",FALSE
+python,BAN-B701,jinja2_autoescape_false,warning,critical,security,"When autoescaping is enabled, Jinja2 will filter input strings to escape any HTML content submitted via template variables. Without escaping HTML input the application becomes vulnerable to Cross Site Scripting (XSS) attacks.",FALSE
+python,BAN-B702,use_of_mako_templates,warning,major,security,"Unlike Jinja2 (an alternative templating system), Mako has no environment wide variable escaping mechanism. Because of this, all input variables must be carefully escaped before use to prevent possible vulnerabilities to Cross Site Scripting (XSS) attacks.",FALSE
+python,BAN-B703,django_mark_safe,warning,minor,security,Use of `mark_safe()` may expose cross-site scripting vulnerabilities and should be reviewed.,FALSE
 python,FLK8-C901,function is too complex,warning,major,bug-risk,"Too many decision blocks were found, which is why the code has been tagged as complex. You should consider refactoring the code for simplicity. Read more about cyclomatic complexity [here](https://en.wikipedia.org/wiki/Cyclomatic_complexity).",FALSE
 python,FLK8-D100,Missing docstring in public module,info,minor,style,,FALSE
 python,FLK8-D101,Missing docstring in public class,info,minor,style,,FALSE
@@ -242,11 +258,9 @@ python,FLK8-W602,deprecated form of raising exception,warning,major,code-smell,"
 python,FLK8-W603,"<>' is deprecated, use '!='",warning,major,code-smell,`<>` has been deprecated and removed in Python 3. Replace instances of `<>` with `!=`.,FALSE
 python,FLK8-W604,"backticks are deprecated, use 'repr()'",warning,major,code-smell,Backticks were deprecated and removed in Python 3. Use the built-in function `repr()` instead.,FALSE
 python,FLK8-W605,invalid escape sequence 'x',warning,major,bug-risk,"As of Python 3.6, a backslash-character pair that is not a valid escape sequence now generates a DeprecationWarning. Although this will eventually become a SyntaxError, that will not be for several Python releases.",FALSE
-python,FLK8-W606,async' and 'await' are reserved keywords starting with Python 3.7,warning,major,bug-risk,Using these symbols as names can break your code in future.,FALSE
-python,PYL-C0102,blacklisted-name,,,,,
-python,PYL-C0103,invalid-name,,,,,
-python,PYL-C0111,missing-docstring,,,,,
-python,PYL-C0112,empty-docstring,,,,,
+python,FLK8-W606,`async` and `await` are reserved keywords starting with Python 3.7,warning,major,bug-risk,Using these symbols as names can break your code in future.,FALSE
+python,PYL-C0102,blacklisted-name,warning,major,code-smell,Using these names can make the intention of the code unclear and hard to understand and debug later.,FALSE
+python,PYL-C0103,invalid-name,warning,minor,style,"Names of classes, variables, functions and constants are capitalized in separate ways to help distinguish later. Not following these conventions can lead to hard-to-read code, since you may have to refer to the definition of the name to know its type.",FALSE
 python,PYL-C0113,unneeded-not,,,,,
 python,PYL-C0121,singleton-comparison,,,,,
 python,PYL-C0122,misplaced-comparison-constant,,,,,
@@ -558,5 +572,4 @@ python,PYL-W1659,xreadlines-attribute,,,,,
 python,PYL-W1660,deprecated-sys-function,,,,,
 python,PYL-W1661,exception-escape,,,,,
 python,PYL-W1662,comprehension-escape,,,,,
-python,PYDEP-001,uninstalled-imports,,,,,
-python,PYDEP-002,unused-module,,,,,
+python,PYDEP-001,Module used but not installed.,error,critical,bug-risk,"The files mentioned in `dependency_file_paths` setting in `.deepsource.toml` are scanned in addition to `requirements.txt`, `Pipfile` and `Pipfile.lock` to look for installed dependencies.",TRUE
