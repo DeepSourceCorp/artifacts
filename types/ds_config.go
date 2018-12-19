@@ -7,7 +7,7 @@ type DSConfig struct {
 	TestPatterns    []string `toml:"test_patterns,omitempty" json:"test_patterns,omitempty"`
 	Analyzers       []struct {
 		Name                string   `toml:"name" json:"name"`
-		RuntimeVersion      string   `toml:"runtime_version" json:"runtime_version"`
+		RuntimeVersion      string   `toml:"runtime_version,omitempty" json:"runtime_version,omitempty"`
 		Enabled             bool     `toml:"enabled" json:"enabled"`
 		DependencyFilePaths []string `toml:"dependency_file_paths,omitempty" json:"dependency_file_paths,omitempty"`
 	} `toml:"analyzers,omitempty" json:"analyzers,omitempty"`
