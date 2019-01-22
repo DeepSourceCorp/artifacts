@@ -17,8 +17,9 @@ type RepoRun struct {
 // AnalysisRun type is the expected structure of a analysis run task
 // to be received
 type AnalysisRun struct {
-	RunID   string `json:"run_id"`
-	VCSMeta struct {
+	RunID           string `json:"run_id"`
+	DSConfigUpdated bool   `json:"ds_config_updated"`
+	VCSMeta         struct {
 		Name         string `json:"name"`
 		Provider     string `json:"provider"`
 		Owner        string `json:"owner"`
