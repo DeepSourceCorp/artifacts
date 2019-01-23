@@ -10,6 +10,7 @@ type MarvinConfig struct {
 	AnalyzerCommand   string   `toml:"analyzerCommand"`
 	DefaultHash       string   `toml:"defaultHash"`
 	CheckoutHash      string   `toml:"checkoutHash"`
+	DSConfigUpdated   bool     `toml:"dsConfigUpdated"`
 	Processors        []string `toml:"processors"`
 }
 
