@@ -6,14 +6,6 @@ type Status struct {
 	Err      string `json:"err"`
 }
 
-type StatusMsg struct {
-	MachineryTaskID string `json:"machinery_task_id"`
-	RunID           string `json:"run_id"`
-	RunType         string `json:"run_type"`
-	Status          Status `json:"status"`
-	CheckSeq        string `json:"check_seq"`
-}
-
 type RepoResult struct {
 	RunID    string                 `json:"run_id"`
 	RunType  string                 `json:"run_type"`
@@ -29,7 +21,7 @@ type RepoResultCeleryTask struct {
 	Retries int        `json:"retries"`
 }
 
-type AnalysisResult struct {
+type AnalysisArtifacts struct {
 	Issues []struct {
 		IssueCode string `json:"issue_code"`
 		IssueText string `json:"issue_text"`
@@ -71,20 +63,20 @@ type AnalysisResult struct {
 	ExtraData interface{} `json:"extra_data"`
 }
 
-type AnalysisStatusMsg struct {
-	MachineryTaskID string         `json:"machinery_task_id"`
-	RunID           string         `json:"run_id"`
-	RunType         string         `json:"run_type"`
-	Status          Status         `json:"status"`
-	CheckSeq        string         `json:"check_seq"`
-	Result          AnalysisResult `json:"result"`
+type AnalysisResult struct {
+	MachineryTaskID string            `json:"machinery_task_id"`
+	RunID           string            `json:"run_id"`
+	RunType         string            `json:"run_type"`
+	Status          Status            `json:"status"`
+	CheckSeq        string            `json:"check_seq"`
+	Artifacts       AnalysisArtifacts `json:"artifacts"`
 }
 
 type AnalysisResultCeleryTask struct {
-	ID      string            `json:"id"`
-	Task    string            `json:"task"`
-	KWArgs  AnalysisStatusMsg `json:"kwargs"`
-	Retries int               `json:"retries"`
+	ID      string         `json:"id"`
+	Task    string         `json:"task"`
+	KWArgs  AnalysisResult `json:"kwargs"`
+	Retries int            `json:"retries"`
 }
 
 type BeaconResult struct {
