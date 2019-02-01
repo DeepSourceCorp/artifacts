@@ -8,7 +8,6 @@ type Status struct {
 
 type RepoResult struct {
 	RunID    string                 `json:"run_id"`
-	RunType  string                 `json:"run_type"`
 	Status   Status                 `json:"status"`
 	Language map[string]interface{} `json:"language_meta"`
 	DSConfig DSConfig               `json:"ds_config"`
@@ -66,7 +65,6 @@ type AnalysisArtifacts struct {
 type AnalysisResult struct {
 	MachineryTaskID string            `json:"machinery_task_id"`
 	RunID           string            `json:"run_id"`
-	RunType         string            `json:"run_type"`
 	Status          Status            `json:"status"`
 	CheckSeq        string            `json:"check_seq"`
 	Artifacts       AnalysisArtifacts `json:"artifacts"`
@@ -94,7 +92,6 @@ type BeaconResult struct {
 
 type BeaconStatusMsg struct {
 	RunID     string       `json:"run_id"`
-	RunType   string       `json:"beacon"`
 	ProjectID string       `json:"project_id"`
 	Status    Status       `json:"status"`
 	Result    BeaconResult `json:"result"`
