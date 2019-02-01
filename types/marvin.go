@@ -4,7 +4,6 @@ type MarvinConfig struct {
 	MachineryTaskID   string   `toml:"taskID"`
 	RunID             string   `toml:"runID"`
 	RunType           string   `toml:"runType"`
-	RMQRoutingKey     string   `toml:"rmqRoutingKey"`
 	CheckSeq          string   `toml:"checkSeq"`
 	AnalyzerShortcode string   `toml:"analyzerShortcode"`
 	AnalyzerCommand   string   `toml:"analyzerCommand"`
