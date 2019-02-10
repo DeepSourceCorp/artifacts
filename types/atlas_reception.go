@@ -11,6 +11,7 @@ type RepoRun struct {
 		Owner        string `json:"owner"`
 		Repository   string `json:"repository"`
 		CheckoutHash string `json:"checkout_hash"`
+		PatchFile    string `json:"patch_file"`
 	} `json:"vcs_meta"`
 }
 
