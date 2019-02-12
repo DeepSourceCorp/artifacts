@@ -5,11 +5,7 @@ package types
 type RepoRun struct {
 	RunID   string `json:"run_id"`
 	VCSMeta struct {
-		Name         string `json:"name"`
-		Provider     string `json:"provider"`
 		RepoURL      string `json:"repo_url"`
-		Owner        string `json:"owner"`
-		Repository   string `json:"repository"`
 		CheckoutHash string `json:"checkout_hash"`
 		PatchFile    string `json:"patch_file"`
 	} `json:"vcs_meta"`
@@ -21,10 +17,7 @@ type AnalysisRun struct {
 	RunID           string `json:"run_id"`
 	DSConfigUpdated bool   `json:"ds_config_updated"`
 	VCSMeta         struct {
-		Name         string `json:"name"`
-		Provider     string `json:"provider"`
-		Owner        string `json:"owner"`
-		Repository   string `json:"repository"`
+		CacheID      string `json:"cache_id"`
 		DefaultHash  string `json:"default_hash"`
 		CheckoutHash string `json:"checkout_hash"`
 	} `json:"vcs_meta"`
