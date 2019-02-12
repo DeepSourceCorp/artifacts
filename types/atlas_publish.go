@@ -7,10 +7,11 @@ type Status struct {
 }
 
 type RepoResult struct {
-	RunID    string                 `json:"run_id"`
-	Status   Status                 `json:"status"`
-	Language map[string]interface{} `json:"language_meta"`
-	DSConfig DSConfig               `json:"ds_config"`
+	RunID     string                 `json:"run_id"`
+	Status    Status                 `json:"status"`
+	PatchHEAD string                 `json:"patch_head"`
+	Language  map[string]interface{} `json:"language_meta"`
+	DSConfig  DSConfig               `json:"ds_config"`
 }
 
 type RepoResultCeleryTask struct {
