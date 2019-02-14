@@ -1,7 +1,6 @@
 package types
 
 type MarvinConfig struct {
-	MachineryTaskID   string   `toml:"taskID"`
 	RunID             string   `toml:"runID"`
 	CheckSeq          string   `toml:"checkSeq"`
 	AnalyzerShortcode string   `toml:"analyzerShortcode"`
