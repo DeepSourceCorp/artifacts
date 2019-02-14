@@ -5,8 +5,10 @@ package types
 type RepoRun struct {
 	RunID   string `json:"run_id"`
 	VCSMeta struct {
-		RepoURL      string `json:"repo_url"`
-		CheckoutHash string `json:"checkout_hash"`
+		RepoURL     string `json:"repo_url"`
+		BaseBranch  string `json:"base_branch"`
+		BaseOID     string `json:"base_oid"`
+		CheckoutOID string `json:"checkout_oid"`
 	} `json:"vcs_meta"`
 }
 
@@ -16,9 +18,9 @@ type AnalysisRun struct {
 	RunID           string `json:"run_id"`
 	DSConfigUpdated bool   `json:"ds_config_updated"`
 	VCSMeta         struct {
-		CacheID      string `json:"cache_id"`
-		DefaultHash  string `json:"default_hash"`
-		CheckoutHash string `json:"checkout_hash"`
+		CacheID     string `json:"cache_id"`
+		BaseOID     string `json:"base_oid"`
+		CheckoutOID string `json:"checkout_oid"`
 	} `json:"vcs_meta"`
 	Checks []struct {
 		CheckSeq     string `json:"check_seq"`
