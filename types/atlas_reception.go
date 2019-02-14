@@ -7,7 +7,6 @@ type RepoRun struct {
 	VCSMeta struct {
 		RepoURL      string `json:"repo_url"`
 		CheckoutHash string `json:"checkout_hash"`
-		PatchFile    string `json:"patch_file"`
 	} `json:"vcs_meta"`
 }
 
