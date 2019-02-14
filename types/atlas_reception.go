@@ -5,7 +5,7 @@ package types
 type RepoRun struct {
 	RunID   string `json:"run_id"`
 	VCSMeta struct {
-		RepoURL     string `json:"repo_url"`
+		RemoteURL   string `json:"remote_url"`
 		BaseBranch  string `json:"base_branch"`
 		BaseOID     string `json:"base_oid"`
 		CheckoutOID string `json:"checkout_oid"`
