@@ -5,7 +5,7 @@ type MarvinConfig struct {
 	CheckSeq          string   `toml:"checkSeq"`
 	AnalyzerShortcode string   `toml:"analyzerShortcode"`
 	AnalyzerCommand   string   `toml:"analyzerCommand"`
-	DefaultOID        string   `toml:"defaultOID"`
+	BaseOID           string   `toml:"baseOID"`
 	CheckoutOID       string   `toml:"checkoutOID"`
 	DSConfigUpdated   bool     `toml:"dsConfigUpdated"`
 	Processors        []string `toml:"processors"`
