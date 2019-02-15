@@ -3,8 +3,9 @@ package types
 // RepoRun type is the expected structure of a repo run task
 // to be received
 type RepoRun struct {
-	RunID   string `json:"run_id"`
-	VCSMeta struct {
+	RunID     string `json:"run_id"`
+	RunSerial string `json:"run_serial"`
+	VCSMeta   struct {
 		RemoteURL   string `json:"remote_url"`
 		BaseBranch  string `json:"base_branch"`
 		BaseOID     string `json:"base_oid"`
@@ -16,6 +17,7 @@ type RepoRun struct {
 // to be received
 type AnalysisRun struct {
 	RunID           string `json:"run_id"`
+	RunSerial       string `json:"run_serial"`
 	DSConfigUpdated bool   `json:"ds_config_updated"`
 	VCSMeta         struct {
 		CacheID     string `json:"cache_id"`
