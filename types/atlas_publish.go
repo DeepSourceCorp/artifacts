@@ -9,7 +9,6 @@ type Status struct {
 type RepoResult struct {
 	RunID    string                 `json:"run_id"`
 	Status   Status                 `json:"status"`
-	CacheID  string                 `json:"cache_id"`
 	Language map[string]interface{} `json:"language_meta"`
 	DSConfig DSConfig               `json:"ds_config"`
 }
