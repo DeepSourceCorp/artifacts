@@ -6,10 +6,8 @@ type RepoRun struct {
 	RunID     string `json:"run_id"`
 	RunSerial string `json:"run_serial"`
 	VCSMeta   struct {
-		RemoteURL   string `json:"remote_url"`
-		BaseBranch  string `json:"base_branch"`
-		BaseOID     string `json:"base_oid"`
-		CheckoutOID string `json:"checkout_oid"`
+		RemoteURL      string `json:"remote_url"`
+		CheckoutBranch string `json:"checkout_branch"`
 	} `json:"vcs_meta"`
 }
 
@@ -20,7 +18,8 @@ type AnalysisRun struct {
 	RunSerial       string `json:"run_serial"`
 	DSConfigUpdated bool   `json:"ds_config_updated"`
 	VCSMeta         struct {
-		CacheID     string `json:"cache_id"`
+		RemoteURL   string `json:"remote_url"`
+		BaseBranch  string `json:"base_branch"`
 		BaseOID     string `json:"base_oid"`
 		CheckoutOID string `json:"checkout_oid"`
 	} `json:"vcs_meta"`
