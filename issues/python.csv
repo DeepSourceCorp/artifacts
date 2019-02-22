@@ -1,10 +1,10 @@
-python,BAN-B101,assert_used,warning,minor,security,"Usage of `assert` statement in application logic is discouraged. `assert` is removed with compiling to optimised byte code (`python -o` producing *.pyo files).Consider raising an exception instead. Ideally, `assert` statement should be used only in tests.",FALSE
-python,BAN-B102,exec_used,warning,major,security,"Usage of `exec` statement is strongly discouraged, since it opens up possibilities of unauthorized code execution if the staments are not escaped properly.",FALSE
-python,BAN-B103,set_bad_file_permissions,warning,minor,security,A particularly permissive control flag was used with `chmod`.,FALSE
-python,BAN-B104,hardcoded_bind_all_interfaces,warning,major,security,"Binding to all network interfaces can potentially open up a service to traffic on unintended interfaces, that may not be properly documented or secured. ",FALSE
-python,BAN-B105,hardcoded_password_string,warning,major,security,Potential hardcoded password. Sensitive information like password shouldn't be hardcoded. Use an environment variable instead.,FALSE
-python,BAN-B106,hardcoded_password_funcarg,warning,major,security,Potential hardcoded password as function argument. Sensitive information like password shouldn't be hardcoded in a function argument. Pick it from an environment variable instead.,FALSE
-python,BAN-B107,hardcoded_password_default,warning,major,security,"Potential hardcoded password as default function argument. Sensitive information like password shouldn't be hardcoded in a function argument. Pick it from an environment variable instead.
+python,BAN-B101,Assert statement used outside of tests,warning,minor,security,"Usage of `assert` statement in application logic is discouraged. `assert` is removed with compiling to optimised byte code (`python -o` producing *.pyo files).Consider raising an exception instead. Ideally, `assert` statement should be used only in tests.",FALSE
+python,BAN-B102,Use of `exec` statement found,warning,major,security,"Usage of `exec` function is strongly discouraged, since it opens up possibilities of unauthorized code execution if the staments are not escaped properly.",FALSE
+python,BAN-B103,Insecure permissions set on a file,warning,minor,security,A particularly permissive control flag was used with `chmod`.,FALSE
+python,BAN-B104,Binding to all interfaces detected with hardcoded values,warning,major,security,"Binding to all network interfaces can potentially open up a service to traffic on unintended interfaces, that may not be properly documented or secured. ",FALSE
+python,BAN-B105,Potential hardcoded password detected,warning,major,security,Potential hardcoded password. Sensitive information like password shouldn't be hardcoded. Use an environment variable instead.,FALSE
+python,BAN-B106,Potential hardcoded password detected as function argument,warning,major,security,Potential hardcoded password as function argument. Sensitive information like password shouldn't be hardcoded in a function argument. Pick it from an environment variable instead.,FALSE
+python,BAN-B107,Potential hardcoded password detected as default function argument,warning,major,security,"Potential hardcoded password as default function argument. Sensitive information like password shouldn't be hardcoded in a function argument. Pick it from an environment variable instead.
 ",FALSE
 python,BAN-B108,hardcoded_tmp_directory,warning,minor,security,"Hardcoded temp directory. Prefer using `tmpfile` - https://docs.python.org/3.7/library/tempfile.html
 
@@ -91,57 +91,57 @@ python,BAN-B611,django_rawsql_used,warning,minor,security,"Use of `extra` in Dja
 python,BAN-B701,jinja2_autoescape_false,warning,critical,security,"When autoescaping is enabled, Jinja2 will filter input strings to escape any HTML content submitted via template variables. Without escaping HTML input the application becomes vulnerable to Cross Site Scripting (XSS) attacks.",FALSE
 python,BAN-B702,use_of_mako_templates,warning,major,security,"Unlike Jinja2 (an alternative templating system), Mako has no environment wide variable escaping mechanism. Because of this, all input variables must be carefully escaped before use to prevent possible vulnerabilities to Cross Site Scripting (XSS) attacks.",FALSE
 python,BAN-B703,django_mark_safe,warning,minor,security,Use of `mark_safe()` may expose cross-site scripting vulnerabilities and should be reviewed.,FALSE
-python,FLK8-C901,function is too complex,warning,major,bug-risk,"Too many decision blocks were found, which is why the code has been tagged as complex. You should consider refactoring the code for simplicity. Read more about cyclomatic complexity [here](https://en.wikipedia.org/wiki/Cyclomatic_complexity).",FALSE
-python,FLK8-D100,Missing docstring in public module,info,minor,style,,FALSE
-python,FLK8-D101,Missing docstring in public class,info,minor,style,,FALSE
-python,FLK8-D102,Missing docstring in public method,info,minor,style,,FALSE
-python,FLK8-D103,Missing docstring in public function,info,minor,style,,FALSE
-python,FLK8-D104,Missing docstring in public package,info,minor,style,,FALSE
-python,FLK8-D105,Missing docstring in magic method,info,minor,style,,FALSE
-python,FLK8-D106,Missing docstring in public nested class,info,minor,style,,FALSE
-python,FLK8-D107,Missing docstring in __init__,info,minor,style,,FALSE
-python,FLK8-D200,One-line docstring should fit on one line with quotes,info,minor,style,,FALSE
-python,FLK8-D201,No blank lines allowed before function docstring,info,minor,style,,FALSE
-python,FLK8-D202,No blank lines allowed after function docstring,info,minor,style,,FALSE
-python,FLK8-D203,1 blank line required before class docstring,info,minor,style,,FALSE
-python,FLK8-D204,1 blank line required after class docstring,info,minor,style,,FALSE
-python,FLK8-D205,1 blank line required between summary line and description,info,minor,style,,FALSE
-python,FLK8-D206,"Docstring should be indented with spaces, not tabs",info,minor,style,,FALSE
-python,FLK8-D207,Docstring is under-indented,info,minor,style,,FALSE
-python,FLK8-D208,Docstring is over-indented,info,minor,style,,FALSE
-python,FLK8-D209,Multi-line docstring closing quotes should be on a separate line,info,minor,style,,FALSE
-python,FLK8-D210,No whitespaces allowed surrounding docstring text,info,minor,style,,FALSE
-python,FLK8-D211,No blank lines allowed before class docstring,info,minor,style,,FALSE
-python,FLK8-D212,Multi-line docstring summary should start at the first line,info,minor,style,,FALSE
-python,FLK8-D213,Multi-line docstring summary should start at the second line,info,minor,style,,FALSE
-python,FLK8-D214,Section is over-indented,info,minor,style,,FALSE
-python,FLK8-D215,Section underline is over-indented,info,minor,style,,FALSE
-python,FLK8-D300,Use “”“triple double quotes”“”,info,minor,style,,FALSE
-python,FLK8-D301,Use r”“” if any backslashes in a docstring,info,minor,style,,FALSE
-python,FLK8-D302,Use u”“” for Unicode docstrings,info,minor,style,,FALSE
-python,FLK8-D400,First line should end with a period,info,minor,style,,FALSE
-python,FLK8-D401,First line should be in imperative mood,info,minor,style,,FALSE
-python,FLK8-D401,First line should be in imperative mood; try rephrasing,info,minor,style,,FALSE
-python,FLK8-D402,First line should not be the function’s “signature”,info,minor,style,,FALSE
-python,FLK8-D403,First word of the first line should be properly capitalized,info,minor,style,,FALSE
-python,FLK8-D404,First word of the docstring should not be This,info,minor,style,,FALSE
-python,FLK8-D405,Section name should be properly capitalized,info,minor,style,,FALSE
-python,FLK8-D406,Section name should end with a newline,info,minor,style,,FALSE
-python,FLK8-D407,Missing dashed underline after section,info,minor,style,,FALSE
-python,FLK8-D408,Section underline should be in the line following the section’s name,info,minor,style,,FALSE
-python,FLK8-D409,Section underline should match the length of its name,info,minor,style,,FALSE
-python,FLK8-D410,Missing blank line after section,info,minor,style,,FALSE
-python,FLK8-D411,Missing blank line before section,info,minor,style,,FALSE
-python,FLK8-D412,No blank lines allowed between a section header and its content,info,minor,style,,FALSE
-python,FLK8-D413,Missing blank line after last section,info,minor,style,,FALSE
-python,FLK8-D414,Section has no content,info,minor,style,,FALSE
+python,FLK8-C901,Function is too complex,warning,major,bug-risk,"Too many decision blocks were found, which is why the code has been tagged as complex. You should consider refactoring the code for simplicity. Read more about cyclomatic complexity [here](https://en.wikipedia.org/wiki/Cyclomatic_complexity).",FALSE
+python,FLK8-D100,Missing docstring in public module,info,minor,doc,,FALSE
+python,FLK8-D101,Missing docstring in public class,info,minor,doc,,FALSE
+python,FLK8-D102,Missing docstring in public method,info,minor,doc,,FALSE
+python,FLK8-D103,Missing docstring in public function,info,minor,doc,It is recommended to have docstrings in public functions.,FALSE
+python,FLK8-D104,Missing docstring in public package,info,minor,doc,,FALSE
+python,FLK8-D105,Missing docstring in magic method,info,minor,doc,,FALSE
+python,FLK8-D106,Missing docstring in public nested class,info,minor,doc,,FALSE
+python,FLK8-D107,Missing docstring in `__init__`,info,minor,doc,It is recommended to have docstrings in the `__init__` method.,FALSE
+python,FLK8-D200,One-line docstring should fit on one line with quotes,info,minor,doc,,FALSE
+python,FLK8-D201,No blank lines allowed before function docstring,info,minor,doc,,FALSE
+python,FLK8-D202,No blank lines allowed after function docstring,info,minor,doc,,FALSE
+python,FLK8-D203,1 blank line required before class docstring,info,minor,doc,,FALSE
+python,FLK8-D204,1 blank line required after class docstring,info,minor,doc,,FALSE
+python,FLK8-D205,1 blank line required between summary line and description,info,minor,doc,,FALSE
+python,FLK8-D206,"Docstring should be indented with spaces, not tabs",info,minor,doc,"It is recommended to use spaces in the docstrings, just as the code.",FALSE
+python,FLK8-D207,Docstring is under-indented,info,minor,doc,It is recommended to properly indent docstrings for readability. ,FALSE
+python,FLK8-D208,Docstring is over-indented,info,minor,doc,It is recommended to properly indent docstrings for readability. ,FALSE
+python,FLK8-D209,Multi-line docstring closing quotes should be on a separate line,info,minor,doc,,FALSE
+python,FLK8-D210,No whitespaces allowed surrounding docstring text,info,minor,doc,,FALSE
+python,FLK8-D211,No blank lines allowed before class docstring,info,minor,doc,,FALSE
+python,FLK8-D212,Multi-line docstring summary should start at the first line,info,minor,doc,,FALSE
+python,FLK8-D213,Multi-line docstring summary should start at the second line,info,minor,doc,,FALSE
+python,FLK8-D214,Section is over-indented,info,minor,doc,,FALSE
+python,FLK8-D215,Section underline is over-indented,info,minor,doc,,FALSE
+python,FLK8-D300,Use “”“triple double quotes”“”,info,minor,doc,Use of triple-quotes is recommended to specify docstrings.,FALSE
+python,FLK8-D301,Use r”“” if any backslashes in a docstring,info,minor,doc,"If there are backslashes in a docstring, please raw strings.",FALSE
+python,FLK8-D302,Use u”“” for Unicode docstrings,info,minor,doc,,FALSE
+python,FLK8-D400,First line should end with a period,info,minor,doc,,FALSE
+python,FLK8-D401,First line should be in imperative mood,info,minor,doc,,FALSE
+python,FLK8-D401,First line should be in imperative mood; try rephrasing,info,minor,doc,,FALSE
+python,FLK8-D402,First line should not be the function’s “signature”,info,minor,doc,,FALSE
+python,FLK8-D403,First word of the first line should be properly capitalized,info,minor,doc,,FALSE
+python,FLK8-D404,First word of the docstring should not be This,info,minor,doc,,FALSE
+python,FLK8-D405,Section name should be properly capitalized,info,minor,doc,,FALSE
+python,FLK8-D406,Section name should end with a newline,info,minor,doc,,FALSE
+python,FLK8-D407,Missing dashed underline after section,info,minor,doc,,FALSE
+python,FLK8-D408,Section underline should be in the line following the section’s name,info,minor,doc,,FALSE
+python,FLK8-D409,Section underline should match the length of its name,info,minor,doc,,FALSE
+python,FLK8-D410,Missing blank line after section,info,minor,doc,,FALSE
+python,FLK8-D411,Missing blank line before section,info,minor,doc,,FALSE
+python,FLK8-D412,No blank lines allowed between a section header and its content,info,minor,doc,,FALSE
+python,FLK8-D413,Missing blank line after last section,info,minor,doc,,FALSE
+python,FLK8-D414,Section has no content,info,minor,doc,,FALSE
 python,FLK8-E101,Indentation contains mixed spaces and tabs,warning,major,bug-risk,"Indentation has has both tabs and spaces in it. You should use either tabs or spaces, but not both.",FALSE
 python,FLK8-E111,Indentation is not a multiple of four,warning,major,style,PEP8 recommends that Python code indentation be a multiple of four.,FALSE
 python,FLK8-E112,Expected an indented block,warning,major,bug-risk,This issue occurs when code is not indented but should be.,FALSE
 python,FLK8-E113,Unexpected indentation,error,major,bug-risk,A line is indented when it shouldn’t be. Usually this will mean that multiple lines need to be indented at the same level.,FALSE
-python,FLK8-E114,Indentation is not a multiple of four (comment),info,minor,style,Comment indentation should be a multiple of four.,FALSE
-python,FLK8-E115,Expected an indented block (comment),info,minor,style,An indented block comment was expected but a non-indented block comment was found instead.,FALSE
-python,FLK8-E116,Unexpected indentation (comment),info,minor,style,Comments should be indented relative to the code in the block they are in.,FALSE
+python,FLK8-E114,Indentation is not a multiple of four in comments,info,minor,style,Comment indentation should be a multiple of four.,FALSE
+python,FLK8-E115,Expected an indented block in comments,info,minor,style,An indented block comment was expected but a non-indented block comment was found instead.,FALSE
+python,FLK8-E116,Unexpected indentation in comments,info,minor,style,Comments should be indented relative to the code in the block they are in.,FALSE
 python,FLK8-E121,Continuation line under-indented for hanging indent,info,minor,style,A line is less indented than it should be for hanging indents.,FALSE
 python,FLK8-E122,Continuation line missing indentation or outdented,info,minor,style,A continuation line is not indented as far as it should be or is indented too far.,FALSE
 python,FLK8-E123,Closing bracket does not match indentation of opening bracket's line,info,minor,style,Closing brackets should match the same indentation level of the line that their opening bracket started on.,FALSE
@@ -152,14 +152,14 @@ python,FLK8-E127,Continuation line over-indented for visual indent,info,minor,st
 python,FLK8-E128,Continuation line under-indented for visual indent,info,minor,style,A continuation line is under-indented for a visual indentation.,FALSE
 python,FLK8-E129,Visually indented line with same indent as next logical line,info,minor,style,A visual indented line has the same indentation as the next logical line. This can make it hard to read.,FALSE
 python,FLK8-E131,Continuation line unaligned for hanging indent,info,minor,style,A continuation line is unaligned for hanging indent.,FALSE
-python,FLK8-E201,Whitespace after '(',info,minor,style,Open parentheses should not have any space before or after them.,FALSE
-python,FLK8-E202,Whitespace before ')',info,minor,style,Closing parentheses should not have any before after them.,FALSE
-python,FLK8-E203,Whitespace before ':',info,minor,style,Colons should not have any space before them.,FALSE
-python,FLK8-E211,Whitespace before '(',info,minor,style,Open parentheses should not have any space before or after them.,FALSE
-python,FLK8-E221,Multiple spaces before operator,info,minor,style,There should be only one space before an operator.,FALSE
-python,FLK8-E222,Multiple spaces after operator,info,minor,style,There should be only one space after an operator.,FALSE
-python,FLK8-E223,Tab before operator,info,minor,style,There should be only one space before or after operators.,FALSE
-python,FLK8-E224,Tab after operator,info,minor,style,There should be only one space before or after operators.,FALSE
+python,FLK8-E201,Whitespace after `(`,info,minor,style,Open parentheses should not have any space before or after them.,FALSE
+python,FLK8-E202,Whitespace before `)`,info,minor,style,Closing parentheses should not have any before after them.,FALSE
+python,FLK8-E203,Whitespace before `:`,info,minor,style,Colons should not have any space before them.,FALSE
+python,FLK8-E211,Whitespace before `(`,info,minor,style,Open parentheses should not have any space before or after them.,FALSE
+python,FLK8-E221,Multiple spaces found before operator,info,minor,style,There should be only one space before an operator.,FALSE
+python,FLK8-E222,Multiple spaces found after operator,info,minor,style,There should be only one space after an operator.,FALSE
+python,FLK8-E223,Tab found before operator,info,minor,style,There should be only one space before or after operators.,FALSE
+python,FLK8-E224,Tab found after operator,info,minor,style,There should be only one space before or after operators.,FALSE
 python,FLK8-E225,Missing whitespace around operator,info,minor,style,There should be one space before and after all operators.,FALSE
 python,FLK8-E226,Missing whitespace around arithmetic operator,info,minor,style,"There should be one space before and after an arithmetic operator (`+`, `-`, `/`, and `*`).",FALSE
 python,FLK8-E227,Missing whitespace around bitwise or shift operator,info,minor,style,"There should be one space before and after bitwise and shift operators (`<<`, `>>`, `&`, `|`, `^`).",FALSE
@@ -169,9 +169,9 @@ python,FLK8-E241,"Multiple spaces after ','",info,minor,style,"There should be o
 python,FLK8-E242,"Tab after ','",info,minor,style,"There should be only one space after the `,` character.",FALSE
 python,FLK8-E251,Unexpected spaces around keyword / parameter equals,info,minor,style,There should be no spaces before or after the `=` in a function definition.,FALSE
 python,FLK8-E261,At least two spaces before inline comment,info,minor,style,"Inline comments should have two spaces before them. Often programmers will only include one space, which will trigger this warning.",FALSE
-python,FLK8-E262,Inline comment should start with '# ',info,minor,style,Inline comments should have one space before the pound sign (`#`) and the comment itself.,FALSE
-python,FLK8-E265,Block comment should start with '# ',info,minor,style,Block comments should have one space before the pound sign (`#`) and the comment itself.,FALSE
-python,FLK8-E266,Too many leading '#' for block comment,info,minor,style,There should be only one leading `#` for a block comment.,FALSE
+python,FLK8-E262,Inline comment should start with `# `,info,minor,style,Inline comments should have one space before the pound sign (`#`) and the comment itself.,FALSE
+python,FLK8-E265,Block comment should start with `# `,info,minor,style,Block comments should have one space before the pound sign (`#`) and the comment itself.,FALSE
+python,FLK8-E266,Too many leading `#` for block comment,info,minor,style,There should be only one leading `#` for a block comment.,FALSE
 python,FLK8-E271,Multiple spaces after keyword,info,minor,style,There should be only one space after a keyword.,FALSE
 python,FLK8-E272,Multiple spaces before keyword,info,minor,style,There should be only one space before a keyword.,FALSE
 python,FLK8-E273,Tab after keyword,info,minor,style,There should be only one space after a keyword.,FALSE
@@ -179,14 +179,14 @@ python,FLK8-E274,Tab before keyword,info,minor,style,There should be only one sp
 python,FLK8-E275,Missing whitespace after keyword,info,minor,style,There should be one space after keywords.,FALSE
 python,FLK8-E301,"Expected 1 blank line, found 0",info,minor,style,One blank line is expected between the methods of a class.,FALSE
 python,FLK8-E302,"Expected 2 blank lines, found 0",info,minor,style,Two blank lines are expected between functions and classes.,FALSE
-python,FLK8-E303,Too many blank lines (3),info,minor,style,Two blank lines are expected between functions and classes and one blank line is expected between methods of a class.,FALSE
+python,FLK8-E303,Too many blank lines found,info,minor,style,Two blank lines are expected between functions and classes and one blank line is expected between methods of a class.,FALSE
 python,FLK8-E304,Blank lines found after function decorator,info,minor,style,There should be no blank lines between a function decorator and the function it is decorating.,FALSE
 python,FLK8-E305,Expected 2 blank lines after end of function or class,info,minor,style,"Functions and classes should have two blank lines after them, separating them from other functions and classes.
 ",FALSE
 python,FLK8-E306,Expected 1 blank line before a nested definition,info,minor,style,Nested functions and classes should have one blank line before them.,FALSE
 python,FLK8-E401,Multiple imports on one line,info,minor,style,Imports from different modules should occur on different lines.,FALSE
 python,FLK8-E402,Module level import not at top of file,info,minor,style,All module level imports should be at the top of the file. This means that there should be no statements in between module level imports.,FALSE
-python,FLK8-E501,Line too long (82 > 79 characters),info,minor,style,Line lengths are recommended to be no greater than 79 characters.,FALSE
+python,FLK8-E501,Line too long,info,minor,style,Line lengths are recommended to be no greater than 79 characters.,FALSE
 python,FLK8-E502,The backslash is redundant between brackets,info,minor,style,There is no need for backslashes between brackets.,FALSE
 python,FLK8-E701,Multiple statements on one line (colon),info,major,style,Multiple statements should be on their own separate lines. This improves readability.,FALSE
 python,FLK8-E702,Multiple statements on one line (semicolon),info,minor,style,Multiple statements should not be on the same line separated by a semicolon. They should be on their own separate lines.,FALSE
@@ -196,9 +196,8 @@ python,FLK8-E711,Comparison to None should be 'if cond is None:',warning,minor,b
 python,FLK8-E712,Comparison to True should be 'if cond is True:' or 'if cond:',warning,minor,bug-risk,"When comparing a variable to `True`, you should use the form `if x is True` or simply `if x`. The most common incorrect form is `if x == True`.",FALSE
 python,FLK8-E713,Test for membership should be 'not in',warning,minor,bug-risk,Tests for membership should use the form `x not in the_list` rather than `not x in the_list`. The former example is simply more readable.,FALSE
 python,FLK8-E714,Test for object identity should be 'is not',warning,minor,bug-risk,Tests for object identity should use the form `x is not None` rather than `not x is None`. The former example is simply more readable.,FALSE
-python,FLK8-E721,"Do not compare types, use 'isinstance()'",warning,minor,bug-risk,A object should be be compared to a type by using `isinstance`. This is because `isinstance` can handle subclasses as well.,FALSE
-python,FLK8-E722,"Do not use bare except, specify exception instead",warning,minor,bug-risk,Using `except` without a specific exception can be error prone.,FALSE
-python,FLK8-E731,"Do not assign a lambda expression, use a def",warning,minor,bug-risk,"Lambdas should not be assigned to a variable. Instead, they should be defined as functions. The primary reason for this is debugging. Lambdas show as `<lambda>` in tracebacks, where functions will display the function’s name.",FALSE
+python,FLK8-E722,"Do not use bare `except`, specify exception instead",warning,minor,bug-risk,Using `except` without a specific exception can be error prone.,FALSE
+python,FLK8-E731,"Do not assign a lambda expression, use a `def`",warning,minor,bug-risk,"Lambdas should not be assigned to a variable. Instead, they should be defined as functions. The primary reason for this is debugging. Lambdas show as `<lambda>` in tracebacks, where functions will display the function’s name.",FALSE
 python,FLK8-E741,"Do not use variables named 'l', 'O', or 'I'",warning,major,style,"Variables named `I`, `O`, and `l` can be very hard to read. This is because the letter `I` and the letter `l` are easily confused, and the letter `O` and the number `0` can be easily confused.
 
 Change the names of these variables to something more descriptive.
@@ -210,8 +209,6 @@ Change the names of these classes to something more descriptive.",FALSE
 python,FLK8-E743,"Do not define functions named 'l', 'O', or 'I'",warning,major,style,"Functions named `I`, `O`, and `l` can be very hard to read. This is because the letter `I` and the letter `l` are easily confused, and the letter `O` and the number `0` can be easily confused.
 
 Change the names of these functions to something more descriptive.",FALSE
-python,FLK8-E901,SyntaxError or IndentationError,warning,minor,bug-risk,,FALSE
-python,FLK8-E902,IOError,warning,minor,bug-risk,,FALSE
 python,FLK8-F401,Module imported but unused,warning,major,style,A module has been imported but is not used anywhere in the file. The module should either be used or the import should be removed.,FALSE
 python,FLK8-F402,import module from line N shadowed by loop variable,warning,major,bug-risk,Loop variables should not redefine the name of modules that are imported.,FALSE
 python,FLK8-F403,‘from module import *’ used; unable to detect undefined names,warning,major,bug-risk,"`from module import *` is discouraged because the programmer often won’t know where an imported object is defined. The imported module, class, or function should be explicitly defined.",FALSE
@@ -219,29 +216,28 @@ python,FLK8-F404,future import(s) name after other statements,warning,major,styl
 python,FLK8-F405,"name may be undefined, or defined from star imports: module",warning,major,bug-risk,"This warning occurs in conjunction with issue FLK8-F403, `'from module import *'` used. It means that the variable name could be undefined, but we cannot be sure because it also could also be imported in the star imports.
 
 Confirm that the variable is defined in the star imports. If it is, explicitly import it instead of importing `*`. If not, then define the variable.",FALSE
-python,FLK8-F406,‘from module import *’ only allowed at module level,warning,major,bug-risk,"Importing `*` is generally discouraged, but if there's a need regardless, such imports should only be done on module level.",FALSE
+python,FLK8-F406,`from module import *` is only allowed at module level,warning,major,bug-risk,"Importing `*` is generally discouraged, but if there's a need regardless, such imports should only be done on module level.",FALSE
 python,FLK8-F407,an undefined __future__ feature name was imported,warning,critical,bug-risk,The imported name does not exist in the `__future__` package.,FALSE
 python,FLK8-F601,Dictionary key name repeated with different values,warning,major,bug-risk,All dictionary keys should be unique.,FALSE
 python,FLK8-F602,Dictionary key variable name repeated with different values,warning,major,bug-risk,All dictionary keys should be unique.,FALSE
-python,FLK8-F621,Too many expressions in an assignment with star-unpacking,warning,major,bug-risk,,FALSE
-python,FLK8-F622,"Two or more starred expressions in an assignment (a, *b, *c = d)",warning,major,bug-risk,,FALSE
+python,FLK8-F621,Too many expressions in an assignment with star-unpacking,warning,major,bug-risk,Too many expressions found in starred assignment. This can be error prone.,TRUE
+python,FLK8-F622,"Two or more starred expressions in an assignment (a, *b, *c = d)",warning,major,bug-risk,There are more than one starred expressions (*x) in an assignment. This is a SyntaxError.,FALSE
 python,FLK8-F631,"Assertion test is a tuple, which are always True",warning,major,bug-risk,"A tuple with at least one element is always truthy, so the assertion will always pass. Remove the parentheses.",FALSE
-python,FLK8-F701,A break statement outside of a while or for loop,warning,major,bug-risk,break statement should not be used outside a loop.,FALSE
-python,FLK8-F702,A continue statement outside of a while or for loop,warning,major,bug-risk,continue statement should not be used outside a loop.,FALSE
-python,FLK8-F703,A continue statement in a finally block in a loop,warning,minor,bug-risk,"continue statement doesn't have any effect in the finally block, and can be removed.",FALSE
-python,FLK8-F704,A yield or yield from statement outside of a function,warning,major,bug-risk,yield should not be used outside of a function.,FALSE
-python,FLK8-F705,A return statement with arguments inside a generator,warning,major,bug-risk,A return statement with arguments should not be used inside a generator.,FALSE
-python,FLK8-F706,A return statement outside of a function/method,warning,major,bug-risk,Return statement should not be used outside of a function or method.,FALSE
-python,FLK8-F707,An except: block as not the last exception handler,warning,major,bug-risk,A bare exception catcher should always be the last block in a `try...except`.,FALSE
+python,FLK8-F701,`break` statement used outside of a `while` or `for` loop,warning,major,bug-risk,break statement should not be used outside a loop.,FALSE
+python,FLK8-F702,`continue` statement outside of a `while` or `for` loop,warning,major,bug-risk,continue statement should not be used outside a loop.,FALSE
+python,FLK8-F703,`continue` statement used in a `finally` block in a loop,warning,minor,bug-risk,"continue statement doesn't have any effect in the finally block, and can be removed.",FALSE
+python,FLK8-F704,`yield` or `yield from` statement used outside of a function,warning,major,bug-risk,yield should not be used outside of a function.,FALSE
+python,FLK8-F705,`return` statement used with arguments inside a generator,warning,major,bug-risk,A return statement with arguments should not be used inside a generator.,FALSE
+python,FLK8-F706,`return` statement used outside of a function or method,warning,major,bug-risk,Return statement should not be used outside of a function or method.,FALSE
+python,FLK8-F707,`except:` block found as not the last exception handler,warning,major,bug-risk,A bare exception catcher should always be the last block in a `try...except`.,FALSE
 python,FLK8-F721,doctest syntax error syntax error in forward type annotation,,,,,FALSE
 python,FLK8-F722,doctest syntax error syntax error in forward type annotation,,,,,FALSE
-python,FLK8-F811,Redefinition of unused name from line N,warning,minor,bug-risk,"A module has been imported twice, and the original import is unused. One of the imports should be removed and you should ensure that it is being used in the file.",FALSE
 python,FLK8-F812,List comprehension redefines name from line N,warning,minor,bug-risk,A list comprehension is using the same name as another variable defined in the module. Either change the variable name in the list comprehension or change it in the module.,FALSE
-python,FLK8-F821,Undefined name name,error,critical,bug-risk,The variable name is not defined where it is used.,FALSE
-python,FLK8-F822,Undefined name name in __all__,error,critical,bug-risk,An undefined module was specified in the `__all__` list. Ensure that it is specified in your file or remove the variable from `__all__`.,FALSE
-python,FLK8-F823,Local variable name … referenced before assignment,warning,major,bug-risk,Local variables should be defined before the are referenced.,FALSE
-python,FLK8-F831,Duplicate argument name in function definition,warning,major,bug-risk,Two or more parameters in a function definition have the same name. All names in the function definition should be distinct.,FALSE
-python,FLK8-F841,Local variable name is assigned to but never used,warning,minor,bug-risk,A local variable in your function was defined but is not being used. This local variable should be removed.,FALSE
+python,FLK8-F821,Undefined name detected,error,critical,bug-risk,The variable name is not defined where it is used.,FALSE
+python,FLK8-F822,Undefined name detected in `__all__`,error,critical,bug-risk,An undefined module was specified in the `__all__` list. Ensure that it is specified in your file or remove the variable from `__all__`.,FALSE
+python,FLK8-F823,Local variable name referenced before assignment,error,critical,bug-risk,Local variables should be defined before they are referenced.,FALSE
+python,FLK8-F831,Duplicate argument in function definition,error,critical,bug-risk,Two or more parameters in a function definition have the same name. All names in the function definition should be distinct.,FALSE
+python,FLK8-F841,Local variable is assigned to but never used,warning,minor,bug-risk,A local variable in your function was defined but is not being used. This local variable should be removed.,FALSE
 python,FLK8-F901,`raise NotImplemented` should be `raise NotImplementedError`,warning,major,bug-risk,"`NotImplemented` signals to the runtime that it should ask someone else to satisfy the operation. In the expression `a == b`, if `a.__eq__(b)` returns `NotImplemented`, then Python tries `b.__eq__(a)`. If `b` knows enough to return `True` or `False`, then the expression can succeed. If it doesn't, then the runtime will fall back to the built-in behavior (which is based on identity for `==` and `!=`).
 
 Raising an exception would break out of the sort unless caught, whereas `NotImplemented` doesn't get raised and can be used in further tests.",FALSE
@@ -252,91 +248,67 @@ python,FLK8-W293,Blank line contains whitespace,info,minor,style,Blank lines sho
 python,FLK8-W391,Blank line at end of file,info,minor,style,"There should be one, and only one, blank line at the end of each file. This warning will occur when there are two or more blank lines.",FALSE
 python,FLK8-W503,Line break before binary operator,info,minor,style,Line breaks should occur after the binary operator to keep all variable names aligned.,FALSE
 python,FLK8-W504,Line break after binary operator,info,minor,style,,FALSE
-python,FLK8-W505,Doc line too long (82 > 79 characters),info,minor,style,Docstring line lengths are recommended to be no greater than 79 characters.,FALSE
+python,FLK8-W505,Doc line too long,info,minor,style,Docstring line lengths are recommended to be no greater than 79 characters.,FALSE
 python,FLK8-W601,".has_key() is deprecated, use 'in'",warning,major,code-smell,`.has_key()` was deprecated in Python 2. It is recommended to use the in operator instead.,FALSE
 python,FLK8-W602,deprecated form of raising exception,warning,major,code-smell,"The `raise Exception, message` form of raising exceptions is deprecated. Use the new form, `raise Exception(message)`.",FALSE
 python,FLK8-W603,"<>' is deprecated, use '!='",warning,major,code-smell,`<>` has been deprecated and removed in Python 3. Replace instances of `<>` with `!=`.,FALSE
 python,FLK8-W604,"backticks are deprecated, use 'repr()'",warning,major,code-smell,Backticks were deprecated and removed in Python 3. Use the built-in function `repr()` instead.,FALSE
-python,FLK8-W605,invalid escape sequence 'x',warning,major,bug-risk,"As of Python 3.6, a backslash-character pair that is not a valid escape sequence now generates a DeprecationWarning. Although this will eventually become a SyntaxError, that will not be for several Python releases.",FALSE
+python,FLK8-W605,Invalid escape sequence found,warning,major,bug-risk,"As of Python 3.6, a backslash-character pair that is not a valid escape sequence now generates a DeprecationWarning. Although this will eventually become a SyntaxError, that will not be for several Python releases.",FALSE
 python,FLK8-W606,`async` and `await` are reserved keywords starting with Python 3.7,warning,major,bug-risk,Using these symbols as names can break your code in future.,FALSE
-python,PYL-C0102,blacklisted-name,warning,major,code-smell,Using these names can make the intention of the code unclear and hard to understand and debug later.,FALSE
-python,PYL-C0103,invalid-name,warning,minor,style,"Names of classes, variables, functions and constants are capitalized in separate ways to help distinguish later. Not following these conventions can lead to hard-to-read code, since you may have to refer to the definition of the name to know its type.",FALSE
-python,PYL-C0113,unneeded-not,,,,,
-python,PYL-C0121,singleton-comparison,,,,,
-python,PYL-C0122,misplaced-comparison-constant,,,,,
-python,PYL-C0123,unidiomatic-typecheck,,,,,
-python,PYL-C0200,consider-using-enumerate,,,,,
-python,PYL-C0201,consider-iterating-dictionary,,,,,
-python,PYL-C0202,bad-classmethod-argument,,,,,
-python,PYL-C0203,bad-mcs-method-argument,,,,,
-python,PYL-C0204,bad-mcs-classmethod-argument,,,,,
-python,PYL-C0205,single-string-used-for-slots,,,,,
-python,PYL-C0301,line-too-long,,,,,
-python,PYL-C0302,too-many-lines,,,,,
-python,PYL-C0303,trailing-whitespace,,,,,
-python,PYL-C0304,missing-final-newline,,,,,
-python,PYL-C0305,trailing-newlines,,,,,
-python,PYL-C0321,multiple-statements,,,,,
-python,PYL-C0325,superfluous-parens,,,,,
-python,PYL-C0326,bad-whitespace,,,,,
-python,PYL-C0327,mixed-line-endings,,,,,
-python,PYL-C0328,unexpected-line-ending-format,,,,,
-python,PYL-C0330,bad-continuation,,,,,
-python,PYL-C0401,wrong-spelling-in-comment,,,,,
-python,PYL-C0402,wrong-spelling-in-docstring,,,,,
-python,PYL-C0403,invalid-characters-in-docstring,,,,,
-python,PYL-C0410,multiple-imports,,,,,
-python,PYL-C0411,wrong-import-order,,,,,
-python,PYL-C0412,ungrouped-imports,,,,,
-python,PYL-C0413,wrong-import-position,,,,,
-python,PYL-C0414,useless-import-alias,,,,,
-python,PYL-C1801,len-as-condition,,,,,
-python,PYL-E0100,init-is-generator,,,,,
-python,PYL-E0101,return-in-init,,,,,
-python,PYL-E0102,function-redefined,,,,,
-python,PYL-E0103,not-in-loop,,,,,
-python,PYL-E0104,return-outside-function,,,,,
-python,PYL-E0105,yield-outside-function,,,,,
-python,PYL-E0106,return-arg-in-generator,,,,,
-python,PYL-E0107,nonexistent-operator,,,,,
-python,PYL-E0108,duplicate-argument-name,,,,,
-python,PYL-E0110,abstract-class-instantiated,,,,,
-python,PYL-E0111,bad-reversed-sequence,,,,,
-python,PYL-E0112,too-many-star-expressions,,,,,
-python,PYL-E0113,invalid-star-assignment-target,,,,,
-python,PYL-E0114,star-needs-assignment-target,,,,,
-python,PYL-E0115,nonlocal-and-global,,,,,
-python,PYL-E0116,continue-in-finally,,,,,
-python,PYL-E0117,nonlocal-without-binding,,,,,
-python,PYL-E0118,used-prior-global-declaration,,,,,
-python,PYL-E0119,misplaced-format-function,,,,,
-python,PYL-E0202,method-hidden,,,,,
-python,PYL-E0203,access-member-before-definition,,,,,
-python,PYL-E0211,no-method-argument,,,,,
-python,PYL-E0213,no-self-argument,,,,,
-python,PYL-E0236,invalid-slots-object,,,,,
-python,PYL-E0237,assigning-non-slot,,,,,
-python,PYL-E0238,invalid-slots,,,,,
-python,PYL-E0239,inherit-non-class,,,,,
-python,PYL-E0240,inconsistent-mro,,,,,
-python,PYL-E0241,duplicate-bases,,,,,
-python,PYL-E0301,non-iterator-returned,,,,,
-python,PYL-E0303,invalid-length-returned,,,,,
-python,PYL-E0401,import-error,,,,,
-python,PYL-E0402,relative-beyond-top-level,,,,,
-python,PYL-E0601,used-before-assignment,,,,,
-python,PYL-E0602,undefined-variable,,,,,
-python,PYL-E0603,undefined-all-variable,,,,,
-python,PYL-E0604,invalid-all-object,,,,,
-python,PYL-E0611,no-name-in-module,,,,,
-python,PYL-E0633,unpacking-non-sequence,,,,,
-python,PYL-E0701,bad-except-order,,,,,
-python,PYL-E0702,raising-bad-type,,,,,
-python,PYL-E0703,bad-exception-context,,,,,
-python,PYL-E0704,misplaced-bare-raise,,,,,
-python,PYL-E0710,raising-non-exception,,,,,
-python,PYL-E0711,notimplemented-raised,,,,,
-python,PYL-E0712,catching-non-exception,,,,,
+python,FLK8-E999,SyntaxError: invalid sytax,error,critical,bug-risk,A Python syntax error is detected.,TRUE
+python,PYL-C0102,blacklisted-name,warning,major,style,These names can make the intention of the code unclear and hard to understand and debug. Using descripted names is recommended.,FALSE
+python,PYL-C0103,invalid-name,warning,minor,style,"Names of classes, variables, functions and constants are differently capitalized and follow separate conventions. Not following these conventions can lead to code that's hard to understand.",FALSE
+python,PYL-C0113,unneeded-not,warning,major,style,"The boolean expression contains an unneeded negation, and can be re-written without using the `not` statement.",FALSE
+python,PYL-C0122,misplaced-comparison-constant,warning,major,style,The constant is placed on the left side of a comparison. It is usually clearer in intent to place it in the right hand side of the comparison.,FALSE
+python,PYL-C0123,unidiomatic-typecheck,warning,major,bug-risk,"Use `type()` instead of `isinstance()` for a typecheck. The idiomatic way to perform an explicit typecheck in Python is to use `isinstance(x, Y)` rather than `type(x) == Y`, `type(x) is Y`. This is because `isinstance` can handle subclasses as well.",TRUE
+python,PYL-C0200,consider-using-enumerate,warning,major,style,"Consider using enumerate instead of iterating with range and len, which is more straightforward.",TRUE
+python,PYL-C0201,consider-iterating-dictionary,warning,major,style,"Consider iterating the dictionary directly instead of calling .keys(). It is enough to just iterate through the dictionary itself, as in `for key in dictionary`.",TRUE
+python,PYL-C0202,bad-classmethod-argument,warning,major,style,Use of `cls` as the first named argument in a class method is recommended so it's easy to differentiate them from regular instance methods.,TRUE
+python,PYL-C0203,bad-mcs-method-argument,warning,major,style,Use of `cls` as the first named argument in a metaclass method is recommended so it's easy to differentiate them from regular instance methods.,TRUE
+python,PYL-C0204,bad-mcs-classmethod-argument,warning,major,style,Use of `mcs` as the first named argument in a metaclass class method is recommended so it's easy to differentiate them from regular instance methods.,
+python,PYL-C0205,single-string-used-for-slots,warning,major,style,"Class slots is a simple string, rather than an iterable.",TRUE
+python,PYL-C0302,too-many-lines,warning,minor,code-smell,"Having too many lines in a module reduces readability, and may be a sign that refactoring is needed. The recommended maximum number of lines in a module is 1000.",FALSE
+python,PYL-C0325,superfluous-parens,warning,minor,style,Parentheses can be omitted after the keyword.,FALSE
+python,PYL-C0327,mixed-line-endings,warning,minor,style,There are mixed (LF and CRLF) newline signs in a file.,TRUE
+python,PYL-C0328,unexpected-line-ending-format,warning,minor,style,Unexpected line ending format.,TRUE
+python,PYL-C0401,wrong-spelling-in-comment,info,minor,style,A word in comment is not spelled correctly.,FALSE
+python,PYL-C0402,wrong-spelling-in-docstring,info,minor,style,A word in docstring is not spelled correctly.,FALSE
+python,PYL-C0403,invalid-characters-in-docstring,info,minor,style,Invalid characters found in docstring.,FALSE
+python,PYL-C1801,len-as-condition,warning,major,performance,"Using the `len` function to check if a sequence is empty is not idiomatic and can be less performant than checking for truthness of the sequence. 
+
+`len` doesn't know the context in which it is called, so if computing the length means traversing the entire sequence, it must; it doesn't know that the result is just being compared to 0. Computing the boolean value can stop after it sees the first element, regardless of how long the sequence actually is.",FALSE
+python,PYL-E0100,init-is-generator,error,critical,bug-risk,"The `__init__()` method is required to return nothing, but a `yield` statement in its body was detected. This will raise a `TypeError` on Python 2.7 and 3.x.",TRUE
+python,PYL-E0101,return-in-init,error,critical,bug-risk,"The `__init__()` method is required to return `None`, but an explicit return value in its body was detected. This will raise a `TypeError` on Python 2.7 and 3.x.",TRUE
+python,PYL-E0102,function-redefined,error,major,bug-risk,"A redefinition of functions, classes, and methods is allowed and overrides the original definition in Python, but is confusing and cause bugs that are difficult to debug.",TRUE
+python,PYL-E0110,abstract-class-instantiated,error,major,bug-risk,An abstract class with `abc.ABCMeta` as metaclass has abstract methods and is instantiated.,TRUE
+python,PYL-E0111,bad-reversed-sequence,error,critical,bug-risk,"The first argument to `reversed()` builtin isn't a sequence (does not implement `reversed`, nor `getitem` and `len`).",TRUE
+python,PYL-E0113,invalid-star-assignment-target,error,major,bug-risk,A star expression is used as a starred assignment target. It must be in a list or tuple.,TRUE
+python,PYL-E0114,star-needs-assignment-target,error,major,bug-risk,A star expression can only be used in an assignment target.,TRUE
+python,PYL-E0115,nonlocal-and-global,error,major,bug-risk,A name is defined as nonlocal and global in the same scope.,TRUE
+python,PYL-E0117,nonlocal-without-binding,error,major,bug-risk,A name is defined as nonlocal without any binding.,TRUE
+python,PYL-E0118,used-prior-global-declaration,error,major,bug-risk,A global name us used prior to it's global declaration.,TRUE
+python,PYL-E0119,misplaced-format-function,error,critical,bug-risk,The `format()` function is called on an object that is not a string. This is an error.,TRUE
+python,PYL-E0202,method-hidden,error,major,bug-risk,"When a method is defined in a child class which has the same name as an attribute in the ancestor class, the attribute in the ancestor class takes precedence and hides the method.",TRUE
+python,PYL-E0203,access-member-before-definition,error,critical,bug-risk,A member of a class is being accessed before its definition. This is an error.,TRUE
+python,PYL-E0211,no-method-argument,error,critical,bug-risk,A method which should have the bound instance as first argument has no argument defined. This is an error.,TRUE
+python,PYL-E0213,no-self-argument,error,critical,bug-risk,"A method has an attribute different the ""self"" as first argument. This is considered as an error since this is a so common convention that you shouldn't break it.",TRUE
+python,PYL-E0236,invalid-slots-object,error,critical,bug-risk,Slots must contain only string objects.,TRUE
+python,PYL-E0237,assigning-non-slot,error,critical,bug-risk,Assigning to an attribute not defined in the class slots will cause an error.,TRUE
+python,PYL-E0238,invalid-slots,error,critical,bug-risk,"An invalid slots value is found in class. Only a string, an iterable or a sequence is permitted. This is an error.",TRUE
+python,PYL-E0239,inherit-non-class,error,critical,bug-risk,Python classes can only inherit from a class. Inheriting from any other object is an error.,TRUE
+python,PYL-E0240,inconsistent-mro,error,critical,bug-risk,"The order in which other classes are specified for inheritence in a class matters. Python classes use the C3 linearization method to determine a method resolution ordering for each class, which ensures that for a class C, if a class C1 precedes a class C2 in the MRO of C then C1 should also precede C2 in the MRO of all subclasses of C.",TRUE
+python,PYL-E0241,duplicate-bases,error,critical,bug-risk,A class must not specify inheritance from another class more than one times. Duplicate base classes will raise a `TypeError`.,TRUE
+python,PYL-E0301,non-iterator-returned,error,critical,bug-risk,The `__iter__` method of a class must return an iterator with a `__next__` method.,TRUE
+python,PYL-E0303,invalid-length-returned,error,critical,bug-risk,The `__len__` method of a class must return a non-negative integer.,TRUE
+python,PYL-E0402,Attempted relative import beyond top-level package,error,critical,bug-risk,A relative import has been attempted from beyond the top-level package. This is an error.,TRUE
+python,PYL-E0604,Invalid object found in `__all__`,error,critical,bug-risk,The `__all__` list must contain only strings. Having other kinds of objects is an error.,TRUE
+python,PYL-E0633,Attempting to unpack a non-sequence object,error,critical,bug-risk,"Unpacking is supported only for sequence objects, like lists, sets, tuples, iterators or generators, etc.",TRUE
+python,PYL-E0701,Bad `except` order found,error,critical,bug-risk,Except clauses are not in the correct order (from the more specific to the more generic). Some exceptions may not be caught by the most specific handler.,TRUE
+python,PYL-E0702,Object of unsupported type raised,error,critical,bug-risk,Only classess or instances are allowed to be raised. Raising other types is an error.,TRUE
+python,PYL-E0703,"Exception context set to something which is not an exception, nor None",error,critical,bug-risk,"The syntax `raise ... from ...` can be used only when the exception context is an exception, or `None`. Trying to do so with other object types is an error.",TRUE
+python,PYL-E0704,The raise statement is not inside an except clause,error,critical,bug-risk,"A bare raise is used inside something which is not an `except` clause. This generates an error, since there are no active exceptions to be re-raised. An exception to this rule is represented by a bare raise inside a `finally` clause, which might work, as long as an exception is raised inside the `try` block, but it is nevertheless a code smell that must not be relied upon.",TRUE
+python,PYL-E0710,New-style class raised which doesn't inherit from `BaseException`,error,critical,bug-risk,New-style classes raised must inherit from `BaseException`.,TRUE
+python,PYL-E0712,Exception caught which does not inherit from `Exception`,error,critical,bug-risk,"For an exception to be caught, it must inherit from the `Exception` class.",TRUE
 python,PYL-E1003,bad-super-call,,,,,
 python,PYL-E1004,missing-super-argument,,,,,
 python,PYL-E1101,no-member,,,,,
@@ -458,7 +430,7 @@ python,PYL-W0312,mixed-indentation,,,,,
 python,PYL-W0401,wildcard-import,,,,,
 python,PYL-W0402,deprecated-module,,,,,
 python,PYL-W0403,relative-import,,,,,
-python,PYL-W0404,reimported,,,,,
+python,PYL-W0404,Module re-imported,warning,major,bug-risk,"A module is reimported mulitple times. This can be confusing, and should be fixed.",TRUE
 python,PYL-W0406,import-self,,,,,
 python,PYL-W0410,misplaced-future,,,,,
 python,PYL-W0511,fixme,,,,,
@@ -572,4 +544,3 @@ python,PYL-W1659,xreadlines-attribute,,,,,
 python,PYL-W1660,deprecated-sys-function,,,,,
 python,PYL-W1661,exception-escape,,,,,
 python,PYL-W1662,comprehension-escape,,,,,
-python,PYDEP-001,Module used but not installed.,error,critical,bug-risk,"The files mentioned in `dependency_file_paths` setting in `.deepsource.toml` are scanned in addition to `requirements.txt`, `Pipfile` and `Pipfile.lock` to look for installed dependencies.",TRUE
