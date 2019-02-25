@@ -309,20 +309,20 @@ python,PYL-E0703,"Exception context set to something which is not an exception, 
 python,PYL-E0704,The raise statement is not inside an except clause,error,critical,bug-risk,"A bare raise is used inside something which is not an `except` clause. This generates an error, since there are no active exceptions to be re-raised. An exception to this rule is represented by a bare raise inside a `finally` clause, which might work, as long as an exception is raised inside the `try` block, but it is nevertheless a code smell that must not be relied upon.",TRUE
 python,PYL-E0710,New-style class raised which doesn't inherit from `BaseException`,error,critical,bug-risk,New-style classes raised must inherit from `BaseException`.,TRUE
 python,PYL-E0712,Exception caught which does not inherit from `Exception`,error,critical,bug-risk,"For an exception to be caught, it must inherit from the `Exception` class.",TRUE
-python,PYL-E1003,bad-super-call,,,,,
-python,PYL-E1004,missing-super-argument,,,,,
-python,PYL-E1101,no-member,,,,,
-python,PYL-E1102,not-callable,,,,,
-python,PYL-E1111,assignment-from-no-return,,,,,
-python,PYL-E1120,no-value-for-parameter,,,,,
-python,PYL-E1121,too-many-function-args,,,,,
-python,PYL-E1123,unexpected-keyword-arg,,,,,
-python,PYL-E1124,redundant-keyword-arg,,,,,
-python,PYL-E1125,missing-kwoa,,,,,
-python,PYL-E1126,invalid-sequence-index,,,,,
-python,PYL-E1127,invalid-slice-index,,,,,
-python,PYL-E1128,assignment-from-none,,,,,
-python,PYL-E1129,not-context-manager,,,,,
+python,PYL-E1003,Bad first argument given in `super()` call,error,critical,bug-risk,The first argument to the `super()` function must be the current class.,TRUE
+python,PYL-E1004,Missing argument in `super()` call,error,critical,bug-risk,"In Python 2.x, the `super()` function must be called with the current class as the first argument, and the current instance as the second argument.",TRUE
+python,PYL-E1101,Variable accessed for non-existent member,error,critical,bug-risk,A variable was accessed for a member not existent in the class. This is an error.,TRUE
+python,PYL-E1102,A non-callable object is being called,error,critical,bug-risk,An object being called has been inferred to a non callable object. This is an error.,TRUE
+python,PYL-E1111,"Assigning result of a function call, where the function has no return",error,critical,bug-risk,"An assignment is done on a function call but the inferred function doesn't return anything. While this is not an error in Python, it is a critical anti-pattern and can lead to unexpected bugs.",TRUE
+python,PYL-E1120,Missing argument in function call,error,critical,bug-risk,A required function parameter isn't provided while calling the function. This is an error.,TRUE
+python,PYL-E1121,Too many positional arguments in function call,error,critical,bug-risk,Too many positional arguments are provided while calling the function. This is an error.,TRUE
+python,PYL-E1123,Unexpected keyword argument in function call,error,critical,bug-risk,The function call has passed a keyword argument that doesn't correspond to one of the function's parameter names. This is an error.,TRUE
+python,PYL-E1124,Argument passed both by position and keyword in function call,error,critical,bug-risk,"The function call would result in assigning multiple values to a function parameter, one value from a positional argument and one from a keyword argument.",TRUE
+python,PYL-E1125,Missing mandatory keyword argument in function call,error,critical,bug-risk,The function call does not pass a mandatory keyword-only argument. This is an error.,TRUE
+python,PYL-E1126,Invalid sequence index found,error,critical,bug-risk,"A sequence type is indexed with an invalid type. Valid types are `int`s, slices, and objects with an `__index__` method.",TRUE
+python,PYL-E1127,Invalid slice index found,error,critical,bug-risk,"A slice is indexed with an invalid type. Valid types are `int`s, slices, and objects with an `__index__` method.",TRUE
+python,PYL-E1128,"Assigning result of a function call, where the function returns `None`",warning,major,bug-risk,"An assignment is done on a function call but the inferred function returns `None`. While this is allowed in Python, it is an anti-pattern and can lead to unexpected bugs.",TRUE
+python,PYL-E1129,Object which is not a context manager used with the `with` statement,error,critical,bug-risk,The object used in the `with` statement doesn't implement the context manager protocol (enter/exit). This is an error.,TRUE
 python,PYL-E1130,invalid-unary-operand-type,,,,,
 python,PYL-E1131,unsupported-binary-operation,,,,,
 python,PYL-E1132,repeated-keyword,,,,,
