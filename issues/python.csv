@@ -323,13 +323,13 @@ python,PYL-E1126,Invalid sequence index found,error,critical,bug-risk,"A sequenc
 python,PYL-E1127,Invalid slice index found,error,critical,bug-risk,"A slice is indexed with an invalid type. Valid types are `int`s, slices, and objects with an `__index__` method.",TRUE
 python,PYL-E1128,"Assigning result of a function call, where the function returns `None`",warning,major,bug-risk,"An assignment is done on a function call but the inferred function returns `None`. While this is allowed in Python, it is an anti-pattern and can lead to unexpected bugs.",TRUE
 python,PYL-E1129,Object which is not a context manager used with the `with` statement,error,critical,bug-risk,The object used in the `with` statement doesn't implement the context manager protocol (enter/exit). This is an error.,TRUE
-python,PYL-E1130,invalid-unary-operand-type,,,,,
-python,PYL-E1131,unsupported-binary-operation,,,,,
-python,PYL-E1132,repeated-keyword,,,,,
-python,PYL-E1135,unsupported-membership-test,,,,,
-python,PYL-E1136,unsubscriptable-object,,,,,
-python,PYL-E1137,unsupported-assignment-operation,,,,,
-python,PYL-E1138,unsupported-delete-operation,,,,,
+python,PYL-E1130,Unary operand used on an unsupported object,error,critical,bug-risk,A unary operand is used on an object which does not support this type of operation. This is an error.,TRUE
+python,PYL-E1131,unsupported-binary-operation,error,critical,bug-risk,,
+python,PYL-E1132,Multiple values found for keyword argument,error,critical,bug-risk,The function was invoked with more than one values for a keyword argument. This is an error.,TRUE
+python,PYL-E1135,Membership test used with unsupported object,error,critical,bug-risk,A membership test using `in` statement is supported only with objects which implement the membership protocol -- `__contains__` / `__iter__` / `__getitem__`.,TRUE
+python,PYL-E1136,Subscription used with unsupported object,error,critical,bug-risk,Subscription can be used only with objects which implement `__getitem__`.,TRUE
+python,PYL-E1137,Assignment attempted with unsupported object,error,critical,bug-risk,Assignment is supported only for items which implement `__setitem__`.,TRUE
+python,PYL-E1138,Deletion attempted with unsupported object,error,critical,bug-risk,Deletion is supported only for items which implement `__delitem__`.,TRUE
 python,PYL-E1139,invalid-metaclass,,,,,
 python,PYL-E1140,unhashable-dict-key,,,,,
 python,PYL-E1200,logging-unsupported-format,,,,,
@@ -544,3 +544,11 @@ python,PYL-W1659,xreadlines-attribute,,,,,
 python,PYL-W1660,deprecated-sys-function,,,,,
 python,PYL-W1661,exception-escape,,,,,
 python,PYL-W1662,comprehension-escape,,,,,
+python,PAP-W0004,Variable name contains type information,warning,minor,code-smell,"Having type information in the variable name is not recommened, since the object can be of different type and can lead to confusion. It is recommended to have contextual, meaningful names.",FALSE
+python,PAP-W0005,Class contains only fields and crude methods,warning,major,code-smell,"Classess that only hold data and do not contain any other functionality cannot operate independently. It is recommended to use structures meant for holding data instead, like `namedtuple`s, data classes, etc.",FALSE
+python,PAP-W0006,Getter method detected in class,warning,major,code-smell,"Instead of having a method like `get_attribute`, it is recommended to use `@property` decorator to get the value of attribute.",TRUE
+python,PAP-W0007,Setter method detected in class,warning,major,code-smell,"Instead of having a set method to set the value of the attribute, it is recommended to use `@<attribute_name>.setter` decorator.",TRUE
+python,PAP-W0009,Multiple return types found in function,warning,major,code-smell,"Returning objects of different types from a function can lead to problems that are difficult to debug. Instead, it is better to raise an exception that can be caught where the function is called.",TRUE
+python,PAP-W0010,File opened without the `with` context manager,warning,critical,code-smell,Opening a file using `with` implements the context manager protocol that release the resource when it is outside of the with block. Not doing so requires you to manually release the resource.,TRUE
+python,PAP-W0011,Use `items()` to iterate over a dictionary,warning,major,code-smell,"The preferred way to iterate over the key-value pairs of a dictionary is to declare two variables in a for loop, and then call `dictionary.items()`, where dictionary is the name of your variable representing a dictionary.'",TRUE
+python,PAP-W0012,Use `get()` method to access values from a dictionary,warning,major,code-smell,"It is recommended to use the built-in method `dict.get(key[, default])` to access values from a dictionary.",TRUE
