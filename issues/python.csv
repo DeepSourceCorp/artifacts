@@ -274,7 +274,7 @@ python,PYL-C0328,unexpected-line-ending-format,warning,minor,style,Unexpected li
 python,PYL-C0401,wrong-spelling-in-comment,info,minor,style,A word in comment is not spelled correctly.,FALSE
 python,PYL-C0402,wrong-spelling-in-docstring,info,minor,style,A word in docstring is not spelled correctly.,FALSE
 python,PYL-C0403,invalid-characters-in-docstring,info,minor,style,Invalid characters found in docstring.,FALSE
-python,PYL-C1801,len-as-condition,warning,major,performance,"Using the `len` function to check if a sequence is empty is not idiomatic and can be less performant than checking for truthness of the sequence. 
+python,PYL-C1801,len-as-condition,warning,major,performance,"Using the `len` function to check if a sequence is empty is not idiomatic and can be less performant than checking for truthness of the sequence.
 
 `len` doesn't know the context in which it is called, so if computing the length means traversing the entire sequence, it must; it doesn't know that the result is just being compared to 0. Computing the boolean value can stop after it sees the first element, regardless of how long the sequence actually is.",FALSE
 python,PYL-E0100,init-is-generator,error,critical,bug-risk,"The `__init__()` method is required to return nothing, but a `yield` statement in its body was detected. This will raise a `TypeError` on Python 2.7 and 3.x.",TRUE
@@ -545,7 +545,7 @@ python,PYL-W1660,deprecated-sys-function,,,,,
 python,PYL-W1661,exception-escape,,,,,
 python,PYL-W1662,comprehension-escape,,,,,
 python,PAP-W0004,Variable name contains type information,warning,minor,code-smell,"Having type information in the variable name is not recommened, since the object can be of different type and can lead to confusion. It is recommended to have contextual, meaningful names.",FALSE
-python,PAP-W0005,Class contains only fields and crude methods,warning,major,code-smell,"Classess that only hold data and do not contain any other functionality cannot operate independently. It is recommended to use structures meant for holding data instead, like `namedtuple`s, data classes, etc.",FALSE
+python,PAP-W0005,Class contains only fields and crude methods,warning,major,code-smell,"Classes that only hold data and do not contain any other functionality cannot operate independently. It is recommended to use structures meant for holding data instead, like `namedtuples`, `data classes`, etc.",FALSE
 python,PAP-W0006,Getter method detected in class,warning,major,code-smell,"Instead of having a method like `get_attribute`, it is recommended to use `@property` decorator to get the value of attribute.",TRUE
 python,PAP-W0007,Setter method detected in class,warning,major,code-smell,"Instead of having a set method to set the value of the attribute, it is recommended to use `@<attribute_name>.setter` decorator.",TRUE
 python,PAP-W0009,Multiple return types found in function,warning,major,code-smell,"Returning objects of different types from a function can lead to problems that are difficult to debug. Instead, it is better to raise an exception that can be caught where the function is called.",TRUE
