@@ -56,8 +56,9 @@ type AnalysisArtifacts struct {
 	} `json:"metrics,omitempty"`
 	IsPassed bool `json:"is_passed"`
 	FileMeta struct {
-		Deleted []string `json:"deleted"`
-		Renamed []string `json:"renamed"`
+		Deleted  []string `json:"deleted"`
+		Renamed  []string `json:"renamed"`
+		Modified []string `json:"modified"`
 	} `json:"file_meta"`
 	ExtraData interface{} `json:"extra_data"`
 }
