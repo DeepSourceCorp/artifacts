@@ -6,8 +6,8 @@ type RepoRun struct {
 	RunID     string `json:"run_id"`
 	RunSerial string `json:"run_serial"`
 	VCSMeta   struct {
-		RemoteURL      string `json:"remote_url"`
-		CheckoutBranch string `json:"checkout_branch"`
+		RemoteURL   string `json:"remote_url"`
+		CheckoutOID string `json:"checkout_oid"`
 	} `json:"vcs_meta"`
 }
 
