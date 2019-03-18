@@ -14,5 +14,6 @@ type MarvinConfig struct {
 type AnalysisConfig struct {
 	Files           []string    `json:"files"`
 	ExcludePatterns []string    `json:"exclude_patterns"`
+	TestPatterns    []string    `json:"test_patterns"`
 	AnalyzerMeta    interface{} `json:"analyzer_meta"`
 }
