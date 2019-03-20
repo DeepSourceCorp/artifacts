@@ -77,6 +77,20 @@ type AnalysisResultCeleryTask struct {
 	Retries int            `json:"retries"`
 }
 
+type CancelCheckResult struct {
+	RunID    string `json:"run_id"`
+	RunType  string `json:"run_type"`
+	CheckSeq string `json:"check_seq"`
+	Status   Status `json:"status"`
+}
+
+type CancelCheckResultCeleryTask struct {
+	ID      string     `json:"id"`
+	Task    string     `json:"task"`
+	KWArgs  RepoResult `json:"kwargs"`
+	Retries int        `json:"retries"`
+}
+
 type BeaconResult struct {
 	Files []struct {
 		Path int8 `json:"path"`
