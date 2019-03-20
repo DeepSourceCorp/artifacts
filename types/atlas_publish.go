@@ -20,7 +20,7 @@ type RepoResultCeleryTask struct {
 	Retries int        `json:"retries"`
 }
 
-type AnalysisArtifacts struct {
+type AnalysisReport struct {
 	Issues []struct {
 		IssueCode string `json:"issue_code"`
 		IssueText string `json:"issue_text"`
@@ -64,10 +64,10 @@ type AnalysisArtifacts struct {
 }
 
 type AnalysisResult struct {
-	RunID     string            `json:"run_id"`
-	Status    Status            `json:"status"`
-	CheckSeq  string            `json:"check_seq"`
-	Artifacts AnalysisArtifacts `json:"artifacts"`
+	RunID    string         `json:"run_id"`
+	Status   Status         `json:"status"`
+	CheckSeq string         `json:"check_seq"`
+	Report   AnalysisReport `json:"report"`
 }
 
 type AnalysisResultCeleryTask struct {
