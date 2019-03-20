@@ -40,6 +40,15 @@ type AnalysisRun struct {
 	} `json:"checks"`
 }
 
+// CancelCheckRun type is the expected structure of a check cancellation
+// task to be recieved
+type CancelCheckRun struct {
+	RunID     string `json:"run_id"`
+	RunType   string `json:"run_type"`
+	RunSerial string `json:"run_serial"`
+	CheckSeq  string `json:"check_seq"`
+}
+
 // Beacon type is the expected structure of a beacon task
 // to be received
 type BeaconRun struct {
