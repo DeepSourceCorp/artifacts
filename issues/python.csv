@@ -552,3 +552,5 @@ python,PAP-W0009,Multiple return types found in function,warning,major,code-smel
 python,PAP-W0010,File opened without the `with` context manager,warning,critical,code-smell,Opening a file using `with` implements the context manager protocol that release the resource when it is outside of the with block. Not doing so requires you to manually release the resource.,TRUE
 python,PAP-W0011,Use `items()` to iterate over a dictionary,warning,major,code-smell,"The preferred way to iterate over the key-value pairs of a dictionary is to declare two variables in a for loop, and then call `dictionary.items()`, where dictionary is the name of your variable representing a dictionary.'",TRUE
 python,PAP-W0012,Use `get()` method to access values from a dictionary,warning,major,code-smell,"It is recommended to use the built-in method `dict.get(key[, default])` to access values from a dictionary.",TRUE
+python,PAP-W0013,Debugger import found,warning,major,performance,"Do not use debugger in the production code base.",TRUE
+python,PAP-W0014,Debugger detected,warning,major,performance,"Do not push code with the debugger turned on. It may cause the code to misbehave.",TRUE
