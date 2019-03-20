@@ -209,7 +209,6 @@ Change the names of these classes to something more descriptive.",FALSE
 python,FLK8-E743,"Do not define functions named 'l', 'O', or 'I'",warning,major,style,"Functions named `I`, `O`, and `l` can be very hard to read. This is because the letter `I` and the letter `l` are easily confused, and the letter `O` and the number `0` can be easily confused.
 
 Change the names of these functions to something more descriptive.",FALSE
-python,FLK8-F401,Module imported but unused,warning,major,style,A module has been imported but is not used anywhere in the file. The module should either be used or the import should be removed.,FALSE
 python,FLK8-F402,import module from line N shadowed by loop variable,warning,major,bug-risk,Loop variables should not redefine the name of modules that are imported.,FALSE
 python,FLK8-F403,‘from module import *’ used; unable to detect undefined names,warning,major,bug-risk,"`from module import *` is discouraged because the programmer often won’t know where an imported object is defined. The imported module, class, or function should be explicitly defined.",FALSE
 python,FLK8-F404,future import(s) name after other statements,warning,major,style,Imports from `__future__` should be the first imports in a file.,FALSE
@@ -439,6 +438,7 @@ python,PYL-W0601,global-variable-undefined,,,,,
 python,PYL-W0602,global-variable-not-assigned,,,,,
 python,PYL-W0603,global-statement,,,,,
 python,PYL-W0604,global-at-module-level,,,,,
+python,PYL-W0611,Module imported but unused,warning,major,code-smell,A module has been imported but is not used anywhere in the file. The module should either be used or the import should be removed.,TRUE
 python,PYL-W0612,unused-variable,,,,,
 python,PYL-W0613,unused-argument,,,,,
 python,PYL-W0614,unused-wildcard-import,,,,,
@@ -545,12 +545,12 @@ python,PYL-W1660,deprecated-sys-function,,,,,
 python,PYL-W1661,exception-escape,,,,,
 python,PYL-W1662,comprehension-escape,,,,,
 python,PAP-W0004,Variable name contains type information,warning,minor,code-smell,"Having type information in the variable name is not recommened, since the object can be of different type and can lead to confusion. It is recommended to have contextual, meaningful names.",FALSE
-python,PAP-W0005,Class contains only fields and crude methods,warning,major,code-smell,"Classes that only hold data and do not contain any other functionality cannot operate independently. It is recommended to use structures meant for holding data instead, like `namedtuples`, `data classes`, etc.",FALSE
+python,PAP-W0005,Class contains only fields and crude methods,warning,major,code-smell,"Classes that only hold data and do not contain any other functionality cannot operate independently. It is recommended to use structures meant for holding data instead, like `namedtuple`, `dataclass`, etc.",FALSE
 python,PAP-W0006,Getter method detected in class,warning,major,code-smell,"Instead of having a method like `get_attribute`, it is recommended to use `@property` decorator to get the value of attribute.",TRUE
 python,PAP-W0007,Setter method detected in class,warning,major,code-smell,"Instead of having a set method to set the value of the attribute, it is recommended to use `@<attribute_name>.setter` decorator.",TRUE
 python,PAP-W0009,Multiple return types found in function,warning,major,code-smell,"Returning objects of different types from a function can lead to problems that are difficult to debug. Instead, it is better to raise an exception that can be caught where the function is called.",TRUE
 python,PAP-W0010,File opened without the `with` context manager,warning,critical,code-smell,Opening a file using `with` implements the context manager protocol that release the resource when it is outside of the with block. Not doing so requires you to manually release the resource.,TRUE
 python,PAP-W0011,Use `items()` to iterate over a dictionary,warning,major,code-smell,"The preferred way to iterate over the key-value pairs of a dictionary is to declare two variables in a for loop, and then call `dictionary.items()`, where dictionary is the name of your variable representing a dictionary.'",TRUE
 python,PAP-W0012,Use `get()` method to access values from a dictionary,warning,major,code-smell,"It is recommended to use the built-in method `dict.get(key[, default])` to access values from a dictionary.",TRUE
-python,PAP-W0013,Debugger import found,warning,major,performance,"Do not use debugger in the production code base.",TRUE
-python,PAP-W0014,Debugger detected,warning,major,performance,"Do not push code with the debugger turned on. It may cause the code to misbehave.",TRUE
+python,PAP-W0013,Debugger import detected,warning,major,code-smell,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code.,TRUE
+python,PAP-W0014,Debugger activation detected,error,critical,code-smell,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code. This may cause your application to have unintended side-effects.,TRUE
