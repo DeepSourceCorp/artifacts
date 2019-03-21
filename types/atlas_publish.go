@@ -51,8 +51,11 @@ type AnalysisReport struct {
 		} `json:"processed_data,omitempty"`
 	} `json:"issues"`
 	Metrics []struct {
-		MetricCode string  `json:"metric_code"`
-		Value      float64 `json:"value"`
+		MetricCode string `json:"metric_code"`
+		Namespaces []struct {
+			Key   string  `json:"key"`
+			Value float64 `json:"value"`
+		} `json:"namespaces"`
 	} `json:"metrics,omitempty"`
 	IsPassed bool `json:"is_passed"`
 	FileMeta struct {
