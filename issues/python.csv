@@ -1,556 +1,555 @@
-python,BAN-B101,Assert statement used outside of tests,warning,minor,security,"Usage of `assert` statement in application logic is discouraged. `assert` is removed with compiling to optimised byte code (`python -o` producing *.pyo files).Consider raising an exception instead. Ideally, `assert` statement should be used only in tests.",FALSE
-python,BAN-B102,Use of `exec` statement found,warning,major,security,"Usage of `exec` function is strongly discouraged, since it opens up possibilities of unauthorized code execution if the staments are not escaped properly.",FALSE
-python,BAN-B103,Insecure permissions set on a file,warning,minor,security,A particularly permissive control flag was used with `chmod`.,FALSE
-python,BAN-B104,Binding to all interfaces detected with hardcoded values,warning,major,security,"Binding to all network interfaces can potentially open up a service to traffic on unintended interfaces, that may not be properly documented or secured. ",FALSE
-python,BAN-B105,Potential hardcoded password detected,warning,major,security,Potential hardcoded password. Sensitive information like password shouldn't be hardcoded. Use an environment variable instead.,FALSE
-python,BAN-B106,Potential hardcoded password detected as function argument,warning,major,security,Potential hardcoded password as function argument. Sensitive information like password shouldn't be hardcoded in a function argument. Pick it from an environment variable instead.,FALSE
+python,BAN-B101,Assert statement used outside of tests,warning,minor,security,"Usage of `assert` statement in application logic is discouraged. `assert` is removed with compiling to optimised byte code (`python -o` producing *.pyo files).Consider raising an exception instead. Ideally, `assert` statement should be used only in tests."
+python,BAN-B102,Use of `exec` statement found,warning,major,security,"Usage of `exec` function is strongly discouraged, since it opens up possibilities of unauthorized code execution if the staments are not escaped properly."
+python,BAN-B103,Insecure permissions set on a file,warning,minor,security,A particularly permissive control flag was used with `chmod`.
+python,BAN-B104,Binding to all interfaces detected with hardcoded values,warning,major,security,"Binding to all network interfaces can potentially open up a service to traffic on unintended interfaces, that may not be properly documented or secured. "
+python,BAN-B105,Potential hardcoded password detected,warning,major,security,Potential hardcoded password. Sensitive information like password shouldn't be hardcoded. Use an environment variable instead.
+python,BAN-B106,Potential hardcoded password detected as function argument,warning,major,security,Potential hardcoded password as function argument. Sensitive information like password shouldn't be hardcoded in a function argument. Pick it from an environment variable instead.
 python,BAN-B107,Potential hardcoded password detected as default function argument,warning,major,security,"Potential hardcoded password as default function argument. Sensitive information like password shouldn't be hardcoded in a function argument. Pick it from an environment variable instead.
-",FALSE
+"
 python,BAN-B108,hardcoded_tmp_directory,warning,minor,security,"Hardcoded temp directory. Prefer using `tmpfile` - https://docs.python.org/3.7/library/tempfile.html
 
 Reason:
 Malicious users that can predict the file name and write to directory containing the temporary file can effectively hijack the temporary file by creating a symlink with the name of the temporary file before the program creates the file itself. This allows a malicious user to supply malicious data or cause actions by the program to affect attacker chosen files.
-",FALSE
-python,BAN-B110,try_except_pass,warning,minor,security,"Catching generic exceptions and silently ignoring them is considered bad practice in general, but also presents a potential security issue. A larger than normal volume of errors from a service can indicate an attempt is being made to disrupt or interfere with it. Thus errors should, at the very least, be logged.",FALSE
-python,BAN-B112,try_except_continue,warning,minor,security,"Catching generic exceptions and silently ignoring them in a loop is considered bad practice in general, but also presents a potential security issue. A larger than normal volume of errors from a service can indicate an attempt is being made to disrupt or interfere with it. Thus errors should, at the very least, be logged.",FALSE
-python,BAN-B201,flask_debug_true,warning,critical,security,Running Flask applications in debug mode results in the Werkzeug debugger being enabled. This includes a feature that allows arbitrary code execution. Documentation for both Flask and Werkzeug strongly suggests that debug mode should never be enabled on production systems.,FALSE
-python,BAN-B301,pickle,warning,major,security,"Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.",FALSE
-python,BAN-B302,marshal,warning,major,security,Deserialization with the marshal module is possibly dangerous.,FALSE
-python,BAN-B303,md5,warning,minor,security,"Use of insecure MD2, MD4, MD5, or SHA1 hash functions should be avoided. Using more secure algorithms like SHA256 or SHA512.",FALSE
-python,BAN-B304,ciphers,warning,major,security,Use of insecure cipher or cipher mode. Replace with a known secure cipher such as AES.,FALSE
-python,BAN-B305,cipher_modes,warning,major,security,Use of insecure cipher or cipher mode. Replace with a known secure cipher such as AES.,FALSE
-python,BAN-B306,mktemp_q,warning,major,security,Use of insecure and deprecated function (mktemp).,FALSE
-python,BAN-B307,eval,warning,major,security,Use of possibly insecure function - consider using safer `ast.literal_eval`.,FALSE
-python,BAN-B308,mark_safe,warning,major,security,Use of `mark_safe()` may expose cross-site scripting vulnerabilities and should be reviewed.,FALSE
-python,BAN-B309,httpsconnection,warning,major,security,Use of `HTTPSConnection` on older versions of Python prior to 2.7.9 and 3.4.3 do not provide security. Please see [this report](https://wiki.openstack.org/wiki/OSSN/OSSN-0033) for details.,FALSE
-python,BAN-B310,urllib_urlopen,warning,major,security,Audit url open for permitted schemes. Allowing use of ‘file:’’ or custom schemes is often unexpected.,FALSE
-python,BAN-B311,random,warning,minor,security,Standard pseudo-random generators are not suitable for security/cryptographic purposes.,FALSE
-python,BAN-B312,telnetlib,warning,major,security,Telnet-related functions are being called. Telnet is considered insecure. Use SSH or some other encrypted protocol.,FALSE
-python,BAN-B313,xml_bad_cElementTree,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.,FALSE
-python,BAN-B314,xml_bad_ElementTree,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.,FALSE
-python,BAN-B315,xml_bad_expatreader,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.,FALSE
-python,BAN-B316,xml_bad_expatbuilder,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.,FALSE
-python,BAN-B317,xml_bad_sax,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.,FALSE
-python,BAN-B318,xml_bad_minidom,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.,FALSE
-python,BAN-B319,xml_bad_pulldom,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.,FALSE
-python,BAN-B320,xml_bad_etree,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.,FALSE
-python,BAN-B321,ftplib,warning,major,security,FTP-related functions are being called. FTP is considered insecure. Use SSH/SFTP/SCP or some other encrypted protocol.,FALSE
-python,BAN-B322,input,warning,major,security,"The input method in Python 2 will read from standard input, evaluate and run the resulting string as python source code. This is similar, though in many ways worse, then using `eval`. On Python 2, use `raw_input` instead, `input` is safe in Python 3.",FALSE
-python,BAN-B323,unverified_context,warning,major,security,"By default, Python will create a secure, verified ssl context for use in such classes as `HTTPSConnection`. However, it still allows using an insecure context via the `_create_unverified_context` that reverts to the previous behavior that does not validate certificates or perform hostname checks.",FALSE
-python,BAN-B324,hashlib_new_insecure_functions,warning,major,security,"Use of insecure MD2, MD4, MD5, or SHA1 hash functions should be avoided. Using more secure algorithms like SHA256 or SHA512.",FALSE
-python,BAN-B325,tempnam,warning,major,security,Use of `os.tempnam()` and `os.tmpnam()` is vulnerable to symlink attacks. Consider using `tmpfile()` instead.,FALSE
-python,BAN-B401,import_telnetlib,warning,major,security,A telnet-related module is being imported. Telnet is considered insecure. Use SSH or some other encrypted protocol.,FALSE
-python,BAN-B402,import_ftplib,warning,major,security,A FTP-related module is being imported. FTP is considered insecure. Use SSH/SFTP/SCP or some other encrypted protocol.,FALSE
-python,BAN-B403,import_pickle,warning,minor,security,"Consider possible security implications associated with these modules: `pickle`, `cPickle`, `dill`.",FALSE
-python,BAN-B404,import_subprocess,warning,minor,security,Consider possible security implications associated with the `subprocess` module.,FALSE
-python,BAN-B405,import_xml_etree,warning,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called.",FALSE
-python,BAN-B406,import_xml_sax,warning,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called.",FALSE
-python,BAN-B407,import_xml_expat,warning,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called.",FALSE
-python,BAN-B408,import_xml_minidom,warning,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called.",FALSE
-python,BAN-B409,import_xml_pulldom,warning,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called.",FALSE
-python,BAN-B410,import_lxml,warning,minor,security,Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package.,FALSE
-python,BAN-B411,import_xmlrpclib,warning,major,security,XMLRPC is particularly dangerous as it is also concerned with communicating data over a network. Use `defused.xmlrpc.monkey_patch()` function to monkey-patch xmlrpclib and mitigate remote XML attacks.,FALSE
-python,BAN-B412,import_httpoxy,warning,major,security,"httpoxy is a set of vulnerabilities that affect application code running in CGI, or CGI-like environments. The use of CGI for web applications should be avoided to prevent this class of attack. More details are available at [httpoxy.org](https://httpoxy.org/).",FALSE
-python,BAN-B413,import_pycrypto,warning,major,security,pycrypto library is known to have publicly disclosed [buffer overflow vulnerability](https://github.com/dlitz/pycrypto/issues/176). It is no longer actively maintained and has been deprecated in favor of pyca/cryptography library.,FALSE
-python,BAN-B414,import_pycryptodome,warning,major,security,"pycryptodome is a direct fork of pycrypto that has not fully addressed the issues inherent in PyCrypto. It seems to exist, mainly, as an API compatible continuation of pycrypto and should be deprecated in favor of pyca/cryptography which has more support among the Python community.",FALSE
-python,BAN-B501,request_with_no_cert_validation,warning,major,security,Encryption in general is typically critical to the security of many applications. Using TLS can greatly increase security by guaranteeing the identity of the party you are communicating with. This is accomplished by one or both parties presenting trusted certificates during the connection initialization phase of TLS.,FALSE
+"
+python,BAN-B110,try_except_pass,warning,minor,security,"Catching generic exceptions and silently ignoring them is considered bad practice in general, but also presents a potential security issue. A larger than normal volume of errors from a service can indicate an attempt is being made to disrupt or interfere with it. Thus errors should, at the very least, be logged."
+python,BAN-B112,try_except_continue,warning,minor,security,"Catching generic exceptions and silently ignoring them in a loop is considered bad practice in general, but also presents a potential security issue. A larger than normal volume of errors from a service can indicate an attempt is being made to disrupt or interfere with it. Thus errors should, at the very least, be logged."
+python,BAN-B201,flask_debug_true,warning,critical,security,Running Flask applications in debug mode results in the Werkzeug debugger being enabled. This includes a feature that allows arbitrary code execution. Documentation for both Flask and Werkzeug strongly suggests that debug mode should never be enabled on production systems.
+python,BAN-B301,pickle,warning,major,security,"Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue."
+python,BAN-B302,marshal,warning,major,security,Deserialization with the marshal module is possibly dangerous.
+python,BAN-B303,md5,warning,minor,security,"Use of insecure MD2, MD4, MD5, or SHA1 hash functions should be avoided. Using more secure algorithms like SHA256 or SHA512."
+python,BAN-B304,ciphers,warning,major,security,Use of insecure cipher or cipher mode. Replace with a known secure cipher such as AES.
+python,BAN-B305,cipher_modes,warning,major,security,Use of insecure cipher or cipher mode. Replace with a known secure cipher such as AES.
+python,BAN-B306,mktemp_q,warning,major,security,Use of insecure and deprecated function (mktemp).
+python,BAN-B307,eval,warning,major,security,Use of possibly insecure function - consider using safer `ast.literal_eval`.
+python,BAN-B308,mark_safe,warning,major,security,Use of `mark_safe()` may expose cross-site scripting vulnerabilities and should be reviewed.
+python,BAN-B309,httpsconnection,warning,major,security,Use of `HTTPSConnection` on older versions of Python prior to 2.7.9 and 3.4.3 do not provide security. Please see [this report](https://wiki.openstack.org/wiki/OSSN/OSSN-0033) for details.
+python,BAN-B310,urllib_urlopen,warning,major,security,Audit url open for permitted schemes. Allowing use of ‘file:’’ or custom schemes is often unexpected.
+python,BAN-B311,random,warning,minor,security,Standard pseudo-random generators are not suitable for security/cryptographic purposes.
+python,BAN-B312,telnetlib,warning,major,security,Telnet-related functions are being called. Telnet is considered insecure. Use SSH or some other encrypted protocol.
+python,BAN-B313,xml_bad_cElementTree,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.
+python,BAN-B314,xml_bad_ElementTree,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.
+python,BAN-B315,xml_bad_expatreader,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.
+python,BAN-B316,xml_bad_expatbuilder,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.
+python,BAN-B317,xml_bad_sax,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.
+python,BAN-B318,xml_bad_minidom,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.
+python,BAN-B319,xml_bad_pulldom,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.
+python,BAN-B320,xml_bad_etree,warning,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.
+python,BAN-B321,ftplib,warning,major,security,FTP-related functions are being called. FTP is considered insecure. Use SSH/SFTP/SCP or some other encrypted protocol.
+python,BAN-B322,input,warning,major,security,"The input method in Python 2 will read from standard input, evaluate and run the resulting string as python source code. This is similar, though in many ways worse, then using `eval`. On Python 2, use `raw_input` instead, `input` is safe in Python 3."
+python,BAN-B323,unverified_context,warning,major,security,"By default, Python will create a secure, verified ssl context for use in such classes as `HTTPSConnection`. However, it still allows using an insecure context via the `_create_unverified_context` that reverts to the previous behavior that does not validate certificates or perform hostname checks."
+python,BAN-B324,hashlib_new_insecure_functions,warning,major,security,"Use of insecure MD2, MD4, MD5, or SHA1 hash functions should be avoided. Using more secure algorithms like SHA256 or SHA512."
+python,BAN-B325,tempnam,warning,major,security,Use of `os.tempnam()` and `os.tmpnam()` is vulnerable to symlink attacks. Consider using `tmpfile()` instead.
+python,BAN-B401,import_telnetlib,warning,major,security,A telnet-related module is being imported. Telnet is considered insecure. Use SSH or some other encrypted protocol.
+python,BAN-B402,import_ftplib,warning,major,security,A FTP-related module is being imported. FTP is considered insecure. Use SSH/SFTP/SCP or some other encrypted protocol.
+python,BAN-B403,import_pickle,warning,minor,security,"Consider possible security implications associated with these modules: `pickle`, `cPickle`, `dill`."
+python,BAN-B404,import_subprocess,warning,minor,security,Consider possible security implications associated with the `subprocess` module.
+python,BAN-B405,import_xml_etree,warning,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called."
+python,BAN-B406,import_xml_sax,warning,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called."
+python,BAN-B407,import_xml_expat,warning,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called."
+python,BAN-B408,import_xml_minidom,warning,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called."
+python,BAN-B409,import_xml_pulldom,warning,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called."
+python,BAN-B410,import_lxml,warning,minor,security,Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package.
+python,BAN-B411,import_xmlrpclib,warning,major,security,XMLRPC is particularly dangerous as it is also concerned with communicating data over a network. Use `defused.xmlrpc.monkey_patch()` function to monkey-patch xmlrpclib and mitigate remote XML attacks.
+python,BAN-B412,import_httpoxy,warning,major,security,"httpoxy is a set of vulnerabilities that affect application code running in CGI, or CGI-like environments. The use of CGI for web applications should be avoided to prevent this class of attack. More details are available at [httpoxy.org](https://httpoxy.org/)."
+python,BAN-B413,import_pycrypto,warning,major,security,pycrypto library is known to have publicly disclosed [buffer overflow vulnerability](https://github.com/dlitz/pycrypto/issues/176). It is no longer actively maintained and has been deprecated in favor of pyca/cryptography library.
+python,BAN-B414,import_pycryptodome,warning,major,security,"pycryptodome is a direct fork of pycrypto that has not fully addressed the issues inherent in PyCrypto. It seems to exist, mainly, as an API compatible continuation of pycrypto and should be deprecated in favor of pyca/cryptography which has more support among the Python community."
+python,BAN-B501,request_with_no_cert_validation,warning,major,security,Encryption in general is typically critical to the security of many applications. Using TLS can greatly increase security by guaranteeing the identity of the party you are communicating with. This is accomplished by one or both parties presenting trusted certificates during the connection initialization phase of TLS.
 python,BAN-B502,ssl_with_bad_version,warning,major,security,"Several highly publicized exploitable flaws have been discovered in all versions of SSL and early versions of TLS. It is strongly recommended that use of the following known broken protocol versions be avoided:
 
  - SSL v2
  - SSL v3
  - TLS v1
- - TLS v1.1",FALSE
+ - TLS v1.1"
 python,BAN-B503,ssl_with_bad_defaults,warning,minor,security,"Several highly publicized exploitable flaws have been discovered in all versions of SSL and early versions of TLS. It is strongly recommended that use of the following known broken protocol versions be avoided:
 
  - SSL v2
  - SSL v3
  - TLS v1
- - TLS v1.1",FALSE
+ - TLS v1.1"
 python,BAN-B504,ssl_with_no_version,warning,minor,security,"Several highly publicized exploitable flaws have been discovered in all versions of SSL and early versions of TLS. It is strongly recommended that use of the following known broken protocol versions be avoided:
 
  - SSL v2
  - SSL v3
  - TLS v1
- - TLS v1.1",FALSE
-python,BAN-B505,weak_cryptographic_key,warning,major,security,"As computational power increases, so does the ability to break ciphers with smaller key lengths. The recommended key length size for RSA and DSA algorithms is 2048 and higher. 1024 bits and below are now considered breakable. EC key length sizes are recommended to be 224 and higher with 160 and below considered breakable.",FALSE
-python,BAN-B506,yaml_load,warning,minor,security,"The yaml.load function provides the ability to construct an arbitrary Python object, which may be dangerous if you receive a YAML document from an untrusted source. The function `yaml.safe_load` limits this ability to simple Python objects like integers or lists.",FALSE
+ - TLS v1.1"
+python,BAN-B505,weak_cryptographic_key,warning,major,security,"As computational power increases, so does the ability to break ciphers with smaller key lengths. The recommended key length size for RSA and DSA algorithms is 2048 and higher. 1024 bits and below are now considered breakable. EC key length sizes are recommended to be 224 and higher with 160 and below considered breakable."
+python,BAN-B506,yaml_load,warning,minor,security,"The yaml.load function provides the ability to construct an arbitrary Python object, which may be dangerous if you receive a YAML document from an untrusted source. The function `yaml.safe_load` limits this ability to simple Python objects like integers or lists."
 python,BAN-B507,ssh_no_host_key_verification,warning,major,security,"Encryption in general is typically critical to the security of many applications. Using SSH can greatly increase security by guaranteeing the identity of the party you are communicating with. This is accomplished by one or both parties presenting trusted host keys during the connection initialization phase of SSH.
 
-When paramiko methods are used, host keys are verified by default.",FALSE
-python,BAN-B601,paramiko_calls,warning,major,security,Paramiko is a Python library designed to work with the SSH2 protocol for secure (encrypted and authenticated) connections to remote machines. It is intended to run commands on a remote host. These commands are run within a shell on the target and are thus vulnerable to various shell injection attacks. Use of Paramiko’s “exec_command” or “invoke_shell” methods should be reviewed to ensure that the input is sanitized.,FALSE
-python,BAN-B602,subprocess_popen_with_shell_equals_true,warning,major,security,"Python possesses many mechanisms to invoke an external executable. However, doing so may present a security issue if appropriate care is not taken to sanitize any user provided or variable input. Subprocess invocation using a command shell is dangerous as it is vulnerable to various shell injection attacks. Great care should be taken to sanitize all input in order to mitigate this risk. Calls of this type are identified by a parameter of ‘shell=True’ being given.",FALSE
-python,BAN-B603,subprocess_without_shell_equals_true,warning,minor,security,"Spawning of a subprocess without the use of a command shell is not vulnerable to shell injection attacks, but care should still be taken to ensure validity of input.",FALSE
-python,BAN-B604,any_other_function_with_shell_equals_true,warning,major,security,Method calls for the presence of a keyword parameter shell equalling true can be vulnerable to shell injection issues. This issue is intended to catch custom wrappers to vulnerable methods that may have been created.,FALSE
-python,BAN-B605,start_process_with_a_shell,warning,minor,security,Spawning of a subprocess using a command shell is dangerous as it is vulnerable to various shell injection attacks. Great care should be taken to sanitize all input in order to mitigate this risk. Calls of this type are identified by the use of certain commands which are known to use shells. ,FALSE
-python,BAN-B606,start_process_with_no_shell,warning,minor,security,"Spawning of a subprocess in a way that doesn’t use a shell is generally safe, but it maybe useful for penetration testing workflows to track where external system calls are used.",FALSE
-python,BAN-B607,start_process_with_partial_path,warning,minor,security,Python possesses many mechanisms to invoke an external executable. If the desired executable path is not fully qualified relative to the filesystem root then this may present a potential security risk.,FALSE
-python,BAN-B608,hardcoded_sql_expressions,warning,major,security,"An SQL injection attack consists of insertion or “injection” of a SQL query via the input data given to an application. It is a very common attack vector. Unless care is taken to sanitize and control the input data when building such SQL statement strings, an injection attack becomes possible.",FALSE
-python,BAN-B609,linux_commands_wildcard_injection,warning,major,security,The use of partially qualified paths may result in unintended consequences if an unexpected file or symlink is placed into the path location given. This becomes particularly dangerous when combined with commands used to manipulate file permissions or copy data off of a system.,FALSE
-python,BAN-B610,django_extra_used,warning,minor,security,"Use of `extra` in Django querysets should be audited, since unsanitized strings can open up security vulnerabilities.",FALSE
-python,BAN-B611,django_rawsql_used,warning,minor,security,"Use of `extra` in Django querysets should be audited, since unsanitized strings can open up security vulnerabilities.",FALSE
-python,BAN-B701,jinja2_autoescape_false,warning,critical,security,"When autoescaping is enabled, Jinja2 will filter input strings to escape any HTML content submitted via template variables. Without escaping HTML input the application becomes vulnerable to Cross Site Scripting (XSS) attacks.",FALSE
-python,BAN-B702,use_of_mako_templates,warning,major,security,"Unlike Jinja2 (an alternative templating system), Mako has no environment wide variable escaping mechanism. Because of this, all input variables must be carefully escaped before use to prevent possible vulnerabilities to Cross Site Scripting (XSS) attacks.",FALSE
-python,BAN-B703,django_mark_safe,warning,minor,security,Use of `mark_safe()` may expose cross-site scripting vulnerabilities and should be reviewed.,FALSE
-python,FLK8-C901,Function is too complex,warning,major,bug-risk,"Too many decision blocks were found, which is why the code has been tagged as complex. You should consider refactoring the code for simplicity. Read more about cyclomatic complexity [here](https://en.wikipedia.org/wiki/Cyclomatic_complexity).",FALSE
-python,FLK8-D100,Missing docstring in public module,info,minor,doc,,FALSE
-python,FLK8-D101,Missing docstring in public class,info,minor,doc,,FALSE
-python,FLK8-D102,Missing docstring in public method,info,minor,doc,,FALSE
-python,FLK8-D103,Missing docstring in public function,info,minor,doc,It is recommended to have docstrings in public functions.,FALSE
-python,FLK8-D104,Missing docstring in public package,info,minor,doc,,FALSE
-python,FLK8-D105,Missing docstring in magic method,info,minor,doc,,FALSE
-python,FLK8-D106,Missing docstring in public nested class,info,minor,doc,,FALSE
-python,FLK8-D107,Missing docstring in `__init__`,info,minor,doc,It is recommended to have docstrings in the `__init__` method.,FALSE
-python,FLK8-D200,One-line docstring should fit on one line with quotes,info,minor,doc,,FALSE
-python,FLK8-D201,No blank lines allowed before function docstring,info,minor,doc,,FALSE
-python,FLK8-D202,No blank lines allowed after function docstring,info,minor,doc,,FALSE
-python,FLK8-D203,1 blank line required before class docstring,info,minor,doc,,FALSE
-python,FLK8-D204,1 blank line required after class docstring,info,minor,doc,,FALSE
-python,FLK8-D205,1 blank line required between summary line and description,info,minor,doc,,FALSE
-python,FLK8-D206,"Docstring should be indented with spaces, not tabs",info,minor,doc,"It is recommended to use spaces in the docstrings, just as the code.",FALSE
-python,FLK8-D207,Docstring is under-indented,info,minor,doc,It is recommended to properly indent docstrings for readability. ,FALSE
-python,FLK8-D208,Docstring is over-indented,info,minor,doc,It is recommended to properly indent docstrings for readability. ,FALSE
-python,FLK8-D209,Multi-line docstring closing quotes should be on a separate line,info,minor,doc,,FALSE
-python,FLK8-D210,No whitespaces allowed surrounding docstring text,info,minor,doc,,FALSE
-python,FLK8-D211,No blank lines allowed before class docstring,info,minor,doc,,FALSE
-python,FLK8-D212,Multi-line docstring summary should start at the first line,info,minor,doc,,FALSE
-python,FLK8-D213,Multi-line docstring summary should start at the second line,info,minor,doc,,FALSE
-python,FLK8-D214,Section is over-indented,info,minor,doc,,FALSE
-python,FLK8-D215,Section underline is over-indented,info,minor,doc,,FALSE
-python,FLK8-D300,Use “”“triple double quotes”“”,info,minor,doc,Use of triple-quotes is recommended to specify docstrings.,FALSE
-python,FLK8-D301,Use r”“” if any backslashes in a docstring,info,minor,doc,"If there are backslashes in a docstring, please raw strings.",FALSE
-python,FLK8-D302,Use u”“” for Unicode docstrings,info,minor,doc,,FALSE
-python,FLK8-D400,First line should end with a period,info,minor,doc,,FALSE
-python,FLK8-D401,First line should be in imperative mood,info,minor,doc,,FALSE
-python,FLK8-D401,First line should be in imperative mood; try rephrasing,info,minor,doc,,FALSE
-python,FLK8-D402,First line should not be the function’s “signature”,info,minor,doc,,FALSE
-python,FLK8-D403,First word of the first line should be properly capitalized,info,minor,doc,,FALSE
-python,FLK8-D404,First word of the docstring should not be This,info,minor,doc,,FALSE
-python,FLK8-D405,Section name should be properly capitalized,info,minor,doc,,FALSE
-python,FLK8-D406,Section name should end with a newline,info,minor,doc,,FALSE
-python,FLK8-D407,Missing dashed underline after section,info,minor,doc,,FALSE
-python,FLK8-D408,Section underline should be in the line following the section’s name,info,minor,doc,,FALSE
-python,FLK8-D409,Section underline should match the length of its name,info,minor,doc,,FALSE
-python,FLK8-D410,Missing blank line after section,info,minor,doc,,FALSE
-python,FLK8-D411,Missing blank line before section,info,minor,doc,,FALSE
-python,FLK8-D412,No blank lines allowed between a section header and its content,info,minor,doc,,FALSE
-python,FLK8-D413,Missing blank line after last section,info,minor,doc,,FALSE
-python,FLK8-D414,Section has no content,info,minor,doc,,FALSE
-python,FLK8-E101,Indentation contains mixed spaces and tabs,warning,major,bug-risk,"Indentation has has both tabs and spaces in it. You should use either tabs or spaces, but not both.",FALSE
-python,FLK8-E111,Indentation is not a multiple of four,warning,major,style,PEP8 recommends that Python code indentation be a multiple of four.,FALSE
-python,FLK8-E112,Expected an indented block,warning,major,bug-risk,This issue occurs when code is not indented but should be.,FALSE
-python,FLK8-E113,Unexpected indentation,error,major,bug-risk,A line is indented when it shouldn’t be. Usually this will mean that multiple lines need to be indented at the same level.,FALSE
-python,FLK8-E114,Indentation is not a multiple of four in comments,info,minor,style,Comment indentation should be a multiple of four.,FALSE
-python,FLK8-E115,Expected an indented block in comments,info,minor,style,An indented block comment was expected but a non-indented block comment was found instead.,FALSE
-python,FLK8-E116,Unexpected indentation in comments,info,minor,style,Comments should be indented relative to the code in the block they are in.,FALSE
-python,FLK8-E121,Continuation line under-indented for hanging indent,info,minor,style,A line is less indented than it should be for hanging indents.,FALSE
-python,FLK8-E122,Continuation line missing indentation or outdented,info,minor,style,A continuation line is not indented as far as it should be or is indented too far.,FALSE
-python,FLK8-E123,Closing bracket does not match indentation of opening bracket's line,info,minor,style,Closing brackets should match the same indentation level of the line that their opening bracket started on.,FALSE
-python,FLK8-E124,Closing bracket does not match visual indentation,info,minor,style,Closing brackets should match the indentation of the opening bracket.,FALSE
-python,FLK8-E125,Continuation line with same indent as next logical line,info,minor,style,"Continuation lines should not be indented at the same level as the next logical line. Instead, they should be indented to one more level so as to distinguish them from the next line.",FALSE
-python,FLK8-E126,Continuation line over-indented for hanging indent,info,minor,style,A continuation line is indented farther than it should be for a hanging indent.,FALSE
-python,FLK8-E127,Continuation line over-indented for visual indent,info,minor,style,A continuation line is indented farther than it should be for a visual indent.,FALSE
-python,FLK8-E128,Continuation line under-indented for visual indent,info,minor,style,A continuation line is under-indented for a visual indentation.,FALSE
-python,FLK8-E129,Visually indented line with same indent as next logical line,info,minor,style,A visual indented line has the same indentation as the next logical line. This can make it hard to read.,FALSE
-python,FLK8-E131,Continuation line unaligned for hanging indent,info,minor,style,A continuation line is unaligned for hanging indent.,FALSE
-python,FLK8-E201,Whitespace after `(`,info,minor,style,Open parentheses should not have any space before or after them.,FALSE
-python,FLK8-E202,Whitespace before `)`,info,minor,style,Closing parentheses should not have any before after them.,FALSE
-python,FLK8-E203,Whitespace before `:`,info,minor,style,Colons should not have any space before them.,FALSE
-python,FLK8-E211,Whitespace before `(`,info,minor,style,Open parentheses should not have any space before or after them.,FALSE
-python,FLK8-E221,Multiple spaces found before operator,info,minor,style,There should be only one space before an operator.,FALSE
-python,FLK8-E222,Multiple spaces found after operator,info,minor,style,There should be only one space after an operator.,FALSE
-python,FLK8-E223,Tab found before operator,info,minor,style,There should be only one space before or after operators.,FALSE
-python,FLK8-E224,Tab found after operator,info,minor,style,There should be only one space before or after operators.,FALSE
-python,FLK8-E225,Missing whitespace around operator,info,minor,style,There should be one space before and after all operators.,FALSE
-python,FLK8-E226,Missing whitespace around arithmetic operator,info,minor,style,"There should be one space before and after an arithmetic operator (`+`, `-`, `/`, and `*`).",FALSE
-python,FLK8-E227,Missing whitespace around bitwise or shift operator,info,minor,style,"There should be one space before and after bitwise and shift operators (`<<`, `>>`, `&`, `|`, `^`).",FALSE
-python,FLK8-E228,Missing whitespace around modulo operator,info,minor,style,The modulo operator (`%`) should have whitespace on either side of it.,FALSE
-python,FLK8-E231,"Missing whitespace after ',', ';', or ':'",info,minor,style,"There should be whitespace after the characters `,`, `;`, and `:`.",FALSE
-python,FLK8-E241,"Multiple spaces after ','",info,minor,style,"There should be only one space after the `,` character.",FALSE
-python,FLK8-E242,"Tab after ','",info,minor,style,"There should be only one space after the `,` character.",FALSE
-python,FLK8-E251,Unexpected spaces around keyword / parameter equals,info,minor,style,There should be no spaces before or after the `=` in a function definition.,FALSE
-python,FLK8-E261,At least two spaces before inline comment,info,minor,style,"Inline comments should have two spaces before them. Often programmers will only include one space, which will trigger this warning.",FALSE
-python,FLK8-E262,Inline comment should start with `# `,info,minor,style,Inline comments should have one space before the pound sign (`#`) and the comment itself.,FALSE
-python,FLK8-E265,Block comment should start with `# `,info,minor,style,Block comments should have one space before the pound sign (`#`) and the comment itself.,FALSE
-python,FLK8-E266,Too many leading `#` for block comment,info,minor,style,There should be only one leading `#` for a block comment.,FALSE
-python,FLK8-E271,Multiple spaces after keyword,info,minor,style,There should be only one space after a keyword.,FALSE
-python,FLK8-E272,Multiple spaces before keyword,info,minor,style,There should be only one space before a keyword.,FALSE
-python,FLK8-E273,Tab after keyword,info,minor,style,There should be only one space after a keyword.,FALSE
-python,FLK8-E274,Tab before keyword,info,minor,style,There should be only one space before a keyword.,FALSE
-python,FLK8-E275,Missing whitespace after keyword,info,minor,style,There should be one space after keywords.,FALSE
-python,FLK8-E301,"Expected 1 blank line, found 0",info,minor,style,One blank line is expected between the methods of a class.,FALSE
-python,FLK8-E302,"Expected 2 blank lines, found 0",info,minor,style,Two blank lines are expected between functions and classes.,FALSE
-python,FLK8-E303,Too many blank lines found,info,minor,style,Two blank lines are expected between functions and classes and one blank line is expected between methods of a class.,FALSE
-python,FLK8-E304,Blank lines found after function decorator,info,minor,style,There should be no blank lines between a function decorator and the function it is decorating.,FALSE
+When paramiko methods are used, host keys are verified by default."
+python,BAN-B601,paramiko_calls,warning,major,security,Paramiko is a Python library designed to work with the SSH2 protocol for secure (encrypted and authenticated) connections to remote machines. It is intended to run commands on a remote host. These commands are run within a shell on the target and are thus vulnerable to various shell injection attacks. Use of Paramiko’s “exec_command” or “invoke_shell” methods should be reviewed to ensure that the input is sanitized.
+python,BAN-B602,subprocess_popen_with_shell_equals_true,warning,major,security,"Python possesses many mechanisms to invoke an external executable. However, doing so may present a security issue if appropriate care is not taken to sanitize any user provided or variable input. Subprocess invocation using a command shell is dangerous as it is vulnerable to various shell injection attacks. Great care should be taken to sanitize all input in order to mitigate this risk. Calls of this type are identified by a parameter of ‘shell=True’ being given."
+python,BAN-B603,subprocess_without_shell_equals_true,warning,minor,security,"Spawning of a subprocess without the use of a command shell is not vulnerable to shell injection attacks, but care should still be taken to ensure validity of input."
+python,BAN-B604,any_other_function_with_shell_equals_true,warning,major,security,Method calls for the presence of a keyword parameter shell equalling true can be vulnerable to shell injection issues. This issue is intended to catch custom wrappers to vulnerable methods that may have been created.
+python,BAN-B605,start_process_with_a_shell,warning,minor,security,Spawning of a subprocess using a command shell is dangerous as it is vulnerable to various shell injection attacks. Great care should be taken to sanitize all input in order to mitigate this risk. Calls of this type are identified by the use of certain commands which are known to use shells. 
+python,BAN-B606,start_process_with_no_shell,warning,minor,security,"Spawning of a subprocess in a way that doesn’t use a shell is generally safe, but it maybe useful for penetration testing workflows to track where external system calls are used."
+python,BAN-B607,start_process_with_partial_path,warning,minor,security,Python possesses many mechanisms to invoke an external executable. If the desired executable path is not fully qualified relative to the filesystem root then this may present a potential security risk.
+python,BAN-B608,hardcoded_sql_expressions,warning,major,security,"An SQL injection attack consists of insertion or “injection” of a SQL query via the input data given to an application. It is a very common attack vector. Unless care is taken to sanitize and control the input data when building such SQL statement strings, an injection attack becomes possible."
+python,BAN-B609,linux_commands_wildcard_injection,warning,major,security,The use of partially qualified paths may result in unintended consequences if an unexpected file or symlink is placed into the path location given. This becomes particularly dangerous when combined with commands used to manipulate file permissions or copy data off of a system.
+python,BAN-B610,django_extra_used,warning,minor,security,"Use of `extra` in Django querysets should be audited, since unsanitized strings can open up security vulnerabilities."
+python,BAN-B611,django_rawsql_used,warning,minor,security,"Use of `extra` in Django querysets should be audited, since unsanitized strings can open up security vulnerabilities."
+python,BAN-B701,jinja2_autoescape_false,warning,critical,security,"When autoescaping is enabled, Jinja2 will filter input strings to escape any HTML content submitted via template variables. Without escaping HTML input the application becomes vulnerable to Cross Site Scripting (XSS) attacks."
+python,BAN-B702,use_of_mako_templates,warning,major,security,"Unlike Jinja2 (an alternative templating system), Mako has no environment wide variable escaping mechanism. Because of this, all input variables must be carefully escaped before use to prevent possible vulnerabilities to Cross Site Scripting (XSS) attacks."
+python,BAN-B703,django_mark_safe,warning,minor,security,Use of `mark_safe()` may expose cross-site scripting vulnerabilities and should be reviewed.
+python,FLK8-C901,Function is too complex,warning,major,bug-risk,"Too many decision blocks were found, which is why the code has been tagged as complex. You should consider refactoring the code for simplicity. Read more about cyclomatic complexity [here](https://en.wikipedia.org/wiki/Cyclomatic_complexity)."
+python,FLK8-D100,Missing docstring in public module,info,minor,doc,
+python,FLK8-D101,Missing docstring in public class,info,minor,doc,
+python,FLK8-D102,Missing docstring in public method,info,minor,doc,
+python,FLK8-D103,Missing docstring in public function,info,minor,doc,It is recommended to have docstrings in public functions.
+python,FLK8-D104,Missing docstring in public package,info,minor,doc,
+python,FLK8-D105,Missing docstring in magic method,info,minor,doc,
+python,FLK8-D106,Missing docstring in public nested class,info,minor,doc,
+python,FLK8-D107,Missing docstring in `__init__`,info,minor,doc,It is recommended to have docstrings in the `__init__` method.
+python,FLK8-D200,One-line docstring should fit on one line with quotes,info,minor,doc,
+python,FLK8-D201,No blank lines allowed before function docstring,info,minor,doc,
+python,FLK8-D202,No blank lines allowed after function docstring,info,minor,doc,
+python,FLK8-D203,1 blank line required before class docstring,info,minor,doc,
+python,FLK8-D204,1 blank line required after class docstring,info,minor,doc,
+python,FLK8-D205,1 blank line required between summary line and description,info,minor,doc,
+python,FLK8-D206,"Docstring should be indented with spaces, not tabs",info,minor,doc,"It is recommended to use spaces in the docstrings, just as the code."
+python,FLK8-D207,Docstring is under-indented,info,minor,doc,It is recommended to properly indent docstrings for readability. 
+python,FLK8-D208,Docstring is over-indented,info,minor,doc,It is recommended to properly indent docstrings for readability. 
+python,FLK8-D209,Multi-line docstring closing quotes should be on a separate line,info,minor,doc,
+python,FLK8-D210,No whitespaces allowed surrounding docstring text,info,minor,doc,
+python,FLK8-D211,No blank lines allowed before class docstring,info,minor,doc,
+python,FLK8-D212,Multi-line docstring summary should start at the first line,info,minor,doc,
+python,FLK8-D213,Multi-line docstring summary should start at the second line,info,minor,doc,
+python,FLK8-D214,Section is over-indented,info,minor,doc,
+python,FLK8-D215,Section underline is over-indented,info,minor,doc,
+python,FLK8-D300,Use “”“triple double quotes”“”,info,minor,doc,Use of triple-quotes is recommended to specify docstrings.
+python,FLK8-D301,Use r”“” if any backslashes in a docstring,info,minor,doc,"If there are backslashes in a docstring, please raw strings."
+python,FLK8-D302,Use u”“” for Unicode docstrings,info,minor,doc,
+python,FLK8-D400,First line should end with a period,info,minor,doc,
+python,FLK8-D401,First line should be in imperative mood,info,minor,doc,
+python,FLK8-D401,First line should be in imperative mood; try rephrasing,info,minor,doc,
+python,FLK8-D402,First line should not be the function’s “signature”,info,minor,doc,
+python,FLK8-D403,First word of the first line should be properly capitalized,info,minor,doc,
+python,FLK8-D404,First word of the docstring should not be This,info,minor,doc,
+python,FLK8-D405,Section name should be properly capitalized,info,minor,doc,
+python,FLK8-D406,Section name should end with a newline,info,minor,doc,
+python,FLK8-D407,Missing dashed underline after section,info,minor,doc,
+python,FLK8-D408,Section underline should be in the line following the section’s name,info,minor,doc,
+python,FLK8-D409,Section underline should match the length of its name,info,minor,doc,
+python,FLK8-D410,Missing blank line after section,info,minor,doc,
+python,FLK8-D411,Missing blank line before section,info,minor,doc,
+python,FLK8-D412,No blank lines allowed between a section header and its content,info,minor,doc,
+python,FLK8-D413,Missing blank line after last section,info,minor,doc,
+python,FLK8-D414,Section has no content,info,minor,doc,
+python,FLK8-E101,Indentation contains mixed spaces and tabs,warning,major,bug-risk,"Indentation has has both tabs and spaces in it. You should use either tabs or spaces, but not both."
+python,FLK8-E111,Indentation is not a multiple of four,warning,major,style,PEP8 recommends that Python code indentation be a multiple of four.
+python,FLK8-E112,Expected an indented block,warning,major,bug-risk,This issue occurs when code is not indented but should be.
+python,FLK8-E113,Unexpected indentation,error,major,bug-risk,A line is indented when it shouldn’t be. Usually this will mean that multiple lines need to be indented at the same level.
+python,FLK8-E114,Indentation is not a multiple of four in comments,info,minor,style,Comment indentation should be a multiple of four.
+python,FLK8-E115,Expected an indented block in comments,info,minor,style,An indented block comment was expected but a non-indented block comment was found instead.
+python,FLK8-E116,Unexpected indentation in comments,info,minor,style,Comments should be indented relative to the code in the block they are in.
+python,FLK8-E121,Continuation line under-indented for hanging indent,info,minor,style,A line is less indented than it should be for hanging indents.
+python,FLK8-E122,Continuation line missing indentation or outdented,info,minor,style,A continuation line is not indented as far as it should be or is indented too far.
+python,FLK8-E123,Closing bracket does not match indentation of opening bracket's line,info,minor,style,Closing brackets should match the same indentation level of the line that their opening bracket started on.
+python,FLK8-E124,Closing bracket does not match visual indentation,info,minor,style,Closing brackets should match the indentation of the opening bracket.
+python,FLK8-E125,Continuation line with same indent as next logical line,info,minor,style,"Continuation lines should not be indented at the same level as the next logical line. Instead, they should be indented to one more level so as to distinguish them from the next line."
+python,FLK8-E126,Continuation line over-indented for hanging indent,info,minor,style,A continuation line is indented farther than it should be for a hanging indent.
+python,FLK8-E127,Continuation line over-indented for visual indent,info,minor,style,A continuation line is indented farther than it should be for a visual indent.
+python,FLK8-E128,Continuation line under-indented for visual indent,info,minor,style,A continuation line is under-indented for a visual indentation.
+python,FLK8-E129,Visually indented line with same indent as next logical line,info,minor,style,A visual indented line has the same indentation as the next logical line. This can make it hard to read.
+python,FLK8-E131,Continuation line unaligned for hanging indent,info,minor,style,A continuation line is unaligned for hanging indent.
+python,FLK8-E201,Whitespace after `(`,info,minor,style,Open parentheses should not have any space before or after them.
+python,FLK8-E202,Whitespace before `)`,info,minor,style,Closing parentheses should not have any before after them.
+python,FLK8-E203,Whitespace before `:`,info,minor,style,Colons should not have any space before them.
+python,FLK8-E211,Whitespace before `(`,info,minor,style,Open parentheses should not have any space before or after them.
+python,FLK8-E221,Multiple spaces found before operator,info,minor,style,There should be only one space before an operator.
+python,FLK8-E222,Multiple spaces found after operator,info,minor,style,There should be only one space after an operator.
+python,FLK8-E223,Tab found before operator,info,minor,style,There should be only one space before or after operators.
+python,FLK8-E224,Tab found after operator,info,minor,style,There should be only one space before or after operators.
+python,FLK8-E225,Missing whitespace around operator,info,minor,style,There should be one space before and after all operators.
+python,FLK8-E226,Missing whitespace around arithmetic operator,info,minor,style,"There should be one space before and after an arithmetic operator (`+`, `-`, `/`, and `*`)."
+python,FLK8-E227,Missing whitespace around bitwise or shift operator,info,minor,style,"There should be one space before and after bitwise and shift operators (`<<`, `>>`, `&`, `|`, `^`)."
+python,FLK8-E228,Missing whitespace around modulo operator,info,minor,style,The modulo operator (`%`) should have whitespace on either side of it.
+python,FLK8-E231,"Missing whitespace after ',', ';', or ':'",info,minor,style,"There should be whitespace after the characters `,`, `;`, and `:`."
+python,FLK8-E241,"Multiple spaces after ','",info,minor,style,"There should be only one space after the `,` character."
+python,FLK8-E242,"Tab after ','",info,minor,style,"There should be only one space after the `,` character."
+python,FLK8-E251,Unexpected spaces around keyword / parameter equals,info,minor,style,There should be no spaces before or after the `=` in a function definition.
+python,FLK8-E261,At least two spaces before inline comment,info,minor,style,"Inline comments should have two spaces before them. Often programmers will only include one space, which will trigger this warning."
+python,FLK8-E262,Inline comment should start with `# `,info,minor,style,Inline comments should have one space before the pound sign (`#`) and the comment itself.
+python,FLK8-E265,Block comment should start with `# `,info,minor,style,Block comments should have one space before the pound sign (`#`) and the comment itself.
+python,FLK8-E266,Too many leading `#` for block comment,info,minor,style,There should be only one leading `#` for a block comment.
+python,FLK8-E271,Multiple spaces after keyword,info,minor,style,There should be only one space after a keyword.
+python,FLK8-E272,Multiple spaces before keyword,info,minor,style,There should be only one space before a keyword.
+python,FLK8-E273,Tab after keyword,info,minor,style,There should be only one space after a keyword.
+python,FLK8-E274,Tab before keyword,info,minor,style,There should be only one space before a keyword.
+python,FLK8-E275,Missing whitespace after keyword,info,minor,style,There should be one space after keywords.
+python,FLK8-E301,"Expected 1 blank line, found 0",info,minor,style,One blank line is expected between the methods of a class.
+python,FLK8-E302,"Expected 2 blank lines, found 0",info,minor,style,Two blank lines are expected between functions and classes.
+python,FLK8-E303,Too many blank lines found,info,minor,style,Two blank lines are expected between functions and classes and one blank line is expected between methods of a class.
+python,FLK8-E304,Blank lines found after function decorator,info,minor,style,There should be no blank lines between a function decorator and the function it is decorating.
 python,FLK8-E305,Expected 2 blank lines after end of function or class,info,minor,style,"Functions and classes should have two blank lines after them, separating them from other functions and classes.
-",FALSE
-python,FLK8-E306,Expected 1 blank line before a nested definition,info,minor,style,Nested functions and classes should have one blank line before them.,FALSE
-python,FLK8-E401,Multiple imports on one line,info,minor,style,Imports from different modules should occur on different lines.,FALSE
-python,FLK8-E402,Module level import not at top of file,info,minor,style,All module level imports should be at the top of the file. This means that there should be no statements in between module level imports.,FALSE
-python,FLK8-E501,Line too long,info,minor,style,Line lengths are recommended to be no greater than 79 characters.,FALSE
-python,FLK8-E502,The backslash is redundant between brackets,info,minor,style,There is no need for backslashes between brackets.,FALSE
-python,FLK8-E701,Multiple statements on one line (colon),info,major,style,Multiple statements should be on their own separate lines. This improves readability.,FALSE
-python,FLK8-E702,Multiple statements on one line (semicolon),info,minor,style,Multiple statements should not be on the same line separated by a semicolon. They should be on their own separate lines.,FALSE
-python,FLK8-E703,Statement ends with a semicolon,info,minor,style,"Unlike programming languages like Java and C#, statements in Python do not need to end with a semicolon. They can be removed.",FALSE
-python,FLK8-E704,Multiple statements on one line (def),info,major,style,Multiple statements of a function definition should be on their own separate lines.,FALSE
-python,FLK8-E711,Comparison to None should be 'if cond is None:',warning,minor,bug-risk,"Comparisons to the singleton objects, like `True`, `False`, and `None`, should be done with identity, not equality. Use “is” or “is not”.",FALSE
-python,FLK8-E712,Comparison to True should be 'if cond is True:' or 'if cond:',warning,minor,bug-risk,"When comparing a variable to `True`, you should use the form `if x is True` or simply `if x`. The most common incorrect form is `if x == True`.",FALSE
-python,FLK8-E713,Test for membership should be 'not in',warning,minor,bug-risk,Tests for membership should use the form `x not in the_list` rather than `not x in the_list`. The former example is simply more readable.,FALSE
-python,FLK8-E714,Test for object identity should be 'is not',warning,minor,bug-risk,Tests for object identity should use the form `x is not None` rather than `not x is None`. The former example is simply more readable.,FALSE
-python,FLK8-E722,"Do not use bare `except`, specify exception instead",warning,minor,bug-risk,Using `except` without a specific exception can be error prone.,FALSE
-python,FLK8-E731,"Do not assign a lambda expression, use a `def`",warning,minor,bug-risk,"Lambdas should not be assigned to a variable. Instead, they should be defined as functions. The primary reason for this is debugging. Lambdas show as `<lambda>` in tracebacks, where functions will display the function’s name.",FALSE
+"
+python,FLK8-E306,Expected 1 blank line before a nested definition,info,minor,style,Nested functions and classes should have one blank line before them.
+python,FLK8-E401,Multiple imports on one line,info,minor,style,Imports from different modules should occur on different lines.
+python,FLK8-E402,Module level import not at top of file,info,minor,style,All module level imports should be at the top of the file. This means that there should be no statements in between module level imports.
+python,FLK8-E501,Line too long,info,minor,style,Line lengths are recommended to be no greater than 79 characters.
+python,FLK8-E502,The backslash is redundant between brackets,info,minor,style,There is no need for backslashes between brackets.
+python,FLK8-E701,Multiple statements on one line (colon),info,major,style,Multiple statements should be on their own separate lines. This improves readability.
+python,FLK8-E702,Multiple statements on one line (semicolon),info,minor,style,Multiple statements should not be on the same line separated by a semicolon. They should be on their own separate lines.
+python,FLK8-E703,Statement ends with a semicolon,info,minor,style,"Unlike programming languages like Java and C#, statements in Python do not need to end with a semicolon. They can be removed."
+python,FLK8-E704,Multiple statements on one line (def),info,major,style,Multiple statements of a function definition should be on their own separate lines.
+python,FLK8-E711,Comparison to None should be 'if cond is None:',warning,minor,bug-risk,"Comparisons to the singleton objects, like `True`, `False`, and `None`, should be done with identity, not equality. Use “is” or “is not”."
+python,FLK8-E712,Comparison to True should be 'if cond is True:' or 'if cond:',warning,minor,bug-risk,"When comparing a variable to `True`, you should use the form `if x is True` or simply `if x`. The most common incorrect form is `if x == True`."
+python,FLK8-E713,Test for membership should be 'not in',warning,minor,bug-risk,Tests for membership should use the form `x not in the_list` rather than `not x in the_list`. The former example is simply more readable.
+python,FLK8-E714,Test for object identity should be 'is not',warning,minor,bug-risk,Tests for object identity should use the form `x is not None` rather than `not x is None`. The former example is simply more readable.
+python,FLK8-E722,"Do not use bare `except`, specify exception instead",warning,minor,bug-risk,Using `except` without a specific exception can be error prone.
+python,FLK8-E731,"Do not assign a lambda expression, use a `def`",warning,minor,bug-risk,"Lambdas should not be assigned to a variable. Instead, they should be defined as functions. The primary reason for this is debugging. Lambdas show as `<lambda>` in tracebacks, where functions will display the function’s name."
 python,FLK8-E741,"Do not use variables named 'l', 'O', or 'I'",warning,major,style,"Variables named `I`, `O`, and `l` can be very hard to read. This is because the letter `I` and the letter `l` are easily confused, and the letter `O` and the number `0` can be easily confused.
 
 Change the names of these variables to something more descriptive.
 
-",FALSE
+"
 python,FLK8-E742,"Do not define classes named 'l', 'O', or 'I'",warning,major,style,"Classes named `I`, `O`, and `l` can be very hard to read. This is because the letter `I` and the letter `l` are easily confused, and the letter `O` and the number `0` can be easily confused.
 
-Change the names of these classes to something more descriptive.",FALSE
+Change the names of these classes to something more descriptive."
 python,FLK8-E743,"Do not define functions named 'l', 'O', or 'I'",warning,major,style,"Functions named `I`, `O`, and `l` can be very hard to read. This is because the letter `I` and the letter `l` are easily confused, and the letter `O` and the number `0` can be easily confused.
 
-Change the names of these functions to something more descriptive.",FALSE
-python,FLK8-F402,import module from line N shadowed by loop variable,warning,major,bug-risk,Loop variables should not redefine the name of modules that are imported.,FALSE
-python,FLK8-F403,‘from module import *’ used; unable to detect undefined names,warning,major,bug-risk,"`from module import *` is discouraged because the programmer often won’t know where an imported object is defined. The imported module, class, or function should be explicitly defined.",FALSE
-python,FLK8-F404,future import(s) name after other statements,warning,major,style,Imports from `__future__` should be the first imports in a file.,FALSE
+Change the names of these functions to something more descriptive."
+python,FLK8-F402,import module from line N shadowed by loop variable,warning,major,bug-risk,Loop variables should not redefine the name of modules that are imported.
+python,FLK8-F403,‘from module import *’ used; unable to detect undefined names,warning,major,bug-risk,"`from module import *` is discouraged because the programmer often won’t know where an imported object is defined. The imported module, class, or function should be explicitly defined."
+python,FLK8-F404,future import(s) name after other statements,warning,major,style,Imports from `__future__` should be the first imports in a file.
 python,FLK8-F405,"name may be undefined, or defined from star imports: module",warning,major,bug-risk,"This warning occurs in conjunction with issue FLK8-F403, `'from module import *'` used. It means that the variable name could be undefined, but we cannot be sure because it also could also be imported in the star imports.
 
-Confirm that the variable is defined in the star imports. If it is, explicitly import it instead of importing `*`. If not, then define the variable.",FALSE
-python,FLK8-F406,`from module import *` is only allowed at module level,warning,major,bug-risk,"Importing `*` is generally discouraged, but if there's a need regardless, such imports should only be done on module level.",FALSE
-python,FLK8-F407,an undefined __future__ feature name was imported,warning,critical,bug-risk,The imported name does not exist in the `__future__` package.,FALSE
-python,FLK8-F601,Dictionary key name repeated with different values,warning,major,bug-risk,All dictionary keys should be unique.,FALSE
-python,FLK8-F602,Dictionary key variable name repeated with different values,warning,major,bug-risk,All dictionary keys should be unique.,FALSE
-python,FLK8-F621,Too many expressions in an assignment with star-unpacking,warning,major,bug-risk,Too many expressions found in starred assignment. This can be error prone.,TRUE
-python,FLK8-F622,"Two or more starred expressions in an assignment (a, *b, *c = d)",warning,major,bug-risk,There are more than one starred expressions (*x) in an assignment. This is a SyntaxError.,FALSE
-python,FLK8-F631,"Assertion test is a tuple, which are always True",warning,major,bug-risk,"A tuple with at least one element is always truthy, so the assertion will always pass. Remove the parentheses.",FALSE
-python,FLK8-F701,`break` statement used outside of a `while` or `for` loop,warning,major,bug-risk,break statement should not be used outside a loop.,FALSE
-python,FLK8-F702,`continue` statement outside of a `while` or `for` loop,warning,major,bug-risk,continue statement should not be used outside a loop.,FALSE
-python,FLK8-F703,`continue` statement used in a `finally` block in a loop,warning,minor,bug-risk,"continue statement doesn't have any effect in the finally block, and can be removed.",FALSE
-python,FLK8-F704,`yield` or `yield from` statement used outside of a function,warning,major,bug-risk,yield should not be used outside of a function.,FALSE
-python,FLK8-F705,`return` statement used with arguments inside a generator,warning,major,bug-risk,A return statement with arguments should not be used inside a generator.,FALSE
-python,FLK8-F706,`return` statement used outside of a function or method,warning,major,bug-risk,Return statement should not be used outside of a function or method.,FALSE
-python,FLK8-F707,`except:` block found as not the last exception handler,warning,major,bug-risk,A bare exception catcher should always be the last block in a `try...except`.,FALSE
-python,FLK8-F721,doctest syntax error syntax error in forward type annotation,,,,,FALSE
-python,FLK8-F722,doctest syntax error syntax error in forward type annotation,,,,,FALSE
-python,FLK8-F812,List comprehension redefines name from line N,warning,minor,bug-risk,A list comprehension is using the same name as another variable defined in the module. Either change the variable name in the list comprehension or change it in the module.,FALSE
-python,FLK8-F821,Undefined name detected,error,critical,bug-risk,The variable name is not defined where it is used.,FALSE
-python,FLK8-F822,Undefined name detected in `__all__`,error,critical,bug-risk,An undefined module was specified in the `__all__` list. Ensure that it is specified in your file or remove the variable from `__all__`.,FALSE
-python,FLK8-F823,Local variable name referenced before assignment,error,critical,bug-risk,Local variables should be defined before they are referenced.,FALSE
-python,FLK8-F831,Duplicate argument in function definition,error,critical,bug-risk,Two or more parameters in a function definition have the same name. All names in the function definition should be distinct.,FALSE
-python,FLK8-F841,Local variable is assigned to but never used,warning,minor,bug-risk,A local variable in your function was defined but is not being used. This local variable should be removed.,FALSE
+Confirm that the variable is defined in the star imports. If it is, explicitly import it instead of importing `*`. If not, then define the variable."
+python,FLK8-F406,`from module import *` is only allowed at module level,warning,major,bug-risk,"Importing `*` is generally discouraged, but if there's a need regardless, such imports should only be done on module level."
+python,FLK8-F407,an undefined __future__ feature name was imported,warning,critical,bug-risk,The imported name does not exist in the `__future__` package.
+python,FLK8-F601,Dictionary key name repeated with different values,warning,major,bug-risk,All dictionary keys should be unique.
+python,FLK8-F602,Dictionary key variable name repeated with different values,warning,major,bug-risk,All dictionary keys should be unique.
+python,FLK8-F621,Too many expressions in an assignment with star-unpacking,warning,major,bug-risk,Too many expressions found in starred assignment. This can be error prone.
+python,FLK8-F622,"Two or more starred expressions in an assignment (a, *b, *c = d)",warning,major,bug-risk,There are more than one starred expressions (*x) in an assignment. This is a SyntaxError.
+python,FLK8-F631,"Assertion test is a tuple, which are always True",warning,major,bug-risk,"A tuple with at least one element is always truthy, so the assertion will always pass. Remove the parentheses."
+python,FLK8-F701,`break` statement used outside of a `while` or `for` loop,warning,major,bug-risk,break statement should not be used outside a loop.
+python,FLK8-F702,`continue` statement outside of a `while` or `for` loop,warning,major,bug-risk,continue statement should not be used outside a loop.
+python,FLK8-F703,`continue` statement used in a `finally` block in a loop,warning,minor,bug-risk,"continue statement doesn't have any effect in the finally block, and can be removed."
+python,FLK8-F704,`yield` or `yield from` statement used outside of a function,warning,major,bug-risk,yield should not be used outside of a function.
+python,FLK8-F705,`return` statement used with arguments inside a generator,warning,major,bug-risk,A return statement with arguments should not be used inside a generator.
+python,FLK8-F706,`return` statement used outside of a function or method,warning,major,bug-risk,Return statement should not be used outside of a function or method.
+python,FLK8-F707,`except:` block found as not the last exception handler,warning,major,bug-risk,A bare exception catcher should always be the last block in a `try...except`.
+python,FLK8-F721,doctest syntax error syntax error in forward type annotation,,,,
+python,FLK8-F722,doctest syntax error syntax error in forward type annotation,,,,
+python,FLK8-F812,List comprehension redefines name from line N,warning,minor,bug-risk,A list comprehension is using the same name as another variable defined in the module. Either change the variable name in the list comprehension or change it in the module.
+python,FLK8-F821,Undefined name detected,error,critical,bug-risk,The variable name is not defined where it is used.
+python,FLK8-F822,Undefined name detected in `__all__`,error,critical,bug-risk,An undefined module was specified in the `__all__` list. Ensure that it is specified in your file or remove the variable from `__all__`.
+python,FLK8-F823,Local variable name referenced before assignment,error,critical,bug-risk,Local variables should be defined before they are referenced.
+python,FLK8-F831,Duplicate argument in function definition,error,critical,bug-risk,Two or more parameters in a function definition have the same name. All names in the function definition should be distinct.
+python,FLK8-F841,Local variable is assigned to but never used,warning,minor,bug-risk,A local variable in your function was defined but is not being used. This local variable should be removed.
 python,FLK8-F901,`raise NotImplemented` should be `raise NotImplementedError`,warning,major,bug-risk,"`NotImplemented` signals to the runtime that it should ask someone else to satisfy the operation. In the expression `a == b`, if `a.__eq__(b)` returns `NotImplemented`, then Python tries `b.__eq__(a)`. If `b` knows enough to return `True` or `False`, then the expression can succeed. If it doesn't, then the runtime will fall back to the built-in behavior (which is based on identity for `==` and `!=`).
 
-Raising an exception would break out of the sort unless caught, whereas `NotImplemented` doesn't get raised and can be used in further tests.",FALSE
-python,FLK8-W191,Indentation contains tabs,info,minor,style,Indentation has tabs when only spaces are expected. Change all tabs to spaces.,FALSE
-python,FLK8-W291,Trailing whitespace,info,minor,style,There should be no whitespace after the final character in a line.,FALSE
-python,FLK8-W292,No newline at end of file,info,minor,style,Files should end with a newline.,FALSE
-python,FLK8-W293,Blank line contains whitespace,info,minor,style,Blank lines should not contain any tabs or spaces.,FALSE
-python,FLK8-W391,Blank line at end of file,info,minor,style,"There should be one, and only one, blank line at the end of each file. This warning will occur when there are two or more blank lines.",FALSE
-python,FLK8-W503,Line break before binary operator,info,minor,style,Line breaks should occur after the binary operator to keep all variable names aligned.,FALSE
-python,FLK8-W504,Line break after binary operator,info,minor,style,,FALSE
-python,FLK8-W505,Doc line too long,info,minor,style,Docstring line lengths are recommended to be no greater than 79 characters.,FALSE
-python,FLK8-W601,".has_key() is deprecated, use 'in'",warning,major,code-smell,`.has_key()` was deprecated in Python 2. It is recommended to use the in operator instead.,FALSE
-python,FLK8-W602,deprecated form of raising exception,warning,major,code-smell,"The `raise Exception, message` form of raising exceptions is deprecated. Use the new form, `raise Exception(message)`.",FALSE
-python,FLK8-W603,"<>' is deprecated, use '!='",warning,major,code-smell,`<>` has been deprecated and removed in Python 3. Replace instances of `<>` with `!=`.,FALSE
-python,FLK8-W604,"backticks are deprecated, use 'repr()'",warning,major,code-smell,Backticks were deprecated and removed in Python 3. Use the built-in function `repr()` instead.,FALSE
-python,FLK8-W605,Invalid escape sequence found,warning,major,bug-risk,"As of Python 3.6, a backslash-character pair that is not a valid escape sequence now generates a DeprecationWarning. Although this will eventually become a SyntaxError, that will not be for several Python releases.",FALSE
-python,FLK8-W606,`async` and `await` are reserved keywords starting with Python 3.7,warning,major,bug-risk,Using these symbols as names can break your code in future.,FALSE
-python,FLK8-E999,SyntaxError: invalid sytax,error,critical,bug-risk,A Python syntax error is detected.,TRUE
-python,PYL-C0102,blacklisted-name,warning,major,style,These names can make the intention of the code unclear and hard to understand and debug. Using descripted names is recommended.,FALSE
-python,PYL-C0103,invalid-name,warning,minor,style,"Names of classes, variables, functions and constants are differently capitalized and follow separate conventions. Not following these conventions can lead to code that's hard to understand.",FALSE
-python,PYL-C0113,unneeded-not,warning,major,style,"The boolean expression contains an unneeded negation, and can be re-written without using the `not` statement.",FALSE
-python,PYL-C0122,misplaced-comparison-constant,warning,major,style,The constant is placed on the left side of a comparison. It is usually clearer in intent to place it in the right hand side of the comparison.,FALSE
-python,PYL-C0123,unidiomatic-typecheck,warning,major,bug-risk,"Use `type()` instead of `isinstance()` for a typecheck. The idiomatic way to perform an explicit typecheck in Python is to use `isinstance(x, Y)` rather than `type(x) == Y`, `type(x) is Y`. This is because `isinstance` can handle subclasses as well.",TRUE
-python,PYL-C0200,consider-using-enumerate,warning,major,style,"Consider using enumerate instead of iterating with range and len, which is more straightforward.",TRUE
-python,PYL-C0201,consider-iterating-dictionary,warning,major,style,"Consider iterating the dictionary directly instead of calling .keys(). It is enough to just iterate through the dictionary itself, as in `for key in dictionary`.",TRUE
-python,PYL-C0202,bad-classmethod-argument,warning,major,style,Use of `cls` as the first named argument in a class method is recommended so it's easy to differentiate them from regular instance methods.,TRUE
-python,PYL-C0203,bad-mcs-method-argument,warning,major,style,Use of `cls` as the first named argument in a metaclass method is recommended so it's easy to differentiate them from regular instance methods.,TRUE
-python,PYL-C0204,bad-mcs-classmethod-argument,warning,major,style,Use of `mcs` as the first named argument in a metaclass class method is recommended so it's easy to differentiate them from regular instance methods.,
-python,PYL-C0205,single-string-used-for-slots,warning,major,style,"Class slots is a simple string, rather than an iterable.",TRUE
-python,PYL-C0302,too-many-lines,warning,minor,code-smell,"Having too many lines in a module reduces readability, and may be a sign that refactoring is needed. The recommended maximum number of lines in a module is 1000.",FALSE
-python,PYL-C0325,superfluous-parens,warning,minor,style,Parentheses can be omitted after the keyword.,FALSE
-python,PYL-C0327,mixed-line-endings,warning,minor,style,There are mixed (LF and CRLF) newline signs in a file.,TRUE
-python,PYL-C0328,unexpected-line-ending-format,warning,minor,style,Unexpected line ending format.,TRUE
-python,PYL-C0401,wrong-spelling-in-comment,info,minor,style,A word in comment is not spelled correctly.,FALSE
-python,PYL-C0402,wrong-spelling-in-docstring,info,minor,style,A word in docstring is not spelled correctly.,FALSE
-python,PYL-C0403,invalid-characters-in-docstring,info,minor,style,Invalid characters found in docstring.,FALSE
+Raising an exception would break out of the sort unless caught, whereas `NotImplemented` doesn't get raised and can be used in further tests."
+python,FLK8-W191,Indentation contains tabs,info,minor,style,Indentation has tabs when only spaces are expected. Change all tabs to spaces.
+python,FLK8-W291,Trailing whitespace,info,minor,style,There should be no whitespace after the final character in a line.
+python,FLK8-W292,No newline at end of file,info,minor,style,Files should end with a newline.
+python,FLK8-W293,Blank line contains whitespace,info,minor,style,Blank lines should not contain any tabs or spaces.
+python,FLK8-W391,Blank line at end of file,info,minor,style,"There should be one, and only one, blank line at the end of each file. This warning will occur when there are two or more blank lines."
+python,FLK8-W503,Line break before binary operator,info,minor,style,Line breaks should occur after the binary operator to keep all variable names aligned.
+python,FLK8-W504,Line break after binary operator,info,minor,style,
+python,FLK8-W505,Doc line too long,info,minor,style,Docstring line lengths are recommended to be no greater than 79 characters.
+python,FLK8-W601,".has_key() is deprecated, use 'in'",warning,major,code-smell,`.has_key()` was deprecated in Python 2. It is recommended to use the in operator instead.
+python,FLK8-W602,deprecated form of raising exception,warning,major,code-smell,"The `raise Exception, message` form of raising exceptions is deprecated. Use the new form, `raise Exception(message)`."
+python,FLK8-W603,"<>' is deprecated, use '!='",warning,major,code-smell,`<>` has been deprecated and removed in Python 3. Replace instances of `<>` with `!=`.
+python,FLK8-W604,"backticks are deprecated, use 'repr()'",warning,major,code-smell,Backticks were deprecated and removed in Python 3. Use the built-in function `repr()` instead.
+python,FLK8-W605,Invalid escape sequence found,warning,major,bug-risk,"As of Python 3.6, a backslash-character pair that is not a valid escape sequence now generates a DeprecationWarning. Although this will eventually become a SyntaxError, that will not be for several Python releases."
+python,FLK8-W606,`async` and `await` are reserved keywords starting with Python 3.7,warning,major,bug-risk,Using these symbols as names can break your code in future.
+python,FLK8-E999,SyntaxError: invalid sytax,error,critical,bug-risk,A Python syntax error is detected.
+python,PYL-C0102,blacklisted-name,warning,major,style,These names can make the intention of the code unclear and hard to understand and debug. Using descripted names is recommended.
+python,PYL-C0113,unneeded-not,warning,major,style,"The boolean expression contains an unneeded negation, and can be re-written without using the `not` statement."
+python,PYL-C0122,misplaced-comparison-constant,warning,major,style,The constant is placed on the left side of a comparison. It is usually clearer in intent to place it in the right hand side of the comparison.
+python,PYL-C0123,unidiomatic-typecheck,warning,major,bug-risk,"Use `type()` instead of `isinstance()` for a typecheck. The idiomatic way to perform an explicit typecheck in Python is to use `isinstance(x, Y)` rather than `type(x) == Y`, `type(x) is Y`. This is because `isinstance` can handle subclasses as well."
+python,PYL-C0200,consider-using-enumerate,warning,major,style,"Consider using enumerate instead of iterating with range and len, which is more straightforward."
+python,PYL-C0201,consider-iterating-dictionary,warning,major,style,"Consider iterating the dictionary directly instead of calling .keys(). It is enough to just iterate through the dictionary itself, as in `for key in dictionary`."
+python,PYL-C0202,bad-classmethod-argument,warning,major,style,Use of `cls` as the first named argument in a class method is recommended so it's easy to differentiate them from regular instance methods.
+python,PYL-C0203,bad-mcs-method-argument,warning,major,style,Use of `cls` as the first named argument in a metaclass method is recommended so it's easy to differentiate them from regular instance methods.
+python,PYL-C0204,bad-mcs-classmethod-argument,warning,major,style,Use of `mcs` as the first named argument in a metaclass class method is recommended so it's easy to differentiate them from regular instance methods.
+python,PYL-C0205,single-string-used-for-slots,warning,major,style,"Class slots is a simple string, rather than an iterable."
+python,PYL-C0302,too-many-lines,warning,minor,code-smell,"Having too many lines in a module reduces readability, and may be a sign that refactoring is needed. The recommended maximum number of lines in a module is 1000."
+python,PYL-C0325,superfluous-parens,warning,minor,style,Parentheses can be omitted after the keyword.
+python,PYL-C0327,mixed-line-endings,warning,minor,style,There are mixed (LF and CRLF) newline signs in a file.
+python,PYL-C0328,unexpected-line-ending-format,warning,minor,style,Unexpected line ending format.
+python,PYL-C0401,wrong-spelling-in-comment,info,minor,style,A word in comment is not spelled correctly.
+python,PYL-C0402,wrong-spelling-in-docstring,info,minor,style,A word in docstring is not spelled correctly.
+python,PYL-C0403,invalid-characters-in-docstring,info,minor,style,Invalid characters found in docstring.
 python,PYL-C1801,len-as-condition,warning,major,performance,"Using the `len` function to check if a sequence is empty is not idiomatic and can be less performant than checking for truthness of the sequence. 
 
-`len` doesn't know the context in which it is called, so if computing the length means traversing the entire sequence, it must; it doesn't know that the result is just being compared to 0. Computing the boolean value can stop after it sees the first element, regardless of how long the sequence actually is.",FALSE
-python,PYL-E0100,init-is-generator,error,critical,bug-risk,"The `__init__()` method is required to return nothing, but a `yield` statement in its body was detected. This will raise a `TypeError` on Python 2.7 and 3.x.",TRUE
-python,PYL-E0101,return-in-init,error,critical,bug-risk,"The `__init__()` method is required to return `None`, but an explicit return value in its body was detected. This will raise a `TypeError` on Python 2.7 and 3.x.",TRUE
-python,PYL-E0102,function-redefined,error,major,bug-risk,"A redefinition of functions, classes, and methods is allowed and overrides the original definition in Python, but is confusing and cause bugs that are difficult to debug.",TRUE
-python,PYL-E0110,abstract-class-instantiated,error,major,bug-risk,An abstract class with `abc.ABCMeta` as metaclass has abstract methods and is instantiated.,TRUE
-python,PYL-E0111,bad-reversed-sequence,error,critical,bug-risk,"The first argument to `reversed()` builtin isn't a sequence (does not implement `reversed`, nor `getitem` and `len`).",TRUE
-python,PYL-E0113,invalid-star-assignment-target,error,major,bug-risk,A star expression is used as a starred assignment target. It must be in a list or tuple.,TRUE
-python,PYL-E0114,star-needs-assignment-target,error,major,bug-risk,A star expression can only be used in an assignment target.,TRUE
-python,PYL-E0115,nonlocal-and-global,error,major,bug-risk,A name is defined as nonlocal and global in the same scope.,TRUE
-python,PYL-E0117,nonlocal-without-binding,error,major,bug-risk,A name is defined as nonlocal without any binding.,TRUE
-python,PYL-E0118,used-prior-global-declaration,error,major,bug-risk,A global name us used prior to it's global declaration.,TRUE
-python,PYL-E0119,misplaced-format-function,error,critical,bug-risk,The `format()` function is called on an object that is not a string. This is an error.,TRUE
-python,PYL-E0202,method-hidden,error,major,bug-risk,"When a method is defined in a child class which has the same name as an attribute in the ancestor class, the attribute in the ancestor class takes precedence and hides the method.",TRUE
-python,PYL-E0203,access-member-before-definition,error,critical,bug-risk,A member of a class is being accessed before its definition. This is an error.,TRUE
-python,PYL-E0211,no-method-argument,error,critical,bug-risk,A method which should have the bound instance as first argument has no argument defined. This is an error.,TRUE
-python,PYL-E0213,no-self-argument,error,critical,bug-risk,"A method has an attribute different the ""self"" as first argument. This is considered as an error since this is a so common convention that you shouldn't break it.",TRUE
-python,PYL-E0236,invalid-slots-object,error,critical,bug-risk,Slots must contain only string objects.,TRUE
-python,PYL-E0237,assigning-non-slot,error,critical,bug-risk,Assigning to an attribute not defined in the class slots will cause an error.,TRUE
-python,PYL-E0238,invalid-slots,error,critical,bug-risk,"An invalid slots value is found in class. Only a string, an iterable or a sequence is permitted. This is an error.",TRUE
-python,PYL-E0239,inherit-non-class,error,critical,bug-risk,Python classes can only inherit from a class. Inheriting from any other object is an error.,TRUE
-python,PYL-E0240,inconsistent-mro,error,critical,bug-risk,"The order in which other classes are specified for inheritence in a class matters. Python classes use the C3 linearization method to determine a method resolution ordering for each class, which ensures that for a class C, if a class C1 precedes a class C2 in the MRO of C then C1 should also precede C2 in the MRO of all subclasses of C.",TRUE
-python,PYL-E0241,duplicate-bases,error,critical,bug-risk,A class must not specify inheritance from another class more than one times. Duplicate base classes will raise a `TypeError`.,TRUE
-python,PYL-E0301,non-iterator-returned,error,critical,bug-risk,The `__iter__` method of a class must return an iterator with a `__next__` method.,TRUE
-python,PYL-E0303,invalid-length-returned,error,critical,bug-risk,The `__len__` method of a class must return a non-negative integer.,TRUE
-python,PYL-E0402,Attempted relative import beyond top-level package,error,critical,bug-risk,A relative import has been attempted from beyond the top-level package. This is an error.,TRUE
-python,PYL-E0604,Invalid object found in `__all__`,error,critical,bug-risk,The `__all__` list must contain only strings. Having other kinds of objects is an error.,TRUE
-python,PYL-E0633,Attempting to unpack a non-sequence object,error,critical,bug-risk,"Unpacking is supported only for sequence objects, like lists, sets, tuples, iterators or generators, etc.",TRUE
-python,PYL-E0701,Bad `except` order found,error,critical,bug-risk,Except clauses are not in the correct order (from the more specific to the more generic). Some exceptions may not be caught by the most specific handler.,TRUE
-python,PYL-E0702,Object of unsupported type raised,error,critical,bug-risk,Only classess or instances are allowed to be raised. Raising other types is an error.,TRUE
-python,PYL-E0703,"Exception context set to something which is not an exception, nor None",error,critical,bug-risk,"The syntax `raise ... from ...` can be used only when the exception context is an exception, or `None`. Trying to do so with other object types is an error.",TRUE
-python,PYL-E0704,The raise statement is not inside an except clause,error,critical,bug-risk,"A bare raise is used inside something which is not an `except` clause. This generates an error, since there are no active exceptions to be re-raised. An exception to this rule is represented by a bare raise inside a `finally` clause, which might work, as long as an exception is raised inside the `try` block, but it is nevertheless a code smell that must not be relied upon.",TRUE
-python,PYL-E0710,New-style class raised which doesn't inherit from `BaseException`,error,critical,bug-risk,New-style classes raised must inherit from `BaseException`.,TRUE
-python,PYL-E0712,Exception caught which does not inherit from `Exception`,error,critical,bug-risk,"For an exception to be caught, it must inherit from the `Exception` class.",TRUE
-python,PYL-E1003,Bad first argument given in `super()` call,error,critical,bug-risk,The first argument to the `super()` function must be the current class.,TRUE
-python,PYL-E1004,Missing argument in `super()` call,error,critical,bug-risk,"In Python 2.x, the `super()` function must be called with the current class as the first argument, and the current instance as the second argument.",TRUE
-python,PYL-E1101,Variable accessed for non-existent member,error,critical,bug-risk,A variable was accessed for a member not existent in the class. This is an error.,TRUE
-python,PYL-E1102,A non-callable object is being called,error,critical,bug-risk,An object being called has been inferred to a non callable object. This is an error.,TRUE
-python,PYL-E1111,"Assigning result of a function call, where the function has no return",error,critical,bug-risk,"An assignment is done on a function call but the inferred function doesn't return anything. While this is not an error in Python, it is a critical anti-pattern and can lead to unexpected bugs.",TRUE
-python,PYL-E1120,Missing argument in function call,error,critical,bug-risk,A required function parameter isn't provided while calling the function. This is an error.,TRUE
-python,PYL-E1121,Too many positional arguments in function call,error,critical,bug-risk,Too many positional arguments are provided while calling the function. This is an error.,TRUE
-python,PYL-E1123,Unexpected keyword argument in function call,error,critical,bug-risk,The function call has passed a keyword argument that doesn't correspond to one of the function's parameter names. This is an error.,TRUE
-python,PYL-E1124,Argument passed both by position and keyword in function call,error,critical,bug-risk,"The function call would result in assigning multiple values to a function parameter, one value from a positional argument and one from a keyword argument.",TRUE
-python,PYL-E1125,Missing mandatory keyword argument in function call,error,critical,bug-risk,The function call does not pass a mandatory keyword-only argument. This is an error.,TRUE
-python,PYL-E1126,Invalid sequence index found,error,critical,bug-risk,"A sequence type is indexed with an invalid type. Valid types are `int`s, slices, and objects with an `__index__` method.",TRUE
-python,PYL-E1127,Invalid slice index found,error,critical,bug-risk,"A slice is indexed with an invalid type. Valid types are `int`s, slices, and objects with an `__index__` method.",TRUE
-python,PYL-E1128,"Assigning result of a function call, where the function returns `None`",warning,major,bug-risk,"An assignment is done on a function call but the inferred function returns `None`. While this is allowed in Python, it is an anti-pattern and can lead to unexpected bugs.",TRUE
-python,PYL-E1129,Object which is not a context manager used with the `with` statement,error,critical,bug-risk,The object used in the `with` statement doesn't implement the context manager protocol (enter/exit). This is an error.,TRUE
-python,PYL-E1130,Unary operand used on an unsupported object,error,critical,bug-risk,A unary operand is used on an object which does not support this type of operation. This is an error.,TRUE
-python,PYL-E1131,unsupported-binary-operation,error,critical,bug-risk,,
-python,PYL-E1132,Multiple values found for keyword argument,error,critical,bug-risk,The function was invoked with more than one values for a keyword argument. This is an error.,TRUE
-python,PYL-E1135,Membership test used with unsupported object,error,critical,bug-risk,A membership test using `in` statement is supported only with objects which implement the membership protocol -- `__contains__` / `__iter__` / `__getitem__`.,TRUE
-python,PYL-E1136,Subscription used with unsupported object,error,critical,bug-risk,Subscription can be used only with objects which implement `__getitem__`.,TRUE
-python,PYL-E1137,Assignment attempted with unsupported object,error,critical,bug-risk,Assignment is supported only for items which implement `__setitem__`.,TRUE
-python,PYL-E1138,Deletion attempted with unsupported object,error,critical,bug-risk,Deletion is supported only for items which implement `__delitem__`.,TRUE
-python,PYL-E1139,invalid-metaclass,,,,,
-python,PYL-E1140,unhashable-dict-key,,,,,
-python,PYL-E1200,logging-unsupported-format,,,,,
-python,PYL-E1201,logging-format-truncated,,,,,
-python,PYL-E1205,logging-too-many-args,,,,,
-python,PYL-E1206,logging-too-few-args,,,,,
-python,PYL-E1300,bad-format-character,,,,,
-python,PYL-E1301,truncated-format-string,,,,,
-python,PYL-E1302,mixed-format-string,,,,,
-python,PYL-E1303,format-needs-mapping,,,,,
-python,PYL-E1304,missing-format-string-key,,,,,
-python,PYL-E1305,too-many-format-args,,,,,
-python,PYL-E1306,too-few-format-args,,,,,
-python,PYL-E1307,bad-string-format-type,,,,,
-python,PYL-E1310,bad-str-strip-call,,,,,
-python,PYL-E1507,invalid-envvar-value,,,,,
-python,PYL-E1601,print-statement,,,,,
-python,PYL-E1602,parameter-unpacking,,,,,
-python,PYL-E1603,unpacking-in-except,,,,,
-python,PYL-E1604,old-raise-syntax,,,,,
-python,PYL-E1605,backtick,,,,,
-python,PYL-E1606,long-suffix,,,,,
-python,PYL-E1607,old-ne-operator,,,,,
-python,PYL-E1608,old-octal-literal,,,,,
-python,PYL-E1609,import-star-module-level,,,,,
-python,PYL-E1610,non-ascii-bytes-literal,,,,,
-python,PYL-E1700,yield-inside-async-function,,,,,
-python,PYL-E1701,not-async-context-manager,,,,,
-python,PYL-E302,unexpected-special-method-signature,,,,,
-python,PYL-F0202,method-check-failed,,,,,
-python,PYL-I1101,c-extension-no-member,,,,,
-python,PYL-R0123,literal-comparison,,,,,
-python,PYL-R0124,comparison-with-itself,,,,,
-python,PYL-R0201,no-self-use,,,,,
-python,PYL-R0202,no-classmethod-decorator,,,,,
-python,PYL-R0203,no-staticmethod-decorator,,,,,
-python,PYL-R0205,useless-object-inheritance,,,,,
-python,PYL-R0401,cyclic-import,,,,,
-python,PYL-R0801,duplicate-code,,,,,
-python,PYL-R0901,too-many-ancestors,,,,,
-python,PYL-R0902,too-many-instance-attributes,,,,,
-python,PYL-R0903,too-few-public-methods,,,,,
-python,PYL-R0904,too-many-public-methods,,,,,
-python,PYL-R0911,too-many-return-statements,,,,,
-python,PYL-R0912,too-many-branches,,,,,
-python,PYL-R0913,too-many-arguments,,,,,
-python,PYL-R0914,too-many-locals,,,,,
-python,PYL-R0915,too-many-statements,,,,,
-python,PYL-R0916,too-many-boolean-expressions,,,,,
-python,PYL-R1701,consider-merging-isinstance,,,,,
-python,PYL-R1702,too-many-nested-blocks,,,,,
-python,PYL-R1703,simplifiable-if-statement,,,,,
-python,PYL-R1704,redefined-argument-from-local,,,,,
-python,PYL-R1705,no-else-return,,,,,
-python,PYL-R1706,consider-using-ternary,,,,,
-python,PYL-R1707,trailing-comma-tuple,,,,,
-python,PYL-R1708,stop-iteration-return,,,,,
-python,PYL-R1709,simplify-boolean-expression,,,,,
-python,PYL-R1710,inconsistent-return-statements,,,,,
-python,PYL-R1711,useless-return,,,,,
-python,PYL-R1712,consider-swap-variables,,,,,
-python,PYL-R1713,consider-using-join,,,,,
-python,PYL-R1714,consider-using-in,,,,,
-python,PYL-R1715,consider-using-get,,,,,
-python,PYL-R1716,chained-comparison,,,,,
-python,PYL-R1717,consider-using-dict-comprehension,,,,,
-python,PYL-R1718,consider-using-set-comprehension,,,,,
-python,PYL-R1719,simplifiable-if-expression,,,,,
-python,PYL-W0101,unreachable,,,,,
-python,PYL-W0102,dangerous-default-value,,,,,
-python,PYL-W0104,pointless-statement,,,,,
-python,PYL-W0105,pointless-string-statement,,,,,
-python,PYL-W0106,expression-not-assigned,,,,,
-python,PYL-W0108,unnecessary-lambda,,,,,
-python,PYL-W0109,duplicate-key,,,,,
-python,PYL-W0111,assign-to-new-keyword,,,,,
-python,PYL-W0120,useless-else-on-loop,,,,,
-python,PYL-W0122,exec-used,,,,,
-python,PYL-W0123,eval-used,,,,,
-python,PYL-W0124,confusing-with-statement,,,,,
-python,PYL-W0125,using-constant-test,,,,,
-python,PYL-W0143,comparison-with-callable,,,,,
-python,PYL-W0150,lost-exception,,,,,
-python,PYL-W0199,assert-on-tuple,,,,,
-python,PYL-W0201,attribute-defined-outside-init,,,,,
-python,PYL-W0211,bad-staticmethod-argument,,,,,
-python,PYL-W0212,protected-access,,,,,
-python,PYL-W0221,arguments-differ,,,,,
-python,PYL-W0222,signature-differs,,,,,
-python,PYL-W0223,abstract-method,,,,,
-python,PYL-W0231,super-init-not-called,,,,,
-python,PYL-W0232,no-init,,,,,
-python,PYL-W0233,non-parent-init-called,,,,,
-python,PYL-W0235,useless-super-delegation,,,,,
-python,PYL-W0301,unnecessary-semicolon,,,,,
-python,PYL-W0311,bad-indentation,,,,,
-python,PYL-W0312,mixed-indentation,,,,,
-python,PYL-W0401,wildcard-import,,,,,
-python,PYL-W0402,deprecated-module,,,,,
-python,PYL-W0403,relative-import,,,,,
-python,PYL-W0404,Module re-imported,warning,major,bug-risk,"A module is reimported mulitple times. This can be confusing, and should be fixed.",TRUE
-python,PYL-W0406,import-self,,,,,
-python,PYL-W0410,misplaced-future,,,,,
-python,PYL-W0511,fixme,,,,,
-python,PYL-W0512,invalid-encoded-data,,,,,
-python,PYL-W0601,global-variable-undefined,,,,,
-python,PYL-W0602,global-variable-not-assigned,,,,,
-python,PYL-W0603,global-statement,,,,,
-python,PYL-W0604,global-at-module-level,,,,,
-python,PYL-W0611,Module imported but unused,warning,major,code-smell,A module has been imported but is not used anywhere in the file. The module should either be used or the import should be removed.,TRUE
-python,PYL-W0612,unused-variable,,,,,
-python,PYL-W0613,unused-argument,,,,,
-python,PYL-W0614,unused-wildcard-import,,,,,
-python,PYL-W0621,redefined-outer-name,,,,,
-python,PYL-W0622,redefined-builtin,,,,,
-python,PYL-W0623,redefine-in-handler,,,,,
-python,PYL-W0631,undefined-loop-variable,,,,,
-python,PYL-W0632,unbalanced-tuple-unpacking,,,,,
-python,PYL-W0640,cell-var-from-loop,,,,,
-python,PYL-W0641,possibly-unused-variable,,,,,
-python,PYL-W0642,self-cls-assignment,,,,,
-python,PYL-W0702,bare-except,,,,,
-python,PYL-W0703,broad-except,,,,,
-python,PYL-W0705,duplicate-except,,,,,
-python,PYL-W0706,try-except-raise,,,,,
-python,PYL-W0711,binary-op-exception,,,,,
-python,PYL-W0715,raising-format-tuple,,,,,
-python,PYL-W1113,keyword-arg-before-vararg,,,,,
-python,PYL-W1201,logging-not-lazy,,,,,
-python,PYL-W1201,logging-not-lazy,,,,,
-python,PYL-W1202,logging-format-interpolation,,,,,
-python,PYL-W1202,logging-format-interpolation,,,,,
-python,PYL-W1203,logging-fstring-interpolation,,,,,
-python,PYL-W1203,logging-fstring-interpolation,,,,,
-python,PYL-W1300,bad-format-string-key,,,,,
-python,PYL-W1301,unused-format-string-key,,,,,
-python,PYL-W1302,bad-format-string,,,,,
-python,PYL-W1303,missing-format-argument-key,,,,,
-python,PYL-W1304,unused-format-string-argument,,,,,
-python,PYL-W1305,format-combined-specification,,,,,
-python,PYL-W1306,missing-format-attribute,,,,,
-python,PYL-W1307,invalid-format-index,,,,,
-python,PYL-W1308,duplicate-string-formatting-argument,,,,,
-python,PYL-W1401,anomalous-backslash-in-string,,,,,
-python,PYL-W1402,anomalous-unicode-escape-in-string,,,,,
-python,PYL-W1403,implicit-str-concat-in-sequence,,,,,
-python,PYL-W1501,bad-open-mode,,,,,
-python,PYL-W1502,boolean-datetime,,,,,
-python,PYL-W1503,redundant-unittest-assert,,,,,
-python,PYL-W1505,deprecated-method,,,,,
-python,PYL-W1506,bad-thread-instantiation,,,,,
-python,PYL-W1507,shallow-copy-environ,,,,,
-python,PYL-W1508,invalid-envvar-default,,,,,
-python,PYL-W1509,subprocess-popen-preexec-fn,,,,,
-python,PYL-W1601,apply-builtin,,,,,
-python,PYL-W1602,basestring-builtin,,,,,
-python,PYL-W1603,buffer-builtin,,,,,
-python,PYL-W1604,cmp-builtin,,,,,
-python,PYL-W1605,coerce-builtin,,,,,
-python,PYL-W1606,execfile-builtin,,,,,
-python,PYL-W1607,file-builtin,,,,,
-python,PYL-W1608,long-builtin,,,,,
-python,PYL-W1609,raw_input-builtin,,,,,
-python,PYL-W1610,reduce-builtin,,,,,
-python,PYL-W1611,standarderror-builtin,,,,,
-python,PYL-W1612,unicode-builtin,,,,,
-python,PYL-W1613,xrange-builtin,,,,,
-python,PYL-W1614,coerce-method,,,,,
-python,PYL-W1615,delslice-method,,,,,
-python,PYL-W1616,getslice-method,,,,,
-python,PYL-W1617,setslice-method,,,,,
-python,PYL-W1618,no-absolute-import,,,,,
-python,PYL-W1619,old-division,,,,,
-python,PYL-W1620,dict-iter-method,,,,,
-python,PYL-W1621,dict-view-method,,,,,
-python,PYL-W1622,next-method-called,,,,,
-python,PYL-W1623,metaclass-assignment,,,,,
-python,PYL-W1624,indexing-exception,,,,,
-python,PYL-W1625,raising-string,,,,,
-python,PYL-W1626,reload-builtin,,,,,
-python,PYL-W1627,oct-method,,,,,
-python,PYL-W1628,hex-method,,,,,
-python,PYL-W1629,nonzero-method,,,,,
-python,PYL-W1630,cmp-method,,,,,
-python,PYL-W1632,input-builtin,,,,,
-python,PYL-W1633,round-builtin,,,,,
-python,PYL-W1634,intern-builtin,,,,,
-python,PYL-W1635,unichr-builtin,,,,,
-python,PYL-W1636,map-builtin-not-iterating,,,,,
-python,PYL-W1637,zip-builtin-not-iterating,,,,,
-python,PYL-W1638,range-builtin-not-iterating,,,,,
-python,PYL-W1639,filter-builtin-not-iterating,,,,,
-python,PYL-W1640,using-cmp-argument,,,,,
-python,PYL-W1641,eq-without-hash,,,,,
-python,PYL-W1642,div-method,,,,,
-python,PYL-W1643,idiv-method,,,,,
-python,PYL-W1644,rdiv-method,,,,,
-python,PYL-W1645,exception-message-attribute,,,,,
-python,PYL-W1646,invalid-str-codec,,,,,
-python,PYL-W1647,sys-max-int,,,,,
-python,PYL-W1648,bad-python3-import,,,,,
-python,PYL-W1649,deprecated-string-function,,,,,
-python,PYL-W1650,deprecated-str-translate-call,,,,,
-python,PYL-W1651,deprecated-itertools-function,,,,,
-python,PYL-W1652,deprecated-types-field,,,,,
-python,PYL-W1653,next-method-defined,,,,,
-python,PYL-W1654,dict-items-not-iterating,,,,,
-python,PYL-W1655,dict-keys-not-iterating,,,,,
-python,PYL-W1656,dict-values-not-iterating,,,,,
-python,PYL-W1657,deprecated-operator-function,,,,,
-python,PYL-W1658,deprecated-urllib-function,,,,,
-python,PYL-W1659,xreadlines-attribute,,,,,
-python,PYL-W1660,deprecated-sys-function,,,,,
-python,PYL-W1661,exception-escape,,,,,
-python,PYL-W1662,comprehension-escape,,,,,
-python,PAP-W0004,Variable name contains type information,warning,minor,code-smell,"Having type information in the variable name is not recommened, since the object can be of different type and can lead to confusion. It is recommended to have contextual, meaningful names.",FALSE
-python,PAP-W0005,Class contains only fields and crude methods,warning,major,code-smell,"Classes that only hold data and do not contain any other functionality cannot operate independently. It is recommended to use structures meant for holding data instead, like `namedtuple`, `dataclass`, etc.",FALSE
-python,PAP-W0006,Getter method detected in class,warning,major,code-smell,"Instead of having a method like `get_attribute`, it is recommended to use `@property` decorator to get the value of attribute.",TRUE
-python,PAP-W0007,Setter method detected in class,warning,major,code-smell,"Instead of having a set method to set the value of the attribute, it is recommended to use `@<attribute_name>.setter` decorator.",TRUE
-python,PAP-W0009,Multiple return types found in function,warning,major,code-smell,"Returning objects of different types from a function can lead to problems that are difficult to debug. Instead, it is better to raise an exception that can be caught where the function is called.",TRUE
-python,PAP-W0010,File opened without the `with` context manager,warning,critical,code-smell,Opening a file using `with` implements the context manager protocol that release the resource when it is outside of the with block. Not doing so requires you to manually release the resource.,TRUE
-python,PAP-W0011,Use `items()` to iterate over a dictionary,warning,major,code-smell,"The preferred way to iterate over the key-value pairs of a dictionary is to declare two variables in a for loop, and then call `dictionary.items()`, where dictionary is the name of your variable representing a dictionary.'",TRUE
-python,PAP-W0012,Use `get()` method to access values from a dictionary,warning,major,code-smell,"It is recommended to use the built-in method `dict.get(key[, default])` to access values from a dictionary.",TRUE
-python,PAP-W0013,Debugger import detected,warning,major,code-smell,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code.,TRUE
-python,PAP-W0014,Debugger activation detected,error,critical,code-smell,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code. This may cause your application to have unintended side-effects.,TRUE
+`len` doesn't know the context in which it is called, so if computing the length means traversing the entire sequence, it must; it doesn't know that the result is just being compared to 0. Computing the boolean value can stop after it sees the first element, regardless of how long the sequence actually is."
+python,PYL-E0100,init-is-generator,error,critical,bug-risk,"The `__init__()` method is required to return nothing, but a `yield` statement in its body was detected. This will raise a `TypeError` on Python 2.7 and 3.x."
+python,PYL-E0101,return-in-init,error,critical,bug-risk,"The `__init__()` method is required to return `None`, but an explicit return value in its body was detected. This will raise a `TypeError` on Python 2.7 and 3.x."
+python,PYL-E0102,function-redefined,error,major,bug-risk,"A redefinition of functions, classes, and methods is allowed and overrides the original definition in Python, but is confusing and cause bugs that are difficult to debug."
+python,PYL-E0110,abstract-class-instantiated,error,major,bug-risk,An abstract class with `abc.ABCMeta` as metaclass has abstract methods and is instantiated.
+python,PYL-E0111,bad-reversed-sequence,error,critical,bug-risk,"The first argument to `reversed()` builtin isn't a sequence (does not implement `reversed`, nor `getitem` and `len`)."
+python,PYL-E0113,invalid-star-assignment-target,error,major,bug-risk,A star expression is used as a starred assignment target. It must be in a list or tuple.
+python,PYL-E0114,star-needs-assignment-target,error,major,bug-risk,A star expression can only be used in an assignment target.
+python,PYL-E0115,nonlocal-and-global,error,major,bug-risk,A name is defined as nonlocal and global in the same scope.
+python,PYL-E0117,nonlocal-without-binding,error,major,bug-risk,A name is defined as nonlocal without any binding.
+python,PYL-E0118,used-prior-global-declaration,error,major,bug-risk,A global name us used prior to it's global declaration.
+python,PYL-E0119,misplaced-format-function,error,critical,bug-risk,The `format()` function is called on an object that is not a string. This is an error.
+python,PYL-E0202,method-hidden,error,major,bug-risk,"When a method is defined in a child class which has the same name as an attribute in the ancestor class, the attribute in the ancestor class takes precedence and hides the method."
+python,PYL-E0203,access-member-before-definition,error,critical,bug-risk,A member of a class is being accessed before its definition. This is an error.
+python,PYL-E0211,no-method-argument,error,critical,bug-risk,A method which should have the bound instance as first argument has no argument defined. This is an error.
+python,PYL-E0213,no-self-argument,error,critical,bug-risk,"A method has an attribute different the ""self"" as first argument. This is considered as an error since this is a so common convention that you shouldn't break it."
+python,PYL-E0236,invalid-slots-object,error,critical,bug-risk,Slots must contain only string objects.
+python,PYL-E0237,assigning-non-slot,error,critical,bug-risk,Assigning to an attribute not defined in the class slots will cause an error.
+python,PYL-E0238,invalid-slots,error,critical,bug-risk,"An invalid slots value is found in class. Only a string, an iterable or a sequence is permitted. This is an error."
+python,PYL-E0239,inherit-non-class,error,critical,bug-risk,Python classes can only inherit from a class. Inheriting from any other object is an error.
+python,PYL-E0240,inconsistent-mro,error,critical,bug-risk,"The order in which other classes are specified for inheritence in a class matters. Python classes use the C3 linearization method to determine a method resolution ordering for each class, which ensures that for a class C, if a class C1 precedes a class C2 in the MRO of C then C1 should also precede C2 in the MRO of all subclasses of C."
+python,PYL-E0241,duplicate-bases,error,critical,bug-risk,A class must not specify inheritance from another class more than one times. Duplicate base classes will raise a `TypeError`.
+python,PYL-E0301,non-iterator-returned,error,critical,bug-risk,The `__iter__` method of a class must return an iterator with a `__next__` method.
+python,PYL-E0303,invalid-length-returned,error,critical,bug-risk,The `__len__` method of a class must return a non-negative integer.
+python,PYL-E0402,Attempted relative import beyond top-level package,error,critical,bug-risk,A relative import has been attempted from beyond the top-level package. This is an error.
+python,PYL-E0604,Invalid object found in `__all__`,error,critical,bug-risk,The `__all__` list must contain only strings. Having other kinds of objects is an error.
+python,PYL-E0633,Attempting to unpack a non-sequence object,error,critical,bug-risk,"Unpacking is supported only for sequence objects, like lists, sets, tuples, iterators or generators, etc."
+python,PYL-E0701,Bad `except` order found,error,critical,bug-risk,Except clauses are not in the correct order (from the more specific to the more generic). Some exceptions may not be caught by the most specific handler.
+python,PYL-E0702,Object of unsupported type raised,error,critical,bug-risk,Only classess or instances are allowed to be raised. Raising other types is an error.
+python,PYL-E0703,"Exception context set to something which is not an exception, nor None",error,critical,bug-risk,"The syntax `raise ... from ...` can be used only when the exception context is an exception, or `None`. Trying to do so with other object types is an error."
+python,PYL-E0704,The raise statement is not inside an except clause,error,critical,bug-risk,"A bare raise is used inside something which is not an `except` clause. This generates an error, since there are no active exceptions to be re-raised. An exception to this rule is represented by a bare raise inside a `finally` clause, which might work, as long as an exception is raised inside the `try` block, but it is nevertheless a code smell that must not be relied upon."
+python,PYL-E0710,New-style class raised which doesn't inherit from `BaseException`,error,critical,bug-risk,New-style classes raised must inherit from `BaseException`.
+python,PYL-E0712,Exception caught which does not inherit from `Exception`,error,critical,bug-risk,"For an exception to be caught, it must inherit from the `Exception` class."
+python,PYL-E1003,Bad first argument given in `super()` call,error,critical,bug-risk,The first argument to the `super()` function must be the current class.
+python,PYL-E1004,Missing argument in `super()` call,error,critical,bug-risk,"In Python 2.x, the `super()` function must be called with the current class as the first argument, and the current instance as the second argument."
+python,PYL-E1101,Variable accessed for non-existent member,error,critical,bug-risk,A variable was accessed for a member not existent in the class. This is an error.
+python,PYL-E1102,A non-callable object is being called,error,critical,bug-risk,An object being called has been inferred to a non callable object. This is an error.
+python,PYL-E1111,"Assigning result of a function call, where the function has no return",error,critical,bug-risk,"An assignment is done on a function call but the inferred function doesn't return anything. While this is not an error in Python, it is a critical anti-pattern and can lead to unexpected bugs."
+python,PYL-E1120,Missing argument in function call,error,critical,bug-risk,A required function parameter isn't provided while calling the function. This is an error.
+python,PYL-E1121,Too many positional arguments in function call,error,critical,bug-risk,Too many positional arguments are provided while calling the function. This is an error.
+python,PYL-E1123,Unexpected keyword argument in function call,error,critical,bug-risk,The function call has passed a keyword argument that doesn't correspond to one of the function's parameter names. This is an error.
+python,PYL-E1124,Argument passed both by position and keyword in function call,error,critical,bug-risk,"The function call would result in assigning multiple values to a function parameter, one value from a positional argument and one from a keyword argument."
+python,PYL-E1125,Missing mandatory keyword argument in function call,error,critical,bug-risk,The function call does not pass a mandatory keyword-only argument. This is an error.
+python,PYL-E1126,Invalid sequence index found,error,critical,bug-risk,"A sequence type is indexed with an invalid type. Valid types are `int`s, slices, and objects with an `__index__` method."
+python,PYL-E1127,Invalid slice index found,error,critical,bug-risk,"A slice is indexed with an invalid type. Valid types are `int`s, slices, and objects with an `__index__` method."
+python,PYL-E1128,"Assigning result of a function call, where the function returns `None`",warning,major,bug-risk,"An assignment is done on a function call but the inferred function returns `None`. While this is allowed in Python, it is an anti-pattern and can lead to unexpected bugs."
+python,PYL-E1129,Object which is not a context manager used with the `with` statement,error,critical,bug-risk,The object used in the `with` statement doesn't implement the context manager protocol (enter/exit). This is an error.
+python,PYL-E1130,Unary operand used on an unsupported object,error,critical,bug-risk,A unary operand is used on an object which does not support this type of operation. This is an error.
+python,PYL-E1131,unsupported-binary-operation,error,critical,bug-risk,
+python,PYL-E1132,Multiple values found for keyword argument,error,critical,bug-risk,The function was invoked with more than one values for a keyword argument. This is an error.
+python,PYL-E1135,Membership test used with unsupported object,error,critical,bug-risk,A membership test using `in` statement is supported only with objects which implement the membership protocol -- `__contains__` / `__iter__` / `__getitem__`.
+python,PYL-E1136,Subscription used with unsupported object,error,critical,bug-risk,Subscription can be used only with objects which implement `__getitem__`.
+python,PYL-E1137,Assignment attempted with unsupported object,error,critical,bug-risk,Assignment is supported only for items which implement `__setitem__`.
+python,PYL-E1138,Deletion attempted with unsupported object,error,critical,bug-risk,Deletion is supported only for items which implement `__delitem__`.
+python,PYL-E1139,invalid-metaclass,,,,
+python,PYL-E1140,unhashable-dict-key,,,,
+python,PYL-E1200,logging-unsupported-format,,,,
+python,PYL-E1201,logging-format-truncated,,,,
+python,PYL-E1205,logging-too-many-args,,,,
+python,PYL-E1206,logging-too-few-args,,,,
+python,PYL-E1300,bad-format-character,,,,
+python,PYL-E1301,truncated-format-string,,,,
+python,PYL-E1302,mixed-format-string,,,,
+python,PYL-E1303,format-needs-mapping,,,,
+python,PYL-E1304,missing-format-string-key,,,,
+python,PYL-E1305,too-many-format-args,,,,
+python,PYL-E1306,too-few-format-args,,,,
+python,PYL-E1307,bad-string-format-type,,,,
+python,PYL-E1310,bad-str-strip-call,,,,
+python,PYL-E1507,invalid-envvar-value,,,,
+python,PYL-E1601,print-statement,,,,
+python,PYL-E1602,parameter-unpacking,,,,
+python,PYL-E1603,unpacking-in-except,,,,
+python,PYL-E1604,old-raise-syntax,,,,
+python,PYL-E1605,backtick,,,,
+python,PYL-E1606,long-suffix,,,,
+python,PYL-E1607,old-ne-operator,,,,
+python,PYL-E1608,old-octal-literal,,,,
+python,PYL-E1609,import-star-module-level,,,,
+python,PYL-E1610,non-ascii-bytes-literal,,,,
+python,PYL-E1700,yield-inside-async-function,,,,
+python,PYL-E1701,not-async-context-manager,,,,
+python,PYL-E302,unexpected-special-method-signature,,,,
+python,PYL-F0202,method-check-failed,,,,
+python,PYL-I1101,c-extension-no-member,,,,
+python,PYL-R0123,literal-comparison,,,,
+python,PYL-R0124,comparison-with-itself,,,,
+python,PYL-R0201,no-self-use,,,,
+python,PYL-R0202,no-classmethod-decorator,,,,
+python,PYL-R0203,no-staticmethod-decorator,,,,
+python,PYL-R0205,useless-object-inheritance,,,,
+python,PYL-R0401,cyclic-import,,,,
+python,PYL-R0801,duplicate-code,,,,
+python,PYL-R0901,too-many-ancestors,,,,
+python,PYL-R0902,too-many-instance-attributes,,,,
+python,PYL-R0903,too-few-public-methods,,,,
+python,PYL-R0904,too-many-public-methods,,,,
+python,PYL-R0911,too-many-return-statements,,,,
+python,PYL-R0912,too-many-branches,,,,
+python,PYL-R0913,too-many-arguments,,,,
+python,PYL-R0914,too-many-locals,,,,
+python,PYL-R0915,too-many-statements,,,,
+python,PYL-R0916,too-many-boolean-expressions,,,,
+python,PYL-R1701,consider-merging-isinstance,,,,
+python,PYL-R1702,too-many-nested-blocks,,,,
+python,PYL-R1703,simplifiable-if-statement,,,,
+python,PYL-R1704,redefined-argument-from-local,,,,
+python,PYL-R1705,no-else-return,,,,
+python,PYL-R1706,consider-using-ternary,,,,
+python,PYL-R1707,trailing-comma-tuple,,,,
+python,PYL-R1708,stop-iteration-return,,,,
+python,PYL-R1709,simplify-boolean-expression,,,,
+python,PYL-R1710,inconsistent-return-statements,,,,
+python,PYL-R1711,useless-return,,,,
+python,PYL-R1712,consider-swap-variables,,,,
+python,PYL-R1713,consider-using-join,,,,
+python,PYL-R1714,consider-using-in,,,,
+python,PYL-R1715,consider-using-get,,,,
+python,PYL-R1716,chained-comparison,,,,
+python,PYL-R1717,consider-using-dict-comprehension,,,,
+python,PYL-R1718,consider-using-set-comprehension,,,,
+python,PYL-R1719,simplifiable-if-expression,,,,
+python,PYL-W0101,unreachable,,,,
+python,PYL-W0102,dangerous-default-value,,,,
+python,PYL-W0104,pointless-statement,,,,
+python,PYL-W0105,pointless-string-statement,,,,
+python,PYL-W0106,expression-not-assigned,,,,
+python,PYL-W0108,unnecessary-lambda,,,,
+python,PYL-W0109,duplicate-key,,,,
+python,PYL-W0111,assign-to-new-keyword,,,,
+python,PYL-W0120,useless-else-on-loop,,,,
+python,PYL-W0122,exec-used,,,,
+python,PYL-W0123,eval-used,,,,
+python,PYL-W0124,confusing-with-statement,,,,
+python,PYL-W0125,using-constant-test,,,,
+python,PYL-W0143,comparison-with-callable,,,,
+python,PYL-W0150,lost-exception,,,,
+python,PYL-W0199,assert-on-tuple,,,,
+python,PYL-W0201,attribute-defined-outside-init,,,,
+python,PYL-W0211,bad-staticmethod-argument,,,,
+python,PYL-W0212,protected-access,,,,
+python,PYL-W0221,arguments-differ,,,,
+python,PYL-W0222,signature-differs,,,,
+python,PYL-W0223,abstract-method,,,,
+python,PYL-W0231,super-init-not-called,,,,
+python,PYL-W0232,no-init,,,,
+python,PYL-W0233,non-parent-init-called,,,,
+python,PYL-W0235,useless-super-delegation,,,,
+python,PYL-W0301,unnecessary-semicolon,,,,
+python,PYL-W0311,bad-indentation,,,,
+python,PYL-W0312,mixed-indentation,,,,
+python,PYL-W0401,wildcard-import,,,,
+python,PYL-W0402,deprecated-module,,,,
+python,PYL-W0403,relative-import,,,,
+python,PYL-W0404,Module re-imported,warning,major,bug-risk,"A module is reimported mulitple times. This can be confusing, and should be fixed."
+python,PYL-W0406,import-self,,,,
+python,PYL-W0410,misplaced-future,,,,
+python,PYL-W0511,fixme,,,,
+python,PYL-W0512,invalid-encoded-data,,,,
+python,PYL-W0601,global-variable-undefined,,,,
+python,PYL-W0602,global-variable-not-assigned,,,,
+python,PYL-W0603,global-statement,,,,
+python,PYL-W0604,global-at-module-level,,,,
+python,PYL-W0611,Module imported but unused,warning,major,code-smell,A module has been imported but is not used anywhere in the file. The module should either be used or the import should be removed.
+python,PYL-W0612,unused-variable,,,,
+python,PYL-W0613,unused-argument,,,,
+python,PYL-W0614,unused-wildcard-import,,,,
+python,PYL-W0621,redefined-outer-name,,,,
+python,PYL-W0622,redefined-builtin,,,,
+python,PYL-W0623,redefine-in-handler,,,,
+python,PYL-W0631,undefined-loop-variable,,,,
+python,PYL-W0632,unbalanced-tuple-unpacking,,,,
+python,PYL-W0640,cell-var-from-loop,,,,
+python,PYL-W0641,possibly-unused-variable,,,,
+python,PYL-W0642,self-cls-assignment,,,,
+python,PYL-W0702,bare-except,,,,
+python,PYL-W0703,broad-except,,,,
+python,PYL-W0705,duplicate-except,,,,
+python,PYL-W0706,try-except-raise,,,,
+python,PYL-W0711,binary-op-exception,,,,
+python,PYL-W0715,raising-format-tuple,,,,
+python,PYL-W1113,keyword-arg-before-vararg,,,,
+python,PYL-W1201,logging-not-lazy,,,,
+python,PYL-W1201,logging-not-lazy,,,,
+python,PYL-W1202,logging-format-interpolation,,,,
+python,PYL-W1202,logging-format-interpolation,,,,
+python,PYL-W1203,logging-fstring-interpolation,,,,
+python,PYL-W1203,logging-fstring-interpolation,,,,
+python,PYL-W1300,bad-format-string-key,,,,
+python,PYL-W1301,unused-format-string-key,,,,
+python,PYL-W1302,bad-format-string,,,,
+python,PYL-W1303,missing-format-argument-key,,,,
+python,PYL-W1304,unused-format-string-argument,,,,
+python,PYL-W1305,format-combined-specification,,,,
+python,PYL-W1306,missing-format-attribute,,,,
+python,PYL-W1307,invalid-format-index,,,,
+python,PYL-W1308,duplicate-string-formatting-argument,,,,
+python,PYL-W1401,anomalous-backslash-in-string,,,,
+python,PYL-W1402,anomalous-unicode-escape-in-string,,,,
+python,PYL-W1403,implicit-str-concat-in-sequence,,,,
+python,PYL-W1501,bad-open-mode,,,,
+python,PYL-W1502,boolean-datetime,,,,
+python,PYL-W1503,redundant-unittest-assert,,,,
+python,PYL-W1505,deprecated-method,,,,
+python,PYL-W1506,bad-thread-instantiation,,,,
+python,PYL-W1507,shallow-copy-environ,,,,
+python,PYL-W1508,invalid-envvar-default,,,,
+python,PYL-W1509,subprocess-popen-preexec-fn,,,,
+python,PYL-W1601,apply-builtin,,,,
+python,PYL-W1602,basestring-builtin,,,,
+python,PYL-W1603,buffer-builtin,,,,
+python,PYL-W1604,cmp-builtin,,,,
+python,PYL-W1605,coerce-builtin,,,,
+python,PYL-W1606,execfile-builtin,,,,
+python,PYL-W1607,file-builtin,,,,
+python,PYL-W1608,long-builtin,,,,
+python,PYL-W1609,raw_input-builtin,,,,
+python,PYL-W1610,reduce-builtin,,,,
+python,PYL-W1611,standarderror-builtin,,,,
+python,PYL-W1612,unicode-builtin,,,,
+python,PYL-W1613,xrange-builtin,,,,
+python,PYL-W1614,coerce-method,,,,
+python,PYL-W1615,delslice-method,,,,
+python,PYL-W1616,getslice-method,,,,
+python,PYL-W1617,setslice-method,,,,
+python,PYL-W1618,no-absolute-import,,,,
+python,PYL-W1619,old-division,,,,
+python,PYL-W1620,dict-iter-method,,,,
+python,PYL-W1621,dict-view-method,,,,
+python,PYL-W1622,next-method-called,,,,
+python,PYL-W1623,metaclass-assignment,,,,
+python,PYL-W1624,indexing-exception,,,,
+python,PYL-W1625,raising-string,,,,
+python,PYL-W1626,reload-builtin,,,,
+python,PYL-W1627,oct-method,,,,
+python,PYL-W1628,hex-method,,,,
+python,PYL-W1629,nonzero-method,,,,
+python,PYL-W1630,cmp-method,,,,
+python,PYL-W1632,input-builtin,,,,
+python,PYL-W1633,round-builtin,,,,
+python,PYL-W1634,intern-builtin,,,,
+python,PYL-W1635,unichr-builtin,,,,
+python,PYL-W1636,map-builtin-not-iterating,,,,
+python,PYL-W1637,zip-builtin-not-iterating,,,,
+python,PYL-W1638,range-builtin-not-iterating,,,,
+python,PYL-W1639,filter-builtin-not-iterating,,,,
+python,PYL-W1640,using-cmp-argument,,,,
+python,PYL-W1641,eq-without-hash,,,,
+python,PYL-W1642,div-method,,,,
+python,PYL-W1643,idiv-method,,,,
+python,PYL-W1644,rdiv-method,,,,
+python,PYL-W1645,exception-message-attribute,,,,
+python,PYL-W1646,invalid-str-codec,,,,
+python,PYL-W1647,sys-max-int,,,,
+python,PYL-W1648,bad-python3-import,,,,
+python,PYL-W1649,deprecated-string-function,,,,
+python,PYL-W1650,deprecated-str-translate-call,,,,
+python,PYL-W1651,deprecated-itertools-function,,,,
+python,PYL-W1652,deprecated-types-field,,,,
+python,PYL-W1653,next-method-defined,,,,
+python,PYL-W1654,dict-items-not-iterating,,,,
+python,PYL-W1655,dict-keys-not-iterating,,,,
+python,PYL-W1656,dict-values-not-iterating,,,,
+python,PYL-W1657,deprecated-operator-function,,,,
+python,PYL-W1658,deprecated-urllib-function,,,,
+python,PYL-W1659,xreadlines-attribute,,,,
+python,PYL-W1660,deprecated-sys-function,,,,
+python,PYL-W1661,exception-escape,,,,
+python,PYL-W1662,comprehension-escape,,,,
+python,PAP-W0004,Variable name contains type information,warning,minor,code-smell,"Having type information in the variable name is not recommened, since the object can be of different type and can lead to confusion. It is recommended to have contextual, meaningful names."
+python,PAP-W0005,Class contains only fields and crude methods,warning,major,code-smell,"Classes that only hold data and do not contain any other functionality cannot operate independently. It is recommended to use structures meant for holding data instead, like `namedtuple`, `dataclass`, etc."
+python,PAP-W0006,Getter method detected in class,warning,major,code-smell,"Instead of having a method like `get_attribute`, it is recommended to use `@property` decorator to get the value of attribute."
+python,PAP-W0007,Setter method detected in class,warning,major,code-smell,"Instead of having a set method to set the value of the attribute, it is recommended to use `@<attribute_name>.setter` decorator."
+python,PAP-W0009,Multiple return types found in function,warning,major,code-smell,"Returning objects of different types from a function can lead to problems that are difficult to debug. Instead, it is better to raise an exception that can be caught where the function is called."
+python,PAP-W0010,File opened without the `with` context manager,warning,critical,code-smell,Opening a file using `with` implements the context manager protocol that release the resource when it is outside of the with block. Not doing so requires you to manually release the resource.
+python,PAP-W0011,Use `items()` to iterate over a dictionary,warning,major,code-smell,"The preferred way to iterate over the key-value pairs of a dictionary is to declare two variables in a for loop, and then call `dictionary.items()`, where dictionary is the name of your variable representing a dictionary.'"
+python,PAP-W0012,Use `get()` method to access values from a dictionary,warning,major,code-smell,"It is recommended to use the built-in method `dict.get(key[, default])` to access values from a dictionary."
+python,PAP-W0013,Debugger import detected,warning,major,code-smell,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code.
+python,PAP-W0014,Debugger activation detected,error,critical,code-smell,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code. This may cause your application to have unintended side-effects.
