@@ -17,4 +17,8 @@ type AnalysisConfig struct {
 	TestFiles       []string    `json:"test_files"`
 	TestPatterns    []string    `json:"test_patterns"`
 	AnalyzerMeta    interface{} `json:"analyzer_meta"`
+	Artifacts       []struct {
+		Key   string `json:"key"`
+		Value string `json:"value"`
+	} `json:"artifacts"`
 }
