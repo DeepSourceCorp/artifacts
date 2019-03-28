@@ -44,7 +44,6 @@ type AnalysisRun struct {
 // task to be recieved
 type CancelCheckRun struct {
 	RunID        string `json:"run_id"`
-	RunType      string `json:"run_type"`
 	RunSerial    string `json:"run_serial"`
 	AnalysisMeta struct {
 		RunID     string `json:"run_id"`
