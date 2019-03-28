@@ -81,10 +81,8 @@ type AnalysisResultCeleryTask struct {
 }
 
 type CancelCheckResult struct {
-	RunID    string `json:"run_id"`
-	RunType  string `json:"run_type"`
-	CheckSeq string `json:"check_seq"`
-	Status   Status `json:"status"`
+	RunID  string `json:"run_id"`
+	Status Status `json:"status"`
 }
 
 type CancelCheckResultCeleryTask struct {
