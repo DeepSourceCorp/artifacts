@@ -86,10 +86,10 @@ type CancelCheckResult struct {
 }
 
 type CancelCheckResultCeleryTask struct {
-	ID      string     `json:"id"`
-	Task    string     `json:"task"`
-	KWArgs  RepoResult `json:"kwargs"`
-	Retries int        `json:"retries"`
+	ID      string            `json:"id"`
+	Task    string            `json:"task"`
+	KWArgs  CancelCheckResult `json:"kwargs"`
+	Retries int               `json:"retries"`
 }
 
 type BeaconResult struct {
