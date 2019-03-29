@@ -24,11 +24,8 @@ type AnalysisRun struct {
 		CheckoutOID string `json:"checkout_oid"`
 	} `json:"vcs_meta"`
 	Checks []struct {
-		CheckSeq  string `json:"check_seq"`
-		Artifacts []struct {
-			Key  string `json:"key"`
-			Data string `json:"data"`
-		} `json:"artifacts,omitempty"`
+		CheckSeq     string  `json:"check_seq"`
+		Artifacts    []int64 `json:"artifacts"`
 		AnalyzerMeta struct {
 			Shortcode   string `json:"name"`
 			Command     string `json:"command"`
