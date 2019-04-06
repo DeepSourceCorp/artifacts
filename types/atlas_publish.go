@@ -57,7 +57,8 @@ type AnalysisReport struct {
 			Value float64 `json:"value"`
 		} `json:"namespaces"`
 	} `json:"metrics,omitempty"`
-	IsPassed bool `json:"is_passed"`
+	IsPassed bool   `json:"is_passed"`
+	Error    string `json:"error"`
 	FileMeta struct {
 		Deleted  []string `json:"deleted"`
 		Renamed  []string `json:"renamed"`
