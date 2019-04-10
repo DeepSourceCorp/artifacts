@@ -11,5 +11,6 @@ type DSConfig struct {
 		Enabled             bool        `toml:"enabled" json:"enabled"`
 		DependencyFilePaths []string    `toml:"dependency_file_paths,omitempty" json:"dependency_file_paths,omitempty"`
 		Meta                interface{} `toml:"meta,omitempty" json:"meta,omitempty"`
+		Thresholds          interface{} `toml:"thresholds,omitempty" json:"thresholds,omitempty"`
 	} `toml:"analyzers,omitempty" json:"analyzers,omitempty"`
 }
