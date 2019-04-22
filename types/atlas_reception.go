@@ -21,6 +21,7 @@ type AnalysisRun struct {
 		RemoteURL   string `json:"remote_url"`
 		BaseBranch  string `json:"base_branch"`
 		BaseOID     string `json:"base_oid"`
+		RepoPath    string `json:"repo_path"`
 		CheckoutOID string `json:"checkout_oid"`
 	} `json:"vcs_meta"`
 	Checks []struct {
