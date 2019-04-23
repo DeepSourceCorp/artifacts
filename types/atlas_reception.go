@@ -23,6 +23,12 @@ type AnalysisRun struct {
 		BaseOID     string `json:"base_oid"`
 		CheckoutOID string `json:"checkout_oid"`
 	} `json:"vcs_meta"`
+	Keys struct {
+		SSH struct {
+			Public  string `json:"public"`
+			Private string `json:"private"`
+		} `json:"ssh,omitempty"`
+	} `json:"keys"`
 	Checks []struct {
 		CheckSeq     string  `json:"check_seq"`
 		Artifacts    []int64 `json:"artifacts"`
