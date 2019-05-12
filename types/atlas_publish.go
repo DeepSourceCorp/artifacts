@@ -67,6 +67,11 @@ type AnalysisReport struct {
 		Renamed  []string `json:"renamed"`
 		Modified []string `json:"modified"`
 	} `json:"file_meta"`
+	SkipCQ struct {
+		CommentPrefix string   `json:"comment_prefix"`
+		CommentSuffix string   `json:"comment_suffix"`
+		Identifiers   []string `json:"identifiers"`
+	} `json:"skip_cq,omitempty"`
 	ExtraData interface{} `json:"extra_data"`
 }
 
