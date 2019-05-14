@@ -2,25 +2,25 @@ python,BAN-B101,Assert statement used outside of tests,warning,minor,security,"U
 python,BAN-B102,Use of `exec` statement found,warning,major,security,"Usage of `exec` function is strongly discouraged, since it opens up possibilities of unauthorized code execution if the staments are not escaped properly."
 python,BAN-B103,Insecure permissions set on a file,warning,minor,security,A particularly permissive control flag was used with `chmod`.
 python,BAN-B104,Binding to all interfaces detected with hardcoded values,warning,major,security,"Binding to all network interfaces can potentially open up a service to traffic on unintended interfaces, that may not be properly documented or secured. "
-python,BAN-B105,Potential hardcoded password detected,warning,major,security,Potential hardcoded password. Sensitive information like password shouldn't be hardcoded. Use an environment variable instead.
-python,BAN-B106,Potential hardcoded password detected as function argument,warning,major,security,Potential hardcoded password as function argument. Sensitive information like password shouldn't be hardcoded in a function argument. Pick it from an environment variable instead.
-python,BAN-B107,Potential hardcoded password detected as default function argument,warning,major,security,"Potential hardcoded password as default function argument. Sensitive information like password shouldn't be hardcoded in a function argument. Pick it from an environment variable instead.
+python,BAN-B105,Potential hardcoded credential detected,warning,major,security,Potential hardcoded credential. Sensitive information like password shouldn't be hardcoded. Use an environment variable instead.
+python,BAN-B106,Potential hardcoded credential detected as function argument,warning,major,security,Potential hardcoded credential as function argument. Sensitive information like password shouldn't be hardcoded in a function argument. Pick it from an environment variable instead.
+python,BAN-B107,Potential hardcoded credential detected as default function argument,warning,major,security,"Potential hardcoded credential as default function argument. Sensitive information like password shouldn't be hardcoded in a function argument. Pick it from an environment variable instead.
 "
-python,BAN-B108,hardcoded_tmp_directory,warning,minor,security,"Hardcoded temp directory. Prefer using `tmpfile` - https://docs.python.org/3.7/library/tempfile.html
+python,BAN-B108,Hardcoded temporary directory detected,warning,minor,security,"Hardcoded temp directory. Prefer using `tmpfile` - https://docs.python.org/3.7/library/tempfile.html
 
 Reason:
 Malicious users that can predict the file name and write to directory containing the temporary file can effectively hijack the temporary file by creating a symlink with the name of the temporary file before the program creates the file itself. This allows a malicious user to supply malicious data or cause actions by the program to affect attacker chosen files.
 "
-python,BAN-B110,try_except_pass,warning,minor,security,"Catching generic exceptions and silently ignoring them is considered bad practice in general, but also presents a potential security issue. A larger than normal volume of errors from a service can indicate an attempt is being made to disrupt or interfere with it. Thus errors should, at the very least, be logged."
-python,BAN-B112,try_except_continue,warning,minor,security,"Catching generic exceptions and silently ignoring them in a loop is considered bad practice in general, but also presents a potential security issue. A larger than normal volume of errors from a service can indicate an attempt is being made to disrupt or interfere with it. Thus errors should, at the very least, be logged."
-python,BAN-B201,flask_debug_true,warning,critical,security,Running Flask applications in debug mode results in the Werkzeug debugger being enabled. This includes a feature that allows arbitrary code execution. Documentation for both Flask and Werkzeug strongly suggests that debug mode should never be enabled on production systems.
-python,BAN-B301,pickle,warning,major,security,"Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue."
-python,BAN-B302,marshal,warning,major,security,Deserialization with the marshal module is possibly dangerous.
-python,BAN-B303,md5,warning,minor,security,"Use of insecure MD2, MD4, MD5, or SHA1 hash functions should be avoided. Using more secure algorithms like SHA256 or SHA512."
-python,BAN-B304,ciphers,warning,major,security,Use of insecure cipher or cipher mode. Replace with a known secure cipher such as AES.
-python,BAN-B305,cipher_modes,warning,major,security,Use of insecure cipher or cipher mode. Replace with a known secure cipher such as AES.
-python,BAN-B306,mktemp_q,warning,major,security,Use of insecure and deprecated function (mktemp).
-python,BAN-B307,eval,warning,major,security,Use of possibly insecure function - consider using safer `ast.literal_eval`.
+python,BAN-B110,Generic exception caught and silently ignored,warning,minor,security,"Catching generic exceptions and silently ignoring them is considered bad practice in general, but also presents a potential security issue. A larger than normal volume of errors from a service can indicate an attempt is being made to disrupt or interfere with it. Thus errors should, at the very least, be logged."
+python,BAN-B112,Generic exception caught and silently ignored in a loop,warning,minor,security,"Catching generic exceptions and silently ignoring them in a loop is considered bad practice in general, but also presents a potential security issue. A larger than normal volume of errors from a service can indicate an attempt is being made to disrupt or interfere with it. Thus errors should, at the very least, be logged."
+python,BAN-B201,Flask app detected with DEBUG mode enabled,warning,critical,security,Running Flask applications in debug mode results in the Werkzeug debugger being enabled. This includes a feature that allows arbitrary code execution. Documentation for both Flask and Werkzeug strongly suggests that debug mode should never be enabled on production systems.
+python,BAN-B301,Audit required: Use of `pickle` module,warning,major,security,"Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue."
+python,BAN-B302,Audit required: Use of `marshal` module,warning,major,security,Deserialization with the marshal module is possibly dangerous.
+python,BAN-B303,Audit required: Use of `md5`,warning,minor,security,"Use of insecure MD2, MD4, MD5, or SHA1 hash functions should be avoided. Using more secure algorithms like SHA256 or SHA512."
+python,BAN-B304,Audit required: Use of insecure cipher,warning,major,security,Use of insecure cipher or cipher mode. Replace with a known secure cipher such as AES.
+python,BAN-B305,Audit required: Use of insecure cipher mode,warning,major,security,Use of insecure cipher or cipher mode. Replace with a known secure cipher such as AES.
+python,BAN-B306,Use of deprecated function: `mktemp`,warning,major,security,Use of insecure and deprecated function (mktemp).
+python,BAN-B307,Audit required: Use of `eval`,warning,major,security,Use of possibly insecure function - consider using safer `ast.literal_eval`.
 python,BAN-B308,mark_safe,warning,major,security,Use of `mark_safe()` may expose cross-site scripting vulnerabilities and should be reviewed.
 python,BAN-B309,httpsconnection,warning,major,security,Use of `HTTPSConnection` on older versions of Python prior to 2.7.9 and 3.4.3 do not provide security. Please see [this report](https://wiki.openstack.org/wiki/OSSN/OSSN-0033) for details.
 python,BAN-B310,urllib_urlopen,warning,major,security,Audit url open for permitted schemes. Allowing use of ‘file:’’ or custom schemes is often unexpected.
@@ -81,7 +81,7 @@ python,BAN-B601,paramiko_calls,warning,major,security,Paramiko is a Python libra
 python,BAN-B602,subprocess_popen_with_shell_equals_true,warning,major,security,"Python possesses many mechanisms to invoke an external executable. However, doing so may present a security issue if appropriate care is not taken to sanitize any user provided or variable input. Subprocess invocation using a command shell is dangerous as it is vulnerable to various shell injection attacks. Great care should be taken to sanitize all input in order to mitigate this risk. Calls of this type are identified by a parameter of ‘shell=True’ being given."
 python,BAN-B603,subprocess_without_shell_equals_true,warning,minor,security,"Spawning of a subprocess without the use of a command shell is not vulnerable to shell injection attacks, but care should still be taken to ensure validity of input."
 python,BAN-B604,any_other_function_with_shell_equals_true,warning,major,security,Method calls for the presence of a keyword parameter shell equalling true can be vulnerable to shell injection issues. This issue is intended to catch custom wrappers to vulnerable methods that may have been created.
-python,BAN-B605,start_process_with_a_shell,warning,minor,security,Spawning of a subprocess using a command shell is dangerous as it is vulnerable to various shell injection attacks. Great care should be taken to sanitize all input in order to mitigate this risk. Calls of this type are identified by the use of certain commands which are known to use shells.
+python,BAN-B605,start_process_with_a_shell,warning,minor,security,Spawning of a subprocess using a command shell is dangerous as it is vulnerable to various shell injection attacks. Great care should be taken to sanitize all input in order to mitigate this risk. Calls of this type are identified by the use of certain commands which are known to use shells. 
 python,BAN-B606,start_process_with_no_shell,warning,minor,security,"Spawning of a subprocess in a way that doesn’t use a shell is generally safe, but it maybe useful for penetration testing workflows to track where external system calls are used."
 python,BAN-B607,start_process_with_partial_path,warning,minor,security,Python possesses many mechanisms to invoke an external executable. If the desired executable path is not fully qualified relative to the filesystem root then this may present a potential security risk.
 python,BAN-B608,hardcoded_sql_expressions,warning,major,security,"An SQL injection attack consists of insertion or “injection” of a SQL query via the input data given to an application. It is a very common attack vector. Unless care is taken to sanitize and control the input data when building such SQL statement strings, an injection attack becomes possible."
@@ -107,8 +107,8 @@ python,FLK8-D203,1 blank line required before class docstring,info,minor,doc,
 python,FLK8-D204,1 blank line required after class docstring,info,minor,doc,
 python,FLK8-D205,1 blank line required between summary line and description,info,minor,doc,
 python,FLK8-D206,"Docstring should be indented with spaces, not tabs",info,minor,doc,"It is recommended to use spaces in the docstrings, just as the code."
-python,FLK8-D207,Docstring is under-indented,info,minor,doc,It is recommended to properly indent docstrings for readability.
-python,FLK8-D208,Docstring is over-indented,info,minor,doc,It is recommended to properly indent docstrings for readability.
+python,FLK8-D207,Docstring is under-indented,info,minor,doc,It is recommended to properly indent docstrings for readability. 
+python,FLK8-D208,Docstring is over-indented,info,minor,doc,It is recommended to properly indent docstrings for readability. 
 python,FLK8-D209,Multi-line docstring closing quotes should be on a separate line,info,minor,doc,
 python,FLK8-D210,No whitespaces allowed surrounding docstring text,info,minor,doc,
 python,FLK8-D211,No blank lines allowed before class docstring,info,minor,doc,
@@ -236,7 +236,6 @@ python,FLK8-F821,Undefined name detected,error,critical,bug-risk,The variable na
 python,FLK8-F822,Undefined name detected in `__all__`,error,critical,bug-risk,An undefined module was specified in the `__all__` list. Ensure that it is specified in your file or remove the variable from `__all__`.
 python,FLK8-F823,Local variable name referenced before assignment,error,critical,bug-risk,Local variables should be defined before they are referenced.
 python,FLK8-F831,Duplicate argument in function definition,error,critical,bug-risk,Two or more parameters in a function definition have the same name. All names in the function definition should be distinct.
-python,FLK8-F841,Local variable is assigned to but never used,warning,minor,bug-risk,A local variable in your function was defined but is not being used. This local variable should be removed.
 python,FLK8-F901,`raise NotImplemented` should be `raise NotImplementedError`,warning,major,bug-risk,"`NotImplemented` signals to the runtime that it should ask someone else to satisfy the operation. In the expression `a == b`, if `a.__eq__(b)` returns `NotImplemented`, then Python tries `b.__eq__(a)`. If `b` knows enough to return `True` or `False`, then the expression can succeed. If it doesn't, then the runtime will fall back to the built-in behavior (which is based on identity for `==` and `!=`).
 
 Raising an exception would break out of the sort unless caught, whereas `NotImplemented` doesn't get raised and can be used in further tests."
@@ -258,13 +257,13 @@ python,FLK8-E999,SyntaxError: invalid sytax,error,critical,bug-risk,A Python syn
 python,PYL-C0102,blacklisted-name,warning,major,style,These names can make the intention of the code unclear and hard to understand and debug. Using descripted names is recommended.
 python,PYL-C0113,unneeded-not,warning,major,style,"The boolean expression contains an unneeded negation, and can be re-written without using the `not` statement."
 python,PYL-C0122,misplaced-comparison-constant,warning,major,style,The constant is placed on the left side of a comparison. It is usually clearer in intent to place it in the right hand side of the comparison.
-python,PYL-C0123,unidiomatic-typecheck,warning,major,bug-risk,"Use `type()` instead of `isinstance()` for a typecheck. The idiomatic way to perform an explicit typecheck in Python is to use `isinstance(x, Y)` rather than `type(x) == Y`, `type(x) is Y`. This is because `isinstance` can handle subclasses as well."
-python,PYL-C0200,consider-using-enumerate,warning,major,style,"Consider using enumerate instead of iterating with range and len, which is more straightforward."
-python,PYL-C0201,consider-iterating-dictionary,warning,major,style,"Consider iterating the dictionary directly instead of calling .keys(). It is enough to just iterate through the dictionary itself, as in `for key in dictionary`."
+python,PYL-C0123,Unidiomatic typecheck: use `isinstance()`,warning,major,bug-risk,"Use `isinstance()` instead `type()` of  for a typecheck. The idiomatic way to perform an explicit typecheck in Python is to use `isinstance(x, Y)` rather than `type(x) == Y`, `type(x) is Y`. This is because `isinstance` can handle subclasses as well."
+python,PYL-C0200,Consider using `enumerate` for iteration,warning,major,style,"Consider using enumerate instead of iterating with range and len, which is more straightforward."
+python,PYL-C0201,Consider iterating dictionary,warning,major,style,"Consider iterating the dictionary directly instead of calling .keys(). It is enough to just iterate through the dictionary itself, as in `for key in dictionary`."
 python,PYL-C0202,bad-classmethod-argument,warning,major,style,Use of `cls` as the first named argument in a class method is recommended so it's easy to differentiate them from regular instance methods.
 python,PYL-C0203,bad-mcs-method-argument,warning,major,style,Use of `cls` as the first named argument in a metaclass method is recommended so it's easy to differentiate them from regular instance methods.
 python,PYL-C0204,bad-mcs-classmethod-argument,warning,major,style,Use of `mcs` as the first named argument in a metaclass class method is recommended so it's easy to differentiate them from regular instance methods.
-python,PYL-C0205,single-string-used-for-slots,warning,major,style,"Class slots is a simple string, rather than an iterable."
+python,PYL-C0205,"Slots should be an interable, simple string detected",warning,major,style,"Class slots is a simple string, rather than an iterable."
 python,PYL-C0302,too-many-lines,warning,minor,code-smell,"Having too many lines in a module reduces readability, and may be a sign that refactoring is needed. The recommended maximum number of lines in a module is 1000."
 python,PYL-C0325,superfluous-parens,warning,minor,style,Parentheses can be omitted after the keyword.
 python,PYL-C0327,mixed-line-endings,warning,minor,style,There are mixed (LF and CRLF) newline signs in a file.
@@ -289,7 +288,7 @@ python,PYL-E0119,misplaced-format-function,error,critical,bug-risk,The `format()
 python,PYL-E0202,method-hidden,error,major,bug-risk,"When a method is defined in a child class which has the same name as an attribute in the ancestor class, the attribute in the ancestor class takes precedence and hides the method."
 python,PYL-E0203,access-member-before-definition,error,critical,bug-risk,A member of a class is being accessed before its definition. This is an error.
 python,PYL-E0211,no-method-argument,error,critical,bug-risk,A method which should have the bound instance as first argument has no argument defined. This is an error.
-python,PYL-E0213,no-self-argument,error,critical,bug-risk,"A method has an attribute different the ""self"" as first argument. This is considered as an error since this is a so common convention that you shouldn't break it."
+python,PYL-E0213,Method should have `self` as the first argument,error,major,bug-risk,The first argument of instance methods must be named `self`. This is considered an error since this convention is so common that you shouldn't break it.
 python,PYL-E0236,invalid-slots-object,error,critical,bug-risk,Slots must contain only string objects.
 python,PYL-E0237,assigning-non-slot,error,critical,bug-risk,Assigning to an attribute not defined in the class slots will cause an error.
 python,PYL-E0238,invalid-slots,error,critical,bug-risk,"An invalid slots value is found in class. Only a string, an iterable or a sequence is permitted. This is an error."
@@ -328,21 +327,21 @@ python,PYL-E1136,Subscription used with unsupported object,error,critical,bug-ri
 python,PYL-E1137,Assignment attempted with unsupported object,error,critical,bug-risk,Assignment is supported only for items which implement `__setitem__`.
 python,PYL-E1138,Deletion attempted with unsupported object,error,critical,bug-risk,Deletion is supported only for items which implement `__delitem__`.
 python,PYL-E1139,invalid-metaclass,,,,
-python,PYL-E1140,unhashable-dict-key,,,,
-python,PYL-E1200,logging-unsupported-format,,,,
-python,PYL-E1201,logging-format-truncated,,,,
-python,PYL-E1205,logging-too-many-args,,,,
-python,PYL-E1206,logging-too-few-args,,,,
+python,PYL-E1140,Dictionary key is unhashable,error,critical,bug-risk,"It is recommended to use strings or integers as keys. If you want to use complex objects, ensure that they are hashable."
+python,PYL-E1200,Unsupported format character used in the logging format string,error,critical,bug-risk,Logging format string must not contain any unsupported format character.
+python,PYL-E1201,Logging format string terminated in between conversion specifier,error,critical,bug-risk,Logging statement format string shall not terminate before the end of a conversion specifier.
+python,PYL-E1205,Logging format string contains too many arguments,error,critical,bug-risk,Too many arguments passed to the logging format string.
+python,PYL-E1206,Logging format string contains very few arguments,error,critical,bug-risk,Very few arguments are passed to the logging format string.
 python,PYL-E1300,bad-format-character,,,,
 python,PYL-E1301,truncated-format-string,,,,
 python,PYL-E1302,mixed-format-string,,,,
 python,PYL-E1303,format-needs-mapping,,,,
 python,PYL-E1304,missing-format-string-key,,,,
-python,PYL-E1305,too-many-format-args,,,,
-python,PYL-E1306,too-few-format-args,,,,
+python,PYL-E1305,Format string contains excess arguments,error,critical,bug-risk,Format string has been given excess variables to unpack. This is an error. 
+python,PYL-E1306,Not enough arguments found for format string,error,critical,bug-risk,Format string do not contain enough arguments to unpack. This is an error.
 python,PYL-E1307,bad-string-format-type,,,,
 python,PYL-E1310,bad-str-strip-call,,,,
-python,PYL-E1507,invalid-envvar-value,,,,
+python,PYL-E1507,Invalid value passed to access env variable,error,major,bug-risk,Env manipulation functions support only string type arguments.
 python,PYL-E1601,print-statement,,,,
 python,PYL-E1602,parameter-unpacking,,,,
 python,PYL-E1603,unpacking-in-except,,,,
@@ -437,24 +436,23 @@ python,PYL-W0602,global-variable-not-assigned,,,,
 python,PYL-W0603,global-statement,,,,
 python,PYL-W0604,global-at-module-level,,,,
 python,PYL-W0611,Module imported but unused,warning,major,code-smell,A module has been imported but is not used anywhere in the file. The module should either be used or the import should be removed.
-python,PYL-W0612,unused-variable,,,,
-python,PYL-W0613,unused-argument,,,,
-python,PYL-W0614,unused-wildcard-import,,,,
-python,PYL-W0621,redefined-outer-name,,,,
-python,PYL-W0622,redefined-builtin,,,,
+python,PYL-W0612,Unused variable found,warning,major,code-smell,"An unused variable take up space in the code, and can lead to confusions. It should be removed. If this variable is necessary, name the variable `_` or start the name with `unused` or `_unused`."
+python,PYL-W0613,Function contains unused argument,warning,major,code-smell,"An unused argument can lead to confusions. It should be removed. If this variable is necessary, name the variable `_` or start the name with `unused` or `_unused`."
+python,PYL-W0614,Unused import from wildcard import found,warning,major,code-smell,"In a wildcard import, all public names defined in the module are imported. It is advised to explicitly import the values needed or modify the module being imported from and define __all__ to restrict the names to be imported. "
+python,PYL-W0621,Re-defined variable from outer scope,warning,major,code-smell,"Local variable name hides the variable defined in the outer space, making it inaccesible. It may cause confusion."
+python,PYL-W0622,Re-definition found for builtin function,warning,critical,code-smell,Defining a local variable or function with the same name as a built-in object makes the built-in object unusable within the current scope and makes the code more difficult to read.
 python,PYL-W0623,redefine-in-handler,,,,
-python,PYL-W0631,undefined-loop-variable,,,,
+python,PYL-W0631,Loop variable used outside the loop,warning,critical,bug-risk, Do not use a loop variable (i.e. defined by a for loop or a list comprehension or a generator expression) outside the loop. It can induce wrong results.
 python,PYL-W0632,unbalanced-tuple-unpacking,,,,
 python,PYL-W0640,cell-var-from-loop,,,,
 python,PYL-W0641,possibly-unused-variable,,,,
-python,PYL-W0642,self-cls-assignment,,,,
-python,PYL-W0702,bare-except,,,,
-python,PYL-W0703,broad-except,,,,
-python,PYL-W0705,duplicate-except,,,,
-python,PYL-W0706,try-except-raise,,,,
-python,PYL-W0711,binary-op-exception,,,,
-python,PYL-W0715,raising-format-tuple,,,,
-python,PYL-W1113,keyword-arg-before-vararg,,,,
+python,PYL-W0642,Assignment to `self` or `cls` detected,warning,major,bug-risk,Assignment to `self` and `cls` is invalid and strongly discouraged. Doing so can cause errors when accessing the object or the class.
+python,PYL-W0703,Exception caught is very general,warning,major,code-smell,"If the except block catches a very general exception, it is likely to include many unrelated errors too. Try to be more precise while catching the exception."
+python,PYL-W0705,Catching previously caught exception,warning,critical,bug-risk,"In a `try` block, one type of exception shall be caught only once. Do not catch the same exception again."
+python,PYL-W0706,Except handler raises immediately,warning,critical,bug-risk,Using `raise` as the first or only operator of an except handler is useless because it raises back the exception immediately. Remove the `raise` operator or the entire `try-except-raise` block.
+python,PYL-W0711,Exception to catch is the result of a binary operation,error,critical,bug-risk,"Do not use binary operations (or, and) to catch exceptions. If intending to catch multiple exceptions, rewrite as ""except (A, B):"""
+python,PYL-W0715,Exception arguments suggest string formatting might be intended,warning,major,code-smell,"Found multiple arguments to an exception constructor, the first of them a string literal containing what appears to be placeholders intended for formatting. In this case, it is recommended to format the message properly."
+python,PYL-W1113,Keword argument defined before variable positional arguments,warning,minor,code-smell,"On defining a keyword argument before variable positional arguments, one can end up in having multiple values passed for the aforementioned parameter in case the method is called with keyword arguments. It is recommended to define keyword arguments after variable positional arguments. "
 python,PYL-W1201,logging-not-lazy,,,,
 python,PYL-W1201,logging-not-lazy,,,,
 python,PYL-W1202,logging-format-interpolation,,,,
@@ -469,8 +467,8 @@ python,PYL-W1304,unused-format-string-argument,,,,
 python,PYL-W1305,format-combined-specification,,,,
 python,PYL-W1306,missing-format-attribute,,,,
 python,PYL-W1307,invalid-format-index,,,,
-python,PYL-W1308,duplicate-string-formatting-argument,,,,
-python,PYL-W1401,anomalous-backslash-in-string,,,,
+python,PYL-W1308,Duplicate string formatting argument found,warning,minor,,String argument is repeating an argument. Consider passing arguments as named arguments.
+python,PYL-W1401,Anomalous backslash detected,warning,major,style,Backslash is present in the literal string but not as an escape. String constant might be missing an `r` prefix.
 python,PYL-W1402,anomalous-unicode-escape-in-string,,,,
 python,PYL-W1403,implicit-str-concat-in-sequence,,,,
 python,PYL-W1501,bad-open-mode,,,,
