@@ -1,0 +1,1 @@
+test-coverage,TCV-001,Lines missed in tests -- not covered and not executed,warning,major,bug-risk,"Tests don't cover the following lines. A source line is considered executed when at least one instruction that is assigned to this line has been executed."
