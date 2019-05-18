@@ -540,8 +540,6 @@ python,PYL-W1659,xreadlines-attribute,,,,
 python,PYL-W1660,deprecated-sys-function,,,,
 python,PYL-W1661,exception-escape,,,,
 python,PYL-W1662,comprehension-escape,,,,
-python,PAP-W0004,Variable name contains type information,warning,minor,code-smell,"Having type information in the variable name is not recommened, since the object can be of different type and can lead to confusion. It is recommended to have contextual, meaningful names."
-python,PAP-W0005,Class contains only fields and crude methods,warning,major,code-smell,"Classes that only hold data and do not contain any other functionality cannot operate independently. It is recommended to use structures meant for holding data instead, like `namedtuple`, `dataclass`, etc."
 python,PAP-W0006,Getter method detected in class,warning,major,code-smell,"Instead of having a method like `get_attribute`, it is recommended to use `@property` decorator to get the value of attribute."
 python,PAP-W0007,Setter method detected in class,warning,major,code-smell,"Instead of having a set method to set the value of the attribute, it is recommended to use `@<attribute_name>.setter` decorator."
 python,PAP-W0009,Multiple return types found in function,warning,major,code-smell,"Returning objects of different types from a function can lead to problems that are difficult to debug. Instead, it is better to raise an exception that can be caught where the function is called."
