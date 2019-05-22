@@ -18,10 +18,11 @@ type AnalysisRun struct {
 	RunSerial       string `json:"run_serial"`
 	DSConfigUpdated bool   `json:"ds_config_updated"`
 	VCSMeta         struct {
-		RemoteURL   string `json:"remote_url"`
-		BaseBranch  string `json:"base_branch"`
-		BaseOID     string `json:"base_oid"`
-		CheckoutOID string `json:"checkout_oid"`
+		RemoteURL       string `json:"remote_url"`
+		BaseBranch      string `json:"base_branch"`
+		BaseOID         string `json:"base_oid"`
+		CheckoutOID     string `json:"checkout_oid"`
+		CloneSubmodules bool   `json:"clone_submodules"`
 	} `json:"vcs_meta"`
 	Keys struct {
 		SSH struct {
