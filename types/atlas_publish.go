@@ -45,7 +45,8 @@ type AnalysisReport struct {
 				End struct {
 					Line int `json:"line"`
 				} `json:"end"`
-				Lines []string `json:"lines"`
+				Lines    []string `json:"lines"`
+				Rendered string   `json:"rendered"`
 			} `json:"source_code,omitempty"`
 			IsIgnored bool `json:"is_ignored,omitempty"`
 		} `json:"processed_data,omitempty"`
