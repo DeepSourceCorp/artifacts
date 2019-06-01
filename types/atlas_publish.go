@@ -39,14 +39,7 @@ type AnalysisReport struct {
 		} `json:"location"`
 		ProcessedData struct {
 			SourceCode struct {
-				Begin struct {
-					Line int `json:"line"`
-				} `json:"begin"`
-				End struct {
-					Line int `json:"line"`
-				} `json:"end"`
-				Lines    []string `json:"lines"`
-				Rendered string   `json:"rendered"`
+				Rendered string `json:"rendered"`
 			} `json:"source_code,omitempty"`
 			IsIgnored bool `json:"is_ignored,omitempty"`
 		} `json:"processed_data,omitempty"`
