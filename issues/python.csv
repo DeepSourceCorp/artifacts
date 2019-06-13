@@ -394,37 +394,37 @@ python,PYL-R1716,chained-comparison,,,,
 python,PYL-R1717,consider-using-dict-comprehension,,,,
 python,PYL-R1718,consider-using-set-comprehension,,,,
 python,PYL-R1719,simplifiable-if-expression,,,,
-python,PYL-W0101,unreachable,,,,
-python,PYL-W0102,dangerous-default-value,,,,
-python,PYL-W0104,pointless-statement,,,,
+python,PYL-W0101,Statement not reachable in execution,warning,major,code-smell,"This statement is unreachable, as the control flow will never reach upto this point. Consider removing this part of code or re-evaluating the control flow."
+python,PYL-W0102,Dangerous default argument,warning,critical,bug-risk,Do not use a mutable like `list` or `dictionary` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.
+python,PYL-W0104,Statement has no effect,warning,major,code-smell,The expression or statement is pointless and once evaluated this will have no effect on the program.
 python,PYL-W0105,pointless-string-statement,,,,
 python,PYL-W0106,expression-not-assigned,,,,
-python,PYL-W0108,unnecessary-lambda,,,,
+python,PYL-W0108,Unnecessary lambda expression,warning,major,bug-risk,A lambda that calls a function without modifying any of its parameters is unnecessary. Python functions are first class objects and can be passed around in the same way as the resulting lambda. It is recommended to remove the lambda and use the function directly.
 python,PYL-W0109,duplicate-key,,,,
 python,PYL-W0111,assign-to-new-keyword,,,,
-python,PYL-W0120,useless-else-on-loop,,,,
+python,PYL-W0120,Useless else clause detected on the loop,warning,major,bug-risk,"When a loop specifies no break statement, the else clause will always execute when the loop sequence is empty, thus making it useless. It is recommended to have the statements under else in the same scope as the loop itself. If the else clause should not always execute at the end of a loop clause, then the code should add a break statement within the loop block."
 python,PYL-W0122,exec-used,,,,
 python,PYL-W0123,eval-used,,,,
-python,PYL-W0124,confusing-with-statement,,,,
-python,PYL-W0125,using-constant-test,,,,
+python,PYL-W0124,`as` with another context manager looks like a tuple,warning,minor,bug-risk,"This `with` statement component returns multiple values and uses name binding with `as` only for a part of those values, as in with ctx() as a, b. This can be misleading, since it's not clear if the context manager returns a tuple or if the node without a name binding is another context manager."
+python,PYL-W0125,Conditional statement used with a constant value,warning,major,code-smell,Using a conditional statement with a constant value is pointless and will always evaluate to either True or False. This might not be what is intended.
 python,PYL-W0143,comparison-with-callable,,,,
-python,PYL-W0150,lost-exception,,,,
-python,PYL-W0199,assert-on-tuple,,,,
-python,PYL-W0201,attribute-defined-outside-init,,,,
-python,PYL-W0211,bad-staticmethod-argument,,,,
-python,PYL-W0212,protected-access,,,,
+python,PYL-W0150,Exception might be lost,warning,major,bug-risk,The `finally` block may swallow any exceptions raised in the `try` block. This can pose a bug risk.
+python,PYL-W0199,`assert` called on tuple,warning,major,bug-risk,"A call of `assert` on a tuple will always evaluate to `True` if the tuple is not empty, and will always evaluate to `False` if it is. "
+python,PYL-W0201,Attribute defined outside `__init__`,warning,minor,code-smell,"Defining an instance attribute outside `__init__` affects the readability of code. It is expected to find all the attributes an instance may have by reading its `__init__` method. If there is a need to initialize attribute via sub-initialization methods, it is recommended to assign attributes to `None` in the __init__ then call the sub-initialization methods."
+python,PYL-W0211,Bad `staticmethod` argument detected,warning,major,bug-risk,"It is customary for instance or class methods to take `self` or `cls`, respectively, as their first arguments, a method that uses either of these names but is found to be a static method may have been defined incorrectly. Choose names other than `self` or `cls` for arguments to avoid confusing other programmers looking at your code."
+python,PYL-W0212,Protected member accessed from outside outside the class,warning,minor,bug-risk,"Accessing a protected member (a member prefixed with `_`) of a class from outside that class is not recommended, since the creator of that class did not intend this member to be exposed. If accesing this attribute outside of the class is absolutely needed, refactor it such that it becomes part of the public interface of the class."
 python,PYL-W0221,arguments-differ,,,,
 python,PYL-W0222,signature-differs,,,,
 python,PYL-W0223,abstract-method,,,,
-python,PYL-W0231,super-init-not-called,,,,
+python,PYL-W0231,`__init__` method fron the base class not called,warning,major,bug-risk,The ancestor class method has an init method which is not called by the derived class. This can cause unintended consequences.
 python,PYL-W0232,no-init,,,,
 python,PYL-W0233,non-parent-init-called,,,,
 python,PYL-W0235,useless-super-delegation,,,,
-python,PYL-W0301,unnecessary-semicolon,,,,
+python,PYL-W0301,Unnecessary semicolon,info,minor,style,Semicolon used is unecessary on this line.
 python,PYL-W0311,bad-indentation,,,,
 python,PYL-W0312,mixed-indentation,,,,
 python,PYL-W0401,wildcard-import,,,,
-python,PYL-W0402,deprecated-module,,,,
+python,PYL-W0402,Use of a deprecated module detected,warning,major,bug-risk,The moule imported has been deprecated for the current version of Python.
 python,PYL-W0403,relative-import,,,,
 python,PYL-W0404,Module re-imported,warning,major,bug-risk,"A module is reimported mulitple times. This can be confusing, and should be fixed."
 python,PYL-W0406,import-self,,,,
@@ -432,9 +432,10 @@ python,PYL-W0410,misplaced-future,,,,
 python,PYL-W0511,fixme,,,,
 python,PYL-W0512,invalid-encoded-data,,,,
 python,PYL-W0601,global-variable-undefined,,,,
-python,PYL-W0602,global-variable-not-assigned,,,,
-python,PYL-W0603,global-statement,,,,
-python,PYL-W0604,global-at-module-level,,,,
+python,PYL-W0602,Global variable is declared but not used,warning,major,bug-risk,The variable is defined through the `global` statement but no assignment to this variable is done. It is recommended to remove it if not necessary.
+python,PYL-W0603,global-statement,,,code-smell,
+python,PYL-W0604,Use of `global` at module level,warning,major,code-smell,"The global statement is used to specify that assignments to that name are assignments to the variable in the global (module) scope, rather than in the local scope. At the module level, this statement is redundant because the local scope and global scope are the same.
+It is recommended to remove the `global` statement."
 python,PYL-W0611,Module imported but unused,warning,major,code-smell,A module has been imported but is not used anywhere in the file. The module should either be used or the import should be removed.
 python,PYL-W0612,Unused variable found,warning,major,code-smell,"An unused variable take up space in the code, and can lead to confusions. It should be removed. If this variable is necessary, name the variable `_` or start the name with `unused` or `_unused`."
 python,PYL-W0613,Function contains unused argument,warning,major,code-smell,"An unused argument can lead to confusions. It should be removed. If this variable is necessary, name the variable `_` or start the name with `unused` or `_unused`."
@@ -443,7 +444,7 @@ python,PYL-W0621,Re-defined variable from outer scope,warning,major,code-smell,"
 python,PYL-W0622,Re-definition found for builtin function,warning,critical,code-smell,Defining a local variable or function with the same name as a built-in object makes the built-in object unusable within the current scope and makes the code more difficult to read.
 python,PYL-W0623,redefine-in-handler,,,,
 python,PYL-W0631,Loop variable used outside the loop,warning,critical,bug-risk, Do not use a loop variable (i.e. defined by a for loop or a list comprehension or a generator expression) outside the loop. It can induce wrong results.
-python,PYL-W0632,unbalanced-tuple-unpacking,,,,
+python,PYL-W0632,Unbalanced tuple unpacking,warning,major,bug-risk,Possible unbalanced tuple unpacking detected: either left or right side of the statement has more labels. This can raise `ValueError` while unpacking.
 python,PYL-W0640,cell-var-from-loop,,,,
 python,PYL-W0641,possibly-unused-variable,,,,
 python,PYL-W0642,Assignment to `self` or `cls` detected,warning,major,bug-risk,Assignment to `self` and `cls` is invalid and strongly discouraged. Doing so can cause errors when accessing the object or the class.
@@ -467,14 +468,14 @@ python,PYL-W1304,unused-format-string-argument,,,,
 python,PYL-W1305,format-combined-specification,,,,
 python,PYL-W1306,missing-format-attribute,,,,
 python,PYL-W1307,invalid-format-index,,,,
-python,PYL-W1308,Duplicate string formatting argument found,warning,minor,,String argument is repeating an argument. Consider passing arguments as named arguments.
+python,PYL-W1308,Duplicate string formatting argument found,warning,minor,code-smell,String argument is repeating an argument. Consider passing arguments as named arguments.
 python,PYL-W1401,Anomalous backslash detected,warning,major,style,Backslash is present in the literal string but not as an escape. String constant might be missing an `r` prefix.
 python,PYL-W1402,anomalous-unicode-escape-in-string,,,,
 python,PYL-W1403,implicit-str-concat-in-sequence,,,,
-python,PYL-W1501,bad-open-mode,,,,
+python,PYL-W1501,Bad open mode for file,warning,major,bug-risk,"The mode with which the file is opened is not valid. Python supports: r, w, a[, x] modes with b, +, and U (only with r) options."
 python,PYL-W1502,boolean-datetime,,,,
 python,PYL-W1503,redundant-unittest-assert,,,,
-python,PYL-W1505,deprecated-method,,,,
+python,PYL-W1505,Method used has been deprecated,warning,major,code-smell,The method is marked as deprecated and will be removed in a future version of Python. Consider looking for an alternative in the documentation.
 python,PYL-W1506,bad-thread-instantiation,,,,
 python,PYL-W1507,shallow-copy-environ,,,,
 python,PYL-W1508,invalid-envvar-default,,,,
@@ -535,7 +536,7 @@ python,PYL-W1654,dict-items-not-iterating,,,,
 python,PYL-W1655,dict-keys-not-iterating,,,,
 python,PYL-W1656,dict-values-not-iterating,,,,
 python,PYL-W1657,deprecated-operator-function,,,,
-python,PYL-W1658,deprecated-urllib-function,,,,
+python,PYL-W1658,Accessed a removed attribute on the `urllib` module,info,major,bug-risk,This attribute of `urllib` module has been removed or moved in Python 3. Please consult the documentation.
 python,PYL-W1659,xreadlines-attribute,,,,
 python,PYL-W1660,deprecated-sys-function,,,,
 python,PYL-W1661,exception-escape,,,,
@@ -548,3 +549,14 @@ python,PAP-W0011,Use `items()` to iterate over a dictionary,warning,major,code-s
 python,PAP-W0012,Use `get()` method to access values from a dictionary,warning,major,code-smell,"It is recommended to use the built-in method `dict.get(key[, default])` to access values from a dictionary."
 python,PAP-W0013,Debugger import detected,warning,major,code-smell,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code.
 python,PAP-W0014,Debugger activation detected,error,critical,code-smell,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code. This may cause your application to have unintended side-effects.
+python,PYL-W5198,New column added in database with a default value,warning,major,performance,The prefered way is to add a new DB column with `null=True` because it will be created instantly and then possibly populate the table with the desired default values. Adding a default value will lead to a performance issue if the existing table has a large number of rows.
+python,PYL-W5104,`exclude` used in a `ModelForm`,warning,major,bug-risk,"It is recommended to use explicit fields instead of `exclude` in a `ModelForm`. This prevents accidentally setting fields, especially when adding new fields to a model."
+python,PYL-R5101,`HttpResponse` used to return JSON response,warning,major,code-smell,"It is recommended to use `JsonResponse` to return JSON data instead of HttpResponse.
+`HttpResponse(json.dumps(data))` can be replaced with `JsonResponse(data)`, where `data` is a JSON-serializable object."
+python,PYL-R5102,`HttpResponse()` returns `application/json` content type,warning,major,code-smell,"It is recommended to use `JsonResponse` to return JSON content.
+`HttpResponse(content_type='application/json)` can be replaced with just `JsonResponse()`."
+python,PYL-R5103,Redundant `content_type` parameter for `JsonResponse()` detected,warning,major,code-smell,"`JsonResponse()` contains `content_type` parameter. This is either redundant or the content_type is not JSON, which is probably an error."
+python,PYL-E5101,Model's `__unicode__` is not callable,warning,major,code-smell,Django models require a `__unicode__` method which must be callable.
+python,PYL-W5101,Model missing `__unicode__` method,warning,minor,code-smell,Django models should implement a `__unicode__ ` method for string representation.
+python,PYL-W5102,Model has `__unicode__` method,warning,major,code-smell,Django models should not implement a `__unicode__` method for string representation when using Python 3. Use `__str__` instead.
+python,PYL-W5103,Model does not explicitly define `__unicode__`,warning,minor,code-smell,"Django models should implement a `__unicode__` method for string representation.  A parent class of this model does, but ideally all models should be explicit."
