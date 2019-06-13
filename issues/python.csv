@@ -396,7 +396,7 @@ python,PYL-R1718,consider-using-set-comprehension,,,,
 python,PYL-R1719,simplifiable-if-expression,,,,
 python,PYL-W0101,Statement not reachable on execution,warning,major,code-smell,"This statement is unreachable, as the control flow will never reach upto this point. Consider removing this part of code or re-evaluating the control flow."
 python,PYL-W0102,Dangerous default argument,warning,critical,bug-risk,Do not use a mutable like `list` or `dictionary` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.
-python,PYL-W0104,Statement has no effect,warning,major,code-smell,The expression or statement is pointless and once evaluated this will have no effect on the program.
+python,PYL-W0104,Statement has no effect,warning,major,code-smell,The expression or statement is pointless and will have no effect on the program on execution.
 python,PYL-W0105,pointless-string-statement,,,,
 python,PYL-W0106,expression-not-assigned,,,,
 python,PYL-W0108,Unnecessary lambda expression,warning,major,bug-risk,A lambda that calls a function without modifying any of its parameters is unnecessary. Python functions are first class objects and can be passed around in the same way as the resulting lambda. It is recommended to remove the lambda and use the function directly.
@@ -434,7 +434,7 @@ python,PYL-W0512,invalid-encoded-data,,,,
 python,PYL-W0601,global-variable-undefined,,,,
 python,PYL-W0602,Global variable is declared but not used,warning,major,bug-risk,The variable is defined through the `global` statement but no assignment to this variable is done. It is recommended to remove it if not necessary.
 python,PYL-W0603,global-statement,,,code-smell,
-python,PYL-W0604,Use of `global` at module level,warning,major,code-smell,"The global statement is used to specify that assignments to that name are assignments to the variable in the global (module) scope, rather than in the local scope. At the module level, this statement is redundant because the local scope and global scope are the same.
+python,PYL-W0604,Use of `global` at module level,warning,major,code-smell,"The global statement is used to specify that the assignment to that name is an assignment to the variable in the global (module) scope, rather than in the local scope. At the module level, this statement is redundant because the local scope and global scope are the same.
 It is recommended to remove the `global` statement."
 python,PYL-W0611,Module imported but unused,warning,major,code-smell,A module has been imported but is not used anywhere in the file. The module should either be used or the import should be removed.
 python,PYL-W0612,Unused variable found,warning,major,code-smell,"An unused variable take up space in the code, and can lead to confusions. It should be removed. If this variable is necessary, name the variable `_` or start the name with `unused` or `_unused`."
@@ -536,7 +536,7 @@ python,PYL-W1654,dict-items-not-iterating,,,,
 python,PYL-W1655,dict-keys-not-iterating,,,,
 python,PYL-W1656,dict-values-not-iterating,,,,
 python,PYL-W1657,deprecated-operator-function,,,,
-python,PYL-W1658,Accessed a removed attribute on the `urllib` module,info,major,bug-risk,This attribute of `urllib` module has been removed or moved in Python 3. Please consult the documentation.
+python,PYL-W1658,Accessed a removed attribute on the `urllib` module,info,major,bug-risk,This attribute of `urllib` module has been removed or moved to Python 3. Please consult the documentation.
 python,PYL-W1659,xreadlines-attribute,,,,
 python,PYL-W1660,deprecated-sys-function,,,,
 python,PYL-W1661,exception-escape,,,,
