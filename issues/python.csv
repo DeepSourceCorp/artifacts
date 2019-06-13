@@ -394,7 +394,7 @@ python,PYL-R1716,chained-comparison,,,,
 python,PYL-R1717,consider-using-dict-comprehension,,,,
 python,PYL-R1718,consider-using-set-comprehension,,,,
 python,PYL-R1719,simplifiable-if-expression,,,,
-python,PYL-W0101,Statement not reachable in execution,warning,major,code-smell,"This statement is unreachable, as the control flow will never reach upto this point. Consider removing this part of code or re-evaluating the control flow."
+python,PYL-W0101,Statement not reachable on execution,warning,major,code-smell,"This statement is unreachable, as the control flow will never reach upto this point. Consider removing this part of code or re-evaluating the control flow."
 python,PYL-W0102,Dangerous default argument,warning,critical,bug-risk,Do not use a mutable like `list` or `dictionary` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.
 python,PYL-W0104,Statement has no effect,warning,major,code-smell,The expression or statement is pointless and once evaluated this will have no effect on the program.
 python,PYL-W0105,pointless-string-statement,,,,
