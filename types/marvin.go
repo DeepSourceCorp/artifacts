@@ -13,6 +13,7 @@ type MarvinConfig struct {
 
 type AnalysisConfig struct {
 	Files           []string    `json:"files"`
+	IfAllFiles      bool        `json:"if_all_files"`
 	ExcludePatterns []string    `json:"exclude_patterns"`
 	ExcludeFiles    []string    `json:"exclude_files"`
 	TestFiles       []string    `json:"test_files"`
