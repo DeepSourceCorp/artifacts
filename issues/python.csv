@@ -210,7 +210,7 @@ python,FLK8-E743,"Do not define functions named 'l', 'O', or 'I'",warning,major,
 
 Change the names of these functions to something more descriptive."
 python,FLK8-F402,import module from line N shadowed by loop variable,warning,major,bug-risk,Loop variables should not redefine the name of modules that are imported.
-python,FLK8-F403,‘from module import *’ used; unable to detect undefined names,warning,major,bug-risk,"`from module import *` is discouraged because the programmer often won’t know where an imported object is defined. The imported module, class, or function should be explicitly defined."
+python,FLK8-F403,‘from module import *’ used; unable to detect undefined names,warning,minor,bug-risk,"`from module import *` is discouraged because the programmer often won’t know where an imported object is defined. The imported module, class, or function should be explicitly defined."
 python,FLK8-F404,future import(s) name after other statements,warning,major,style,Imports from `__future__` should be the first imports in a file.
 python,FLK8-F405,"name may be undefined, or defined from star imports: module",warning,major,bug-risk,"This warning occurs in conjunction with issue FLK8-F403, `'from module import *'` used. It means that the variable name could be undefined, but we cannot be sure because it also could also be imported in the star imports.
 
@@ -416,7 +416,7 @@ python,PYL-W0212,Protected member accessed from outside outside the class,warnin
 python,PYL-W0221,arguments-differ,,,,
 python,PYL-W0222,signature-differs,,,,
 python,PYL-W0223,abstract-method,,,,
-python,PYL-W0231,`__init__` method fron the base class not called,warning,major,bug-risk,The ancestor class method has an init method which is not called by the derived class. This can cause unintended consequences.
+python,PYL-W0231,`__init__` method from the base class not called,warning,minor,bug-risk,The ancestor class method has an init method which is not called by the derived class. This can cause unintended consequences.
 python,PYL-W0232,no-init,,,,
 python,PYL-W0233,non-parent-init-called,,,,
 python,PYL-W0235,useless-super-delegation,,,,
@@ -541,12 +541,12 @@ python,PYL-W1659,xreadlines-attribute,,,,
 python,PYL-W1660,deprecated-sys-function,,,,
 python,PYL-W1661,exception-escape,,,,
 python,PYL-W1662,comprehension-escape,,,,
-python,PAP-W0006,Getter method detected in class,warning,major,code-smell,"Instead of having a method like `get_attribute`, it is recommended to use `@property` decorator to get the value of attribute."
-python,PAP-W0007,Setter method detected in class,warning,major,code-smell,"Instead of having a set method to set the value of the attribute, it is recommended to use `@<attribute_name>.setter` decorator."
+python,PAP-W0006,Getter method detected in class,warning,minor,code-smell,"Instead of having a method like `get_attribute`, it is recommended to use `@property` decorator to get the value of attribute."
+python,PAP-W0007,Setter method detected in class,warning,minor,code-smell,"Instead of having a set method to set the value of the attribute, it is recommended to use `@<attribute_name>.setter` decorator."
 python,PAP-W0009,Multiple return types found in function,warning,major,code-smell,"Returning objects of different types from a function can lead to problems that are difficult to debug. Instead, it is better to raise an exception that can be caught where the function is called."
 python,PAP-W0010,File opened without the `with` statement,warning,critical,code-smell,Opening a file using `with` statement is preferred as function `open` implements the context manager protocol that release the resource when it is outside of the `with` block. Not doing so requires you to manually release the resource.
-python,PAP-W0011,Use `items()` to iterate over a dictionary,warning,major,code-smell,"The preferred way to iterate over the key-value pairs of a dictionary is to declare two variables in a for loop, and then call `dictionary.items()`, where dictionary is the name of your variable representing a dictionary.'"
-python,PAP-W0012,Use `get()` method to access values from a dictionary,warning,major,code-smell,"It is recommended to use the built-in method `dict.get(key[, default])` to access values from a dictionary."
+python,PAP-W0011,Use `items()` to iterate over a dictionary,warning,major,code-smell,"The preferred way to iterate over the key-value pairs of a dictionary is to declare two variables in a for loop, and then call `dictionary.items()` (or `dictionary.iteritems()` for Python2), where dictionary is the name of your variable representing a dictionary."
+python,PAP-W0012,Use `get()` method to access values from a dictionary,warning,major,code-smell,"In case of checking if key exists in the dictionary and then fetching the value, it is recommended to use the built-in method `dict.get(key[, default])`. This returns the respective value if key exists in the dictionary, else returns a default value, avoiding the dictionary lookup twice."
 python,PAP-W0013,Debugger import detected,warning,major,code-smell,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code.
 python,PAP-W0014,Debugger activation detected,error,critical,code-smell,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code. This may cause your application to have unintended side-effects.
 python,PYL-W5198,New column added in database with a default value,warning,major,performance,The prefered way is to add a new DB column with `null=True` because it will be created instantly and then possibly populate the table with the desired default values. Adding a default value will lead to a performance issue if the existing table has a large number of rows.
