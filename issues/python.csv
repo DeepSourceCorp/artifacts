@@ -210,7 +210,7 @@ python,FLK8-E743,"Do not define functions named 'l', 'O', or 'I'",warning,major,
 
 Change the names of these functions to something more descriptive."
 python,FLK8-F402,import module from line N shadowed by loop variable,warning,major,bug-risk,Loop variables should not redefine the name of modules that are imported.
-python,FLK8-F403,‘from module import *’ used; unable to detect undefined names,warning,minor,bug-risk,"`from module import *` is discouraged because the programmer often won’t know where an imported object is defined. The imported module, class, or function should be explicitly defined."
+python,FLK8-F403,‘from module import *’ used; unable to detect undefined names,warning,major,bug-risk,"`from module import *` is discouraged because the programmer often won’t know where an imported object is defined. The imported module, class, or function should be explicitly defined."
 python,FLK8-F404,future import(s) name after other statements,warning,major,style,Imports from `__future__` should be the first imports in a file.
 python,FLK8-F405,"name may be undefined, or defined from star imports: module",warning,major,bug-risk,"This warning occurs in conjunction with issue FLK8-F403, `'from module import *'` used. It means that the variable name could be undefined, but we cannot be sure because it also could also be imported in the star imports.
 
