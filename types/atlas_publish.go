@@ -20,6 +20,11 @@ type RepoResultCeleryTask struct {
 	Retries int        `json:"retries"`
 }
 
+type DiffMeta struct {
+	Additions [][]int `json:"additions"`
+	Deletions [][]int `json:"deletions"`
+}
+
 type AnalysisReport struct {
 	Issues []struct {
 		IssueCode string `json:"issue_code"`
@@ -57,15 +62,12 @@ type AnalysisReport struct {
 		Level    int    `json:"level"`
 	} `json:"errors"`
 	FileMeta struct {
-		IfAll    bool     `json:"if_all"`
-		Deleted  []string `json:"deleted"`
-		Renamed  []string `json:"renamed"`
-		Modified []string `json:"modified"`
-		DiffMeta map[string]struct {
-			Additions [][]int `json:"additions"`
-			Deletions [][]int `json:"deletions"`
-		} `json:"diff_meta"`
-	} `json:"file_meta"`
+		IfAll    bool                `json:"if_all"`
+		Deleted  []string            `json:"deleted"`
+		Renamed  []string            `json:"renamed"`
+		Modified []string            `json:"modified"`
+		DiffMeta map[string]DiffMeta `json:"file_meta"`
+	}
 	SkipCQ struct {
 		CommentPrefix string   `json:"comment_prefix"`
 		CommentSuffix string   `json:"comment_suffix"`
