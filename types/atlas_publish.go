@@ -66,8 +66,8 @@ type AnalysisReport struct {
 		Deleted  []string            `json:"deleted"`
 		Renamed  []string            `json:"renamed"`
 		Modified []string            `json:"modified"`
-		DiffMeta map[string]DiffMeta `json:"file_meta"`
-	}
+		DiffMeta map[string]DiffMeta `json:"diff_meta"`
+	} `json:"file_meta"`
 	SkipCQ struct {
 		CommentPrefix string   `json:"comment_prefix"`
 		CommentSuffix string   `json:"comment_suffix"`
