@@ -48,6 +48,7 @@ type AnalysisReport struct {
 			} `json:"source_code,omitempty"`
 			IsIgnored bool `json:"is_ignored,omitempty"`
 		} `json:"processed_data,omitempty"`
+		SkipCQ bool `json:"skip_cq"`
 	} `json:"issues"`
 	Metrics []struct {
 		MetricCode string `json:"metric_code"`
@@ -69,9 +70,8 @@ type AnalysisReport struct {
 		DiffMeta map[string]DiffMeta `json:"diff_meta,omitempty"`
 	} `json:"file_meta"`
 	SkipCQ struct {
-		CommentPrefix string   `json:"comment_prefix"`
-		CommentSuffix string   `json:"comment_suffix"`
-		Identifiers   []string `json:"identifiers"`
+		CommentIdentifier string   `json:"comment_identifier"`
+		IssueShortcodes   []string `json:"issue_shortcodes"`
 	} `json:"skip_cq,omitempty"`
 	ExtraData interface{} `json:"extra_data"`
 }
