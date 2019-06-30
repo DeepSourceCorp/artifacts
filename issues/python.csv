@@ -453,7 +453,7 @@ python,PYL-W0104,Statement has no effect,major,antipattern,The expression or sta
 python,PYL-W0105,pointless-string-statement,,,
 python,PYL-W0106,Expression not assigned,minor,antipattern,An expression that is not a function call is assigned to nothing. Probably something else was intended here. We recommend to review this. Ignore if this is intended. 
 python,PYL-W0108,Unnecessary lambda expression,major,bug-risk,A lambda that calls a function without modifying any of its parameters is unnecessary. Python functions are first class objects and can be passed around in the same way as the resulting lambda. It is recommended to remove the lambda and use the function directly.
-python,PYL-W0109,Duplicate dictionary keys,major,bug-risk,"Dictionary expression binds the same key multiple times. This may lead to unintentional behaviour. It is recommended to have unique keys."
+python,PYL-W0109,Duplicate dictionary keys,major,bug-risk,Dictionary expression binds the same key multiple times. This may lead to unintentional behaviour. It is recommended to have unique keys.
 python,PYL-W0111,Assignment to a new keyword,major,bug-risk,"Assignment is being done to a variable which will become a keyword in the future releases. This statement, which is working fine right now, will give an error in the next Python version. We recommend you to rename this variable. "
 python,PYL-W0120,Useless else clause detected on the loop,major,bug-risk,"When a loop specifies no break statement, the else clause will always execute when the loop sequence is empty, thus making it useless. It is recommended to have the statements under else in the same scope as the loop itself. If the else clause should not always execute at the end of a loop clause, then the code should add a break statement within the loop block."
 python,PYL-W0122,Audit required: Use of `exec`,major,security,"Usage of `exec` function is strongly discouraged, since it opens up possibilities of unauthorized code execution if the statements are not escaped properly. Read more on why should `exec` be avoided [here](https://stackoverflow.com/questions/1933451/why-should-exec-and-eval-be-avoided)."
@@ -599,18 +599,18 @@ python,PAP-W0011,Use `items()` to iterate over a dictionary,major,antipattern,"T
 python,PAP-W0012,Use `get()` method to access values from a dictionary,major,antipattern,"In case of checking if key exists in the dictionary and then fetching the value, it is recommended to use the built-in method `dict.get(key[, default])`. This returns the respective value if key exists in the dictionary, else returns a default value, avoiding the dictionary lookup twice."
 python,PAP-W0013,Debugger import detected,major,antipattern,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code.
 python,PAP-W0014,Debugger activation detected,critical,antipattern,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code. This may cause your application to have unintended side-effects.
-python,PAP-W0015,Unnecessary generator,,antipattern,"It is unnecessary to use `list`, `set`, `dict` around a generator expression to get object of that type, since there are comprehensions for these types."
-python,PAP-W0016,Unnecessary comprehension,,antipattern,"Builtin functions like `all`, `any`, `enumerate`, `frozenset`, `iter`, `max`, `min`, `sum`, `tuple`, `itertools.cycle`, `itertools.accumulate`, can work directly with a generator expression. They do not require comprehension.
+python,PAP-W0015,Unnecessary generator,minor,antipattern,"It is unnecessary to use `list`, `set`, `dict` around a generator expression to get object of that type, since there are comprehensions for these types."
+python,PAP-W0016,Unnecessary comprehension,major,antipattern,"Builtin functions like `all`, `any`, `enumerate`, `frozenset`, `iter`, `max`, `min`, `sum`, `tuple`, `itertools.cycle`, `itertools.accumulate`, can work directly with a generator expression. They do not require comprehension.
 
 The inbuilt functions `all()` and `any()` in python also support short-circuiting, but this behaviour is lost if you use comprehension. This affects the performance. "
-python,PAP-W0017,Redundant call,,antipattern,"It is unnecessary to use e.g. `list` around list comprehension, 'since it is equivalent without it.
+python,PAP-W0017,Redundant call,major,antipattern,"It is unnecessary to use e.g. `list` around list comprehension, 'since it is equivalent without it.
 Same goes for `set` and `dictionary` comprehensions."
-python,PAP-W0018,Unnecessary literal,,antipattern,"It is unnecessary to use a `list` or `tuple` literal within a call to `tuple`, `list`, `set`, or `dict` since there is literal syntax for  these types."
-python,PAP-W0019,Unnecessary call,,antipattern,"It is slower to call e.g. `dict()` than using the empty literal, because the name dict must be looked up in the global scope in case it has been rebound. Same for the other two basic types `list()` and `set()`."
-python,PAP-W0020,Unnecessary typecast,,antipattern,Object is being type casted to the same type. This is unnecessary.
-python,BAN-W1003,Audit required: Insecure hash function,,security,"MD2, MD4, MD5, SHA1 signature algorithms are known to be vulnerable to collision attacks. Attackers can exploit this to generate another certificate with the same digital signature, allowing them to masquerade as the affected service."
-python,BAN-W1004,Audit required: Insecure cipher,,security,Cipher used is not secure. It is recommended to replace with a known secure cipher such as AES.
-python,BAN-W1005,Audit required: Insecure cipher mode,,security,"Use of insecure cipher mode such as `ECB` is not recommended for use in cryptographic protocols at all.
+python,PAP-W0018,Unnecessary literal,minor,antipattern,"It is unnecessary to use a `list` or `tuple` literal within a call to `tuple`, `list`, `set`, or `dict` since there is literal syntax for  these types."
+python,PAP-W0019,Unnecessary call,minor,antipattern,"It is slower to call e.g. `dict()` than using the empty literal, because the name dict must be looked up in the global scope in case it has been rebound. Same for the other two basic types `list()` and `set()`."
+python,PAP-W0020,Unnecessary typecast,minor,antipattern,Object is being type casted to the same type. This is unnecessary.
+python,BAN-W1003,Audit required: Insecure hash function,major,security,"MD2, MD4, MD5, SHA1 signature algorithms are known to be vulnerable to collision attacks. Attackers can exploit this to generate another certificate with the same digital signature, allowing them to masquerade as the affected service."
+python,BAN-W1004,Audit required: Insecure cipher,major,security,Cipher used is not secure. It is recommended to replace with a known secure cipher such as AES.
+python,BAN-W1005,Audit required: Insecure cipher mode,major,security,"Use of insecure cipher mode such as `ECB` is not recommended for use in cryptographic protocols at all.
 
 In case of `ECB`, it encrypts identical plaintext blocks into identical ciphertext blocks; and does not hide data patterns well. In some senses, it doesn't provide serious message confidentiality.
 
