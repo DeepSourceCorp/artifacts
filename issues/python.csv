@@ -1,8 +1,4 @@
 python,BAN-B101,Assert statement used outside of tests,major,security,"Usage of `assert` statement in application logic is discouraged. `assert` is removed with compiling to optimised byte code (`python -o` producing *.pyo files). Consider raising an exception instead. Ideally, `assert` statement should be used only in tests."
-python,BAN-B102,Use of `exec` statement found,major,security,"Usage of `exec` function is strongly discouraged, since it opens up possibilities of unauthorized code execution if the statements are not escaped properly.
-
-Read more on why should `exec` be avoided here -- [https://stackoverflow.com/questions/1933451/why-should-exec-and-eval-be-avoided](https://stackoverflow.com/questions/1933451/why-should-exec-and-eval-be-avoided)
-"
 python,BAN-B103,Insecure permissions set on a file,major,security,"Files should be created with restrictive file permissions to prevent vulnerabilities such as information disclosure and code execution. In particular, any files which may contain confidential information should be set to only permit access by the owning user/service and group (i.e. no world/other access).
 
 Discretion should be used when granting write access to files such as configuration files to prevent vulnerabilities including denial of service and remote code execution.
@@ -39,12 +35,7 @@ Malicious users that can predict the file name and write to directory containing
 python,BAN-B201,Flask app detected with DEBUG mode enabled,critical,security,Running Flask applications in debug mode results in the Werkzeug debugger being enabled. This includes a feature that allows arbitrary code execution. Documentation for both Flask and Werkzeug strongly suggests that debug mode should never be enabled on production systems.
 python,BAN-B301,Audit required: Use of `pickle` module,major,security,The pickle module is not secure against erroneous or maliciously constructed data. Never unpickle data received from an untrusted or unauthenticated source.
 python,BAN-B302,Audit required: Use of `marshal` module,major,security,The marshal module is not intended to be secure against erroneous or maliciously constructed data. Never unmarshal data received from an untrusted or unauthenticated source.
-python,BAN-B306,Use of deprecated function: `mktemp`,major,security,"Use of insecure and deprecated function `mktemp()`. Use of this function may introduce a security hole in your program. By the time you get around to doing anything with the file name it returns, someone else may have beaten you to the punch.
-
-Use `mkstemp()` instead -- [https://docs.python.org/2/library/tempfile.html#tempfile.mkstemp]((https://docs.python.org/2/library/tempfile.html#tempfile.mkstemp)"
-python,BAN-B307,Audit required: Use of `eval`,major,security,"Use of possibly insecure function - consider using safer `ast.literal_eval`.
-
-Read more on why should `eval` be avoided here -- [https://stackoverflow.com/questions/1933451/why-should-exec-and-eval-be-avoided](https://stackoverflow.com/questions/1933451/why-should-exec-and-eval-be-avoided)"
+python,BAN-B306,Use of deprecated function: `mktemp`,major,security,"Use of insecure and deprecated function `mktemp()`. Use of this function may introduce a security hole in your program. By the time you get around to doing anything with the file name it returns, someone else may have beaten you to the punch. Use `mkstemp()` instead. [Read more](https://docs.python.org/2/library/tempfile.html#tempfile.mkstemp)."
 python,BAN-B308,Audit required: Use of `mark_safe` detected,major,security,Use of `mark_safe()` may expose cross-site scripting vulnerabilities and should be reviewed.
 python,BAN-B309,Use of `HTTPSConnection` may not be secure in Python versions < 2.7.9,major,security,"Use of `HTTPSConnection` on older versions of Python prior to 2.7.9 and 3.4.3 does not provide many of the assurances one would expect when using SSL and leaves connections open to potential man-in-the-middle attacks.
 
@@ -71,7 +62,7 @@ else
 with urllib.request.urlopen(req) as resp:
   [...]
 ```"
-python,BAN-B311,Audit required: Use of `random` detected,minor,security,Standard pseudo-random generators are not suitable for security/cryptographic purposes. Consider using `secrets` to generate secure random numbers -- [https://docs.python.org/3/library/secrets.html](https://docs.python.org/3/library/secrets.html)
+python,BAN-B311,Audit required: Use of `random` detected,minor,security,Standard pseudo-random generators are not suitable for security/cryptographic purposes. Consider using `secrets` to generate secure random numbers. [Read more](https://docs.python.org/3/library/secrets.html).
 python,BAN-B312,Audie required: Use of telnet detected,major,security,Telnet-related functions are being called. Telnet is considered insecure. Use SSH or some other encrypted protocol.
 python,BAN-B313,xml_bad_cElementTree,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.
 python,BAN-B314,xml_bad_ElementTree,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.
@@ -294,10 +285,10 @@ python,FLK8-W391,Blank line at end of file,minor,style,"There should be one, and
 python,FLK8-W503,Line break before binary operator,minor,style,Line breaks should occur after the binary operator to keep all variable names aligned.
 python,FLK8-W504,Line break after binary operator,minor,style,
 python,FLK8-W505,Doc line too long,minor,style,Docstring line lengths are recommended to be no greater than 79 characters.
-python,FLK8-W601,".has_key() is deprecated, use 'in'",major,code-smell,`.has_key()` was deprecated in Python 2. It is recommended to use the in operator instead.
-python,FLK8-W602,deprecated form of raising exception,major,code-smell,"The `raise Exception, message` form of raising exceptions is deprecated. Use the new form, `raise Exception(message)`."
-python,FLK8-W603,"<>' is deprecated, use '!='",major,code-smell,`<>` has been deprecated and removed in Python 3. Replace instances of `<>` with `!=`.
-python,FLK8-W604,"backticks are deprecated, use 'repr()'",major,code-smell,Backticks were deprecated and removed in Python 3. Use the built-in function `repr()` instead.
+python,FLK8-W601,".has_key() is deprecated, use 'in'",major,antipattern,`.has_key()` was deprecated in Python 2. It is recommended to use the in operator instead.
+python,FLK8-W602,deprecated form of raising exception,major,antipattern,"The `raise Exception, message` form of raising exceptions is deprecated. Use the new form, `raise Exception(message)`."
+python,FLK8-W603,"<>' is deprecated, use '!='",major,antipattern,`<>` has been deprecated and removed in Python 3. Replace instances of `<>` with `!=`.
+python,FLK8-W604,"backticks are deprecated, use 'repr()'",major,antipattern,Backticks were deprecated and removed in Python 3. Use the built-in function `repr()` instead.
 python,FLK8-W605,Invalid escape sequence found,major,bug-risk,"As of Python 3.6, a backslash-character pair that is not a valid escape sequence now generates a DeprecationWarning. Although this will eventually become a SyntaxError, that will not be for several Python releases."
 python,FLK8-W606,`async` and `await` are reserved keywords starting with Python 3.7,major,bug-risk,Using these symbols as names can break your code in future.
 python,FLK8-E999,SyntaxError: invalid sytax,critical,bug-risk,A Python syntax error is detected.
@@ -311,7 +302,7 @@ python,PYL-C0202,bad-classmethod-argument,major,style,Use of `cls` as the first 
 python,PYL-C0203,bad-mcs-method-argument,major,style,Use of `cls` as the first named argument in a metaclass method is recommended so it's easy to differentiate them from regular instance methods.
 python,PYL-C0204,bad-mcs-classmethod-argument,major,style,Use of `mcs` as the first named argument in a metaclass class method is recommended so it's easy to differentiate them from regular instance methods.
 python,PYL-C0205,"Slots should be an interable, simple string detected",major,style,"Class slots is a simple string, rather than an iterable."
-python,PYL-C0302,too-many-lines,minor,code-smell,"Having too many lines in a module reduces readability, and may be a sign that refactoring is needed. The recommended maximum number of lines in a module is 1000."
+python,PYL-C0302,too-many-lines,minor,antipattern,"Having too many lines in a module reduces readability, and may be a sign that refactoring is needed. The recommended maximum number of lines in a module is 1000."
 python,PYL-C0325,superfluous-parens,minor,style,Parentheses can be omitted after the keyword.
 python,PYL-C0327,mixed-line-endings,minor,style,There are mixed (LF and CRLF) newline signs in a file.
 python,PYL-C0328,unexpected-line-ending-format,minor,style,Unexpected line ending format.
@@ -333,7 +324,9 @@ python,PYL-E0117,nonlocal-without-binding,major,bug-risk,A name is defined as no
 python,PYL-E0118,used-prior-global-declaration,major,bug-risk,A global name us used prior to it's global declaration.
 python,PYL-E0119,misplaced-format-function,critical,bug-risk,The `format()` function is called on an object that is not a string. This is an error.
 python,PYL-E0202,method-hidden,major,bug-risk,"When a method is defined in a child class which has the same name as an attribute in the ancestor class, the attribute in the ancestor class takes precedence and hides the method."
-python,PYL-E0203,access-member-before-definition,critical,bug-risk,A member of a class is being accessed before its definition. This is an error.
+python,PYL-E0203,Member of class accessed before definition,critical,bug-risk,"A member of a class is being accessed before its definition. This can cause an error while execution.
+
+There can be cases when the member is initialized dynamically or using unconventional methods, like setting a value in the `locals()` dictionary, or using `__setattr__` on an object. Doing so affects readability and is generally not recommended. In such cases, either change the approach, or ignore this issue explicitly for this file."
 python,PYL-E0211,no-method-argument,critical,bug-risk,A method which should have the bound instance as first argument has no argument defined. This is an error.
 python,PYL-E0213,Method should have `self` as the first argument,major,bug-risk,The first argument of instance methods must be named `self`. This is considered an error since this convention is so common that you shouldn't break it.
 python,PYL-E0236,invalid-slots-object,critical,bug-risk,Slots must contain only string objects.
@@ -348,7 +341,9 @@ python,PYL-E0402,Attempted relative import beyond top-level package,critical,bug
 python,PYL-E0604,Invalid object found in `__all__`,critical,bug-risk,The `__all__` list must contain only strings. Having other kinds of objects is an error.
 python,PYL-E0633,Attempting to unpack a non-sequence object,critical,bug-risk,"Unpacking is supported only for sequence objects, like lists, sets, tuples, iterators or generators, etc."
 python,PYL-E0701,Bad `except` order found,critical,bug-risk,Except clauses are not in the correct order (from the more specific to the more generic). Some exceptions may not be caught by the most specific handler.
-python,PYL-E0702,Object of unsupported type raised,critical,bug-risk,Only classess or instances are allowed to be raised. Raising other types is an error.
+python,PYL-E0702,Object of unsupported type raised,critical,bug-risk,"Raising objects other than a class, an instance or a string can cause a `TypeError`.
+
+There can be cases where the value being raised is dynamically set. One common example is setting the value to `None` originally, and then assigning other objects to it based on a condition. Doing so can affect readability, and is generally not recommended. In such cases, either re-write the block, or ignore the issue for this file."
 python,PYL-E0703,"Exception context set to something which is not an exception, nor None",critical,bug-risk,"The syntax `raise ... from ...` can be used only when the exception context is an exception, or `None`. Trying to do so with other object types is an error."
 python,PYL-E0704,The raise statement is not inside an except clause,critical,bug-risk,"A bare raise is used inside something which is not an `except` clause. This generates an error, since there are no active exceptions to be re-raised. An exception to this rule is represented by a bare raise inside a `finally` clause, which might work, as long as an exception is raised inside the `try` block, but it is nevertheless a code smell that must not be relied upon."
 python,PYL-E0710,New-style class raised which doesn't inherit from `BaseException`,critical,bug-risk,New-style classes raised must inherit from `BaseException`.
@@ -367,85 +362,75 @@ python,PYL-E1127,Invalid slice index found,critical,bug-risk,"A slice is indexed
 python,PYL-E1128,"Assigning result of a function call, where the function returns `None`",major,bug-risk,"An assignment is done on a function call but the inferred function returns `None`. While this is allowed in Python, it is an anti-pattern and can lead to unexpected bugs."
 python,PYL-E1129,Object which is not a context manager used with the `with` statement,critical,bug-risk,The object used in the `with` statement doesn't implement the context manager protocol (enter/exit). This is an error.
 python,PYL-E1130,Unary operand used on an unsupported object,critical,bug-risk,A unary operand is used on an object which does not support this type of operation. This is an error.
-python,PYL-E1131,Unsupported binary operations,critical,bug-risk,Binary operation being done between oprands is not supported. This is an error.
+python,PYL-E1131,Unsupported binary operation,critical,bug-risk,Binary operation being done between operands that do not support it. This can cause an error on execution.
 python,PYL-E1132,Multiple values found for keyword argument,critical,bug-risk,The function was invoked with more than one values for a keyword argument. This is an error.
 python,PYL-E1135,Membership test used with unsupported object,critical,bug-risk,A membership test using `in` statement is supported only with objects which implement the membership protocol -- `__contains__` / `__iter__` / `__getitem__`.
 python,PYL-E1136,Subscription used with unsupported object,critical,bug-risk,Subscription can be used only with objects which implement `__getitem__`.
 python,PYL-E1137,Assignment attempted with unsupported object,critical,bug-risk,Assignment is supported only for items which implement `__setitem__`.
 python,PYL-E1138,Deletion attempted with unsupported object,critical,bug-risk,Deletion is supported only for items which implement `__delitem__`.
-python,PYL-E1139,Invalid metaclass,minor,bug-risk,"The class is using, as a metaclass, something which might be invalid for using as a metaclass."
+python,PYL-E1139,Invalid metaclass,major,bug-risk,"The class is using, as a metaclass, something which might be invalid for using as a metaclass."
 python,PYL-E1140,Dictionary key is unhashable,critical,bug-risk,"It is recommended to use strings or integers as keys. If you want to use complex objects, ensure that they are hashable."
 python,PYL-E1200,Unsupported format character used in the logging format string,critical,bug-risk,Logging format string must not contain any unsupported format character.
 python,PYL-E1201,Logging format string terminated in between conversion specifier,critical,bug-risk,Logging statement format string shall not terminate before the end of a conversion specifier.
 python,PYL-E1205,Logging format string contains too many arguments,critical,bug-risk,Too many arguments passed to the logging format string.
 python,PYL-E1206,Logging format string contains very few arguments,critical,bug-risk,Very few arguments are passed to the logging format string.
-python,PYL-E1300,Bad format character,critical,style,An unsupported format character is used in the format string. It is recommended to check the format string once again and see if there is need to escape some special character.
-python,PYL-E1301,Format string truncated,major,style,The format string was terminated before the end of a conversion specifier. It is recommended to look again and verify if the conversion specifier is given.
-python,PYL-E1302,Mixed format string,major,style,"The format string contains both named (e.g. '%(foo)d') and unnamed (e.g. '%d') conversion specifiers.
-This issue is also raised when the named conversion specifier contains * for the minimum field width and/or precision.
-It is recommended to fix this. This may give you an error. "
-python,PYL-E1303,Format needs mapping,major,style,"The Format string that uses named conversion specifiers is used with an argument that is not a mapping. This will raise a TypeError.
-It is recommended to conver the argument into a mapping. Example: Dictionary."
-python,PYL-E1304,Missing format string key,major,style,"The format string that uses named conversion specifiers is used with a dictionary that doesn't contain all the keys required by the format string.
-This is an error.
-It is recommended to review this statement and fix this."
-python,PYL-E1305,Format string contains excess arguments,critical,bug-risk,Format string has been given excess variables to unpack. This is an error. 
-python,PYL-E1306,Not enough arguments found for format string,critical,bug-risk,Format string do not contain enough arguments to unpack. This is an error.
-python,PYL-E1307,Bad string format type,major,style,"The type required by format string is not suitable for actual argument type. This is an error.
-It is recommended to review and fix this."
-python,PYL-E1310,Bad string strip call,minor,code-smell,"The argument to a str.{l,r,}strip call contains a duplicate character. Although this will not cause an error, but it is recommended to remove duplicates.
+python,PYL-E1300,Invalid format character,critical,bug-risk,An unsupported format character is used in the format string. It is recommended to check the format string once again and see if there is need to escape some special character.
+python,PYL-E1301,Format string truncated,major,bug-risk,The format string was terminated before the end of a conversion specifier. It is recommended to look again and verify if the conversion specifier is given.
+python,PYL-E1302,Mixed format string,major,bug-risk,"The format string contains both named (e.g. `%(foo)d`) and unnamed (e.g. `%d`) conversion specifiers.
+This issue is also raised when the named conversion specifier contains * for the minimum field width and/or precision. This may give you an error. "
+python,PYL-E1303,Format needs mapping,major,bug-risk,"The format string that uses named conversion specifiers is used with an argument that is not a mapping. This will raise a `TypeError`.
+It is recommended to convert the argument into a mapping, e. g. a dictionary."
+python,PYL-E1304,Missing format string key,major,bug-risk,The format string that uses named conversion specifiers is used with a dictionary that doesn't contain all the keys required by the format string. This can cause an error.
+python,PYL-E1305,Format string contains excess arguments,critical,bug-risk,Format string has been given excess variables to unpack. This can cause an error.
+python,PYL-E1306,Not enough arguments in format string,critical,bug-risk,Format string do not contain enough arguments to unpack. This can cause an error.
+python,PYL-E1307,Bad string format type,major,bug-risk,The type required by format string is not suitable for actual argument type. This can cause an error.
+python,PYL-E1310,Bad string strip call,minor,antipattern,"The argument to a `str.{l,r,}strip` call contains a duplicate character. Although this will not cause an error, but it is recommended to remove duplicates.
 This may affect the redability."
 python,PYL-E1507,Invalid value passed to access env variable,major,bug-risk,Env manipulation functions support only string type arguments.
-python,PYL-E1601,`print` statement detected,major,style,`print` is being used as a statement here. It has been converted to a function in Python 3. This will cause an error.
-python,PYL-E1602,Parameter unpacking detected,major,style,"Parameter unpacking is specified for a function. It has been removed from Python 3.
-
-Read more about it [here](https://www.python.org/dev/peps/pep-3113/)"
-python,PYL-E1603,Unpacking in except,major,style,"Implicit unpacking of exceptions in except clauses was supported in Python 2. 
-This has been removed from Python 3. Using this will give a SyntaxError.
-
-Read more about this [here](http://www.python.org/dev/peps/pep-3110/)"
-python,PYL-E1604,Old `raise` syntax deteted,major,style,"The alternate raise syntax `raise foo, bar` is used instead of `raise foo(bar)`. This is a syntax error in Python 3."
-python,PYL-E1605,Backtick detected,major,style,"Backtick ""``"" operator has been deprecated. Use the `str()` function instead."
-python,PYL-E1606,Use of long suffix,major,style,"""l"" or ""L"" is used to mark a long integer. This will not work in Python 3, since `int` and `long` types have merged."
-python,PYL-E1607,Old `not equal to` operator,major,style,Do not use `<>` operator. This is removed in Python 3 and will raise a SyntaxError. Use `!=` instead.
-python,PYL-E1608,Old octal literal,major,style,"Old octal syntax is being used. This has been removed in Python 3, and will raise an error.
+python,PYL-E1601,`print` statement detected,major,bug-risk,`print` is being used as a statement here. It has been converted to a function in Python 3. This will cause an error.
+python,PYL-E1602,Parameter unpacking detected,major,bug-risk,Parameter unpacking is specified for a function. It has been removed from Python 3. Read more about it [here](https://www.python.org/dev/peps/pep-3113/)
+python,PYL-E1603,Unpacking in except,major,bug-risk,"Implicit unpacking of exceptions in except clauses was supported in Python 2. 
+This has been removed from Python 3. Using this will give a `SyntaxError`. Read more about this [here](http://www.python.org/dev/peps/pep-3110/)"
+python,PYL-E1604,Old `raise` syntax deteted,major,bug-risk,"The alternate raise syntax `raise foo, bar` is used instead of `raise foo(bar)`. This is a syntax error in Python 3."
+python,PYL-E1605,Backtick detected,major,bug-risk,"Backtick ""``"" operator has been deprecated. Use the `str()` function instead."
+python,PYL-E1606,Use of long suffix,major,bug-risk,"""l"" or ""L"" is used to mark a long integer. This will not work in Python 3, since `int` and `long` types have merged."
+python,PYL-E1607,Old inequality operator used,major,bug-risk,Do not use `<>` operator. This is removed in Python 3 and will raise a SyntaxError. Use `!=` instead.
+python,PYL-E1608,Old octal literal,major,bug-risk,"Old octal syntax is being used. This has been removed in Python 3, and will raise an error.
 To use the new syntax, prepend 0o on the number."
 python,PYL-E1609,import-star-module-level,,,
-python,PYL-E1610,Non ascii bytes literals detected,major,style,Non-ascii bytes literals are being used in a program. They are no longer supported in Python 3.
+python,PYL-E1610,Non ascii bytes literals detected,major,bug-risk,Non-ascii bytes literals are being used in a program. They are no longer supported in Python 3.
 python,PYL-E1700,yield-inside-async-function,,,
 python,PYL-E1701,not-async-context-manager,,,
 python,PYL-E0302,unexpected-special-method-signature,,,
 python,PYL-I1101,c-extension-no-member,,,
-python,PYL-R0123,Comparing to literal,minor,code-smell,"Comparing an object to a literal is usually something you do not want to do, since you can compare to a different literal than what was expected altogether."
-python,PYL-R0124,Comparision with itself,minor,code-smell,"Comparision of an object with itself always returns True.
+python,PYL-R0123,Comparing to literal,minor,antipattern,"Comparing an object to a literal is usually something you do not want to do, since you can compare to a different literal than what was expected altogether."
+python,PYL-R0124,Comparision with itself,minor,antipattern,"Comparision of an object with itself always returns `True`.
 This is redundant."
-python,PYL-R0201,No use of `self`,minor,code-smell,"The method doesn't use its bound instance, and so could be written as a function.
-You may want to make this a staticmethod or move this method out of the classs as pure function.
-Read more about staticmethods [here](https://docs.python.org/3/library/functions.html#staticmethod)"
-python,PYL-R0202,No `@classmethod` decorator,major,style,"It is recommended to use the decorator syntax to declare a classmethod.
+python,PYL-R0201,No use of `self`,minor,antipattern,"The method doesn't use its bound instance, and so could be written as a function. You may want to make this a staticmethod or move this method out of the classs as pure function. Read more about staticmethods [here](https://docs.python.org/3/library/functions.html#staticmethod)"
+python,PYL-R0202,No `@classmethod` decorator,major,antipattern,"It is recommended to use the decorator syntax to declare a classmethod.
 Read more about classmethod [here](https://docs.python.org/3/library/functions.html#classmethod)"
-python,PYL-R0203,No `@staticmethod` decorator,major,style,"It is recommended to use the decorator syntax to declare a staticmethod.
+python,PYL-R0203,No `@staticmethod` decorator,major,antipattern,"It is recommended to use the decorator syntax to declare a staticmethod.
 Read more about staticmethod [here](https://docs.python.org/3/library/functions.html#staticmethod)"
-python,PYL-R0205,Useless inheritance from `object`,minor,style,"The class is inheriting from `object`, which is implicit under Python3 , hence can be safely removed from bases."
-python,PYL-R0401,Cyclic import found,minor,code-smell,"Cyclic imports shall be avoided.
-Read why are they fatal [here.](https://datagrok.org/python/circularimports/)
+python,PYL-R0205,Useless inheritance from `object`,minor,antipattern,"The class is inheriting from `object`, which is implicit under Python3 , hence can be safely removed from bases."
+python,PYL-R0401,Cyclic import found,minor,antipattern,"Cyclic imports shall be avoided.
+Read why are they fatal [here](https://datagrok.org/python/circularimports/).
 
-Read more about avoiding cyclic imports [here.](https://stackoverflow.com/questions/7336802/how-to-avoid-circular-imports-in-python)"
-python,PYL-R0801,Duplicate code,major,code-smell,Similar lines has been detected among multiple file. This usually means that the code should be refactored to avoid this duplication.
+Read more about avoiding cyclic imports [here](https://stackoverflow.com/questions/7336802/how-to-avoid-circular-imports-in-python)."
+python,PYL-R0801,Duplicate code,major,antipattern,Similar lines has been detected among multiple file. This usually means that the code should be refactored to avoid this duplication.
 python,PYL-R0901,too-many-ancestors,,,
 python,PYL-R0902,too-many-instance-attributes,,,
 python,PYL-R0903,too-few-public-methods,,,
 python,PYL-R0904,too-many-public-methods,,,
-python,PYL-R0911,Too many return statements,minor,code-smell,"Although there is nothing wrong with this, but it is recommended to refactor this since having too many return statements may make the code hard to follow."
-python,PYL-R0912,Too many branches,minor,code-smell,"Although there is nothing wrong with this, but it is recommended to refactor this since having too many branches may make the code hard to follow."
+python,PYL-R0911,Too many `return` statements,minor,antipattern,"Although there is nothing wrong with this, but it is recommended to refactor this since having too many return statements may make the code hard to follow."
+python,PYL-R0912,Too many branches,minor,antipattern,"Although there is nothing wrong with this, but it is recommended to refactor this since having too many branches may make the code hard to follow."
 python,PYL-R0913,Too many arguments,,,
 python,PYL-R0914,Too many locals,,,
-python,PYL-R0915,Too many statements,minor,code-smell,"Although there is nothing wrong with this, but it is recommended to split this into smaller functions / methods to have a better redability."
+python,PYL-R0915,Too many statements,minor,antipattern,"Although there is nothing wrong with this, but it is recommended to split this into smaller functions / methods to have a better redability."
 python,PYL-R0916,Too many boolean expressions,,,
-python,PYL-R1701,Consider merging `isinstance` calls,minor,code-smell,It is recommended to merge multiple consecutive `isinstance` calls into one for better readability.
-python,PYL-R1702,Too many nested block,minor,code-smell,"Although there is nothing wrong with this, but it is recommended to refactor this since having too many nested blocks may make the code hard to follow."
+python,PYL-R1701,Consider merging `isinstance` calls,minor,antipattern,It is recommended to merge multiple consecutive `isinstance` calls into one for better readability.
+python,PYL-R1702,Too many nested block,minor,antipattern,"Although there is nothing wrong with this, but it is recommended to refactor this since having too many nested blocks may make the code hard to follow."
 python,PYL-R1703,simplifiable-if-statement,,,
-python,PYL-R1704,Argument redefined from local,major,code-smell,"A local name is redefining an argument, which might suggest a potential error. This is taken in account only for a handful of name binding operations, such as for iteration, with statement assignment and exception handler assignment."
+python,PYL-R1704,Argument redefined from local,major,antipattern,"A local name is redefining an argument, which might suggest a potential error. This is taken in account only for a handful of name binding operations, such as for iteration, with statement assignment and exception handler assignment."
 python,PYL-R1705,no-else-return,,,
 python,PYL-R1706,consider-using-ternary,,,
 python,PYL-R1707,trailing-comma-tuple,,,
@@ -456,40 +441,30 @@ python,PYL-R1711,useless-return,,,
 python,PYL-R1712,consider-swap-variables,,,
 python,PYL-R1713,consider-using-join,,,
 python,PYL-R1714,consider-using-in,,,
-python,PYL-R1715,Use `get()` method to access values from a dictionary,major,code-smell,"In case of checking if key exists in the dictionary and then fetching the value, it is recommended to use the built-in method `dict.get(key[, default])`. This returns the respective value if key exists in the dictionary, else returns a default value, avoiding the dictionary lookup twice.
+python,PYL-R1715,Use `get()` method to access values from a dictionary,,antipattern,"In case of checking if key exists in the dictionary and then fetching the value, it is recommended to use the built-in method `dict.get(key[, default])`. This returns the respective value if key exists in the dictionary, else returns a default value, avoiding the dictionary lookup twice.
 It is simpler and considered more idiomatic, although it is sometimes a bit slower than accessing the value directly."
-python,PYL-R1716,Chained comarision detected,minor,code-smell,"Detected boolean operation like`a < b and b < c`.
-It is recommended to refactor it to ""a < b < c"". It improves the redability,"
-python,PYL-R1717,Consider using a dictionary comprehension,minor,code-smell,"Although there is nothing syntactically wrong with this code, it is hard to read and can be simplified to a dict comprehension.
-Also it is faster since there is no need to create another transient list"
-python,PYL-R1718,consider-using-set-comprehension,minor,code-smell,"Although there is nothing syntactically wrong with this code, it is hard to read and can be simplified to a set comprehension.
-Also it is faster since there is no need to create another transient list"
-python,PYL-W0101,Statement not reachable on execution,major,code-smell,"This statement is unreachable, as the control flow will never reach upto this point. Consider removing this part of code or re-evaluating the control flow."
+python,PYL-R1716,Chained comarision detected,minor,antipattern,"Detected boolean operation like`a < b and b < c`.
+It is recommended to refactor it to `a < b < c`. It improves the redability,"
+python,PYL-R1717,Consider using a dictionary comprehension,minor,performance,"Although there is nothing syntactically wrong with this code, it is hard to read and can be simplified to a dict comprehension. Also it is faster since there is no need to create another transient list."
+python,PYL-R1718,Consider using a set comprehension,minor,performance,"Although there is nothing syntactically wrong with this code, it is hard to read and can be simplified to a set comprehension. Also it is faster since there is no need to create another transient list."
+python,PYL-W0101,Statement not reachable on execution,major,antipattern,"This statement is unreachable, as the control flow will never reach upto this point. Consider removing this part of code or re-evaluating the control flow."
 python,PYL-W0102,Dangerous default argument,critical,bug-risk,Do not use a mutable like `list` or `dictionary` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.
-python,PYL-W0104,Statement has no effect,major,code-smell,The expression or statement is pointless and will have no effect on the program on execution.
+python,PYL-W0104,Statement has no effect,major,antipattern,The expression or statement is pointless and will have no effect on the program on execution.
 python,PYL-W0105,pointless-string-statement,,,
-python,PYL-W0106,Expression not assigned,minor,code-smell,"An expression that is not a function call is assigned to nothing. Probably something else was intended here.
-We recommend to review this. Ignore if this is intended. "
+python,PYL-W0106,Expression not assigned,minor,antipattern,An expression that is not a function call is assigned to nothing. Probably something else was intended here. We recommend to review this. Ignore if this is intended. 
 python,PYL-W0108,Unnecessary lambda expression,major,bug-risk,A lambda that calls a function without modifying any of its parameters is unnecessary. Python functions are first class objects and can be passed around in the same way as the resulting lambda. It is recommended to remove the lambda and use the function directly.
 python,PYL-W0109,Duplicate dictionary keys,major,bug-risk,"Dictionary expression binds the same key multiple times. This is not recommended as this may lead to unintentional behaviour.
 It is recommendes to have unique dictionary keys."
-python,PYL-W0111,Assignment to a new keyword,major,bug-risk,"Assignment is being done to a variable which will become a keyword in the future releases.
-This statement, which is working fine right now, will give an error in the next Python version.
-We recommend you to rename this variable. "
+python,PYL-W0111,Assignment to a new keyword,major,bug-risk,"Assignment is being done to a variable which will become a keyword in the future releases. This statement, which is working fine right now, will give an error in the next Python version. We recommend you to rename this variable. "
 python,PYL-W0120,Useless else clause detected on the loop,major,bug-risk,"When a loop specifies no break statement, the else clause will always execute when the loop sequence is empty, thus making it useless. It is recommended to have the statements under else in the same scope as the loop itself. If the else clause should not always execute at the end of a loop clause, then the code should add a break statement within the loop block."
-python,PYL-W0122,Audit required: Use of `exec`,major,security,"Usage of `exec` function is strongly discouraged, since it opens up possibilities of unauthorized code execution if the statements are not escaped properly.
-That doesn't mean you cannot use it ! But, it is recommended it avoid it's use.
-
-Read more on why should `exec` be avoided here -- [https://stackoverflow.com/questions/1933451/why-should-exec-and-eval-be-avoided](https://stackoverflow.com/questions/1933451/why-should-exec-and-eval-be-avoided)"
-python,PYL-W0123,Audit required: Use of `eval`,major,security,"Use of possibly insecure function - consider using safer `ast.literal_eval`.
-
-Read more on why should `eval` be avoided here -- [https://stackoverflow.com/questions/1933451/why-should-exec-and-eval-be-avoided](https://stackoverflow.com/questions/1933451/why-should-exec-and-eval-be-avoided)"
+python,PYL-W0122,Audit required: Use of `exec`,major,security,"Usage of `exec` function is strongly discouraged, since it opens up possibilities of unauthorized code execution if the statements are not escaped properly. Read more on why should `exec` be avoided [here](https://stackoverflow.com/questions/1933451/why-should-exec-and-eval-be-avoided)."
+python,PYL-W0123,Audit required: Use of `eval`,major,security,Use of possibly insecure function - consider using safer `ast.literal_eval`. Read more on why should `eval` be avoided [here](https://stackoverflow.com/questions/1933451/why-should-exec-and-eval-be-avoided).
 python,PYL-W0124,`as` with another context manager looks like a tuple,minor,bug-risk,"This `with` statement component returns multiple values and uses name binding with `as` only for a part of those values, as in with ctx() as a, b. This can be misleading, since it's not clear if the context manager returns a tuple or if the node without a name binding is another context manager."
-python,PYL-W0125,Conditional statement used with a constant value,major,code-smell,Using a conditional statement with a constant value is pointless and will always evaluate to either True or False. This might not be what is intended.
+python,PYL-W0125,Conditional statement used with a constant value,major,antipattern,Using a conditional statement with a constant value is pointless and will always evaluate to either True or False. This might not be what is intended.
 python,PYL-W0143,comparison-with-callable,,,
 python,PYL-W0150,Exception might be lost,major,bug-risk,The `finally` block may swallow any exceptions raised in the `try` block. This can pose a bug risk.
 python,PYL-W0199,`assert` called on tuple,major,bug-risk,"A call of `assert` on a tuple will always evaluate to `True` if the tuple is not empty, and will always evaluate to `False` if it is. "
-python,PYL-W0201,Attribute defined outside `__init__`,minor,code-smell,"Defining an instance attribute outside `__init__` affects the readability of code. It is expected to find all the attributes an instance may have by reading its `__init__` method. If there is a need to initialize attribute via sub-initialization methods, it is recommended to assign attributes to `None` in the __init__ then call the sub-initialization methods."
+python,PYL-W0201,Attribute defined outside `__init__`,minor,antipattern,"Defining an instance attribute outside `__init__` affects the readability of code. It is expected to find all the attributes an instance may have by reading its `__init__` method. If there is a need to initialize attribute via sub-initialization methods, it is recommended to assign attributes to `None` in the __init__ then call the sub-initialization methods."
 python,PYL-W0211,Bad `staticmethod` argument detected,major,bug-risk,"It is customary for instance or class methods to take `self` or `cls`, respectively, as their first arguments, a method that uses either of these names but is found to be a static method may have been defined incorrectly. Choose names other than `self` or `cls` for arguments to avoid confusing other programmers looking at your code."
 python,PYL-W0212,Protected member accessed from outside outside the class,minor,bug-risk,"Accessing a protected member (a member prefixed with `_`) of a class from outside that class is not recommended, since the creator of that class did not intend this member to be exposed. If accesing this attribute outside of the class is absolutely needed, refactor it such that it becomes part of the public interface of the class."
 python,PYL-W0221,arguments-differ,,,
@@ -512,27 +487,27 @@ python,PYL-W0511,fixme,,,
 python,PYL-W0512,invalid-encoded-data,,,
 python,PYL-W0601,global-variable-undefined,,,
 python,PYL-W0602,Global variable is declared but not used,major,bug-risk,The variable is defined through the `global` statement but no assignment to this variable is done. It is recommended to remove it if not necessary.
-python,PYL-W0603,global-statement,,code-smell,
-python,PYL-W0604,Use of `global` at module level,major,code-smell,"The global statement is used to specify that the assignment to that name is an assignment to the variable in the global (module) scope, rather than in the local scope. At the module level, this statement is redundant because the local scope and global scope are the same.
+python,PYL-W0603,global-statement,,antipattern,
+python,PYL-W0604,Use of `global` at module level,major,antipattern,"The global statement is used to specify that the assignment to that name is an assignment to the variable in the global (module) scope, rather than in the local scope. At the module level, this statement is redundant because the local scope and global scope are the same.
 It is recommended to remove the `global` statement."
-python,PYL-W0611,Module imported but unused,major,code-smell,A module has been imported but is not used anywhere in the file. The module should either be used or the import should be removed.
-python,PYL-W0612,Unused variable found,major,code-smell,"An unused variable take up space in the code, and can lead to confusions. It should be removed. If this variable is necessary, name the variable `_` or start the name with `unused` or `_unused`."
-python,PYL-W0613,Function contains unused argument,major,code-smell,"An unused argument can lead to confusions. It should be removed. If this variable is necessary, name the variable `_` or start the name with `unused` or `_unused`."
-python,PYL-W0614,Unused import from wildcard import found,major,code-smell,"In a wildcard import, all public names defined in the module are imported. It is advised to explicitly import the values needed or modify the module being imported from and define __all__ to restrict the names to be imported. "
-python,PYL-W0621,Re-defined variable from outer scope,major,code-smell,"Local variable name hides the variable defined in the outer space, making it inaccesible. It may cause confusion."
-python,PYL-W0622,Re-definition found for builtin function,critical,code-smell,Defining a local variable or function with the same name as a built-in object makes the built-in object unusable within the current scope and makes the code more difficult to read.
+python,PYL-W0611,Module imported but unused,major,antipattern,A module has been imported but is not used anywhere in the file. The module should either be used or the import should be removed.
+python,PYL-W0612,Unused variable found,major,antipattern,"An unused variable take up space in the code, and can lead to confusions. It should be removed. If this variable is necessary, name the variable `_` or start the name with `unused` or `_unused`."
+python,PYL-W0613,Function contains unused argument,major,antipattern,"An unused argument can lead to confusions. It should be removed. If this variable is necessary, name the variable `_` or start the name with `unused` or `_unused`."
+python,PYL-W0614,Unused import from wildcard import found,major,antipattern,"In a wildcard import, all public names defined in the module are imported. It is advised to explicitly import the values needed or modify the module being imported from and define __all__ to restrict the names to be imported. "
+python,PYL-W0621,Re-defined variable from outer scope,major,antipattern,"Local variable name hides the variable defined in the outer space, making it inaccesible. It may cause confusion."
+python,PYL-W0622,Re-definition found for builtin function,critical,antipattern,Defining a local variable or function with the same name as a built-in object makes the built-in object unusable within the current scope and makes the code more difficult to read.
 python,PYL-W0623,redefine-in-handler,,,
 python,PYL-W0631,Loop variable used outside the loop,critical,bug-risk, Do not use a loop variable (i.e. defined by a for loop or a list comprehension or a generator expression) outside the loop. It can induce wrong results.
 python,PYL-W0632,Unbalanced tuple unpacking,major,bug-risk,Possible unbalanced tuple unpacking detected: either left or right side of the statement has more labels. This can raise `ValueError` while unpacking.
 python,PYL-W0640,cell-var-from-loop,,,
 python,PYL-W0641,possibly-unused-variable,,,
 python,PYL-W0642,Assignment to `self` or `cls` detected,major,bug-risk,Assignment to `self` and `cls` is invalid and strongly discouraged. Doing so can cause errors when accessing the object or the class.
-python,PYL-W0703,Exception caught is very general,major,code-smell,"If the except block catches a very general exception, it is likely to include many unrelated errors too. Try to be more precise while catching the exception."
+python,PYL-W0703,Exception caught is very general,major,antipattern,"If the except block catches a very general exception, it is likely to include many unrelated errors too. Try to be more precise while catching the exception."
 python,PYL-W0705,Catching previously caught exception,critical,bug-risk,"In a `try` block, one type of exception shall be caught only once. Do not catch the same exception again."
 python,PYL-W0706,Except handler raises immediately,critical,bug-risk,Using `raise` as the first or only operator of an except handler is useless because it raises back the exception immediately. Remove the `raise` operator or the entire `try-except-raise` block.
 python,PYL-W0711,Exception to catch is the result of a binary operation,critical,bug-risk,"Do not use binary operations (or, and) to catch exceptions. If intending to catch multiple exceptions, rewrite as ""except (A, B):"""
-python,PYL-W0715,Exception arguments suggest string formatting might be intended,major,code-smell,"Found multiple arguments to an exception constructor, the first of them a string literal containing what appears to be placeholders intended for formatting. In this case, it is recommended to format the message properly."
-python,PYL-W1113,Keyword argument defined before variable positional arguments,minor,code-smell,"On defining a keyword argument before variable positional arguments, one can end up in having multiple values passed for the aforementioned parameter in case the method is called with keyword arguments. It is recommended to define keyword arguments after variable positional arguments. "
+python,PYL-W0715,Exception arguments suggest string formatting might be intended,major,antipattern,"Found multiple arguments to an exception constructor, the first of them a string literal containing what appears to be placeholders intended for formatting. In this case, it is recommended to format the message properly."
+python,PYL-W1113,Keyword argument defined before variable positional arguments,minor,antipattern,"On defining a keyword argument before variable positional arguments, one can end up in having multiple values passed for the aforementioned parameter in case the method is called with keyword arguments. It is recommended to define keyword arguments after variable positional arguments. "
 python,PYL-W1201,logging-not-lazy,,,
 python,PYL-W1202,logging-format-interpolation,,,
 python,PYL-W1203,logging-fstring-interpolation,,,
@@ -544,14 +519,14 @@ python,PYL-W1304,unused-format-string-argument,,,
 python,PYL-W1305,format-combined-specification,,,
 python,PYL-W1306,missing-format-attribute,,,
 python,PYL-W1307,invalid-format-index,,,
-python,PYL-W1308,Duplicate string formatting argument found,minor,code-smell,String argument is repeating an argument. Consider passing arguments as named arguments.
+python,PYL-W1308,Duplicate string formatting argument found,minor,antipattern,String argument is repeating an argument. Consider passing arguments as named arguments.
 python,PYL-W1401,Anomalous backslash detected,major,style,Backslash is present in the literal string but not as an escape. String constant might be missing an `r` prefix.
 python,PYL-W1402,anomalous-unicode-escape-in-string,,,
 python,PYL-W1403,implicit-str-concat-in-sequence,,,
 python,PYL-W1501,Bad open mode for file,major,bug-risk,"The mode with which the file is opened is not valid. Python supports: r, w, a[, x] modes with b, +, and U (only with r) options."
 python,PYL-W1502,boolean-datetime,,,
 python,PYL-W1503,redundant-unittest-assert,,,
-python,PYL-W1505,Method used has been deprecated,major,code-smell,The method is marked as deprecated and will be removed in a future version of Python. Consider looking for an alternative in the documentation.
+python,PYL-W1505,Method used has been deprecated,major,antipattern,The method is marked as deprecated and will be removed in a future version of Python. Consider looking for an alternative in the documentation.
 python,PYL-W1506,bad-thread-instantiation,,,
 python,PYL-W1507,shallow-copy-environ,,,
 python,PYL-W1508,invalid-envvar-default,,,
@@ -610,33 +585,33 @@ python,PYL-W1652,deprecated-types-field,,,
 python,PYL-W1653,next-method-defined,,,
 python,PYL-W1654,dict-items-not-iterating,,,
 python,PYL-W1655,dict-keys-not-iterating,,,
-python,PYL-W1656,Dictionary attribute `items()` referenced when not iterating,minor,code-smell,
+python,PYL-W1656,Dictionary attribute `items()` referenced when not iterating,minor,antipattern,
 python,PYL-W1657,Accessed a removed attribute on the operator module,major,bug-risk,The attribute you are trying to access has been removed in the version of Python you are using (Python 3). Please consult the documentation.
 python,PYL-W1658,Accessed a removed attribute on the `urllib` module,major,bug-risk,This attribute of `urllib` module has been removed or moved to Python 3. Please consult the documentation.
 python,PYL-W1659,Accessed the removed xreadlines attribute,major,bug-risk,This attribute has been removed in Python 3. Please consult the documentation.
 python,PYL-W1660,Accessed a removed attribute on the `sys` module,major,bug-risk,This attribute of `sys` module has been removed in Python 3. Please consult the documentation.
 python,PYL-W1661,Used an exception object that was bound by an except handler,major,bug-risk,"An exception, that was bound in an except handler, shall not be used outside of the except handler. On Python 3 these exceptions will be deleted once they get out of the except handler, and will give an error on being used."
 python,PYL-W1662,Used a variable that was bound inside a comprehension,minor,bug-risk,"Accessed a variable, that was bound in a comprehension handler, outside of the comprehension itself. On Python 3 these variables will be deleted outside of the comprehension, and will give an error on being used."
-python,PAP-W0006,Getter method detected in class,minor,code-smell,"Instead of having a method like `get_attribute`, it is recommended to use `@property` decorator to get the value of attribute."
-python,PAP-W0007,Setter method detected in class,minor,code-smell,"Instead of having a set method to set the value of the attribute, it is recommended to use `@<attribute_name>.setter` decorator."
-python,PAP-W0009,Multiple return types found in function,major,code-smell,"Returning objects of different types from a function can lead to problems that are difficult to debug. Instead, it is better to raise an exception that can be caught where the function is called."
-python,PAP-W0010,File opened without the `with` statement,critical,code-smell,Opening a file using `with` statement is preferred as function `open` implements the context manager protocol that release the resource when it is outside of the `with` block. Not doing so requires you to manually release the resource.
-python,PAP-W0011,Use `items()` to iterate over a dictionary,major,code-smell,"The preferred way to iterate over the key-value pairs of a dictionary is to declare two variables in a for loop, and then call `dictionary.items()` (or `dictionary.iteritems()` for Python2), where dictionary is the name of your variable representing a dictionary.'"
-python,PAP-W0012,Use `get()` method to access values from a dictionary,major,code-smell,"In case of checking if key exists in the dictionary and then fetching the value, it is recommended to use the built-in method `dict.get(key[, default])`. This returns the respective value if key exists in the dictionary, else returns a default value, avoiding the dictionary lookup twice."
-python,PAP-W0013,Debugger import detected,major,code-smell,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code.
-python,PAP-W0014,Debugger activation detected,critical,code-smell,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code. This may cause your application to have unintended side-effects.
-python,PAP-W0015,Unnecessary generator,minor,code-smell,"It is unnecessary to use `list`, `set`, `dict` around a generator expression to get object of that type, since there are comprehensions for these types."
-python,PAP-W0016,Unnecessary comprehension,major,code-smell,"Builtin functions like `all`, `any`, `enumerate`, `frozenset`, `iter`, `max`, `min`, `sum`, `tuple`, `itertools.cycle`, `itertools.accumulate`, can work directly with a generator expression. They do not require comprehension.
+python,PAP-W0006,Getter method detected in class,minor,antipattern,"Instead of having a method like `get_attribute`, it is recommended to use `@property` decorator to get the value of attribute."
+python,PAP-W0007,Setter method detected in class,minor,antipattern,"Instead of having a set method to set the value of the attribute, it is recommended to use `@<attribute_name>.setter` decorator."
+python,PAP-W0009,Multiple return types found in function,major,antipattern,"Returning objects of different types from a function can lead to problems that are difficult to debug. Instead, it is better to raise an exception that can be caught where the function is called."
+python,PAP-W0010,File opened without the `with` statement,critical,antipattern,Opening a file using `with` statement is preferred as function `open` implements the context manager protocol that release the resource when it is outside of the `with` block. Not doing so requires you to manually release the resource.
+python,PAP-W0011,Use `items()` to iterate over a dictionary,major,antipattern,"The preferred way to iterate over the key-value pairs of a dictionary is to declare two variables in a for loop, and then call `dictionary.items()` (or `dictionary.iteritems()` for Python2), where dictionary is the name of your variable representing a dictionary.'"
+python,PAP-W0012,Use `get()` method to access values from a dictionary,major,antipattern,"In case of checking if key exists in the dictionary and then fetching the value, it is recommended to use the built-in method `dict.get(key[, default])`. This returns the respective value if key exists in the dictionary, else returns a default value, avoiding the dictionary lookup twice."
+python,PAP-W0013,Debugger import detected,major,antipattern,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code.
+python,PAP-W0014,Debugger activation detected,critical,antipattern,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code. This may cause your application to have unintended side-effects.
+python,PAP-W0015,Unnecessary generator,,antipattern,"It is unnecessary to use `list`, `set`, `dict` around a generator expression to get object of that type, since there are comprehensions for these types."
+python,PAP-W0016,Unnecessary comprehension,,antipattern,"Builtin functions like `all`, `any`, `enumerate`, `frozenset`, `iter`, `max`, `min`, `sum`, `tuple`, `itertools.cycle`, `itertools.accumulate`, can work directly with a generator expression. They do not require comprehension.
 
 The inbuilt functions `all()` and `any()` in python also support short-circuiting, but this behaviour is lost if you use comprehension. This affects the performance. "
-python,PAP-W0017,Redundant call,major,code-smell,"It is unnecessary to use e.g. `list` around list comprehension, 'since it is equivalent without it.
+python,PAP-W0017,Redundant call,,antipattern,"It is unnecessary to use e.g. `list` around list comprehension, 'since it is equivalent without it.
 Same goes for `set` and `dictionary` comprehensions."
-python,PAP-W0018,Unnecessary literal,minor,code-smell,"It is unnecessary to use a `list` or `tuple` literal within a call to `tuple`, `list`, `set`, or `dict` since there is literal syntax for  these types."
-python,PAP-W0019,Unnecessary call,minor,code-smell,"It is slower to call e.g. `dict()` than using the empty literal, because the name dict must be looked up in the global scope in case it has been rebound. Same for the other two basic types `list()` and `set()`."
-python,PAP-W0020,Unnecessary typecast,minor,code-smell,Object is being type casted to the same type. This is unnecessary.
-python,BAN-W1003,Audit required: Insecure hash function,major,security,"MD2, MD4, MD5, SHA1 signature algorithms are known to be vulnerable to collision attacks. Attackers can exploit this to generate another certificate with the same digital signature, allowing them to masquerade as the affected service."
-python,BAN-W1004,Audit required: Insecure cipher,major,security,Cipher used is not secure. It is recommended to replace with a known secure cipher such as AES.
-python,BAN-W1005,Audit required: Insecure cipher mode,major,security,"Use of insecure cipher mode such as `ECB` is not recommended for use in cryptographic protocols at all.
+python,PAP-W0018,Unnecessary literal,,antipattern,"It is unnecessary to use a `list` or `tuple` literal within a call to `tuple`, `list`, `set`, or `dict` since there is literal syntax for  these types."
+python,PAP-W0019,Unnecessary call,,antipattern,"It is slower to call e.g. `dict()` than using the empty literal, because the name dict must be looked up in the global scope in case it has been rebound. Same for the other two basic types `list()` and `set()`."
+python,PAP-W0020,Unnecessary typecast,,antipattern,Object is being type casted to the same type. This is unnecessary.
+python,BAN-W1003,Audit required: Insecure hash function,,security,"MD2, MD4, MD5, SHA1 signature algorithms are known to be vulnerable to collision attacks. Attackers can exploit this to generate another certificate with the same digital signature, allowing them to masquerade as the affected service."
+python,BAN-W1004,Audit required: Insecure cipher,,security,Cipher used is not secure. It is recommended to replace with a known secure cipher such as AES.
+python,BAN-W1005,Audit required: Insecure cipher mode,,security,"Use of insecure cipher mode such as `ECB` is not recommended for use in cryptographic protocols at all.
 
 In case of `ECB`, it encrypts identical plaintext blocks into identical ciphertext blocks; and does not hide data patterns well. In some senses, it doesn't provide serious message confidentiality.
 
@@ -644,12 +619,12 @@ Read more about different cipher modes here --
 [https://cryptography.io/en/latest/hazmat/primitives/symmetric-encryption/#module-cryptography.hazmat.primitives.ciphers.modes](https://cryptography.io/en/latest/hazmat/primitives/symmetric-encryption/#module-cryptography.hazmat.primitives.ciphers.modes)"
 python,PYL-W5198,New column added in database with a default value,major,performance,The prefered way is to add a new DB column with `null=True` because it will be created instantly and then possibly populate the table with the desired default values. Adding a default value will lead to a performance issue if the existing table has a large number of rows.
 python,PYL-W5104,`exclude` used in a `ModelForm`,major,bug-risk,"It is recommended to use explicit fields instead of `exclude` in a `ModelForm`. This prevents accidentally setting fields, especially when adding new fields to a model."
-python,PYL-R5101,`HttpResponse` used to return JSON response,major,code-smell,"It is recommended to use `JsonResponse` to return JSON data instead of HttpResponse.
+python,PYL-R5101,`HttpResponse` used to return JSON response,major,antipattern,"It is recommended to use `JsonResponse` to return JSON data instead of HttpResponse.
 `HttpResponse(json.dumps(data))` can be replaced with `JsonResponse(data)`, where `data` is a JSON-serializable object."
-python,PYL-R5102,`HttpResponse()` returns `application/json` content type,major,code-smell,"It is recommended to use `JsonResponse` to return JSON content.
+python,PYL-R5102,`HttpResponse()` returns `application/json` content type,major,antipattern,"It is recommended to use `JsonResponse` to return JSON content.
 `HttpResponse(content_type='application/json)` can be replaced with just `JsonResponse()`."
-python,PYL-R5103,Redundant `content_type` parameter for `JsonResponse()` detected,major,code-smell,"`JsonResponse()` contains `content_type` parameter. This is either redundant or the content_type is not JSON, which is probably an error."
-python,PYL-E5101,Model's `__unicode__` is not callable,major,code-smell,Django models require a `__unicode__` method which must be callable.
-python,PYL-W5101,Model missing `__unicode__` method,minor,code-smell,Django models should implement a `__unicode__ ` method for string representation.
-python,PYL-W5102,Model has `__unicode__` method,major,code-smell,Django models should not implement a `__unicode__` method for string representation when using Python 3. Use `__str__` instead.
-python,PYL-W5103,Model does not explicitly define `__unicode__`,minor,code-smell,"Django models should implement a `__unicode__` method for string representation.  A parent class of this model does, but ideally all models should be explicit."
+python,PYL-R5103,Redundant `content_type` parameter for `JsonResponse()` detected,major,antipattern,"`JsonResponse()` contains `content_type` parameter. This is either redundant or the content_type is not JSON, which is probably an error."
+python,PYL-E5101,Model's `__unicode__` is not callable,major,antipattern,Django models require a `__unicode__` method which must be callable.
+python,PYL-W5101,Model missing `__unicode__` method,minor,antipattern,Django models should implement a `__unicode__ ` method for string representation.
+python,PYL-W5102,Model has `__unicode__` method,major,antipattern,Django models should not implement a `__unicode__` method for string representation when using Python 3. Use `__str__` instead.
+python,PYL-W5103,Model does not explicitly define `__unicode__`,minor,antipattern,"Django models should implement a `__unicode__` method for string representation.  A parent class of this model does, but ideally all models should be explicit."
