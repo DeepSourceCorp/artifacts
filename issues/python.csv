@@ -249,7 +249,6 @@ python,FLK8-E743,"Do not define functions named 'l', 'O', or 'I'",major,style,"F
 Change the names of these functions to something more descriptive."
 python,FLK8-F402,import module from line N shadowed by loop variable,major,bug-risk,Loop variables should not redefine the name of modules that are imported.
 python,FLK8-F403,‘from module import *’ used; unable to detect undefined names,major,bug-risk,"`from module import *` is discouraged because the programmer often won’t know where an imported object is defined. The imported module, class, or function should be explicitly defined."
-python,FLK8-F404,future import(s) name after other statements,major,style,Imports from `__future__` should be the first imports in a file.
 python,FLK8-F405,"name may be undefined, or defined from star imports: module",major,bug-risk,"This warning occurs in conjunction with issue FLK8-F403, `'from module import *'` used. It means that the variable name could be undefined, but we cannot be sure because it also could also be imported in the star imports.
 
 Confirm that the variable is defined in the star imports. If it is, explicitly import it instead of importing `*`. If not, then define the variable."
@@ -301,7 +300,9 @@ python,PYL-C0201,Consider iterating dictionary,major,style,"Consider iterating t
 python,PYL-C0202,bad-classmethod-argument,major,style,Use of `cls` as the first named argument in a class method is recommended so it's easy to differentiate them from regular instance methods.
 python,PYL-C0203,bad-mcs-method-argument,major,style,Use of `cls` as the first named argument in a metaclass method is recommended so it's easy to differentiate them from regular instance methods.
 python,PYL-C0204,bad-mcs-classmethod-argument,major,style,Use of `mcs` as the first named argument in a metaclass class method is recommended so it's easy to differentiate them from regular instance methods.
-python,PYL-C0205,"Slots should be an interable, simple string detected",major,style,"Class slots is a simple string, rather than an iterable."
+python,PYL-C0205,"Slots are recommended to be an iterable, simple string detected",major,style,"While it's technically correct to have simple strings as slot values, it is recommended to use an iterable like a `tuple` or a `list`. It's very common to add more than one property names in the slots, and even if there's one property name at the present, having that as a one-member iterable is more clear than a string.
+
+This is a convention and helps it easier to understand and extend your code."
 python,PYL-C0302,too-many-lines,minor,antipattern,"Having too many lines in a module reduces readability, and may be a sign that refactoring is needed. The recommended maximum number of lines in a module is 1000."
 python,PYL-C0325,superfluous-parens,minor,style,Parentheses can be omitted after the keyword.
 python,PYL-C0327,mixed-line-endings,minor,style,There are mixed (LF and CRLF) newline signs in a file.
@@ -431,16 +432,64 @@ python,PYL-R1701,Consider merging `isinstance` calls,minor,antipattern,It is rec
 python,PYL-R1702,Too many nested block,minor,antipattern,"Although there is nothing wrong with this, but it is recommended to refactor this since having too many nested blocks may make the code hard to follow."
 python,PYL-R1703,simplifiable-if-statement,,,
 python,PYL-R1704,Argument redefined from local,major,antipattern,"A local name is redefining an argument, which might suggest a potential error. This is taken in account only for a handful of name binding operations, such as for iteration, with statement assignment and exception handler assignment."
-python,PYL-R1705,no-else-return,,,
-python,PYL-R1706,consider-using-ternary,,,
-python,PYL-R1707,trailing-comma-tuple,,,
-python,PYL-R1708,stop-iteration-return,,,
+python,PYL-R1705,Unnecessary else/elif,minor,antipattern,"The else/elif block here is unnecessary because the leading if block has a return statement.
+This doesn't mean you can not use it, but it is recommended to remove this else/elif statement for a better redability.
+
+BAD:
+```
+def some_function(x):
+    if (x % 2 == 0):
+        return ""Even""
+    else:
+        return ""Odd""
+```
+GOOD:
+```
+def some_function(x):
+    if (x % 2 == 0):
+        return ""Even""
+    return ""Odd""
+```"
+python,PYL-R1706,Consider using ternary,minor,style,"One of known pre-python 2.5 ternary syntax is being used. It is recommended to use : `a if condition else b`.
+Using `[expression] and [on_true] or [on_false]` may also give wrong results when `on_true` has a false boolean value."
+python,PYL-R1707,Trailing comma tuple detedted,minor,bug-risk,"In Python, a tuple can be created by the comma symbol. It is possible that one can actually create a tuple by misplacing a trailing comma, which can lead to potential weird bugs in your code.
+It is recommended to always use parentheses explicitly for creating a tuple. It also improves the redability."
+python,PYL-R1708,`StopIteration` detected in the generator,minor,style,"According to [PEP479](https://www.python.org/dev/peps/pep-0479/), the raise of StopIteration to end the loop of a generator may lead to hard to find bugs. This PEP specify that raise StopIteration has to be replaced by a simple return statement."
 python,PYL-R1709,simplify-boolean-expression,,,
-python,PYL-R1710,inconsistent-return-statements,,,
-python,PYL-R1711,useless-return,,,
-python,PYL-R1712,consider-swap-variables,,,
-python,PYL-R1713,consider-using-join,,,
-python,PYL-R1714,consider-using-in,,,
+python,PYL-R1710,Inconsistent return statements,minor,style,"According to [PEP8](https://www.python.org/dev/peps/pep-0008/), if any return statement returns an expression, any return statements where no value is returned should explicitly state this as return None, and an explicit return statement should be present at the end of the function (if reachable).
+
+Good:
+```
+def foo(x):
+    if x >= 0:
+        return math.sqrt(x)
+    else:
+        return None
+
+def bar(x):
+    if x < 0:
+        return None
+    return math.sqrt(x)
+```
+Bad:
+```
+def foo(x):
+    if x >= 0:
+        return math.sqrt(x)
+
+def bar(x):
+    if x < 0:
+        return
+    return math.sqrt(x)
+```"
+python,PYL-R1711,Useless `return` detected,minor,style,"A single ""return"" or ""return None"" statement is found at the end of function or method definition. This statement can safely be removed to improve the redability, because Python will implicitly return None"
+python,PYL-R1712,Use `tuple` to swap variables,major,style,"It is recommended not to use a temporary variable in order to swap variables. Using ""tuple unpacking"" to directly swap variables makes the intention more clear.
+
+Example:
+```a, b = b, a``` Swap the value of a and b."
+python,PYL-R1713,Consider using `join`,major,antipattern,"Consider using `str.join(sequence)` instead of joining the elements of a sequence using for-loop iteration.
+`str.join(sequence)` is faster, uses less memory and increases readability compared to for-loop iteration."
+python,PYL-R1714,Consider using `in`,major,antipattern,"To check if a variable is equal to one of many values, combine the values into a tuple and check if the variable is contained ""in"" it instead of checking for equality against each of the values.This is faster, less verbose and more redable."
 python,PYL-R1715,Use `get()` method to access values from a dictionary,,antipattern,"In case of checking if key exists in the dictionary and then fetching the value, it is recommended to use the built-in method `dict.get(key[, default])`. This returns the respective value if key exists in the dictionary, else returns a default value, avoiding the dictionary lookup twice.
 It is simpler and considered more idiomatic, although it is sometimes a bit slower than accessing the value directly."
 python,PYL-R1716,Chained comarision detected,minor,antipattern,"Detected boolean operation like`a < b and b < c`.
@@ -460,33 +509,50 @@ python,PYL-W0122,Audit required: Use of `exec`,major,security,"Usage of `exec` f
 python,PYL-W0123,Audit required: Use of `eval`,major,security,Use of possibly insecure function - consider using safer `ast.literal_eval`. Read more on why should `eval` be avoided [here](https://stackoverflow.com/questions/1933451/why-should-exec-and-eval-be-avoided).
 python,PYL-W0124,`as` with another context manager looks like a tuple,minor,bug-risk,"This `with` statement component returns multiple values and uses name binding with `as` only for a part of those values, as in with ctx() as a, b. This can be misleading, since it's not clear if the context manager returns a tuple or if the node without a name binding is another context manager."
 python,PYL-W0125,Conditional statement used with a constant value,major,antipattern,Using a conditional statement with a constant value is pointless and will always evaluate to either True or False. This might not be what is intended.
-python,PYL-W0143,comparison-with-callable,,,
+python,PYL-W0143,Comparison with callable detected,major,bug-risk,"A comparison with a callable was made, which might suggest that some parenthesis were omitted, resulting in potential unwanted behaviour.
+In Python3, this is an error."
 python,PYL-W0150,Exception might be lost,major,bug-risk,The `finally` block may swallow any exceptions raised in the `try` block. This can pose a bug risk.
 python,PYL-W0199,`assert` called on tuple,major,bug-risk,"A call of `assert` on a tuple will always evaluate to `True` if the tuple is not empty, and will always evaluate to `False` if it is. "
 python,PYL-W0201,Attribute defined outside `__init__`,minor,antipattern,"Defining an instance attribute outside `__init__` affects the readability of code. It is expected to find all the attributes an instance may have by reading its `__init__` method. If there is a need to initialize attribute via sub-initialization methods, it is recommended to assign attributes to `None` in the __init__ then call the sub-initialization methods."
 python,PYL-W0211,Bad `staticmethod` argument detected,major,bug-risk,"It is customary for instance or class methods to take `self` or `cls`, respectively, as their first arguments, a method that uses either of these names but is found to be a static method may have been defined incorrectly. Choose names other than `self` or `cls` for arguments to avoid confusing other programmers looking at your code."
 python,PYL-W0212,Protected member accessed from outside outside the class,minor,bug-risk,"Accessing a protected member (a member prefixed with `_`) of a class from outside that class is not recommended, since the creator of that class did not intend this member to be exposed. If accesing this attribute outside of the class is absolutely needed, refactor it such that it becomes part of the public interface of the class."
-python,PYL-W0221,arguments-differ,,,
-python,PYL-W0222,signature-differs,,,
-python,PYL-W0223,abstract-method,,,
-python,PYL-W0231,`__init__` method from the base class not called,minor,bug-risk,The ancestor class method has an init method which is not called by the derived class. This can cause unintended consequences.
+python,PYL-W0221,Parameters mismatch in overriden method,major,bug-risk,"Python will allow this, but if the overridden method is intended to be executed from an external code, you may want to reconsider this.
+Overriding a method without ensuring that both methods accept the same number and type of parameters has the potential to cause an error when the overriding method is called with a number of parameters that is legal for the overridden method. This violates the Liskov substitution principle.
+
+Read more about LSP [here.] (https://en.wikipedia.org/wiki/Liskov_substitution_principle)"
+python,PYL-W0222,Signature differs in overridden method,major,bug-risk,"There are one (or more) legal parameters for an overridden method that are not legal for an overriding method. This will cause an error when the overriding method is called with a number of parameters that is legal for the overridden method. This violates the Liskov substitution principle.
+
+Read more about LSP [here.] (https://en.wikipedia.org/wiki/Liskov_substitution_principle)"
+python,PYL-W0223,Abstract method not overridden,major,bug-risk,"The abstract method, which is raising `NotImplementedError` is not overridden in the concrete class."
+python,PYL-W0231,`__init__` method from the base class not called,major,bug-risk,The ancestor class method has an init method which is not called by the derived class. This can cause unintended consequences.
 python,PYL-W0232,no-init,,,
-python,PYL-W0233,non-parent-init-called,,,
+python,PYL-W0233,Non parent `__init__` called,major,bug-risk,
 python,PYL-W0235,useless-super-delegation,,,
 python,PYL-W0301,Unnecessary semicolon,minor,style,Semicolon used is unecessary on this line.
-python,PYL-W0311,bad-indentation,,,
-python,PYL-W0312,mixed-indentation,,,
-python,PYL-W0401,wildcard-import,,,
 python,PYL-W0402,Use of a deprecated module detected,major,bug-risk,The moule imported has been deprecated for the current version of Python.
 python,PYL-W0403,relative-import,,,
 python,PYL-W0404,Module re-imported,major,bug-risk,"A module is reimported mulitple times. This can be confusing, and should be fixed."
-python,PYL-W0406,import-self,,,
-python,PYL-W0410,misplaced-future,,,
+python,PYL-W0406,Module is importing itself,major,bug-risk,The module is importing itself. This is not recommended.
+python,PYL-W0410,Future import(s) name after other statements,major,style,"Imports from `__future__` should be the first imports in a file.
+Not having this may lead to inconsistencies.
+
+Example:
+```
+8 / 7  # Gives output: 1
+
+from __future__ import division
+
+8 / 7  # Gives output: 1.1428571428571428
+```"
 python,PYL-W0511,fixme,,,
-python,PYL-W0512,invalid-encoded-data,,,
+python,PYL-W0512,Invalid encoded data,major,bug-risk,The source line cannot be decoded using the specified source file encoding. It is recommended to check the encoding/encoded data again.
 python,PYL-W0601,global-variable-undefined,,,
 python,PYL-W0602,Global variable is declared but not used,major,bug-risk,The variable is defined through the `global` statement but no assignment to this variable is done. It is recommended to remove it if not necessary.
-python,PYL-W0603,global-statement,,antipattern,
+python,PYL-W0603,`global` statement detected,major,antipattern,"It is recommended not to use `global` statement unless it is really necessary.
+Global variables are dangerous because they can be simultaneously accessed from multiple sections of a program. This frequently results in bugs.
+This also make code difficult to read, because they force you to search through multiple functions or even modules just to understand all the different locations where the global variable is used and modified.
+
+Read more about why it should be avoided [here.](http://wiki.c2.com/?GlobalVariablesAreBad)"
 python,PYL-W0604,Use of `global` at module level,major,antipattern,"The global statement is used to specify that the assignment to that name is an assignment to the variable in the global (module) scope, rather than in the local scope. At the module level, this statement is redundant because the local scope and global scope are the same.
 It is recommended to remove the `global` statement."
 python,PYL-W0611,Module imported but unused,major,antipattern,A module has been imported but is not used anywhere in the file. The module should either be used or the import should be removed.
@@ -498,8 +564,7 @@ python,PYL-W0622,Re-definition found for builtin function,critical,antipattern,D
 python,PYL-W0623,redefine-in-handler,,,
 python,PYL-W0631,Loop variable used outside the loop,critical,bug-risk, Do not use a loop variable (i.e. defined by a for loop or a list comprehension or a generator expression) outside the loop. It can induce wrong results.
 python,PYL-W0632,Unbalanced tuple unpacking,major,bug-risk,Possible unbalanced tuple unpacking detected: either left or right side of the statement has more labels. This can raise `ValueError` while unpacking.
-python,PYL-W0640,cell-var-from-loop,,,
-python,PYL-W0641,possibly-unused-variable,,,
+python,PYL-W0640,Cell variable defined in loop,major,bug-risk,
 python,PYL-W0642,Assignment to `self` or `cls` detected,major,bug-risk,Assignment to `self` and `cls` is invalid and strongly discouraged. Doing so can cause errors when accessing the object or the class.
 python,PYL-W0703,Exception caught is very general,major,antipattern,"If the except block catches a very general exception, it is likely to include many unrelated errors too. Try to be more precise while catching the exception."
 python,PYL-W0705,Catching previously caught exception,critical,bug-risk,"In a `try` block, one type of exception shall be caught only once. Do not catch the same exception again."
@@ -507,42 +572,62 @@ python,PYL-W0706,Except handler raises immediately,critical,bug-risk,Using `rais
 python,PYL-W0711,Exception to catch is the result of a binary operation,critical,bug-risk,"Do not use binary operations (or, and) to catch exceptions. If intending to catch multiple exceptions, rewrite as ""except (A, B):"""
 python,PYL-W0715,Exception arguments suggest string formatting might be intended,major,antipattern,"Found multiple arguments to an exception constructor, the first of them a string literal containing what appears to be placeholders intended for formatting. In this case, it is recommended to format the message properly."
 python,PYL-W1113,Keyword argument defined before variable positional arguments,minor,antipattern,"On defining a keyword argument before variable positional arguments, one can end up in having multiple values passed for the aforementioned parameter in case the method is called with keyword arguments. It is recommended to define keyword arguments after variable positional arguments. "
-python,PYL-W1201,logging-not-lazy,,,
-python,PYL-W1202,logging-format-interpolation,,,
-python,PYL-W1203,logging-fstring-interpolation,,,
+python,PYL-W1201,Logging is not lazy,minor,style,"The logging statement has the call of the form `logging.(format_string % (format_args...))`.
+It is recommended, for such calls, to leave string interpolation to the logging method itself and be written as `logging.(format_string, format_args...)` so that the program may avoid incurring the cost of the interpolation in those cases in which no message will be logged.
+For more, see http://www.python.org/dev/peps/pep-0282/."
 python,PYL-W1300,bad-format-string-key,,,
 python,PYL-W1301,unused-format-string-key,,,
 python,PYL-W1302,bad-format-string,,,
-python,PYL-W1303,missing-format-argument-key,,,
-python,PYL-W1304,unused-format-string-argument,,,
-python,PYL-W1305,format-combined-specification,,,
-python,PYL-W1306,missing-format-attribute,,,
-python,PYL-W1307,invalid-format-index,,,
+python,PYL-W1303,Missing format argument key,major,bug-risk,"The format string has named field(s) which is not provided by the keyword argument.
+This will raise a `KeyError`."
+python,PYL-W1304,Unused format string argument,major,style,"The format string that uses named field(s), is used with an argument that is not required by the format string.
+It is recommended to remove unused keyword-arguments for a better readability."
+python,PYL-W1305,Combined specification detected for format string,major,style,"Format string contains both automatic field numbering (e.g. `{}`) and manual field specification (e.g. `{0}`).
+This is an error.
+Please only one of them."
+python,PYL-W1306,Missing format attribute,major,bug-risk,"The format string is using an attribute specifier like `{0.length}`, but the argument passed for formatting doesn't have that attribute.
+This is an error.
+
+Note: String formatting uses a limited Python-like syntax. Calls are not supported in this syntax, only subscription (indexing by number or by unquoted (!) name), and attribute access is supported."
+python,PYL-W1307,Invalid format index,major,bug-risk,"Format string is using a lookup specifier e.g. `{a[1]}`, but the argument passed for formatting doesn't contain or doesn't have that key as an attribute.
+This is an error."
 python,PYL-W1308,Duplicate string formatting argument found,minor,antipattern,String argument is repeating an argument. Consider passing arguments as named arguments.
 python,PYL-W1401,Anomalous backslash detected,major,style,Backslash is present in the literal string but not as an escape. String constant might be missing an `r` prefix.
-python,PYL-W1402,anomalous-unicode-escape-in-string,,,
-python,PYL-W1403,implicit-str-concat-in-sequence,,,
+python,PYL-W1402,Anomalous unicode escape in string,minor,style,An escape like `\u` is encountered in a byte string where it has no effect. The string constant might be missing an r or u prefix.
+python,PYL-W1403,Implicit string concatination detected in the sequence,major,bug-risk,"String literals are implicitly concatenated in a literal iterable definition when they are not seperated by a comma.
+This may lead to undesirable results.
+
+Example:
+`sample_seq = ['A', 'B' 'C', 'D']`
+Here, `sample_seq` will have `['A', 'BC', 'D']` which, possibly, is not waht was intended.
+
+It is reccomended to look at the highlighted code for possible missing commas. "
 python,PYL-W1501,Bad open mode for file,major,bug-risk,"The mode with which the file is opened is not valid. Python supports: r, w, a[, x] modes with b, +, and U (only with r) options."
 python,PYL-W1502,boolean-datetime,,,
 python,PYL-W1503,redundant-unittest-assert,,,
 python,PYL-W1505,Method used has been deprecated,major,antipattern,The method is marked as deprecated and will be removed in a future version of Python. Consider looking for an alternative in the documentation.
-python,PYL-W1506,bad-thread-instantiation,,,
-python,PYL-W1507,shallow-copy-environ,,,
-python,PYL-W1508,invalid-envvar-default,,,
-python,PYL-W1509,subprocess-popen-preexec-fn,,,
-python,PYL-W1601,apply-builtin,,,
-python,PYL-W1602,basestring-builtin,,,
-python,PYL-W1603,buffer-builtin,,,
-python,PYL-W1604,cmp-builtin,,,
-python,PYL-W1605,coerce-builtin,,,
-python,PYL-W1606,execfile-builtin,,,
-python,PYL-W1607,file-builtin,,,
-python,PYL-W1608,long-builtin,,,
-python,PYL-W1609,raw_input-builtin,,,
-python,PYL-W1610,reduce-builtin,,,
-python,PYL-W1611,standarderror-builtin,,,
-python,PYL-W1612,unicode-builtin,,,
-python,PYL-W1613,xrange-builtin,,,
+python,PYL-W1506,Thread has no target function,major,bug-risk,"`threading.Thread` class is instantiated without the target function being passed. By default, the first parameter is the group param, not the target param.
+You can read more about this [here.[(https://docs.python.org/3/library/threading.html#threading.Thread)"
+python,PYL-W1507,Shallow copy of `os.environ` detected,major,bug-risk,"It is recommended to use `os.environ.copy()` here as `os.environ` is not a dict object but proxy object, so shallow copy has still effects on original object. See https://bugs.python.org/issue15373 for reference."
+python,PYL-W1508,Invalid `envvar` default,major,bug-risk,Env manipulation functions return None or str values. Supplying anything different as a default may cause bugs. See https://docs.python.org/3/library/os.html#os.getenv.
+python,PYL-W1509,Unsafe subprocess.popen preexec_fn parameter,major,bug-risk,"The preexec_fn parameter is not safe to use in the presence of threads in your application. The child process could deadlock before exec is called. If you must use it, keep it trivial! Minimize the number of libraries you call into. 
+Ref: https://docs.python.org/3/library/subprocess.html#popen-constructor"
+python,PYL-W1601,`apply` builtin detected,major,bug-risk,"The `apply` builtin function sas been deprecated since Python 2.3.
+It's use shall be avoided.
+Use `function(*args, **keywords)` instead of `apply(function, args, keywords)`
+Ref: https://docs.python.org/2/library/functions.html#apply"
+python,PYL-W1602,`basestring` builtin detected ,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
+python,PYL-W1603,`buffer` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
+python,PYL-W1604,`cmp` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
+python,PYL-W1605,`coerce` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
+python,PYL-W1606,`execfile` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
+python,PYL-W1607,`file` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
+python,PYL-W1608,`long` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
+python,PYL-W1609,`raw_input` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
+python,PYL-W1610,`reduce` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
+python,PYL-W1611,`standarderror` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
+python,PYL-W1612,`unicode` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
+python,PYL-W1613,`xrange` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
 python,PYL-W1614,coerce-method,,,
 python,PYL-W1615,delslice-method,,,
 python,PYL-W1616,getslice-method,,,
@@ -554,8 +639,9 @@ python,PYL-W1621,dict-view-method,,,
 python,PYL-W1622,next-method-called,,,
 python,PYL-W1623,metaclass-assignment,,,
 python,PYL-W1624,indexing-exception,,,
-python,PYL-W1625,raising-string,,,
-python,PYL-W1626,reload-builtin,,,
+python,PYL-W1625,String exception raised,major,bug-risk,
+python,PYL-W1626,`reload` builtin detected,major,bug-risk,"`reload()` builtin function has been removed in Python 3.
+It is recommended to use `imp.reload()` or `importlib.reload()` instead."
 python,PYL-W1627,oct-method,,,
 python,PYL-W1628,hex-method,,,
 python,PYL-W1629,nonzero-method,,,
@@ -564,23 +650,29 @@ python,PYL-W1632,input-builtin,,,
 python,PYL-W1633,round-builtin,,,
 python,PYL-W1634,intern-builtin,,,
 python,PYL-W1635,unichr-builtin,,,
-python,PYL-W1636,map-builtin-not-iterating,,,
-python,PYL-W1637,zip-builtin-not-iterating,,,
-python,PYL-W1638,range-builtin-not-iterating,,,
-python,PYL-W1639,filter-builtin-not-iterating,,,
-python,PYL-W1640,using-cmp-argument,,,
-python,PYL-W1641,eq-without-hash,,,
+python,PYL-W1636,`map` builtin not iterating,,,
+python,PYL-W1637,`zip` builtin not iterating,,,
+python,PYL-W1638,`range` builtin not iterating,,,
+python,PYL-W1639,`filter` builtin not iterating,,,
+python,PYL-W1640,Use of `cmp` argument detected,major,bug-risk,"A custom comarator is being passed for sorting. In Py3.0, the `cmp` parameter was removed entirely (as part of a larger effort to simplify and unify the language, eliminating the conflict between rich comparisons and the `__cmp__` methods)."
+python,PYL-W1641,`eq` implemented in a class without also implementing `hash`,minor,bug-risk,"The class implements `eq` but not `hash`. In Python 2, objects get object.hash as the default implementation, in Python 3 objects get None as their default hash implementation if they also implement eq."
 python,PYL-W1642,div-method,,,
 python,PYL-W1643,idiv-method,,,
 python,PYL-W1644,rdiv-method,,,
-python,PYL-W1645,exception-message-attribute,,,
-python,PYL-W1646,invalid-str-codec,,,
-python,PYL-W1647,sys-max-int,,,
-python,PYL-W1648,bad-python3-import,,,
-python,PYL-W1649,deprecated-string-function,,,
-python,PYL-W1650,deprecated-str-translate-call,,,
-python,PYL-W1651,deprecated-itertools-function,,,
-python,PYL-W1652,deprecated-types-field,,,
+python,PYL-W1645,`message` attribute accessed on Exception,major,bug-risk,"`Exception.message` has been removed in Python 3.
+It is recommended to use `str(exception)` instead to access the exception message."
+python,PYL-W1646,Invalid string codec detected,major,bug-risk,"`str.encode` or `str.decode` is being used with a non-text encoding.
+It is recommended to use the [codecs](https://docs.python.org/3/library/codecs.html) module to handle arbitary codecs."
+python,PYL-W1647,Use of `sys.maxint` detected,major,bug-risk,`sys.maxint` has been removed in Python 3. It is recommended to use `sys.maxsize` instead.
+python,PYL-W1648,Bad Python 3 import,major,bug-risk,"The module being imported may no longer be available in Python 3.
+Please consult the documenttion."
+python,PYL-W1649,Deprecated string function detected,major,bug-risk,"The `string` function you're trying to access has been deprecated in Python 3.
+Please consult the documentation [here.](https://docs.python.org/3/library/string.html)"
+python,PYL-W1650,Deprecated string translate call detected,,,
+python,PYL-W1651,Deprecated `itertools` function,major,bug-risk,"The `itertools` function you're trying to access has been deprecated in Python 3. 
+Please consult the documentation [here.](https://docs.python.org/3/library/itertools.html)"
+python,PYL-W1652,Deprecated `types` field,major,bug-risk,"The field being accessed has been deprecated in the `types` module in Python 3.
+Please consult the documentation [here.](https://docs.python.org/3/library/types.html)"
 python,PYL-W1653,next-method-defined,,,
 python,PYL-W1654,dict-items-not-iterating,,,
 python,PYL-W1655,dict-keys-not-iterating,,,
