@@ -70,8 +70,7 @@ type AnalysisReport struct {
 		DiffMeta map[string]DiffMeta `json:"diff_meta,omitempty"`
 	} `json:"file_meta"`
 	SkipCQ struct {
-		CommentIdentifier string   `json:"comment_identifier"`
-		IssueShortcodes   []string `json:"issue_shortcodes"`
+		CommentIdentifier string `json:"comment_identifier"`
 	} `json:"skip_cq,omitempty"`
 	ExtraData interface{} `json:"extra_data"`
 }
