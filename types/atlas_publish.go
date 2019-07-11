@@ -73,6 +73,9 @@ type AnalysisReport struct {
 		CommentIdentifier string `json:"comment_identifier"`
 	} `json:"skip_cq,omitempty"`
 	ExtraData interface{} `json:"extra_data"`
+        AnalysisMeta struct {
+                LinesAnalyzed int `json:"lines_analyzed"`
+        } `json:"analysis_meta"`
 }
 
 type AnalysisResult struct {
