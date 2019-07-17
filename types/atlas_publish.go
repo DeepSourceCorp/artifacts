@@ -46,9 +46,8 @@ type AnalysisReport struct {
 			SourceCode struct {
 				Rendered string `json:"rendered"`
 			} `json:"source_code,omitempty"`
-			IsIgnored bool `json:"is_ignored,omitempty"`
+			SkipCQ bool `json:"skip_cq"`
 		} `json:"processed_data,omitempty"`
-		SkipCQ bool `json:"skip_cq"`
 	} `json:"issues"`
 	Metrics []struct {
 		MetricCode string `json:"metric_code"`
