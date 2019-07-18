@@ -248,7 +248,6 @@ python,FLK8-E743,"Do not define functions named 'l', 'O', or 'I'",major,style,"F
 
 Change the names of these functions to something more descriptive."
 python,FLK8-F402,import module from line N shadowed by loop variable,major,bug-risk,Loop variables should not redefine the name of modules that are imported.
-python,FLK8-F403,‘from module import *’ used; unable to detect undefined names,major,bug-risk,"`from module import *` is discouraged because the programmer often won’t know where an imported object is defined. The imported module, class, or function should be explicitly defined."
 python,FLK8-F405,"name may be undefined, or defined from star imports: module",major,bug-risk,"This warning occurs in conjunction with issue FLK8-F403, `'from module import *'` used. It means that the variable name could be undefined, but we cannot be sure because it also could also be imported in the star imports.
 
 Confirm that the variable is defined in the star imports. If it is, explicitly import it instead of importing `*`. If not, then define the variable."
@@ -529,6 +528,7 @@ python,PYL-W0232,no-init,,,
 python,PYL-W0233,Non parent `__init__` called,major,bug-risk,
 python,PYL-W0235,useless-super-delegation,,,
 python,PYL-W0301,Unnecessary semicolon,minor,style,Semicolon used is unecessary on this line.
+python,FYL-W0401,‘from module import *’ used; unable to detect undefined names,major,bug-risk,"`from module import *` is discouraged because the programmer often won’t know where an imported object is defined. The imported module, class, or function should be explicitly defined."
 python,PYL-W0402,Use of a deprecated module detected,major,bug-risk,The moule imported has been deprecated for the current version of Python.
 python,PYL-W0403,relative-import,,,
 python,PYL-W0404,Module re-imported,major,bug-risk,"A module is reimported mulitple times. This can be confusing, and should be fixed."
@@ -683,8 +683,9 @@ python,PYL-W1659,Accessed the removed xreadlines attribute,major,bug-risk,This a
 python,PYL-W1660,Accessed a removed attribute on the `sys` module,major,bug-risk,This attribute of `sys` module has been removed in Python 3. Please consult the documentation.
 python,PYL-W1661,Used an exception object that was bound by an except handler,major,bug-risk,"An exception, that was bound in an except handler, shall not be used outside of the except handler. On Python 3 these exceptions will be deleted once they get out of the except handler, and will give an error on being used."
 python,PYL-W1662,Used a variable that was bound inside a comprehension,minor,bug-risk,"Accessed a variable, that was bound in a comprehension handler, outside of the comprehension itself. On Python 3 these variables will be deleted outside of the comprehension, and will give an error on being used."
-python,PAP-W0006,Getter method detected in class,minor,antipattern,"Instead of having a method like `get_attribute`, it is recommended to use `@property` decorator to get the value of attribute."
-python,PAP-W0007,Setter method detected in class,minor,antipattern,"Instead of having a set method to set the value of the attribute, it is recommended to use `@<attribute_name>.setter` decorator."
+python,PAP-W0007,I/O operation on a closed file detected,major,bug-risk,"The I/O operation is being performed on a file which is closed.
+This is an error. It is recommended to perform I/O operation on file inside the `with` block, as the file is automatically closed when the scope of `with` ends."
+python,PAP-W0008,Illegal operation on file,major,bug-risk,Trying to write on a file which is opened in read mode will give an `IOError`. It is recommended to open file in the appropriate mode.
 python,PAP-W0009,Multiple return types found in function,major,antipattern,"Returning objects of different types from a function can lead to problems that are difficult to debug. Instead, it is better to raise an exception that can be caught where the function is called."
 python,PAP-W0010,File opened without the `with` statement,critical,antipattern,Opening a file using `with` statement is preferred as function `open` implements the context manager protocol that release the resource when it is outside of the `with` block. Not doing so requires you to manually release the resource.
 python,PAP-W0011,Use `items()` to iterate over a dictionary,major,antipattern,"The preferred way to iterate over the key-value pairs of a dictionary is to declare two variables in a for loop, and then call `dictionary.items()` (or `dictionary.iteritems()` for Python2), where dictionary is the name of your variable representing a dictionary.'"
