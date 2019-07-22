@@ -46,7 +46,6 @@ type AnalysisReport struct {
 			SourceCode struct {
 				Rendered string `json:"rendered"`
 			} `json:"source_code,omitempty"`
-			SkipCQ bool `json:"skip_cq"`
 		} `json:"processed_data,omitempty"`
 	} `json:"issues"`
 	Metrics []struct {
@@ -68,9 +67,6 @@ type AnalysisReport struct {
 		Modified []string            `json:"modified"`
 		DiffMeta map[string]DiffMeta `json:"diff_meta,omitempty"`
 	} `json:"file_meta"`
-	SkipCQ struct {
-		CommentIdentifier string `json:"comment_identifier"`
-	} `json:"skip_cq,omitempty"`
 	ExtraData interface{} `json:"extra_data"`
 }
 
