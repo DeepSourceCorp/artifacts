@@ -248,9 +248,6 @@ python,FLK8-E743,"Do not define functions named 'l', 'O', or 'I'",major,style,"F
 
 Change the names of these functions to something more descriptive."
 python,FLK8-F402,import module from line N shadowed by loop variable,major,bug-risk,Loop variables should not redefine the name of modules that are imported.
-python,FLK8-F405,"name may be undefined, or defined from star imports: module",major,bug-risk,"This warning occurs in conjunction with issue FLK8-F403, `'from module import *'` used. It means that the variable name could be undefined, but we cannot be sure because it also could also be imported in the star imports.
-
-Confirm that the variable is defined in the star imports. If it is, explicitly import it instead of importing `*`. If not, then define the variable."
 python,FLK8-F406,`from module import *` is only allowed at module level,major,bug-risk,"Importing `*` is generally discouraged, but if there's a need regardless, such imports should only be done on module level."
 python,FLK8-F407,an undefined __future__ feature name was imported,critical,bug-risk,The imported name does not exist in the `__future__` package.
 python,FLK8-F601,Dictionary key name repeated with different values,major,bug-risk,All dictionary keys should be unique.
@@ -565,6 +562,7 @@ python,PYL-W0623,redefine-in-handler,,,
 python,PYL-W0631,Loop variable used outside the loop,critical,bug-risk, Do not use a loop variable (i.e. defined by a for loop or a list comprehension or a generator expression) outside the loop. It can induce wrong results.
 python,PYL-W0632,Unbalanced tuple unpacking,major,bug-risk,Possible unbalanced tuple unpacking detected: either left or right side of the statement has more labels. This can raise `ValueError` while unpacking.
 python,PYL-W0640,Cell variable defined in loop,major,bug-risk,
+python,PYL-W0641,Possibly Unused variable,major,bug-risk,A variable is defined but might not be used. The possibility comes from the fact that `locals()` might be used, which could consume or not the said variable.
 python,PYL-W0642,Assignment to `self` or `cls` detected,major,bug-risk,Assignment to `self` and `cls` is invalid and strongly discouraged. Doing so can cause errors when accessing the object or the class.
 python,PYL-W0703,Exception caught is very general,major,antipattern,"If the except block catches a very general exception, it is likely to include many unrelated errors too. Try to be more precise while catching the exception."
 python,PYL-W0705,Catching previously caught exception,critical,bug-risk,"In a `try` block, one type of exception shall be caught only once. Do not catch the same exception again."
