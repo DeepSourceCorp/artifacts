@@ -541,7 +541,7 @@ from __future__ import division
 
 8 / 7  # Gives output: 1.1428571428571428
 ```"
-python,PYL-W0511,fixme,,,
+python,PYL-W0511,Use of `FIXME`/`XXX`/`TODO` encountered,minor,doc,You have marked this block as `FIXME`/`XXX`/`TODO`. Please make sure this is addressed, or remove this comment as this could be misleading.
 python,PYL-W0512,Invalid encoded data,major,bug-risk,The source line cannot be decoded using the specified source file encoding. It is recommended to check the encoding/encoded data again.
 python,PYL-W0601,global-variable-undefined,,,
 python,PYL-W0602,Global variable is declared but not used,major,bug-risk,The variable is defined through the `global` statement but no assignment to this variable is done. It is recommended to remove it if not necessary.
