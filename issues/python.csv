@@ -382,7 +382,7 @@ python,PYL-E1305,Format string contains excess arguments,critical,bug-risk,Forma
 python,PYL-E1306,Not enough arguments in format string,critical,bug-risk,Format string do not contain enough arguments to unpack. This can cause an error.
 python,PYL-E1307,Bad string format type,major,bug-risk,The type required by format string is not suitable for actual argument type. This can cause an error.
 python,PYL-E1310,Bad string strip call,minor,antipattern,"The argument to a `str.{l,r,}strip` call contains a duplicate character. Although this will not cause an error, but it is recommended to remove duplicates.
-This may affect the redability."
+This may affect readability."
 python,PYL-E1507,Invalid value passed to access env variable,major,bug-risk,Env manipulation functions support only string type arguments.
 python,PYL-E1601,`print` statement detected,major,bug-risk,`print` is being used as a statement here. It has been converted to a function in Python 3. This will cause an error.
 python,PYL-E1602,Parameter unpacking detected,major,bug-risk,Parameter unpacking is specified for a function. It has been removed from Python 3. Read more about it [here](https://www.python.org/dev/peps/pep-3113/)
@@ -489,10 +489,10 @@ swaps the values of `a` and `b`."
 python,PYL-R1713,Consider using `join`,major,antipattern,"Consider using `str.join(sequence)` instead of joining the elements of a sequence using `for` loop iteration.
 `str.join(sequence)` is faster, uses less memory and increases readability compared to a `for` loop iteration."
 python,PYL-R1714,Consider using `in`,major,antipattern,"To check if a variable is equal to one of many values, combine the values into a tuple and check if the variable is contained `in` it instead of checking for equality against each of the values. This is faster, less verbose, and more readable."
-python,PYL-R1715,Use `get()` method to access values from a dictionary,,antipattern,"In case of checking if key exists in the dictionary and then fetching the value, it is recommended to use the built-in method `dict.get(key[, default])`. This returns the respective value if key exists in the dictionary, else returns a default value, avoiding the dictionary lookup twice.
+python,PYL-R1715,Use `get()` method to access values from a dictionary,major,performance,"In case of checking if key exists in the dictionary and then fetching the value, it is recommended to use the built-in method `dict.get(key[, default])`. This returns the respective value if key exists in the dictionary, else returns a default value, avoiding the dictionary lookup twice.
 It is simpler and considered more idiomatic, although it is sometimes a bit slower than accessing the value directly."
 python,PYL-R1716,Chained comarision detected,minor,antipattern,"Detected boolean operation like`a < b and b < c`.
-It is recommended to refactor it to `a < b < c`. It improves the redability,"
+It is recommended to refactor it to `a < b < c`. It improves readability,"
 python,PYL-R1717,Consider using a dictionary comprehension,minor,performance,"Although there is nothing syntactically wrong with this code, it is hard to read and can be simplified to a dict comprehension. Also it is faster since there is no need to create another transient list."
 python,PYL-R1718,Consider using a set comprehension,minor,performance,"Although there is nothing syntactically wrong with this code, it is hard to read and can be simplified to a set comprehension. Also it is faster since there is no need to create another transient list."
 python,PYL-W0101,Statement not reachable on execution,major,antipattern,"This statement is unreachable, as the control flow will never reach upto this point. Consider removing this part of code or re-evaluating the control flow."
@@ -564,7 +564,7 @@ python,PYL-W0642,Assignment to `self` or `cls` detected,major,bug-risk,Assignmen
 python,PYL-W0703,Exception caught is very general,major,antipattern,"If the except block catches a very general exception, it is likely to include many unrelated errors too. Try to be more precise while catching the exception."
 python,PYL-W0705,Catching previously caught exception,critical,bug-risk,"In a `try` block, one type of exception shall be caught only once. Do not catch the same exception again."
 python,PYL-W0706,Except handler raises immediately,critical,bug-risk,Using `raise` as the first or only operator of an except handler is useless because it raises back the exception immediately. Remove the `raise` operator or the entire `try-except-raise` block.
-python,PYL-W0711,Exception to catch is the result of a binary operation,critical,bug-risk,"Do not use binary operations (or, and) to catch exceptions. If intending to catch multiple exceptions, rewrite as ""except (A, B):"""
+python,PYL-W0711,Exception to catch is the result of a binary operation,critical,bug-risk,"Do not use binary operations (or, and) to catch exceptions. If intending to catch multiple exceptions, rewrite as `except (A, B):`"
 python,PYL-W0715,Exception arguments suggest string formatting might be intended,major,antipattern,"Found multiple arguments to an exception constructor, the first of them a string literal containing what appears to be placeholders intended for formatting. In this case, it is recommended to format the message properly."
 python,PYL-W1113,Keyword argument defined before variable positional arguments,minor,antipattern,"On defining a keyword argument before variable positional arguments, one can end up in having multiple values passed for the aforementioned parameter in case the method is called with keyword arguments. It is recommended to define keyword arguments after variable positional arguments. "
 python,PYL-W1201,Logging is not lazy,major,performance,"The logging statement has the call of the form `logging.(format_string % (format_args...))`. For such calls, it is recommended to leave string interpolation to the logging method itself and be written as `logging.(format_string, format_args...)` so that the program may avoid incurring the cost of the interpolation in those cases in which no message will be logged.
@@ -590,7 +590,7 @@ Example:
 `sample_seq = ['A', 'B' 'C', 'D']`
 Here, `sample_seq` will have `['A', 'BC', 'D']` which, possibly, is not waht was intended.
 
-It is reccomended to look at the highlighted code for possible missing commas. "
+It is recommended to look at the highlighted code for possible missing commas. "
 python,PYL-W1501,Bad open mode for file,major,bug-risk,"The mode with which the file is opened is not valid. Python supports: r, w, a[, x] modes with b, +, and U (only with r) options."
 python,PYL-W1502,boolean-datetime,,,
 python,PYL-W1503,redundant-unittest-assert,,,
@@ -644,7 +644,13 @@ python,PYL-W1637,`zip` builtin not iterating,,,
 python,PYL-W1638,`range` builtin not iterating,,,
 python,PYL-W1639,`filter` builtin not iterating,,,
 python,PYL-W1640,Use of `cmp` argument detected,major,bug-risk,"A custom comparator is being passed for sorting. In Python 3.0, the `cmp` parameter was removed entirely (as part of a larger effort to simplify and unify the language, eliminating the conflict between rich comparisons and the `__cmp__` methods)."
-python,PYL-W1641,`eq` implemented in a class without also implementing `hash`,minor,bug-risk,"The class implements `eq` but not `hash`. In Python 2, objects get object.hash as the default implementation, in Python 3 objects get None as their default hash implementation if they also implement eq."
+python,PYL-W1641,Defining equality for a class without also defining hashability,major,bug-risk,"In order to conform to the object model, classes that define their own equality method should also define their own hash method, or be unhashable. If the hash method is not defined then the hash of the super class is used. This is unlikely to result in the expected behavior.
+
+A class can be made unhashable by setting its `__hash__` attribute to None.
+
+In Python 3, if you define a class-level equality method and omit a `__hash__` method then the class is automatically marked as unhashable.
+
+It is recommended to implement a `__hash__` method or set `__hash__ = None`, whenever you define an `__eq__` method for a class."
 python,PYL-W1642,div-method,,,
 python,PYL-W1643,idiv-method,,,
 python,PYL-W1644,rdiv-method,,,
@@ -682,10 +688,10 @@ python,PAP-W0012,Use `get()` method to access values from a dictionary,major,ant
 python,PAP-W0013,Debugger import detected,major,antipattern,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code.
 python,PAP-W0014,Debugger activation detected,critical,antipattern,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code. This may cause your application to have unintended side-effects.
 python,PAP-W0015,Unnecessary generator,minor,antipattern,"It is unnecessary to use `list`, `set`, `dict` around a generator expression to get object of that type, since there are comprehensions for these types."
-python,PAP-W0016,Unnecessary comprehension,major,antipattern,"Builtin functions like `all`, `any`, `enumerate`, `frozenset`, `iter`, `max`, `min`, `sum`, `tuple`, `itertools.cycle`, `itertools.accumulate`, can work directly with a generator expression. They do not require comprehension.
+python,PAP-W0016,Unnecessary comprehension,major,performance,"Builtin functions like `all`, `any`, `enumerate`, `frozenset`, `iter`, `max`, `min`, `sum`, `tuple`, `itertools.cycle`, `itertools.accumulate`, can work directly with a generator expression. They do not require comprehension.
 
 The inbuilt functions `all()` and `any()` in python also support short-circuiting, but this behaviour is lost if you use comprehension. This affects the performance. "
-python,PAP-W0017,Redundant call,major,antipattern,"It is unnecessary to use e.g. `list` around list comprehension, 'since it is equivalent without it.
+python,PAP-W0017,Redundant call,major,antipattern,"It is unnecessary to use e.g. `list` around list comprehension since it is equivalent without it.
 Same goes for `set` and `dictionary` comprehensions."
 python,PAP-W0018,Unnecessary literal,minor,antipattern,"It is unnecessary to use a `list` or `tuple` literal within a call to `tuple`, `list`, `set`, or `dict` since there is literal syntax for  these types."
 python,PAP-W0019,Unnecessary call,minor,antipattern,"It is slower to call e.g. `dict()` than using the empty literal, because the name dict must be looked up in the global scope in case it has been rebound. Same for the other two basic types `list()` and `set()`."
