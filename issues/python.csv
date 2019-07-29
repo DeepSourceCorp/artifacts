@@ -432,8 +432,8 @@ python,PYL-R1705,Unnecessary `else` / `elif`,minor,antipattern,"The `else` / `el
 
 Bad:
 ```
-def some_function(x):
-    if (x % 2 == 0):
+def classify_number(x):
+    if x % 2 == 0:
         return 'Even'
     else:
         return 'Odd'
@@ -441,15 +441,15 @@ def some_function(x):
 
 Good:
 ```
-def some_function(x):
-    if (x % 2 == 0):
+def classify_number(x):
+    if x % 2 == 0:
         return 'Even'
     return 'Odd'
 ```"
 python,PYL-R1706,Consider using ternary,minor,style,"One of known pre-Python 2.5 ternary syntax is being used. It is recommended to use `a if condition else b`.
 Using `[expression] and [on_true] or [on_false]` may also give wrong results when `on_true` has a false boolean value."
 python,PYL-R1707,Trailing comma tuple detected,minor,bug-risk,"In Python, a tuple can be created by the comma symbol. It is possible that one can actually create a tuple by misplacing a trailing comma, which can lead to potential weird bugs in your code.
-It is recommended to always use parentheses explicitly for creating a tuple. This also improves the redability."
+It is recommended to always use parentheses explicitly for creating a tuple. This also improves readability."
 python,PYL-R1708,`StopIteration` detected in a generator,minor,style,"According to [PEP479](https://www.python.org/dev/peps/pep-0479/), the raise of `StopIteration` to end the loop of a generator may lead to hard to find bugs. This PEP specifies that `raise StopIteration` has to be replaced by a simple `return` statement."
 python,PYL-R1709,simplify-boolean-expression,,,
 python,PYL-R1710,Inconsistent return statements,minor,style,"According to [PEP8](https://www.python.org/dev/peps/pep-0008/), if any return statement returns an expression, any return statements where no value is returned should explicitly state this as `return None`, and an explicit return statement should be present at the end of the function (if reachable).
@@ -509,7 +509,7 @@ python,PYL-W0123,Audit required: Use of `eval`,major,security,Use of possibly in
 python,PYL-W0124,`as` with another context manager looks like a tuple,minor,bug-risk,"This `with` statement component returns multiple values and uses name binding with `as` only for a part of those values, as in with ctx() as a, b. This can be misleading, since it's not clear if the context manager returns a tuple or if the node without a name binding is another context manager."
 python,PYL-W0125,Conditional statement used with a constant value,major,antipattern,Using a conditional statement with a constant value is pointless and will always evaluate to either True or False. This might not be what is intended.
 python,PYL-W0143,Comparison with callable detected,major,bug-risk,"A comparison with a callable was made, which might suggest that some parentheses were omitted, resulting in potential unwanted behaviour.
-In Python3, this is an error."
+In Python 3, this is an error."
 python,PYL-W0150,Exception might be lost,major,bug-risk,The `finally` block may swallow any exceptions raised in the `try` block. This can pose a bug risk.
 python,PYL-W0199,`assert` called on tuple,major,bug-risk,"A call of `assert` on a tuple will always evaluate to `True` if the tuple is not empty, and will always evaluate to `False` if it is. "
 python,PYL-W0201,Attribute defined outside `__init__`,minor,antipattern,"Defining an instance attribute outside `__init__` affects the readability of code. It is expected to find all the attributes an instance may have by reading its `__init__` method. If there is a need to initialize attribute via sub-initialization methods, it is recommended to assign attributes to `None` in the __init__ then call the sub-initialization methods."
@@ -519,7 +519,7 @@ python,PYL-W0221,Parameters mismatch in overriden method,major,bug-risk,"Python 
 Overriding a method without ensuring that both methods accept the same number and type of parameters has the potential to cause an error when the overriding method is called with a number of parameters that is legal for the overridden method. This violates the Liskov substitution principle. Read more about LSP [here](https://en.wikipedia.org/wiki/Liskov_substitution_principle)."
 python,PYL-W0222,Signature differs in overridden method,major,bug-risk,"There are one (or more) legal parameters for an overridden method that are not legal for an overriding method. This will cause an error when the overriding method is called with a number of parameters that is legal for the overridden method. This violates the Liskov substitution principle.
 
-Read more about LSP [here.] (https://en.wikipedia.org/wiki/Liskov_substitution_principle)"
+Read more about LSP [here] (https://en.wikipedia.org/wiki/Liskov_substitution_principle)."
 python,PYL-W0223,Abstract method not overridden,major,bug-risk,"The abstract method which raises `NotImplementedError` is not overridden in the concrete class. This can result in unintended behavior."
 python,PYL-W0231,`__init__` method from the base class not called,major,bug-risk,The ancestor class method has an init method which is not called by the derived class. This can cause unintended consequences.
 python,PYL-W0232,no-init,,,
@@ -546,7 +546,7 @@ python,PYL-W0511,Use of `FIXME`/`XXX`/`TODO` encountered,minor,doc,You have mark
 python,PYL-W0512,Invalid encoded data,major,bug-risk,The source line cannot be decoded using the specified source file encoding. It is recommended to check the encoding/encoded data again.
 python,PYL-W0601,global-variable-undefined,,,
 python,PYL-W0602,Global variable is declared but not used,major,bug-risk,The variable is defined through the `global` statement but no assignment to this variable is done. It is recommended to remove it if not necessary.
-python,PYL-W0603,`global` statement detected,major,antipattern,"It is recommended not to use `global` statement unless it is really necessary. Global variables are dangerous because they can be simultaneously accessed from multiple sections of a program. This frequently results in bugs. This also make code difficult to read, because they force you to search through multiple functions or even modules just to understand all the different locations where the global variable is used and modified. Read more about why it should be avoided [here.](http://wiki.c2.com/?GlobalVariablesAreBad)"
+python,PYL-W0603,`global` statement detected,major,antipattern,"It is recommended not to use `global` statement unless it is really necessary. Global variables are dangerous because they can be simultaneously accessed from multiple sections of a program. This frequently results in bugs. This also make code difficult to read, because they force you to search through multiple functions or even modules just to understand all the different locations where the global variable is used and modified. Read more about why it should be avoided [here](http://wiki.c2.com/?GlobalVariablesAreBad)."
 python,PYL-W0604,Use of `global` at module level,major,antipattern,"The global statement is used to specify that the assignment to that name is an assignment to the variable in the global (module) scope, rather than in the local scope. At the module level, this statement is redundant because the local scope and global scope are the same.
 It is recommended to remove the `global` statement."
 python,PYL-W0611,Module imported but unused,major,antipattern,A module has been imported but is not used anywhere in the file. The module should either be used or the import should be removed.
@@ -568,7 +568,7 @@ python,PYL-W0711,Exception to catch is the result of a binary operation,critical
 python,PYL-W0715,Exception arguments suggest string formatting might be intended,major,antipattern,"Found multiple arguments to an exception constructor, the first of them a string literal containing what appears to be placeholders intended for formatting. In this case, it is recommended to format the message properly."
 python,PYL-W1113,Keyword argument defined before variable positional arguments,minor,antipattern,"On defining a keyword argument before variable positional arguments, one can end up in having multiple values passed for the aforementioned parameter in case the method is called with keyword arguments. It is recommended to define keyword arguments after variable positional arguments. "
 python,PYL-W1201,Logging is not lazy,major,performance,"The logging statement has the call of the form `logging.(format_string % (format_args...))`. For such calls, it is recommended to leave string interpolation to the logging method itself and be written as `logging.(format_string, format_args...)` so that the program may avoid incurring the cost of the interpolation in those cases in which no message will be logged.
-For more, see http://www.python.org/dev/peps/pep-0282/."
+For more details, see [PEP 282](http://www.python.org/dev/peps/pep-0282)."
 python,PYL-W1300,bad-format-string-key,,,
 python,PYL-W1301,unused-format-string-key,,,
 python,PYL-W1302,bad-format-string,,,
@@ -596,27 +596,27 @@ python,PYL-W1502,boolean-datetime,,,
 python,PYL-W1503,redundant-unittest-assert,,,
 python,PYL-W1505,Method used has been deprecated,major,antipattern,The method is marked as deprecated and will be removed in a future version of Python. Consider looking for an alternative in the documentation.
 python,PYL-W1506,Thread has no target function,major,bug-risk,"`threading.Thread` class is instantiated without the target function being passed. By default, the first parameter is the group param, not the target param.
-You can read more about this [here.[(https://docs.python.org/3/library/threading.html#threading.Thread)"
-python,PYL-W1507,Shallow copy of `os.environ` detected,major,bug-risk,"It is recommended to use `os.environ.copy()` here as `os.environ` is not a dict object but proxy object, so shallow copy has still effects on original object. See https://bugs.python.org/issue15373 for reference."
-python,PYL-W1508,Invalid `envvar` default,major,bug-risk,Env manipulation functions return None or str values. Supplying anything different as a default may cause bugs. See https://docs.python.org/3/library/os.html#os.getenv.
-python,PYL-W1509,Unsafe subprocess.popen preexec_fn parameter,major,bug-risk,"The preexec_fn parameter is not safe to use in the presence of threads in your application. The child process could deadlock before exec is called. If you must use it, keep it trivial! Minimize the number of libraries you call into. 
+You can read more about this [here](https://docs.python.org/3/library/threading.html#threading.Thread)."
+python,PYL-W1507,Shallow copy of `os.environ` detected,major,bug-risk,"It is recommended to use `os.environ.copy()` here as `os.environ` is not a `dict` object but proxy object, so shallow copy still has effects on the original object. See https://bugs.python.org/issue15373 for reference."
+python,PYL-W1508,Invalid `envvar` default,major,bug-risk,Env manipulation functions return `None` or `str` values. Supplying anything different as a default may cause bugs. See https://docs.python.org/3/library/os.html#os.getenv.
+python,PYL-W1509,Unsafe parameter given to `subprocess.popen`,major,bug-risk,"The `preexec_fn` parameter is not safe to use in the presence of threads in your application. The child process could deadlock before exec is called. If you must use it, keep it trivial. Minimize the number of libraries you call into. 
 Ref: https://docs.python.org/3/library/subprocess.html#popen-constructor"
-python,PYL-W1601,`apply` builtin detected,major,bug-risk,"The `apply` builtin function sas been deprecated since Python 2.3.
+python,PYL-W1601,Use of `apply` built-in detected,major,bug-risk,"The `apply` built-in function has been deprecated since Python 2.3.
 It's use shall be avoided.
 Use `function(*args, **keywords)` instead of `apply(function, args, keywords)`
 Ref: https://docs.python.org/2/library/functions.html#apply"
-python,PYL-W1602,`basestring` builtin detected ,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
-python,PYL-W1603,`buffer` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
-python,PYL-W1604,`cmp` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
-python,PYL-W1605,`coerce` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
-python,PYL-W1606,`execfile` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
-python,PYL-W1607,`file` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
-python,PYL-W1608,`long` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
-python,PYL-W1609,`raw_input` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
-python,PYL-W1610,`reduce` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
-python,PYL-W1611,`standarderror` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
-python,PYL-W1612,`unicode` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
-python,PYL-W1613,`xrange` builtin detected,major,bug-risk,The builtin function being accessed has been removed from python3. Please consult the [documentation].(https://docs.python.org/3/library/functions.html#built-in-functions)
+python,PYL-W1602,Use of `basestring` built-in detected ,major,bug-risk,The built-in function being accessed has been removed from Python 3. Please consult the [documentation](https://docs.python.org/3/library/functions.html#built-in-functions).
+python,PYL-W1603,Use of `buffer` built-in detected,major,bug-risk,The built-in function being accessed has been removed from Python 3. Please consult the [documentation](https://docs.python.org/3/library/functions.html#built-in-functions).
+python,PYL-W1604,Use of `cmp` built-in detected,major,bug-risk,The built-in function being accessed has been removed from Python 3. Please consult the [documentation](https://docs.python.org/3/library/functions.html#built-in-functions).
+python,PYL-W1605,Use of `coerce` built-in detected,major,bug-risk,The built-in function being accessed has been removed from Python 3. Please consult the [documentation](https://docs.python.org/3/library/functions.html#built-in-functions).
+python,PYL-W1606,Use of `execfile` built-in detected,major,bug-risk,The built-in function being accessed has been removed from Python 3. Please consult the [documentation](https://docs.python.org/3/library/functions.html#built-in-functions).
+python,PYL-W1607,Use of `file` built-in detected,major,bug-risk,The built-in function being accessed has been removed from Python 3. Please consult the [documentation](https://docs.python.org/3/library/functions.html#built-in-functions).
+python,PYL-W1608,Use of `long` built-in detected,major,bug-risk,The built-in function being accessed has been removed from Python 3. Please consult the [documentation](https://docs.python.org/3/library/functions.html#built-in-functions).
+python,PYL-W1609,Use of `raw_input` built-in detected,major,bug-risk,The built-in function being accessed has been removed from Python 3. Please consult the [documentation](https://docs.python.org/3/library/functions.html#built-in-functions).
+python,PYL-W1610,Use of `reduce` built-in detected,major,bug-risk,The built-in function being accessed has been removed from Python 3. Please consult the [documentation](https://docs.python.org/3/library/functions.html#built-in-functions).
+python,PYL-W1611,use of `standarderror` built-in detected,major,bug-risk,The built-in function being accessed has been removed from Python 3. Please consult the [documentation](https://docs.python.org/3/library/functions.html#built-in-functions).
+python,PYL-W1612,Use of `unicode` built-in detected,major,bug-risk,The built-in function being accessed has been removed from Python 3. Please consult the [documentation](https://docs.python.org/3/library/functions.html#built-in-functions).
+python,PYL-W1613,Use of `xrange` built-in detected,major,bug-risk,The built-in function being accessed has been removed from Python 3. Please consult the [documentation](https://docs.python.org/3/library/functions.html#built-in-functions).
 python,PYL-W1614,coerce-method,,,
 python,PYL-W1615,delslice-method,,,
 python,PYL-W1616,getslice-method,,,
@@ -629,7 +629,7 @@ python,PYL-W1622,next-method-called,,,
 python,PYL-W1623,metaclass-assignment,,,
 python,PYL-W1624,indexing-exception,,,
 python,PYL-W1625,String exception raised,major,bug-risk,
-python,PYL-W1626,`reload` builtin detected,major,bug-risk,"`reload()` builtin function has been removed in Python 3.
+python,PYL-W1626,Use of `reload` built-in detected,major,bug-risk,"`reload()` builtin function has been removed in Python 3.
 It is recommended to use `imp.reload()` or `importlib.reload()` instead."
 python,PYL-W1627,oct-method,,,
 python,PYL-W1628,hex-method,,,
@@ -643,7 +643,7 @@ python,PYL-W1636,`map` builtin not iterating,,,
 python,PYL-W1637,`zip` builtin not iterating,,,
 python,PYL-W1638,`range` builtin not iterating,,,
 python,PYL-W1639,`filter` builtin not iterating,,,
-python,PYL-W1640,Use of `cmp` argument detected,major,bug-risk,"A custom comarator is being passed for sorting. In Py3.0, the `cmp` parameter was removed entirely (as part of a larger effort to simplify and unify the language, eliminating the conflict between rich comparisons and the `__cmp__` methods)."
+python,PYL-W1640,Use of `cmp` argument detected,major,bug-risk,"A custom comparator is being passed for sorting. In Python 3.0, the `cmp` parameter was removed entirely (as part of a larger effort to simplify and unify the language, eliminating the conflict between rich comparisons and the `__cmp__` methods)."
 python,PYL-W1641,`eq` implemented in a class without also implementing `hash`,minor,bug-risk,"The class implements `eq` but not `hash`. In Python 2, objects get object.hash as the default implementation, in Python 3 objects get None as their default hash implementation if they also implement eq."
 python,PYL-W1642,div-method,,,
 python,PYL-W1643,idiv-method,,,
@@ -654,14 +654,14 @@ python,PYL-W1646,Invalid string codec detected,major,bug-risk,"`str.encode` or `
 It is recommended to use the [codecs](https://docs.python.org/3/library/codecs.html) module to handle arbitary codecs."
 python,PYL-W1647,Use of `sys.maxint` detected,major,bug-risk,`sys.maxint` has been removed in Python 3. It is recommended to use `sys.maxsize` instead.
 python,PYL-W1648,Bad Python 3 import,major,bug-risk,"The module being imported may no longer be available in Python 3.
-Please consult the documenttion."
-python,PYL-W1649,Deprecated string function detected,major,bug-risk,"The `string` function you're trying to access has been deprecated in Python 3.
-Please consult the documentation [here.](https://docs.python.org/3/library/string.html)"
+Please consult the documentation."
+python,PYL-W1649,Use of deprecated `string` function detected,major,bug-risk,"The `string` function you're trying to access has been deprecated in Python 3.
+Please consult the documentation [here](https://docs.python.org/3/library/string.html)."
 python,PYL-W1650,Deprecated string translate call detected,,,
-python,PYL-W1651,Deprecated `itertools` function,major,bug-risk,"The `itertools` function you're trying to access has been deprecated in Python 3. 
-Please consult the documentation [here.](https://docs.python.org/3/library/itertools.html)"
-python,PYL-W1652,Deprecated `types` field,major,bug-risk,"The field being accessed has been deprecated in the `types` module in Python 3.
-Please consult the documentation [here.](https://docs.python.org/3/library/types.html)"
+python,PYL-W1651,Use of deprecated `itertools` function,major,bug-risk,"The `itertools` function you're trying to access has been deprecated in Python 3.
+Please consult the documentation [here](https://docs.python.org/3/library/itertools.html)."
+python,PYL-W1652,Use of deprecated `types` field,major,bug-risk,"The field being accessed has been deprecated in the `types` module in Python 3.
+Please consult the documentation [here](https://docs.python.org/3/library/types.html)."
 python,PYL-W1653,next-method-defined,,,
 python,PYL-W1654,dict-items-not-iterating,,,
 python,PYL-W1655,dict-keys-not-iterating,,,
@@ -672,9 +672,9 @@ python,PYL-W1659,Accessed the removed xreadlines attribute,major,bug-risk,This a
 python,PYL-W1660,Accessed a removed attribute on the `sys` module,major,bug-risk,This attribute of `sys` module has been removed in Python 3. Please consult the documentation.
 python,PYL-W1661,Used an exception object that was bound by an except handler,major,bug-risk,"An exception, that was bound in an except handler, shall not be used outside of the except handler. On Python 3 these exceptions will be deleted once they get out of the except handler, and will give an error on being used."
 python,PYL-W1662,Used a variable that was bound inside a comprehension,minor,bug-risk,"Accessed a variable, that was bound in a comprehension handler, outside of the comprehension itself. On Python 3 these variables will be deleted outside of the comprehension, and will give an error on being used."
-python,PAP-W0007,I/O operation on a closed file detected,major,bug-risk,"The I/O operation is being performed on a file which is closed.
+python,PAP-W0021,I/O operation on a closed file detected,major,bug-risk,"The I/O operation is being performed on a file which is closed.
 This is an error. It is recommended to perform I/O operation on file inside the `with` block, as the file is automatically closed when the scope of `with` ends."
-python,PAP-W0008,Illegal operation on file,major,bug-risk,Trying to write on a file which is opened in read mode will give an `IOError`. It is recommended to open file in the appropriate mode.
+python,PAP-W0022,Illegal operation on file,major,bug-risk,Trying to write on a file which is opened in read mode will give an `IOError`. It is recommended to open file in the appropriate mode.
 python,PAP-W0009,Multiple return types found in function,major,antipattern,"Returning objects of different types from a function can lead to problems that are difficult to debug. Instead, it is better to raise an exception that can be caught where the function is called."
 python,PAP-W0010,File opened without the `with` statement,critical,antipattern,Opening a file using `with` statement is preferred as function `open` implements the context manager protocol that release the resource when it is outside of the `with` block. Not doing so requires you to manually release the resource.
 python,PAP-W0011,Use `items()` to iterate over a dictionary,major,antipattern,"The preferred way to iterate over the key-value pairs of a dictionary is to declare two variables in a for loop, and then call `dictionary.items()` (or `dictionary.iteritems()` for Python2), where dictionary is the name of your variable representing a dictionary.'"
