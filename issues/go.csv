@@ -7,7 +7,7 @@ go,GSC-G104,Missing error check,major,security,"The function returns an error, b
 go,GSC-G105,Audit the use of math/big.Exp function,minor,security,Use of math/big.Int.Exp function should be audited for modulus == 0
 go,GSC-G106,Audit the use of ssh.InsecureIgnoreHostKey function,minor,security,InsecureIgnoreHostKey is used to accept any host key. It should not be used for production code.
 go,GSC-G107,URL provided to HTTP request as taint input,minor,security,Potential HTTP request made with variable url. Getting an URL from an untrusted source gives the ability of an attacker to redirect your application to bad websites and perform additional attacks. Read more about Taint checking here -- https://en.wikipedia.org/wiki/Taint_checking
-go,GSC-G108,SQL query construction using format string,critical,security,"Using the format string function in the fmt Golang package to dynamically create an SQL query can easily create a possibility for [SQL injection](https://en.wikipedia.org/wiki/SQL_injection). The reason is that the format string function doesn't escape special characters like ' and it's easy to add second SQL command in the format string.
+go,GSC-G201,SQL query construction using format string,critical,security,"Using the format string function in the fmt Golang package to dynamically create an SQL query can easily create a possibility for [SQL injection](https://en.wikipedia.org/wiki/SQL_injection). The reason is that the format string function doesn't escape special characters like ' and it's easy to add second SQL command in the format string.
 
 Use `database/sql` package along with argument placeholders to construct SQL statements that are automatically escaped properly. The key distinction here is that you aren’t trying to construct the SQL statement yourself, but instead you are providing arguments that can be easily escaped. The underlying driver for database/sql will ultimately be aware of what special characters it needs to handle and will escape them for you, preventing any nefarious SQL from running.
 
@@ -48,7 +48,7 @@ func main() {
     rows.Close()
 }
 ```"
-go,GSC-G109,SQL query construction using string concatenation,critical,security,"Using string concatenation to dynamically create an SQL query can easily create a possibility for [SQL injection](https://en.wikipedia.org/wiki/SQL_injection). The reason is that the string concatenation function doesn't escape special characters like ' and it's easy to add second SQL command in the format string.
+go,GSC-G202,SQL query construction using string concatenation,critical,security,"Using string concatenation to dynamically create an SQL query can easily create a possibility for [SQL injection](https://en.wikipedia.org/wiki/SQL_injection). The reason is that the string concatenation function doesn't escape special characters like ' and it's easy to add second SQL command in the format string.
 
 Use `database/sql` package along with argument placeholders to construct SQL statements that are automatically escaped properly. The key distinction here is that you aren’t trying to construct the SQL statement yourself, but instead you are providing arguments that can be easily escaped. The underlying driver for database/sql will ultimately be aware of what special characters it needs to handle and will escape them for you, preventing any nefarious SQL from running.
 
@@ -89,16 +89,16 @@ func main() {
     rows.Close()
 }
 ```"
-go,GSC-G110,Use of unescaped data in HTML templates,major,security,Potential unescaped data in HTML template. This might lead to [Cross site scripting](https://en.wikipedia.org/wiki/Cross-site_scripting). Do not use external values in the template without escaping.
-go,GSC-G111,Audit use of command execution,major,security,"When executing a command,
+go,GSC-G203,Use of unescaped data in HTML templates,major,security,Potential unescaped data in HTML template. This might lead to [Cross site scripting](https://en.wikipedia.org/wiki/Cross-site_scripting). Do not use external values in the template without escaping.
+go,GSC-G204,Audit use of command execution,major,security,"When executing a command,
 
 - Do not use non literal values (or) variables in a command or argument.
 - Make sure the execution path of a command is always absolute."
-go,GSC-G112,Poor file permissions used when creating a directory,major,security,Excessive permissions granted when creating a file/directory. This warning is triggered whenever a permission greater than 0700 is granted.
-go,GSC-G113,Poor file permissions used when creation file or using chmod,major,security,Excessive permissions granted to a file/directory. This warning is triggered whenever a permission greater than 0600 is granted.
-go,GSC-G114,Creating tempfile using a predictable path,major,security,"When creating a temporary file, use `os.TempDir()` to get the name of the directory and `ioutil.TempFile()` to create a file -- instead of `os.Create`. Please note that it’s caller’s responsibility to remove the file."
-go,GSC-G115,File path provided as taint input,major,security,Filepath with variable url. Getting an filepath from an untrusted source gives the ability of an attacker to perform arbitraty attacks. Read more about Taint checking here -- https://en.wikipedia.org/wiki/Taint_checking
-go,GSC-G116,File path traversal when extracting zip archive,minor,security,"A path traversal attack (also known as directory traversal) aims to access files and directories that are stored outside the web root folder. By manipulating variables that reference files with “dot-dot-slash (../)” sequences and its variations or by using absolute file paths, it may be possible to access arbitrary files and directories stored on file system including application source code or configuration and critical system files.
+go,GSC-G301,Poor file permissions used when creating a directory,major,security,Excessive permissions granted when creating a file/directory. This warning is triggered whenever a permission greater than 0700 is granted.
+go,GSC-G302,Poor file permissions used when creation file or using chmod,major,security,Excessive permissions granted to a file/directory. This warning is triggered whenever a permission greater than 0600 is granted.
+go,GSC-G303,Creating tempfile using a predictable path,major,security,"When creating a temporary file, use `os.TempDir()` to get the name of the directory and `ioutil.TempFile()` to create a file -- instead of `os.Create`. Please note that it’s caller’s responsibility to remove the file."
+go,GSC-G304,File path provided as taint input,major,security,Filepath with variable url. Getting an filepath from an untrusted source gives the ability of an attacker to perform arbitraty attacks. Read more about Taint checking here -- https://en.wikipedia.org/wiki/Taint_checking
+go,GSC-G305,File path traversal when extracting zip archive,minor,security,"A path traversal attack (also known as directory traversal) aims to access files and directories that are stored outside the web root folder. By manipulating variables that reference files with “dot-dot-slash (../)” sequences and its variations or by using absolute file paths, it may be possible to access arbitrary files and directories stored on file system including application source code or configuration and critical system files.
 
 The following is an example of a zip archive with one benign file and one malicious file. Extracting the malicious file will result in traversing out of the target folder, ending up in /root/.ssh/ overwriting the authorized_keys file:
 
@@ -109,8 +109,8 @@ The following is an example of a zip archive with one benign file and one malici
 
 Package https://godoc.org/github.com/mholt/archiver handles sanitization of filepath.
 Ref: https://github.com/mholt/archiver/blob/e4ef56d48eb029648b0e895bb0b6a393ef0829c3/archiver.go#L110-L119"
-go,GSC-G117,"Potential usage of DES, RC4, MD5 or SHA1",major,security,"Consider using alternatives as DES, RC4, MD5 and SHA1 are relatively weak encryption algorithms."
-go,GSC-G118,Potentially bad TLS connection settings detected,major,security,"Insecure configuration of TLS connection settings. Refer to the occurence to understand the exact misconfiguration.
+go,GSC-G401,"Potential usage of DES, RC4, MD5 or SHA1",major,security,"Consider using alternatives as DES, RC4, MD5 and SHA1 are relatively weak encryption algorithms."
+go,GSC-G402,Potentially bad TLS connection settings detected,major,security,"Insecure configuration of TLS connection settings. Refer to the occurence to understand the exact misconfiguration.
 
 The following configurations are flagged by our systems:
 - `InsecureSkipVerify` set to `true` in TLS config -- https://golang.org/pkg/crypto/tls/#Config
@@ -118,12 +118,12 @@ The following configurations are flagged by our systems:
 - Bad cipher suite used.
 
 Refer to this compatibility document before making changes -- https://wiki.mozilla.org/Security/Server_Side_TLS#Modern_compatibility"
-go,GSC-G119,RSA key length less than 2048 bits,major,security,"The strength of public-key-based cryptographic algorithm (like RSA) is determined by the time that it takes to derive the private key by using brute-force methods. RSA claims that 1024-bit keys are likely to become crackable some time between 2006 and 2010 and that 2048-bit keys are sufficient until 2030.
+go,GSC-G403,RSA key length less than 2048 bits,major,security,"The strength of public-key-based cryptographic algorithm (like RSA) is determined by the time that it takes to derive the private key by using brute-force methods. RSA claims that 1024-bit keys are likely to become crackable some time between 2006 and 2010 and that 2048-bit keys are sufficient until 2030.
 
 Increase the key length to atleast 2048 bits.
 
 Read more about key size here -- https://en.wikipedia.org/wiki/Key_size"
-go,GSC-G120,Audit the random number generation source (rand),major,security,"`math/rand` is much faster for applications that don’t need crypto-level or security-related random data generation. `crypto/rand` is suited for secure and crypto-ready usage, but it’s slower.
+go,GSC-G404,Audit the random number generation source (rand),major,security,"`math/rand` is much faster for applications that don’t need crypto-level or security-related random data generation. `crypto/rand` is suited for secure and crypto-ready usage, but it’s slower.
 
 It is highly recommended to use `crypto/rand` when needing to be secure with random numbers such as generating session ID in a web application.
 
@@ -131,18 +131,18 @@ It is highly recommended to use `crypto/rand` when needing to be secure with ran
 `math/rand` package -- https://golang.org/pkg/math/rand/
 
 "
-go,GSC-G121,Import blacklist: crypto/md5,major,security,"Detects imports of `crypto/md5` since they are considered vulnerable.
+go,GSC-G501,Import blacklist: crypto/md5,major,security,"Detects imports of `crypto/md5` since they are considered vulnerable.
 
 Refer to https://en.wikipedia.org/wiki/MD5#Collision_vulnerabilities to understand the vulnerability in detail."
-go,GSC-G122,Import blacklist: crypto/des,major,security,"Detects imports of `crypto/des` since they are considered vulnerable.
+go,GSC-G502,Import blacklist: crypto/des,major,security,"Detects imports of `crypto/des` since they are considered vulnerable.
 
 Refer to https://paginas.fe.up.pt/~ei10109/ca/des-vulnerabilities.html to understand the vulnerability in detail."
-go,GSC-G123,Import blacklist: crypto/rc4,major,security,"Detects imports of `crypto/rc4` since it is considered vulnerable.
+go,GSC-G503,Import blacklist: crypto/rc4,major,security,"Detects imports of `crypto/rc4` since it is considered vulnerable.
 
 Refer https://en.wikipedia.org/wiki/RC4 to understand the vulnerability in detail."
-go,GSC-G124,Import blacklist: net/http/cgi,major,security,"Detects imports of `net/http/cgi` since it is considered vulnerable.
+go,GSC-G504,Import blacklist: net/http/cgi,major,security,"Detects imports of `net/http/cgi` since it is considered vulnerable.
 
 Refer to http://phrack.org/issues/49/8.html to understand the vulnerability in detail."
-go,GSC-G125,Import blacklist: crypto/sha1,major,security,"Detects imports of `crypto/sha1` since they are considered vulnerable.
+go,GSC-G505,Import blacklist: crypto/sha1,major,security,"Detects imports of `crypto/sha1` since they are considered vulnerable.
 
 Refer to https://en.wikipedia.org/wiki/SHA-1#Attacks to understand the vulnerability in detail."
