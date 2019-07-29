@@ -306,7 +306,7 @@ python,PYL-C0328,unexpected-line-ending-format,minor,style,Unexpected line endin
 python,PYL-C0401,wrong-spelling-in-comment,minor,style,A word in comment is not spelled correctly.
 python,PYL-C0402,wrong-spelling-in-docstring,minor,style,A word in docstring is not spelled correctly.
 python,PYL-C0403,invalid-characters-in-docstring,minor,style,Invalid characters found in docstring.
-python,PYL-C1801,len-as-condition,major,performance,"Using the `len` function to check if a sequence is empty is not idiomatic and can be less performant than checking for truthness of the sequence. 
+python,PYL-C1801,Builtin function `len` used as condition,major,performance,"Using the `len` function to check if a sequence is empty is not idiomatic and can be less performant than checking for truthness of the sequence. 
 
 `len` doesn't know the context in which it is called, so if computing the length means traversing the entire sequence, it must; it doesn't know that the result is just being compared to 0. Computing the boolean value can stop after it sees the first element, regardless of how long the sequence actually is."
 python,PYL-E0100,init-is-generator,critical,bug-risk,"The `__init__()` method is required to return nothing, but a `yield` statement in its body was detected. This will raise a `TypeError` on Python 2.7 and 3.x."
@@ -386,13 +386,13 @@ This may affect the redability."
 python,PYL-E1507,Invalid value passed to access env variable,major,bug-risk,Env manipulation functions support only string type arguments.
 python,PYL-E1601,`print` statement detected,major,bug-risk,`print` is being used as a statement here. It has been converted to a function in Python 3. This will cause an error.
 python,PYL-E1602,Parameter unpacking detected,major,bug-risk,Parameter unpacking is specified for a function. It has been removed from Python 3. Read more about it [here](https://www.python.org/dev/peps/pep-3113/)
-python,PYL-E1603,Unpacking in except,major,bug-risk,"Implicit unpacking of exceptions in except clauses was supported in Python 2. 
+python,PYL-E1603,Unpacking in `except`,major,bug-risk,"Implicit unpacking of exceptions in `except` clauses were supported in Python 2. 
 This has been removed from Python 3. Using this will give a `SyntaxError`. Read more about this [here](http://www.python.org/dev/peps/pep-3110/)"
 python,PYL-E1604,Old `raise` syntax deteted,major,bug-risk,"The alternate raise syntax `raise foo, bar` is used instead of `raise foo(bar)`. This is a syntax error in Python 3."
 python,PYL-E1605,Backtick detected,major,bug-risk,"Backtick ""``"" operator has been deprecated. Use the `str()` function instead."
 python,PYL-E1606,Use of long suffix,major,bug-risk,"""l"" or ""L"" is used to mark a long integer. This will not work in Python 3, since `int` and `long` types have merged."
 python,PYL-E1607,Old inequality operator used,major,bug-risk,Do not use `<>` operator. This is removed in Python 3 and will raise a SyntaxError. Use `!=` instead.
-python,PYL-E1608,Old octal literal,major,bug-risk,"Old octal syntax is being used. This has been removed in Python 3, and will raise an error.
+python,PYL-E1608,Use of old octal literal,major,bug-risk,"Old octal syntax is being used. This has been removed in Python 3, and will raise an error.
 To use the new syntax, prepend 0o on the number."
 python,PYL-E1609,import-star-module-level,,,
 python,PYL-E1610,Non ascii bytes literals detected,major,bug-risk,Non-ascii bytes literals are being used in a program. They are no longer supported in Python 3.
@@ -428,7 +428,7 @@ python,PYL-R1701,Consider merging `isinstance` calls,minor,antipattern,It is rec
 python,PYL-R1702,Too many nested block,minor,antipattern,"Although there is nothing wrong with this, but it is recommended to refactor this since having too many nested blocks may make the code hard to follow."
 python,PYL-R1703,simplifiable-if-statement,,,
 python,PYL-R1704,Argument redefined from local,major,antipattern,"A local name is redefining an argument, which might suggest a potential error. This is taken in account only for a handful of name binding operations, such as for iteration, with statement assignment and exception handler assignment."
-python,PYL-R1705,Unnecessary `else` / `elif`,minor,antipattern,"The `else` / `elif` block here is unnecessary because the leading `if` block has a `return` statement. This doesn't mean you can not use it, but it is recommended to remove this else/elif statement for a better redability.
+python,PYL-R1705,Unnecessary `else` / `elif`,minor,antipattern,"The `else` / `elif` block here is unnecessary because the leading `if` block has a `return` statement. This doesn't mean you can not use it, but it is recommended to remove this `else` / `elif` statement for a better readability.
 
 Bad:
 ```
@@ -478,7 +478,7 @@ def bar(x):
         return
     return math.sqrt(x)
 ```"
-python,PYL-R1711,Useless `return` detected,minor,style,"A single `return` or `return None` statement is found at the end of function or method definition. This statement can safely be removed to improve the redability, because Python will implicitly return `None`."
+python,PYL-R1711,Useless `return` detected,minor,style,"A single `return` or `return None` statement is found at the end of function or method definition. This statement can safely be removed to improve the readability because Python will implicitly return `None`."
 python,PYL-R1712,Use `tuple` to swap variables,major,style,"It is recommended not to use a temporary variable in order to swap variables. Using tuple unpacking to directly swap variables makes the intention more clear.
 
 Example:
