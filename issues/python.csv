@@ -119,7 +119,7 @@ python,BAN-B601,paramiko_calls,major,security,Paramiko is a Python library desig
 python,BAN-B602,subprocess_popen_with_shell_equals_true,major,security,"Python possesses many mechanisms to invoke an external executable. However, doing so may present a security issue if appropriate care is not taken to sanitize any user provided or variable input. Subprocess invocation using a command shell is dangerous as it is vulnerable to various shell injection attacks. Great care should be taken to sanitize all input in order to mitigate this risk. Calls of this type are identified by a parameter of ‘shell=True’ being given."
 python,BAN-B603,subprocess_without_shell_equals_true,minor,security,"Spawning of a subprocess without the use of a command shell is not vulnerable to shell injection attacks, but care should still be taken to ensure validity of input."
 python,BAN-B604,any_other_function_with_shell_equals_true,major,security,Method calls for the presence of a keyword parameter shell equalling true can be vulnerable to shell injection issues. This issue is intended to catch custom wrappers to vulnerable methods that may have been created.
-python,BAN-B605,start_process_with_a_shell,minor,security,Spawning of a subprocess using a command shell is dangerous as it is vulnerable to various shell injection attacks. Great care should be taken to sanitize all input in order to mitigate this risk. Calls of this type are identified by the use of certain commands which are known to use shells. 
+python,BAN-B605,start_process_with_a_shell,minor,security,Spawning of a subprocess using a command shell is dangerous as it is vulnerable to various shell injection attacks. Great care should be taken to sanitize all input in order to mitigate this risk. Calls of this type are identified by the use of certain commands which are known to use shells.
 python,BAN-B606,start_process_with_no_shell,minor,security,"Spawning of a subprocess in a way that doesn’t use a shell is generally safe, but it maybe useful for penetration testing workflows to track where external system calls are used."
 python,BAN-B607,start_process_with_partial_path,minor,security,Python possesses many mechanisms to invoke an external executable. If the desired executable path is not fully qualified relative to the filesystem root then this may present a potential security risk.
 python,BAN-B608,hardcoded_sql_expressions,major,security,"An SQL injection attack consists of insertion or “injection” of a SQL query via the input data given to an application. It is a very common attack vector. Unless care is taken to sanitize and control the input data when building such SQL statement strings, an injection attack becomes possible."
@@ -145,8 +145,8 @@ python,FLK8-D203,1 blank line required before class docstring,minor,doc,
 python,FLK8-D204,1 blank line required after class docstring,minor,doc,
 python,FLK8-D205,1 blank line required between summary line and description,minor,doc,
 python,FLK8-D206,"Docstring should be indented with spaces, not tabs",minor,doc,"It is recommended to use spaces in the docstrings, just as the code."
-python,FLK8-D207,Docstring is under-indented,minor,doc,It is recommended to properly indent docstrings for readability. 
-python,FLK8-D208,Docstring is over-indented,minor,doc,It is recommended to properly indent docstrings for readability. 
+python,FLK8-D207,Docstring is under-indented,minor,doc,It is recommended to properly indent docstrings for readability.
+python,FLK8-D208,Docstring is over-indented,minor,doc,It is recommended to properly indent docstrings for readability.
 python,FLK8-D209,Multi-line docstring closing quotes should be on a separate line,minor,doc,
 python,FLK8-D210,No whitespaces allowed surrounding docstring text,minor,doc,
 python,FLK8-D211,No blank lines allowed before class docstring,minor,doc,
@@ -306,7 +306,7 @@ python,PYL-C0328,unexpected-line-ending-format,minor,style,Unexpected line endin
 python,PYL-C0401,wrong-spelling-in-comment,minor,style,A word in comment is not spelled correctly.
 python,PYL-C0402,wrong-spelling-in-docstring,minor,style,A word in docstring is not spelled correctly.
 python,PYL-C0403,invalid-characters-in-docstring,minor,style,Invalid characters found in docstring.
-python,PYL-C1801,Built-in function `len` used as condition,major,performance,"Using the `len` function to check if a sequence is empty is not idiomatic and can be less performant than checking for truthness of the sequence. 
+python,PYL-C1801,Built-in function `len` used as condition,major,performance,"Using the `len` function to check if a sequence is empty is not idiomatic and can be less performant than checking for truthness of the sequence.
 
 `len` doesn't know the context in which it is called, so if computing the length means traversing the entire sequence, it must; it doesn't know that the result is just being compared to 0. Computing the boolean value can stop after it sees the first element, regardless of how long the sequence actually is."
 python,PYL-E0100,init-is-generator,critical,bug-risk,"The `__init__()` method is required to return nothing, but a `yield` statement in its body was detected. This will raise a `TypeError` on Python 2.7 and 3.x."
@@ -375,8 +375,7 @@ python,PYL-E1300,Invalid format character,critical,bug-risk,An unsupported forma
 python,PYL-E1301,Format string truncated,major,bug-risk,The format string was terminated before the end of a conversion specifier. It is recommended to look again and verify if the conversion specifier is given.
 python,PYL-E1302,Mixed format string,major,bug-risk,"The format string contains both named (e.g. `%(foo)d`) and unnamed (e.g. `%d`) conversion specifiers.
 This issue is also raised when the named conversion specifier contains * for the minimum field width and/or precision. This may give you an error. "
-python,PYL-E1303,Format needs mapping,major,bug-risk,"The format string that uses named conversion specifiers is used with an argument that is not a mapping. This will raise a `TypeError`.
-It is recommended to convert the argument into a mapping, e. g. a dictionary."
+python,PYL-E1303,Format needs mapping,major,bug-risk,The format string that uses named conversion specifiers is used with an argument that is not a mapping. This will raise a `TypeError`. It is recommended to convert the argument into a mapping, e. g. a dictionary.
 python,PYL-E1304,Missing format string key,major,bug-risk,The format string that uses named conversion specifiers is used with a dictionary that doesn't contain all the keys required by the format string. This can cause an error.
 python,PYL-E1305,Format string contains excess arguments,critical,bug-risk,Format string has been given excess variables to unpack. This can cause an error.
 python,PYL-E1306,Not enough arguments in format string,critical,bug-risk,Format string do not contain enough arguments to unpack. This can cause an error.
@@ -386,7 +385,7 @@ This may affect readability."
 python,PYL-E1507,Invalid value passed to access env variable,major,bug-risk,Env manipulation functions support only string type arguments.
 python,PYL-E1601,`print` statement detected,major,bug-risk,`print` is being used as a statement here. It has been converted to a function in Python 3. This will cause an error.
 python,PYL-E1602,Parameter unpacking detected,major,bug-risk,Parameter unpacking is specified for a function. It has been removed from Python 3. Read more about it [here](https://www.python.org/dev/peps/pep-3113/)
-python,PYL-E1603,Unpacking in `except`,major,bug-risk,"Implicit unpacking of exceptions in `except` clauses were supported in Python 2. 
+python,PYL-E1603,Unpacking in `except`,major,bug-risk,"Implicit unpacking of exceptions in `except` clauses were supported in Python 2.
 This has been removed from Python 3. Using this will give a `SyntaxError`. Read more about this [here](http://www.python.org/dev/peps/pep-3110/)"
 python,PYL-E1604,Old `raise` syntax deteted,major,bug-risk,"The alternate raise syntax `raise foo, bar` is used instead of `raise foo(bar)`. This is a syntax error in Python 3."
 python,PYL-E1605,Backtick detected,major,bug-risk,"Backtick ""``"" operator has been deprecated. Use the `str()` function instead."
@@ -499,7 +498,7 @@ python,PYL-W0101,Statement not reachable on execution,major,antipattern,"This st
 python,PYL-W0102,Dangerous default argument,critical,bug-risk,Do not use a mutable like `list` or `dictionary` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.
 python,PYL-W0104,Statement has no effect,major,antipattern,The expression or statement is pointless and will have no effect on the program on execution.
 python,PYL-W0105,pointless-string-statement,,,
-python,PYL-W0106,Expression not assigned,minor,antipattern,An expression that is not a function call is assigned to nothing. Probably something else was intended here. We recommend to review this. Ignore if this is intended. 
+python,PYL-W0106,Expression not assigned,minor,antipattern,An expression that is not a function call is assigned to nothing. Probably something else was intended here. We recommend to review this. Ignore if this is intended.
 python,PYL-W0108,Unnecessary lambda expression,major,bug-risk,A lambda that calls a function without modifying any of its parameters is unnecessary. Python functions are first class objects and can be passed around in the same way as the resulting lambda. It is recommended to remove the lambda and use the function directly.
 python,PYL-W0109,Duplicate dictionary keys,major,bug-risk,Dictionary expression binds the same key multiple times. This may lead to unintentional behaviour. It is recommended to have unique keys.
 python,PYL-W0111,Assignment to a new keyword,major,bug-risk,"Assignment is being done to a variable which will become a keyword in the future releases. This statement, which is working fine right now, will give an error in the next Python version. We recommend you to rename this variable. "
@@ -599,7 +598,7 @@ python,PYL-W1506,Thread has no target function,major,bug-risk,"`threading.Thread
 You can read more about this [here](https://docs.python.org/3/library/threading.html#threading.Thread)."
 python,PYL-W1507,Shallow copy of `os.environ` detected,major,bug-risk,"It is recommended to use `os.environ.copy()` here as `os.environ` is not a `dict` object but proxy object, so shallow copy still has effects on the original object. See https://bugs.python.org/issue15373 for reference."
 python,PYL-W1508,Invalid `envvar` default,major,bug-risk,Env manipulation functions return `None` or `str` values. Supplying anything different as a default may cause bugs. See https://docs.python.org/3/library/os.html#os.getenv.
-python,PYL-W1509,Unsafe parameter given to `subprocess.popen`,major,bug-risk,"The `preexec_fn` parameter is not safe to use in the presence of threads in your application. The child process could deadlock before exec is called. If you must use it, keep it trivial. Minimize the number of libraries you call into. 
+python,PYL-W1509,Unsafe parameter given to `subprocess.popen`,major,bug-risk,"The `preexec_fn` parameter is not safe to use in the presence of threads in your application. The child process could deadlock before exec is called. If you must use it, keep it trivial. Minimize the number of libraries you call into.
 Ref: https://docs.python.org/3/library/subprocess.html#popen-constructor"
 python,PYL-W1601,Use of `apply` built-in detected,major,bug-risk,"The `apply` built-in function has been deprecated since Python 2.3.
 It's use shall be avoided.
