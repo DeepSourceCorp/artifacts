@@ -306,7 +306,7 @@ python,PYL-C0328,unexpected-line-ending-format,minor,style,Unexpected line endin
 python,PYL-C0401,wrong-spelling-in-comment,minor,style,A word in comment is not spelled correctly.
 python,PYL-C0402,wrong-spelling-in-docstring,minor,style,A word in docstring is not spelled correctly.
 python,PYL-C0403,invalid-characters-in-docstring,minor,style,Invalid characters found in docstring.
-python,PYL-C1801,Builtin function `len` used as condition,major,performance,"Using the `len` function to check if a sequence is empty is not idiomatic and can be less performant than checking for truthness of the sequence. 
+python,PYL-C1801,Built-in function `len` used as condition,major,performance,"Using the `len` function to check if a sequence is empty is not idiomatic and can be less performant than checking for truthness of the sequence. 
 
 `len` doesn't know the context in which it is called, so if computing the length means traversing the entire sequence, it must; it doesn't know that the result is just being compared to 0. Computing the boolean value can stop after it sees the first element, regardless of how long the sequence actually is."
 python,PYL-E0100,init-is-generator,critical,bug-risk,"The `__init__()` method is required to return nothing, but a `yield` statement in its body was detected. This will raise a `TypeError` on Python 2.7 and 3.x."
