@@ -290,7 +290,6 @@ python,FLK8-E999,SyntaxError: invalid sytax,critical,bug-risk,A Python syntax er
 python,PYL-C0102,Blacklisted name detected,major,style,These names can make the intention of the code unclear and hard to understand and debug. Using descripted names is recommended.
 python,PYL-C0113,Use of an unneeded `not` detected,major,anti-pattern,"The boolean expression contains an unneeded negation, and can be re-written without using the `not` statement."
 python,PYL-C0122,Misplaced comparison constant,major,style,The constant is placed on the left side of a comparison. It is usually clearer in intent to place it in the right hand side of the comparison.
-python,PYL-C0123,Unidiomatic typecheck: use `isinstance()`,major,bug-risk,"Use `isinstance()` instead `type()` of  for a typecheck. The idiomatic way to perform an explicit typecheck in Python is to use `isinstance(x, Y)` rather than `type(x) == Y`, `type(x) is Y`. This is because `isinstance` can handle subclasses as well."
 python,PYL-C0200,Consider using `enumerate` for iteration,minor,antipattern,"Consider using enumerate instead of iterating with range and len, which is more straightforward."
 python,PYL-C0201,Consider iterating dictionary,major,style,"Consider iterating the dictionary directly instead of calling .keys(). It is enough to just iterate through the dictionary itself, as in `for key in dictionary`."
 python,PYL-C0202,Bad classmethod argument,major,style,Use of `cls` as the first named argument in a class method is recommended so it's easy to differentiate them from regular instance methods.
