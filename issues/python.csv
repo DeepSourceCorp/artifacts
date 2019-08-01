@@ -390,7 +390,7 @@ python,PYL-E1603,Unpacking in `except`,major,bug-risk,"Implicit unpacking of exc
 This has been removed from Python 3. Using this will give a `SyntaxError`. Read more about this [here](http://www.python.org/dev/peps/pep-3110/)"
 python,PYL-E1604,Old `raise` syntax deteted,major,bug-risk,"The alternate raise syntax `raise foo, bar` is used instead of `raise foo(bar)`. This is a syntax error in Python 3."
 python,PYL-E1605,Backtick detected,major,bug-risk,"Backtick ""``"" operator has been deprecated. Use the `str()` function instead."
-python,PYL-E1606,Use of long suffix,major,bug-risk,"""l"" or ""L"" is used to mark a long integer. This will not work in Python 3, since `int` and `long` types have merged."
+python,PYL-E1606,Use of long suffix,major,bug-risk,"`l` or `L` is used to mark a long integer. This will not work in Python 3, since `int` and `long` types have merged."
 python,PYL-E1607,Old inequality operator used,major,bug-risk,Do not use `<>` operator. This is removed in Python 3 and will raise a SyntaxError. Use `!=` instead.
 python,PYL-E1608,Use of old octal literal,major,bug-risk,"Old octal syntax is being used. This has been removed in Python 3, and will raise an error.
 To use the new syntax, prepend 0o on the number."
@@ -542,7 +542,7 @@ from __future__ import division
 
 8 / 7  # Gives output: 1.1428571428571428
 ```"
-python,PYL-W0511,Use of `FIXME`/`XXX`/`TODO` encountered,minor,doc,You have marked this block as `FIXME`/`XXX`/`TODO`. Please make sure this is addressed, or remove this comment as this could be misleading.
+python,PYL-W0511,Use of `FIXME`/`XXX`/`TODO` encountered,minor,doc,"You have marked this block as `FIXME`/`XXX`/`TODO`. Please make sure this is addressed, or remove this comment as this could be misleading."
 python,PYL-W0512,Invalid encoded data,major,bug-risk,The source line cannot be decoded using the specified source file encoding. It is recommended to check the encoding/encoded data again.
 python,PYL-W0601,global-variable-undefined,,,
 python,PYL-W0602,Global variable is declared but not used,major,bug-risk,The variable is defined through the `global` statement but no assignment to this variable is done. It is recommended to remove it if not necessary.
@@ -559,7 +559,7 @@ python,PYL-W0623,redefine-in-handler,,,
 python,PYL-W0631,Loop variable used outside the loop,critical,bug-risk, Do not use a loop variable (i.e. defined by a for loop or a list comprehension or a generator expression) outside the loop. It can induce wrong results.
 python,PYL-W0632,Unbalanced tuple unpacking,major,bug-risk,Possible unbalanced tuple unpacking detected: either left or right side of the statement has more labels. This can raise `ValueError` while unpacking.
 python,PYL-W0640,Cell variable defined in loop,major,bug-risk,
-python,PYL-W0641,Possibly unused variable,major,bug-risk,A variable is defined but might not be used. The possibility comes from the fact that `locals()` might be used, which could consume or not the said variable.
+python,PYL-W0641,Possibly unused variable,major,bug-risk,"A variable is defined but might not be used. The possibility comes from the fact that `locals()` might be used, which could consume or not the said variable."
 python,PYL-W0642,Assignment to `self` or `cls` detected,major,bug-risk,Assignment to `self` and `cls` is invalid and strongly discouraged. Doing so can cause errors when accessing the object or the class.
 python,PYL-W0703,Exception caught is very general,major,antipattern,"If the except block catches a very general exception, it is likely to include many unrelated errors too. Try to be more precise while catching the exception."
 python,PYL-W0705,Catching previously caught exception,critical,bug-risk,"In a `try` block, one type of exception shall be caught only once. Do not catch the same exception again."
