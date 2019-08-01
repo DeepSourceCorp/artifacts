@@ -287,53 +287,53 @@ python,FLK8-W604,"backticks are deprecated, use 'repr()'",major,antipattern,Back
 python,FLK8-W605,Invalid escape sequence found,major,bug-risk,"As of Python 3.6, a backslash-character pair that is not a valid escape sequence now generates a DeprecationWarning. Although this will eventually become a SyntaxError, that will not be for several Python releases."
 python,FLK8-W606,`async` and `await` are reserved keywords starting with Python 3.7,major,bug-risk,Using these symbols as names can break your code in future.
 python,FLK8-E999,SyntaxError: invalid sytax,critical,bug-risk,A Python syntax error is detected.
-python,PYL-C0102,blacklisted-name,major,style,These names can make the intention of the code unclear and hard to understand and debug. Using descripted names is recommended.
-python,PYL-C0113,unneeded-not,major,style,"The boolean expression contains an unneeded negation, and can be re-written without using the `not` statement."
-python,PYL-C0122,misplaced-comparison-constant,major,style,The constant is placed on the left side of a comparison. It is usually clearer in intent to place it in the right hand side of the comparison.
+python,PYL-C0102,Blacklisted name detected,major,style,These names can make the intention of the code unclear and hard to understand and debug. Using descripted names is recommended.
+python,PYL-C0113,Use of an unneeded `not` detected,major,anti-pattern,"The boolean expression contains an unneeded negation, and can be re-written without using the `not` statement."
+python,PYL-C0122,Misplaced comparison constant,major,style,The constant is placed on the left side of a comparison. It is usually clearer in intent to place it in the right hand side of the comparison.
 python,PYL-C0123,Unidiomatic typecheck: use `isinstance()`,major,bug-risk,"Use `isinstance()` instead `type()` of  for a typecheck. The idiomatic way to perform an explicit typecheck in Python is to use `isinstance(x, Y)` rather than `type(x) == Y`, `type(x) is Y`. This is because `isinstance` can handle subclasses as well."
-python,PYL-C0200,Consider using `enumerate` for iteration,major,style,"Consider using enumerate instead of iterating with range and len, which is more straightforward."
+python,PYL-C0200,Consider using `enumerate` for iteration,minor,antipattern,"Consider using enumerate instead of iterating with range and len, which is more straightforward."
 python,PYL-C0201,Consider iterating dictionary,major,style,"Consider iterating the dictionary directly instead of calling .keys(). It is enough to just iterate through the dictionary itself, as in `for key in dictionary`."
-python,PYL-C0202,bad-classmethod-argument,major,style,Use of `cls` as the first named argument in a class method is recommended so it's easy to differentiate them from regular instance methods.
-python,PYL-C0203,bad-mcs-method-argument,major,style,Use of `cls` as the first named argument in a metaclass method is recommended so it's easy to differentiate them from regular instance methods.
-python,PYL-C0204,bad-mcs-classmethod-argument,major,style,Use of `mcs` as the first named argument in a metaclass class method is recommended so it's easy to differentiate them from regular instance methods.
+python,PYL-C0202,Bad classmethod argument,major,style,Use of `cls` as the first named argument in a class method is recommended so it's easy to differentiate them from regular instance methods.
+python,PYL-C0203,Bad metaclass-method argument,major,style,Use of `cls` as the first named argument in a metaclass method is recommended so it's easy to differentiate them from regular instance methods.
+python,PYL-C0204,Bad metaclass-classmethod argument,major,style,Use of `mcs` as the first named argument in a metaclass class method is recommended so it's easy to differentiate them from regular instance methods.
 python,PYL-C0205,"Slots are recommended to be an iterable, simple string detected",major,style,"While it's technically correct to have simple strings as slot values, it is recommended to use an iterable like a `tuple` or a `list`. It's very common to add more than one property names in the slots, and even if there's one property name at the present, having that as a one-member iterable is more clear than a string.
 
 This is a convention and helps it easier to understand and extend your code."
-python,PYL-C0302,too-many-lines,minor,antipattern,"Having too many lines in a module reduces readability, and may be a sign that refactoring is needed. The recommended maximum number of lines in a module is 1000."
-python,PYL-C0325,superfluous-parens,minor,style,Parentheses can be omitted after the keyword.
-python,PYL-C0327,mixed-line-endings,minor,style,There are mixed (LF and CRLF) newline signs in a file.
-python,PYL-C0328,unexpected-line-ending-format,minor,style,Unexpected line ending format.
-python,PYL-C0401,wrong-spelling-in-comment,minor,style,A word in comment is not spelled correctly.
-python,PYL-C0402,wrong-spelling-in-docstring,minor,style,A word in docstring is not spelled correctly.
-python,PYL-C0403,invalid-characters-in-docstring,minor,style,Invalid characters found in docstring.
+python,PYL-C0302,Module has too many lines,minor,antipattern,"Having too many lines in a module reduces readability, and may be a sign that refactoring is needed. The recommended maximum number of lines in a module is 1000."
+python,PYL-C0325,Unnecessary parentheses after keyword,minor,style,Parentheses can be omitted after the keyword.
+python,PYL-C0327,Mixed line endings found,minor,style,There are mixed (LF and CRLF) newline signs in a file.
+python,PYL-C0328,Unexpected line ending format found,minor,style,Unexpected line ending format.
+python,PYL-C0401,Wrong spelling detected in comment,minor,style,A word in comment is not spelled correctly.
+python,PYL-C0402,Wrong spelling detected in docstring,minor,style,A word in docstring is not spelled correctly.
+python,PYL-C0403,Invalid characters found in docstring,minor,style,Invalid characters found in docstring.
 python,PYL-C1801,Built-in function `len` used as condition,major,performance,"Using the `len` function to check if a sequence is empty is not idiomatic and can be less performant than checking for truthness of the sequence. 
 
 `len` doesn't know the context in which it is called, so if computing the length means traversing the entire sequence, it must; it doesn't know that the result is just being compared to 0. Computing the boolean value can stop after it sees the first element, regardless of how long the sequence actually is."
-python,PYL-E0100,init-is-generator,critical,bug-risk,"The `__init__()` method is required to return nothing, but a `yield` statement in its body was detected. This will raise a `TypeError` on Python 2.7 and 3.x."
-python,PYL-E0101,return-in-init,critical,bug-risk,"The `__init__()` method is required to return `None`, but an explicit return value in its body was detected. This will raise a `TypeError` on Python 2.7 and 3.x."
-python,PYL-E0102,function-redefined,major,bug-risk,"A redefinition of functions, classes, and methods is allowed and overrides the original definition in Python, but is confusing and cause bugs that are difficult to debug."
-python,PYL-E0110,abstract-class-instantiated,major,bug-risk,An abstract class with `abc.ABCMeta` as metaclass has abstract methods and is instantiated.
-python,PYL-E0111,bad-reversed-sequence,critical,bug-risk,"The first argument to `reversed()` builtin isn't a sequence (does not implement `reversed`, nor `getitem` and `len`)."
-python,PYL-E0113,invalid-star-assignment-target,major,bug-risk,A star expression is used as a starred assignment target. It must be in a list or tuple.
-python,PYL-E0114,star-needs-assignment-target,major,bug-risk,A star expression can only be used in an assignment target.
-python,PYL-E0115,nonlocal-and-global,major,bug-risk,A name is defined as nonlocal and global in the same scope.
-python,PYL-E0117,nonlocal-without-binding,major,bug-risk,A name is defined as nonlocal without any binding.
-python,PYL-E0118,used-prior-global-declaration,major,bug-risk,A global name us used prior to it's global declaration.
-python,PYL-E0119,misplaced-format-function,critical,bug-risk,The `format()` function is called on an object that is not a string. This is an error.
-python,PYL-E0202,method-hidden,major,bug-risk,"When a method is defined in a child class which has the same name as an attribute in the ancestor class, the attribute in the ancestor class takes precedence and hides the method."
+python,PYL-E0100,`init` method converted to generator,critical,bug-risk,"The `__init__()` method is required to return nothing, but a `yield` statement in its body was detected. This will raise a `TypeError` on Python 2.7 and 3.x."
+python,PYL-E0101,`return` found in `init`,critical,bug-risk,"The `__init__()` method is required to return `None`, but an explicit return value in its body was detected. This will raise a `TypeError` on Python 2.7 and 3.x."
+python,PYL-E0102,Function redefined,major,bug-risk,"A redefinition of functions, classes, and methods is allowed and overrides the original definition in Python, but is confusing and cause bugs that are difficult to debug."
+python,PYL-E0110,Abstract class instantiated,major,bug-risk,An abstract class with `abc.ABCMeta` as metaclass has abstract methods and is instantiated.
+python,PYL-E0111,Bad reversed sequence,critical,bug-risk,"The first argument to `reversed()` builtin isn't a sequence (does not implement `reversed`, nor `getitem` and `len`)."
+python,PYL-E0113,Invalid star assignment target,major,bug-risk,A star expression is used as a starred assignment target. It must be in a list or tuple.
+python,PYL-E0114,Star expression not used in an assignment target,major,bug-risk,A star expression can only be used in an assignment target.
+python,PYL-E0115,Name defined is both `nonlocal` and `global`,major,bug-risk,A name is defined as nonlocal and global in the same scope.
+python,PYL-E0117,Nonlocal name found without binding,major,bug-risk,A name is defined as nonlocal without any binding.
+python,PYL-E0118,Name used prior global declaration,major,bug-risk,A global name us used prior to it's global declaration.
+python,PYL-E0119,Misplaced format function,critical,bug-risk,The `format()` function is called on an object that is not a string. This is an error.
+python,PYL-E0202,Method hidden,major,bug-risk,"When a method is defined in a child class which has the same name as an attribute in the ancestor class, the attribute in the ancestor class takes precedence and hides the method."
 python,PYL-E0203,Member of class accessed before definition,critical,bug-risk,"A member of a class is being accessed before its definition. This can cause an error while execution.
 
 There can be cases when the member is initialized dynamically or using unconventional methods, like setting a value in the `locals()` dictionary, or using `__setattr__` on an object. Doing so affects readability and is generally not recommended. In such cases, either change the approach, or ignore this issue explicitly for this file."
-python,PYL-E0211,no-method-argument,critical,bug-risk,A method which should have the bound instance as first argument has no argument defined. This is an error.
+python,PYL-E0211,Method has no argument,critical,bug-risk,A method which should have the bound instance as first argument has no argument defined. This is an error.
 python,PYL-E0213,Method should have `self` as the first argument,major,bug-risk,The first argument of instance methods must be named `self`. This is considered an error since this convention is so common that you shouldn't break it.
-python,PYL-E0236,invalid-slots-object,critical,bug-risk,Slots must contain only string objects.
-python,PYL-E0237,assigning-non-slot,critical,bug-risk,Assigning to an attribute not defined in the class slots will cause an error.
-python,PYL-E0238,invalid-slots,critical,bug-risk,"An invalid slots value is found in class. Only a string, an iterable or a sequence is permitted. This is an error."
-python,PYL-E0239,inherit-non-class,critical,bug-risk,Python classes can only inherit from a class. Inheriting from any other object is an error.
-python,PYL-E0240,inconsistent-mro,critical,bug-risk,"The order in which other classes are specified for inheritence in a class matters. Python classes use the C3 linearization method to determine a method resolution ordering for each class, which ensures that for a class C, if a class C1 precedes a class C2 in the MRO of C then C1 should also precede C2 in the MRO of all subclasses of C."
-python,PYL-E0241,duplicate-bases,critical,bug-risk,A class must not specify inheritance from another class more than one times. Duplicate base classes will raise a `TypeError`.
-python,PYL-E0301,non-iterator-returned,critical,bug-risk,The `__iter__` method of a class must return an iterator with a `__next__` method.
-python,PYL-E0303,invalid-length-returned,critical,bug-risk,The `__len__` method of a class must return a non-negative integer.
+python,PYL-E0236,Invalid `slots` object,critical,bug-risk,Slots must contain only non empty string objects.
+python,PYL-E0237,Assigning to an attribute not defined in class `slots`,critical,bug-risk,Assigning to an attribute not defined in the class slots will cause an error.
+python,PYL-E0238,Invalid slots object,critical,bug-risk,"An invalid slots value is found in class. Only a string, an iterable or a sequence is permitted. This is an error."
+python,PYL-E0239,Inheritence is not from a class,critical,bug-risk,Python classes can only inherit from a class. Inheriting from any other object is an error.
+python,PYL-E0240,Inconsistent method resolution order,critical,bug-risk,"The order in which other classes are specified for inheritence in a class matters. Python classes use the C3 linearization method to determine a method resolution ordering for each class, which ensures that for a class C, if a class C1 precedes a class C2 in the MRO of C then C1 should also precede C2 in the MRO of all subclasses of C."
+python,PYL-E0241,Class has duplicate bases,critical,bug-risk,A class must not specify inheritance from another class more than one times. Duplicate base classes will raise a `TypeError`.
+python,PYL-E0301,`iter` returns a non-iterator,critical,bug-risk,The `__iter__` method of a class must return an iterator with a `__next__` method.
+python,PYL-E0303,Invalid return for `__len__`,critical,bug-risk,The `__len__` method of a class must return a non-negative integer.
 python,PYL-E0402,Attempted relative import beyond top-level package,critical,bug-risk,A relative import has been attempted from beyond the top-level package. This is an error.
 python,PYL-E0604,Invalid object found in `__all__`,critical,bug-risk,The `__all__` list must contain only strings. Having other kinds of objects is an error.
 python,PYL-E0633,Attempting to unpack a non-sequence object,critical,bug-risk,"Unpacking is supported only for sequence objects, like lists, sets, tuples, iterators or generators, etc."
@@ -500,7 +500,8 @@ python,PYL-W0102,Dangerous default argument,critical,bug-risk,Do not use a mutab
 python,PYL-W0104,Statement has no effect,major,antipattern,The expression or statement is pointless and will have no effect on the program on execution.
 python,PYL-W0105,pointless-string-statement,,,
 python,PYL-W0106,Expression not assigned,minor,antipattern,An expression that is not a function call is assigned to nothing. Probably something else was intended here. We recommend to review this. Ignore if this is intended. 
-python,PYL-W0108,Unnecessary lambda expression,major,bug-risk,A lambda that calls a function without modifying any of its parameters is unnecessary. Python functions are first class objects and can be passed around in the same way as the resulting lambda. It is recommended to remove the lambda and use the function directly.
+python,PYL-W0107,Unnecessary `pass` statement,minor,style,"The `pass` statement used here is not necessary. You can safely remove this."
+python,PYL-W0108,Unnecessary lambda expression,major,antipattern,A lambda that calls a function without modifying any of its parameters is unnecessary. Python functions are first class objects and can be passed around in the same way as the resulting lambda. It is recommended to remove the lambda and use the function directly.
 python,PYL-W0109,Duplicate dictionary keys,major,bug-risk,Dictionary expression binds the same key multiple times. This may lead to unintentional behaviour. It is recommended to have unique keys.
 python,PYL-W0111,Assignment to a new keyword,major,bug-risk,"Assignment is being done to a variable which will become a keyword in the future releases. This statement, which is working fine right now, will give an error in the next Python version. We recommend you to rename this variable. "
 python,PYL-W0120,Useless else clause detected on the loop,major,bug-risk,"When a loop specifies no break statement, the else clause will always execute when the loop sequence is empty, thus making it useless. It is recommended to have the statements under else in the same scope as the loop itself. If the else clause should not always execute at the end of a loop clause, then the code should add a break statement within the loop block."
@@ -567,14 +568,14 @@ python,PYL-W0706,Except handler raises immediately,critical,bug-risk,Using `rais
 python,PYL-W0711,Exception to catch is the result of a binary operation,critical,bug-risk,"Do not use binary operations (or, and) to catch exceptions. If intending to catch multiple exceptions, rewrite as `except (A, B):`"
 python,PYL-W0715,Exception arguments suggest string formatting might be intended,major,antipattern,"Found multiple arguments to an exception constructor, the first of them a string literal containing what appears to be placeholders intended for formatting. In this case, it is recommended to format the message properly."
 python,PYL-W1113,Keyword argument defined before variable positional arguments,minor,antipattern,"On defining a keyword argument before variable positional arguments, one can end up in having multiple values passed for the aforementioned parameter in case the method is called with keyword arguments. It is recommended to define keyword arguments after variable positional arguments. "
-python,PYL-W1201,Logging is not lazy,major,performance,"The logging statement has the call of the form `logging.(format_string % (format_args...))`. For such calls, it is recommended to leave string interpolation to the logging method itself and be written as `logging.(format_string, format_args...)` so that the program may avoid incurring the cost of the interpolation in those cases in which no message will be logged.
+python,PYL-W1201,Logging is not lazy,minor,style,"The logging statement has the call of the form `logging.(format_string % (format_args...))`. For such calls, it is recommended to leave string interpolation to the logging method itself and be written as `logging.(format_string, format_args...)` so that the program may avoid incurring the cost of the interpolation in those cases in which no message will be logged.
 For more details, see [PEP 282](http://www.python.org/dev/peps/pep-0282)."
 python,PYL-W1300,bad-format-string-key,,,
 python,PYL-W1301,unused-format-string-key,,,
 python,PYL-W1302,bad-format-string,,,
 python,PYL-W1303,Missing format argument key,major,bug-risk,"The format string has named field(s) which is not provided by the keyword argument. This will raise a `KeyError`."
 python,PYL-W1304,Unused format string argument,major,style,"The format string that uses named field(s), is used with an argument that is not required by the format string. It is recommended to remove unused keyword-arguments for a better readability."
-python,PYL-W1305,Combined specification detected for format string,major,bug-risk,"Format string contains both automatic field numbering (e.g. `{}`) and manual field specification (e.g. `{0}`). This is an error. Please only one of them."
+python,PYL-W1305,Combined specification detected for format string,major,style,"Format string contains both automatic field numbering (e.g. `{}`) and manual field specification (e.g. `{0}`). This is an error. Please only one of them."
 python,PYL-W1306,Missing format attribute,major,bug-risk,"The format string is using an attribute specifier like `{0.length}`, but the argument passed for formatting doesn't have that attribute. This is an error.
 
 Note: String formatting uses a limited Python-like syntax. Calls are not supported in this syntax, only subscription (indexing by number or by unquoted (!) name), and attribute access is supported."
@@ -594,7 +595,7 @@ It is recommended to look at the highlighted code for possible missing commas. "
 python,PYL-W1501,Bad open mode for file,major,bug-risk,"The mode with which the file is opened is not valid. Python supports: r, w, a[, x] modes with b, +, and U (only with r) options."
 python,PYL-W1502,boolean-datetime,,,
 python,PYL-W1503,redundant-unittest-assert,,,
-python,PYL-W1505,Method used has been deprecated,major,antipattern,The method is marked as deprecated and will be removed in a future version of Python. Consider looking for an alternative in the documentation.
+python,PYL-W1505,Method used has been deprecated,major,bug-risk,The method is marked as deprecated and will be removed in a future version of Python. Consider looking for an alternative in the documentation.
 python,PYL-W1506,Thread has no target function,major,bug-risk,"`threading.Thread` class is instantiated without the target function being passed. By default, the first parameter is the group param, not the target param.
 You can read more about this [here](https://docs.python.org/3/library/threading.html#threading.Thread)."
 python,PYL-W1507,Shallow copy of `os.environ` detected,major,bug-risk,"It is recommended to use `os.environ.copy()` here as `os.environ` is not a `dict` object but proxy object, so shallow copy still has effects on the original object. See https://bugs.python.org/issue15373 for reference."
@@ -684,7 +685,7 @@ python,PAP-W0022,Illegal operation on file,major,bug-risk,Trying to write on a f
 python,PAP-W0009,Multiple return types found in function,major,antipattern,"Returning objects of different types from a function can lead to problems that are difficult to debug. Instead, it is better to raise an exception that can be caught where the function is called."
 python,PAP-W0010,File opened without the `with` statement,critical,antipattern,Opening a file using `with` statement is preferred as function `open` implements the context manager protocol that release the resource when it is outside of the `with` block. Not doing so requires you to manually release the resource.
 python,PAP-W0011,Use `items()` to iterate over a dictionary,major,antipattern,"The preferred way to iterate over the key-value pairs of a dictionary is to declare two variables in a for loop, and then call `dictionary.items()` (or `dictionary.iteritems()` for Python2), where dictionary is the name of your variable representing a dictionary.'"
-python,PAP-W0012,Use `get()` method to access values from a dictionary,major,antipattern,"In case of checking if key exists in the dictionary and then fetching the value, it is recommended to use the built-in method `dict.get(key[, default])`. This returns the respective value if key exists in the dictionary, else returns a default value, avoiding the dictionary lookup twice."
+python,PAP-W0012,Use `get()` method to access values from a dictionary,major,performance,"In case of checking if key exists in the dictionary and then fetching the value, it is recommended to use the built-in method `dict.get(key[, default])`. This returns the respective value if key exists in the dictionary, else returns a default value, avoiding the dictionary lookup twice."
 python,PAP-W0013,Debugger import detected,major,antipattern,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code.
 python,PAP-W0014,Debugger activation detected,critical,antipattern,Debuggers should only be used temporarily and locally. It is highly recommended not to leave debug statements in checked-in code. This may cause your application to have unintended side-effects.
 python,PAP-W0015,Unnecessary generator,minor,antipattern,"It is unnecessary to use `list`, `set`, `dict` around a generator expression to get object of that type, since there are comprehensions for these types."
