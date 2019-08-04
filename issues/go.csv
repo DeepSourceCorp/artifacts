@@ -11,29 +11,29 @@ go,GSC-G201,SQL query construction using format string,critical,security,"Using 
 
 Use `database/sql` package along with argument placeholders to construct SQL statements that are automatically escaped properly. The key distinction here is that you aren’t trying to construct the SQL statement yourself, but instead you are providing arguments that can be easily escaped. The underlying driver for database/sql will ultimately be aware of what special characters it needs to handle and will escape them for you, preventing any nefarious SQL from running.
 
-## Example:
+## Example: 
 
 ```go
 package main
-
+ 
 import (
     ""database/sql""
     ""fmt""
-
+ 
     _ ""github.com/mattn/go-sqlite3""
 )
-
+ 
 func main() {
     db, _ := sql.Open(""sqlite3"", ""rc.db"")
     defer db.Close()
     db.Exec(`create table players (name, score, active, jerseyNum)`)
     db.Exec(`insert into players values ("""",0,0,""99"")`)
     db.Exec(`insert into players values ("""",0,0,""100"")`)
-
+ 
     // Parameterized SQL statement construction
     db.Exec(`update players set name=?, score=?, active=? where jerseyNum=?`,
         ""Smith, Steve"", 42, true, ""99"")
-
+ 
     rows, _ := db.Query(""select * from players"")
     var (
         name      string
@@ -52,29 +52,29 @@ go,GSC-G202,SQL query construction using string concatenation,critical,security,
 
 Use `database/sql` package along with argument placeholders to construct SQL statements that are automatically escaped properly. The key distinction here is that you aren’t trying to construct the SQL statement yourself, but instead you are providing arguments that can be easily escaped. The underlying driver for database/sql will ultimately be aware of what special characters it needs to handle and will escape them for you, preventing any nefarious SQL from running.
 
-## Example:
+## Example: 
 
 ```go
 package main
-
+ 
 import (
     ""database/sql""
     ""fmt""
-
+ 
     _ ""github.com/mattn/go-sqlite3""
 )
-
+ 
 func main() {
     db, _ := sql.Open(""sqlite3"", ""rc.db"")
     defer db.Close()
     db.Exec(`create table players (name, score, active, jerseyNum)`)
     db.Exec(`insert into players values ("""",0,0,""99"")`)
     db.Exec(`insert into players values ("""",0,0,""100"")`)
-
+ 
     // Parameterized SQL statement construction
     db.Exec(`update players set name=?, score=?, active=? where jerseyNum=?`,
         ""Smith, Steve"", 42, true, ""99"")
-
+ 
     rows, _ := db.Query(""select * from players"")
     var (
         name      string
@@ -146,3 +146,482 @@ Refer to http://phrack.org/issues/49/8.html to understand the vulnerability in d
 go,GSC-G505,Import blacklist: crypto/sha1,major,security,"Detects imports of `crypto/sha1` since they are considered vulnerable.
 
 Refer to https://en.wikipedia.org/wiki/SHA-1#Attacks to understand the vulnerability in detail."
+go,S1000,Use plain channel send or receive,major,antipattern,"Select statements with a single case can be replaced with a simple send or receive. 
+
+Bad pattern: 
+```
+select {
+case x := <-ch:
+    fmt.Println(x)
+}
+```
+
+Good pattern: 
+```
+x := <-ch
+fmt.Println(x)
+```"
+go,S1001,Replace `for` loop with call to `copy`,major,antipattern,"Use `copy()` for copying elements from one slice to another.
+
+Bad pattern: 
+```
+for i, x := range src {
+    dst[i] = x
+}
+```
+
+Good pattern:
+```
+copy(dst, src)
+```
+
+The built-in [copy](https://golang.org/ref/spec#Appending_and_copying_slices) copies elements into a destination slice `dst` from a source slice `src`.
+
+```
+func copy(dst, src []Type) int
+```
+
+It returns the number of elements copied, which will be the minimum of `len(dst) `and `len(src)`. The result does not depend on whether the arguments overlap."
+go,S1002,Omit comparison with boolean constant,minor,antipattern,"Comparing with boolean constant is unnecessary. The actual problem could also be how the variable is named.
+
+Bad pattern:
+```
+if isUserLoggedIn == true {}
+```
+
+Good pattern:
+```
+After: 
+if isUserLoggedIn {}
+```"
+go,S1003,"Replace call to `strings.Index` with `strings.Contains`
+",major,antipattern,"`strings.Contains(x, y)` could be simplified as `strings.Index(x, y) != -1 {}`
+
+Bad pattern:
+```
+if strings.Index(x, y) != -1 {}
+```
+
+Good pattern:
+``` 
+if strings.Contains(x, y) {}
+```"
+go,S1004,Replace call to bytes.Compare with bytes.Equal,major,antipattern,"Bad pattern: 
+```
+if bytes.Compare(x, y) == 0 {}
+```
+
+Good pattern:
+```
+if bytes.Equal(x, y) {}
+```"
+go,S1005,Drop unnecessary use of the blank identifier,major,antipattern,"Assigning to the blank identifier is unnecessary.
+
+Bad patterns: 
+```
+for _ = range slc {}
+
+x, _ = someMap[key]
+
+_ = <-ch
+```
+
+Good patterns:
+```
+for range slc {}
+
+x = someMap[key]
+
+<-ch
+```
+"
+go,S1006,Use for { ... } for infinite loops,major,antipattern,"For infinite loops, using `for { ... }` is the most idiomatic choice."
+go,S1007,Simplify regular expression by using raw string literal,major,antipattern,"Raw string literals use `\`` instead of `’` and thus, do not support any escape sequences. This means that the backslash (\) can be used freely, without the need of escaping.
+
+Since regular expressions have their own escape sequences, raw strings can improve their readability. 
+
+Bad pattern: 
+```
+regexp.Compile(""\\A(\\w+) profile: total \\d+\\n\\z"")
+```
+
+Good pattern:
+``` 
+regexp.Compile(`\A(\w+) profile: total \d+\n\z`)
+```"
+go,S1008,Simplify returning boolean expression,major,antipattern,"Instead of returning boolean expression, returning the expression itself simplifies the code.
+
+Bad pattern:
+```
+if <expr> {
+    return true
+}
+
+return false
+```
+
+Good pattern:
+```
+After: 
+return <expr>
+```"
+go,S1009,Omit redundant `nil` check on slices,major,antipattern,"The `len` function is defined for all slices, even `nil` ones, which have a length of zero.
+
+It is not necessary to check if a slice is not nil before checking that its length is not zero.
+
+Bad pattern:
+``` 
+if x != nil && len(x) != 0 {}
+```
+
+Good pattern:
+``` 
+if len(x) != 0 {}
+```"
+go,S1010,Omit default slice index,major,antipattern,"When slicing, the second index defaults to the length of the value, making `s[n:len(s)]` and `s[n:]` equivalent.
+
+Bad pattern:
+```
+s[n:len(s)]`
+```
+
+Good pattern:
+```
+s[n:]
+```
+"
+go,S1011,Use a single append to concatenate two slices,major,antipattern,"When appending two slices into one, there is no need to range over the source slice. Rather, use `append(sliceOne, sliceTwo…)
+
+Bad pattern:
+``` 
+for _, v := range sliceTwo {
+    x = append(sliceOne, v)
+}
+```
+
+Good pattern:
+``` 
+x = append(sliceOne, sliceTwo…)
+```"
+go,S1012,Replace `time.Now().Sub(x)` with `time.Since(x)`,major,antipattern,"The `time.Since` helper has the same effect as using `time.Now().Sub(x)` but is easier to read.
+
+Bad pattern:
+``` 
+time.Now().Sub(x)
+```
+
+Good pattern:
+``` 
+time.Since(x)
+```"
+go,S1016,Use a type conversion instead of manually copying struct fields,major,antipattern,"Two struct types with identical fields can be converted between each other. In older versions of Go, the fields had to have identical struct tags. Since Go 1.8, however, struct tags are ignored during conversions. It is thus not necessary to manually copy every field individually.
+
+Bad pattern:
+``` 
+var x T1
+y := T2{
+    Field1: x.Field1,
+    Field2: x.Field2,
+}
+```
+
+Good pattern:
+``` 
+var x T1
+y := T2(x)
+```"
+go,S1017,Replace manual trimming with `strings.TrimPrefix`,major,antipattern,"Instead of using `strings.HasPrefix` and manual slicing, use the `strings.TrimPrefix` function. If the string doesn't start with the prefix, the original string will be returned.
+
+Using `strings.TrimPrefix` reduces complexity, and avoid mistakes such as [off-by-one](https://en.wikipedia.org/wiki/Off-by-one_error).
+
+Bad pattern:
+``` 
+if strings.HasPrefix(str, prefix) {
+    str = str[len(prefix):]
+}
+```
+
+Good pattern:
+``` 
+str = strings.TrimPrefix(str, prefix)
+```"
+go,S1018,Use `copy()` for sliding elements,major,antipattern,"`copy()` permits using the same source and destination slice, even with overlapping ranges. This makes it ideal for sliding elements in a slice.
+
+Bad pattern: 
+```
+for i := 0; i < n; i++ {
+    x[i] = x[offset+i]
+}
+```
+
+Good pattern:
+``` 
+copy(x[:n], x[offset:])
+```"
+go,S1019,Simplify `make` call by omitting redundant arguments,major,antipattern,"The `make` function has default values for the length and capacity arguments.
+
+- For channels and maps, the length defaults to zero.
+- For slices the capacity defaults to the length.
+"
+go,S1020,Omit redundant `nil` check in type assertion,major,antipattern,"When performing type assertion, there is no need to check for `nil` as it is implicitly handled.
+
+Bad pattern:
+``` 
+if _, ok := i.(T); ok && i != nil {}
+```
+
+Good pattern:
+``` 
+if _, ok := i.(T); ok {}
+```"
+go,S1021,Merge variable declaration and assignment,major,antipattern,"Declaring and assigning variables can be done together, simplifying the code.
+
+Bad pattern:
+``` 
+var x uint
+x = 1
+```
+
+Good pattern:
+``` 
+var x uint = 1
+```"
+go,S1023,Omit redundant control flow,major,antipattern,"Omit unnecessary (or) redundant control flows.
+
+### Functions that have no return value do not need a return statement as the final statement of the function. Both the examples below act the same.
+
+Bad pattern:
+```
+func foo() {
+	fmt.Println(""foo"")
+	return
+}
+```
+
+Good pattern:
+```
+func foo() {
+	fmt.Println(""foo"")
+}
+```
+
+### `switch` statement in Go do not have automatic fallthrough, unlike languages like C. It is not necessary to have a break statement as the final statement in a case block. Both the examples below act the same.
+
+Bad pattern:
+```
+switch 1 {
+  case 1:
+    fmt.Println(“case one“)
+    break
+  case 2:
+    fmt.Println(“case two“)
+}
+```
+
+Good pattern:
+```
+switch 1 {
+  case 1:
+    fmt.Println(“case one“)
+  case 2:
+    fmt.Println(“case two“)
+}
+```
+"
+go,S1024,Replace `x.Sub(time.Now())` with `time.Until(x)`,major,antipattern,"The `time.Until` helper has the same effect as using `x.Sub(time.Now())`. The former is easier to read.
+
+Bad pattern:
+``` 
+x.Sub(time.Now())
+```
+
+Good pattern:
+``` 
+time.Until(x)
+```"
+go,S1025,"Don't use `fmt.Sprintf(""%s"", x)` unnecessarily",major,antipattern,"In many instances, there are easier and more efficient ways of getting a value's string representation. Whenever a value's underlying type is a string already, or the type has a String method, they should be used directly. 
+
+Given the following shared definitions,
+
+```
+type T1 string
+type T2 int
+
+func (T2) String() string { return ""Hello, world"" }
+
+var x string
+var y T1
+var z T2
+```
+
+Bad pattern:
+```
+fmt.Sprintf(""%s"", x)
+fmt.Sprintf(""%s"", y)
+fmt.Sprintf(""%s"", z)
+```
+
+Good pattern:
+```
+x
+string(y)
+z.String()
+```"
+go,S1028,"Simplify error construction with `fmt.Errorf`
+",major,antipattern,"Error construction could be simplified by using `fmt.Errorf(…)`
+
+Bad pattern:
+``` 
+errors.New(fmt.Sprintf(...))
+```
+
+Good pattern:
+``` 
+fmt.Errorf(...)
+```"
+go,S1029,Range over the string directly,major,antipattern,"Ranging over a string will yield byte offsets and runes. If the offset isn't used, this is functionally equivalent to converting the string to a slice of runes and ranging over that. Ranging directly over the string will be more performant, however, as it avoids allocating a new slice, the size of which depends on the length of the string. 
+
+Bad pattern:
+``` 
+for _, r := range []rune(s) {}
+```
+
+Good pattern:
+``` 
+for _, r := range s {}
+```"
+go,S1030,Use `bytes.Buffer.String` or `bytes.Buffer.Bytes`,major,antipattern,"`bytes.Buffer` has both a `String` and a `Bytes` method. It is unnecessary to use `string(buf.Bytes())` or `[]byte(buf.String())` – simply use the other method. 
+
+Bad pattern:
+```
+string(buf.Bytes())
+```
+
+Good pattern:
+```
+buf.String()
+```
+"
+go,S1031,Omit redundant `nil` check around loop,major,antipattern,"When using `range` on nil slices and maps, the loop will simply never execute. This makes an additional nil check around the loop unnecessary. 
+
+Bad pattern:
+```
+if s != nil {
+    for _, x := range s {
+        ...
+    }
+}
+```
+
+Good pattern:
+``` 
+for _, x := range s {
+    ...
+}
+```"
+go,S1032,"Use `sort.Ints(x)`, `sort.Float64s(x)`, and `sort.Strings(x)`",major,antipattern,"The `sort.Ints`, `sort.Float64s` and `sort.Strings` functions are easier to read than `sort.Sort(sort.IntSlice(x))`, `sort.Sort(sort.Float64Slice(x))` and `sort.Sort(sort.StringSlice(x))`.
+
+Bad pattern:
+``` 
+sort.Sort(sort.StringSlice(x))
+```
+
+Good pattern:
+``` 
+sort.Strings(x)
+```"
+go,S1033,Unnecessary guard around call to `delete`,major,antipattern,Calling delete on a nil map is a [no-op](https://en.wikipedia.org/wiki/NOP_(code)). The command does nothing. You may safely remove this.
+go,S1034,Use result of type assertion to simplify cases,major,antipattern,Use result of type assertion to simplify cases.
+go,S1035,Redundant call to `net/http.CanonicalHeaderKey` in method call on `net/http.Header`,major,antipattern,"The methods on `net/http.Header`, namely `Add`, `Del`, `Get` and `Set`, already canonicalize the given header name. "
+go,SA1???,Various misuses of the standard library,,,
+go,SA1000,Invalid regular expression,critical,bug-risk,
+go,SA1001,Invalid template,critical,bug-risk,
+go,SA1002,Invalid format in `time.Parse`,critical,bug-risk,
+go,SA1003,Unsupported argument to functions in encoding/binary,,,
+go,SA1004,Suspiciously small untyped constant in time.Sleep,,,
+go,SA1005,Invalid first argument to exec.Command,,,
+go,SA1006,Printf with dynamic first argument and no further arguments,,,
+go,SA1007,Invalid URL in net/url.Parse,,,
+go,SA1008,Non-canonical key in http.Header map,,,
+go,SA1010,"(*regexp.Regexp).FindAll called with n == 0, which will always return zero results",,,
+go,SA1011,"Various methods in the strings package expect valid UTF-8, but invalid input is provided",,,
+go,SA1012,"A nil context.Context is being passed to a function, consider using context.TODO instead",,,
+go,SA1013,"io.Seeker.Seek is being called with the whence constant as the first argument, but it should be the second",,,
+go,SA1014,Non-pointer value passed to Unmarshal or Decode,,,
+go,SA1015,"Using time.Tick in a way that will leak. Consider using time.NewTicker, and only use time.Tick in tests, commands and endless functions",,,
+go,SA1016,Trapping a signal that cannot be trapped,,,
+go,SA1017,Channels used with signal.Notify should be buffered,,,
+go,SA1018,"strings.Replace called with n == 0, which does nothing",,,
+go,SA1019,"Using a deprecated function, variable, constant or field",,,
+go,SA1020,Using an invalid host:port pair with a net.Listen-related function,,,
+go,SA1021,Using bytes.Equal to compare two net.IP,,,
+go,SA1023,Modifying the buffer in an io.Writer implementation,,,
+go,SA1024,"A string cutset contains duplicate characters, suggesting TrimPrefix or TrimSuffix should be used instead of TrimLeft or TrimRight",,,
+go,SA1025,it is not possible to use Reset's return value correctly,,,
+go,SA2???,Concurrency issues,,,
+go,SA2000,"sync.WaitGroup.Add called inside the goroutine, leading to a race condition",,,
+go,SA2001,"Empty critical section, did you mean to defer the unlock?",,,
+go,SA2002,"Called testing.T.FailNow or SkipNow in a goroutine, which isn't allowed",,,
+go,SA2003,"Deferred Lock right after locking, likely meant to defer Unlock instead",,,
+go,SA3???,Testing issues,,,
+go,SA3000,"TestMain doesn't call os.Exit, hiding test failures",,,
+go,SA3001,Assigning to b.N in benchmarks distorts the results,,,
+go,SA4???,Code that isn't really doing anything,,,
+go,SA4000,Boolean expression has identical expressions on both sides,,,
+go,SA4001,"&*x gets simplified to x, it does not copy x",,,
+go,SA4002,Comparing strings with known different sizes has predictable results,,,
+go,SA4003,Comparing unsigned values against negative values is pointless,,,
+go,SA4004,The loop exits unconditionally after one iteration,,,
+go,SA4005,Field assignment that will never be observed. Did you mean to use a pointer receiver?,,,
+go,SA4006,A value assigned to a variable is never read before being overwritten. Forgotten error check or dead code?,,,
+go,SA4008,"The variable in the loop condition never changes, are you incrementing the wrong variable?",,,
+go,SA4009,A function argument is overwritten before its first use,,,
+go,SA4010,The result of append will never be observed anywhere,,,
+go,SA4011,Break statement with no effect. Did you mean to break out of an outer loop?,,,
+go,SA4012,Comparing a value against NaN even though no value is equal to NaN,,,
+go,SA4013,"Negating a boolean twice (!!b) is the same as writing b. This is either redundant, or a typo.",,,
+go,SA4014,"An if/else if chain has repeated conditions and no side-effects; if the condition didn't match the first time, it won't match the second time, either",,,
+go,SA4015,Calling functions like math.Ceil on floats converted from integers doesn't do anything useful,,,
+go,SA4016,"Certain bitwise operations, such as x ^ 0, do not do anything useful",,,
+go,SA4017,"A pure function's return value is discarded, making the call pointless",,,
+go,SA4018,Self-assignment of variables,,,
+go,SA4019,"Multiple, identical build constraints in the same file",,,
+go,SA4020,Unreachable case clause in a type switch,,,
+go,SA4021,x = append(y) is equivalent to x = y,,,
+go,SA5???,Correctness issues,,,
+go,SA5000,Assignment to nil map,,,
+go,SA5001,Defering Close before checking for a possible error,,,
+go,SA5002,The empty for loop (for {}) spins and can block the scheduler,,,
+go,SA5003,Defers in infinite loops will never execute,,,
+go,SA5004,for { select { ... with an empty default branch spins,,,
+go,SA5005,"The finalizer references the finalized object, preventing garbage collection",,,
+go,SA5006,Slice index out of bounds,,,
+go,SA5007,Infinite recursive call,,,
+go,SA6???,Performance issues,,,
+go,SA6000,"Using regexp.Match or related in a loop, should use regexp.Compile",,,
+go,SA6001,Missing an optimization opportunity when indexing maps by byte slices,,,
+go,SA6002,Storing non-pointer values in sync.Pool allocates memory,,,
+go,SA6003,Converting a string to a slice of runes before ranging over it,,,
+go,SA6005,Inefficient string comparison with strings.ToLower or strings.ToUpper,,,
+go,SA9???,Dubious code constructs that have a high probability of being wrong,,,
+go,SA9001,defers in for range loops may not run when you expect them to,,,
+go,SA9002,Using a non-octal os.FileMode that looks like it was meant to be in octal.,,,
+go,SA9003,Empty body in an if or else branch,,,
+go,SA9004,Only the first constant has an explicit type,,,
+go,SA9005,Trying to marshal a struct with no public fields nor custom marshaling,,,
+go,ST1???,,,,
+go,ST1000,Incorrect or missing package comment,,,
+go,ST1001,Dot imports are discouraged,,,
+go,ST1003,Poorly chosen identifier,,,
+go,ST1005,Incorrectly formatted error string,,,
+go,ST1006,Poorly chosen receiver name,,,
+go,ST1008,A function's error value should be its last return value,,,
+go,ST1011,Poorly chosen name for variable of type time.Duration,,,
+go,ST1012,Poorly chosen name for error variable,,,
+go,ST1013,"Should use constants for HTTP error codes, not magic numbers",,,
+go,ST1015,A switch's default case should be the first or last case,,,
+go,ST1016,Use consistent method receiver names,,,
+go,ST1017,Don't use Yoda conditions,,,
+go,ST1018,Avoid zero-width and control characters in string literals,,,
+go,U1???,Unused code,,,
+go,U1000,Unused code,,,
