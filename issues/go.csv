@@ -146,7 +146,7 @@ Refer to http://phrack.org/issues/49/8.html to understand the vulnerability in d
 go,GSC-G505,Import blacklist: crypto/sha1,major,security,"Detects imports of `crypto/sha1` since they are considered vulnerable.
 
 Refer to https://en.wikipedia.org/wiki/SHA-1#Attacks to understand the vulnerability in detail."
-go,S1000,Use plain channel send or receive,major,antipattern,"Select statements with a single case can be replaced with a simple send or receive. 
+go,SCC-S1000,Use plain channel send or receive,major,antipattern,"Select statements with a single case can be replaced with a simple send or receive. 
 
 Bad pattern: 
 ```
@@ -161,7 +161,7 @@ Good pattern:
 x := <-ch
 fmt.Println(x)
 ```"
-go,S1001,Replace `for` loop with call to `copy`,major,antipattern,"Use `copy()` for copying elements from one slice to another.
+go,SCC-S1001,Replace `for` loop with call to `copy`,major,antipattern,"Use `copy()` for copying elements from one slice to another.
 
 Bad pattern: 
 ```
@@ -182,7 +182,7 @@ func copy(dst, src []Type) int
 ```
 
 It returns the number of elements copied, which will be the minimum of `len(dst) `and `len(src)`. The result does not depend on whether the arguments overlap."
-go,S1002,Omit comparison with boolean constant,minor,antipattern,"Comparing with boolean constant is unnecessary. The actual problem could also be how the variable is named.
+go,SCC-S1002,Omit comparison with boolean constant,minor,antipattern,"Comparing with boolean constant is unnecessary. The actual problem could also be how the variable is named.
 
 Bad pattern:
 ```
@@ -194,7 +194,7 @@ Good pattern:
 After: 
 if isUserLoggedIn {}
 ```"
-go,S1003,"Replace call to `strings.Index` with `strings.Contains`
+go,SCC-S1003,"Replace call to `strings.Index` with `strings.Contains`
 ",major,antipattern,"`strings.Contains(x, y)` could be simplified as `strings.Index(x, y) != -1 {}`
 
 Bad pattern:
@@ -206,7 +206,7 @@ Good pattern:
 ``` 
 if strings.Contains(x, y) {}
 ```"
-go,S1004,Replace call to bytes.Compare with bytes.Equal,major,antipattern,"Bad pattern: 
+go,SCC-S1004,Replace call to bytes.Compare with bytes.Equal,major,antipattern,"Bad pattern: 
 ```
 if bytes.Compare(x, y) == 0 {}
 ```
@@ -215,7 +215,7 @@ Good pattern:
 ```
 if bytes.Equal(x, y) {}
 ```"
-go,S1005,Drop unnecessary use of the blank identifier,major,antipattern,"Assigning to the blank identifier is unnecessary.
+go,SCC-S1005,Drop unnecessary use of the blank identifier,major,antipattern,"Assigning to the blank identifier is unnecessary.
 
 Bad patterns: 
 ```
@@ -235,8 +235,8 @@ x = someMap[key]
 <-ch
 ```
 "
-go,S1006,Use for { ... } for infinite loops,major,antipattern,"For infinite loops, using `for { ... }` is the most idiomatic choice."
-go,S1007,Simplify regular expression by using raw string literal,major,antipattern,"Raw string literals use `\`` instead of `’` and thus, do not support any escape sequences. This means that the backslash (\) can be used freely, without the need of escaping.
+go,SCC-S1006,Use for { ... } for infinite loops,major,antipattern,"For infinite loops, using `for { ... }` is the most idiomatic choice."
+go,SCC-S1007,Simplify regular expression by using raw string literal,major,antipattern,"Raw string literals use `\`` instead of `’` and thus, do not support any escape sequences. This means that the backslash (\) can be used freely, without the need of escaping.
 
 Since regular expressions have their own escape sequences, raw strings can improve their readability. 
 
@@ -249,7 +249,7 @@ Good pattern:
 ``` 
 regexp.Compile(`\A(\w+) profile: total \d+\n\z`)
 ```"
-go,S1008,Simplify returning boolean expression,major,antipattern,"Instead of returning boolean expression, returning the expression itself simplifies the code.
+go,SCC-S1008,Simplify returning boolean expression,major,antipattern,"Instead of returning boolean expression, returning the expression itself simplifies the code.
 
 Bad pattern:
 ```
@@ -265,7 +265,7 @@ Good pattern:
 After: 
 return <expr>
 ```"
-go,S1009,Omit redundant `nil` check on slices,major,antipattern,"The `len` function is defined for all slices, even `nil` ones, which have a length of zero.
+go,SCC-S1009,Omit redundant `nil` check on slices,major,antipattern,"The `len` function is defined for all slices, even `nil` ones, which have a length of zero.
 
 It is not necessary to check if a slice is not nil before checking that its length is not zero.
 
@@ -278,7 +278,7 @@ Good pattern:
 ``` 
 if len(x) != 0 {}
 ```"
-go,S1010,Omit default slice index,major,antipattern,"When slicing, the second index defaults to the length of the value, making `s[n:len(s)]` and `s[n:]` equivalent.
+go,SCC-S1010,Omit default slice index,major,antipattern,"When slicing, the second index defaults to the length of the value, making `s[n:len(s)]` and `s[n:]` equivalent.
 
 Bad pattern:
 ```
@@ -290,7 +290,7 @@ Good pattern:
 s[n:]
 ```
 "
-go,S1011,Use a single append to concatenate two slices,major,antipattern,"When appending two slices into one, there is no need to range over the source slice. Rather, use `append(sliceOne, sliceTwo…)
+go,SCC-S1011,Use a single append to concatenate two slices,major,antipattern,"When appending two slices into one, there is no need to range over the source slice. Rather, use `append(sliceOne, sliceTwo…)
 
 Bad pattern:
 ``` 
@@ -303,7 +303,7 @@ Good pattern:
 ``` 
 x = append(sliceOne, sliceTwo…)
 ```"
-go,S1012,Replace `time.Now().Sub(x)` with `time.Since(x)`,major,antipattern,"The `time.Since` helper has the same effect as using `time.Now().Sub(x)` but is easier to read.
+go,SCC-S1012,Replace `time.Now().Sub(x)` with `time.Since(x)`,major,antipattern,"The `time.Since` helper has the same effect as using `time.Now().Sub(x)` but is easier to read.
 
 Bad pattern:
 ``` 
@@ -314,7 +314,7 @@ Good pattern:
 ``` 
 time.Since(x)
 ```"
-go,S1016,Use a type conversion instead of manually copying struct fields,major,antipattern,"Two struct types with identical fields can be converted between each other. In older versions of Go, the fields had to have identical struct tags. Since Go 1.8, however, struct tags are ignored during conversions. It is thus not necessary to manually copy every field individually.
+go,SCC-S1013,Use a type conversion instead of manually copying struct fields,major,antipattern,"Two struct types with identical fields can be converted between each other. In older versions of Go, the fields had to have identical struct tags. Since Go 1.8, however, struct tags are ignored during conversions. It is thus not necessary to manually copy every field individually.
 
 Bad pattern:
 ``` 
@@ -330,7 +330,7 @@ Good pattern:
 var x T1
 y := T2(x)
 ```"
-go,S1017,Replace manual trimming with `strings.TrimPrefix`,major,antipattern,"Instead of using `strings.HasPrefix` and manual slicing, use the `strings.TrimPrefix` function. If the string doesn't start with the prefix, the original string will be returned.
+go,SCC-S1014,Replace manual trimming with `strings.TrimPrefix`,major,antipattern,"Instead of using `strings.HasPrefix` and manual slicing, use the `strings.TrimPrefix` function. If the string doesn't start with the prefix, the original string will be returned.
 
 Using `strings.TrimPrefix` reduces complexity, and avoid mistakes such as [off-by-one](https://en.wikipedia.org/wiki/Off-by-one_error).
 
@@ -345,7 +345,7 @@ Good pattern:
 ``` 
 str = strings.TrimPrefix(str, prefix)
 ```"
-go,S1018,Use `copy()` for sliding elements,major,antipattern,"`copy()` permits using the same source and destination slice, even with overlapping ranges. This makes it ideal for sliding elements in a slice.
+go,SCC-S1015,Use `copy()` for sliding elements,major,antipattern,"`copy()` permits using the same source and destination slice, even with overlapping ranges. This makes it ideal for sliding elements in a slice.
 
 Bad pattern: 
 ```
@@ -358,12 +358,12 @@ Good pattern:
 ``` 
 copy(x[:n], x[offset:])
 ```"
-go,S1019,Simplify `make` call by omitting redundant arguments,major,antipattern,"The `make` function has default values for the length and capacity arguments.
+go,SCC-S1016,Simplify `make` call by omitting redundant arguments,major,antipattern,"The `make` function has default values for the length and capacity arguments.
 
 - For channels and maps, the length defaults to zero.
 - For slices the capacity defaults to the length.
 "
-go,S1020,Omit redundant `nil` check in type assertion,major,antipattern,"When performing type assertion, there is no need to check for `nil` as it is implicitly handled.
+go,SCC-S1017,Omit redundant `nil` check in type assertion,major,antipattern,"When performing type assertion, there is no need to check for `nil` as it is implicitly handled.
 
 Bad pattern:
 ``` 
@@ -374,7 +374,7 @@ Good pattern:
 ``` 
 if _, ok := i.(T); ok {}
 ```"
-go,S1021,Merge variable declaration and assignment,major,antipattern,"Declaring and assigning variables can be done together, simplifying the code.
+go,SCC-S1018,Merge variable declaration and assignment,major,antipattern,"Declaring and assigning variables can be done together, simplifying the code.
 
 Bad pattern:
 ``` 
@@ -386,7 +386,7 @@ Good pattern:
 ``` 
 var x uint = 1
 ```"
-go,S1023,Omit redundant control flow,major,antipattern,"Omit unnecessary (or) redundant control flows.
+go,SCC-S1019,Omit redundant control flow,major,antipattern,"Omit unnecessary (or) redundant control flows.
 
 ### Functions that have no return value do not need a return statement as the final statement of the function. Both the examples below act the same.
 
@@ -428,7 +428,7 @@ switch 1 {
 }
 ```
 "
-go,S1024,Replace `x.Sub(time.Now())` with `time.Until(x)`,major,antipattern,"The `time.Until` helper has the same effect as using `x.Sub(time.Now())`. The former is easier to read.
+go,SCC-S1020,Replace `x.Sub(time.Now())` with `time.Until(x)`,major,antipattern,"The `time.Until` helper has the same effect as using `x.Sub(time.Now())`. The former is easier to read.
 
 Bad pattern:
 ``` 
@@ -439,7 +439,7 @@ Good pattern:
 ``` 
 time.Until(x)
 ```"
-go,S1025,"Don't use `fmt.Sprintf(""%s"", x)` unnecessarily",major,antipattern,"In many instances, there are easier and more efficient ways of getting a value's string representation. Whenever a value's underlying type is a string already, or the type has a String method, they should be used directly. 
+go,SCC-S1021,"Don't use `fmt.Sprintf(""%s"", x)` unnecessarily",major,antipattern,"In many instances, there are easier and more efficient ways of getting a value's string representation. Whenever a value's underlying type is a string already, or the type has a String method, they should be used directly. 
 
 Given the following shared definitions,
 
@@ -467,7 +467,7 @@ x
 string(y)
 z.String()
 ```"
-go,S1028,"Simplify error construction with `fmt.Errorf`
+go,SCC-S1022,"Simplify error construction with `fmt.Errorf`
 ",major,antipattern,"Error construction could be simplified by using `fmt.Errorf(…)`
 
 Bad pattern:
@@ -479,7 +479,7 @@ Good pattern:
 ``` 
 fmt.Errorf(...)
 ```"
-go,S1029,Range over the string directly,major,antipattern,"Ranging over a string will yield byte offsets and runes. If the offset isn't used, this is functionally equivalent to converting the string to a slice of runes and ranging over that. Ranging directly over the string will be more performant, however, as it avoids allocating a new slice, the size of which depends on the length of the string. 
+go,SCC-S1023,Range over the string directly,major,antipattern,"Ranging over a string will yield byte offsets and runes. If the offset isn't used, this is functionally equivalent to converting the string to a slice of runes and ranging over that. Ranging directly over the string will be more performant, however, as it avoids allocating a new slice, the size of which depends on the length of the string. 
 
 Bad pattern:
 ``` 
@@ -490,7 +490,7 @@ Good pattern:
 ``` 
 for _, r := range s {}
 ```"
-go,S1030,Use `bytes.Buffer.String` or `bytes.Buffer.Bytes`,major,antipattern,"`bytes.Buffer` has both a `String` and a `Bytes` method. It is unnecessary to use `string(buf.Bytes())` or `[]byte(buf.String())` – simply use the other method. 
+go,SCC-S1024,Use `bytes.Buffer.String` or `bytes.Buffer.Bytes`,major,antipattern,"`bytes.Buffer` has both a `String` and a `Bytes` method. It is unnecessary to use `string(buf.Bytes())` or `[]byte(buf.String())` – simply use the other method. 
 
 Bad pattern:
 ```
@@ -502,7 +502,7 @@ Good pattern:
 buf.String()
 ```
 "
-go,S1031,Omit redundant `nil` check around loop,major,antipattern,"When using `range` on nil slices and maps, the loop will simply never execute. This makes an additional nil check around the loop unnecessary. 
+go,SCC-S1025,Omit redundant `nil` check around loop,major,antipattern,"When using `range` on nil slices and maps, the loop will simply never execute. This makes an additional nil check around the loop unnecessary. 
 
 Bad pattern:
 ```
@@ -519,7 +519,7 @@ for _, x := range s {
     ...
 }
 ```"
-go,S1032,"Use `sort.Ints(x)`, `sort.Float64s(x)`, and `sort.Strings(x)`",major,antipattern,"The `sort.Ints`, `sort.Float64s` and `sort.Strings` functions are easier to read than `sort.Sort(sort.IntSlice(x))`, `sort.Sort(sort.Float64Slice(x))` and `sort.Sort(sort.StringSlice(x))`.
+go,SCC-S1026,"Use `sort.Ints(x)`, `sort.Float64s(x)`, and `sort.Strings(x)`",major,antipattern,"The `sort.Ints`, `sort.Float64s` and `sort.Strings` functions are easier to read than `sort.Sort(sort.IntSlice(x))`, `sort.Sort(sort.Float64Slice(x))` and `sort.Sort(sort.StringSlice(x))`.
 
 Bad pattern:
 ``` 
@@ -530,98 +530,168 @@ Good pattern:
 ``` 
 sort.Strings(x)
 ```"
-go,S1033,Unnecessary guard around call to `delete`,major,antipattern,Calling delete on a nil map is a [no-op](https://en.wikipedia.org/wiki/NOP_(code)). The command does nothing. You may safely remove this.
-go,S1034,Use result of type assertion to simplify cases,major,antipattern,Use result of type assertion to simplify cases.
-go,S1035,Redundant call to `net/http.CanonicalHeaderKey` in method call on `net/http.Header`,major,antipattern,"The methods on `net/http.Header`, namely `Add`, `Del`, `Get` and `Set`, already canonicalize the given header name. "
-go,SA1???,Various misuses of the standard library,,,
-go,SA1000,Invalid regular expression,critical,bug-risk,
-go,SA1001,Invalid template,critical,bug-risk,
-go,SA1002,Invalid format in `time.Parse`,critical,bug-risk,
-go,SA1003,Unsupported argument to functions in encoding/binary,,,
-go,SA1004,Suspiciously small untyped constant in time.Sleep,,,
-go,SA1005,Invalid first argument to exec.Command,,,
-go,SA1006,Printf with dynamic first argument and no further arguments,,,
-go,SA1007,Invalid URL in net/url.Parse,,,
-go,SA1008,Non-canonical key in http.Header map,,,
-go,SA1010,"(*regexp.Regexp).FindAll called with n == 0, which will always return zero results",,,
-go,SA1011,"Various methods in the strings package expect valid UTF-8, but invalid input is provided",,,
-go,SA1012,"A nil context.Context is being passed to a function, consider using context.TODO instead",,,
-go,SA1013,"io.Seeker.Seek is being called with the whence constant as the first argument, but it should be the second",,,
-go,SA1014,Non-pointer value passed to Unmarshal or Decode,,,
-go,SA1015,"Using time.Tick in a way that will leak. Consider using time.NewTicker, and only use time.Tick in tests, commands and endless functions",,,
-go,SA1016,Trapping a signal that cannot be trapped,,,
-go,SA1017,Channels used with signal.Notify should be buffered,,,
-go,SA1018,"strings.Replace called with n == 0, which does nothing",,,
-go,SA1019,"Using a deprecated function, variable, constant or field",,,
-go,SA1020,Using an invalid host:port pair with a net.Listen-related function,,,
-go,SA1021,Using bytes.Equal to compare two net.IP,,,
-go,SA1023,Modifying the buffer in an io.Writer implementation,,,
-go,SA1024,"A string cutset contains duplicate characters, suggesting TrimPrefix or TrimSuffix should be used instead of TrimLeft or TrimRight",,,
-go,SA1025,it is not possible to use Reset's return value correctly,,,
-go,SA2???,Concurrency issues,,,
-go,SA2000,"sync.WaitGroup.Add called inside the goroutine, leading to a race condition",,,
-go,SA2001,"Empty critical section, did you mean to defer the unlock?",,,
-go,SA2002,"Called testing.T.FailNow or SkipNow in a goroutine, which isn't allowed",,,
-go,SA2003,"Deferred Lock right after locking, likely meant to defer Unlock instead",,,
-go,SA3???,Testing issues,,,
-go,SA3000,"TestMain doesn't call os.Exit, hiding test failures",,,
-go,SA3001,Assigning to b.N in benchmarks distorts the results,,,
-go,SA4???,Code that isn't really doing anything,,,
-go,SA4000,Boolean expression has identical expressions on both sides,,,
-go,SA4001,"&*x gets simplified to x, it does not copy x",,,
-go,SA4002,Comparing strings with known different sizes has predictable results,,,
-go,SA4003,Comparing unsigned values against negative values is pointless,,,
-go,SA4004,The loop exits unconditionally after one iteration,,,
-go,SA4005,Field assignment that will never be observed. Did you mean to use a pointer receiver?,,,
-go,SA4006,A value assigned to a variable is never read before being overwritten. Forgotten error check or dead code?,,,
-go,SA4008,"The variable in the loop condition never changes, are you incrementing the wrong variable?",,,
-go,SA4009,A function argument is overwritten before its first use,,,
-go,SA4010,The result of append will never be observed anywhere,,,
-go,SA4011,Break statement with no effect. Did you mean to break out of an outer loop?,,,
-go,SA4012,Comparing a value against NaN even though no value is equal to NaN,,,
-go,SA4013,"Negating a boolean twice (!!b) is the same as writing b. This is either redundant, or a typo.",,,
-go,SA4014,"An if/else if chain has repeated conditions and no side-effects; if the condition didn't match the first time, it won't match the second time, either",,,
-go,SA4015,Calling functions like math.Ceil on floats converted from integers doesn't do anything useful,,,
-go,SA4016,"Certain bitwise operations, such as x ^ 0, do not do anything useful",,,
-go,SA4017,"A pure function's return value is discarded, making the call pointless",,,
-go,SA4018,Self-assignment of variables,,,
-go,SA4019,"Multiple, identical build constraints in the same file",,,
-go,SA4020,Unreachable case clause in a type switch,,,
-go,SA4021,x = append(y) is equivalent to x = y,,,
-go,SA5???,Correctness issues,,,
-go,SA5000,Assignment to nil map,,,
-go,SA5001,Defering Close before checking for a possible error,,,
-go,SA5002,The empty for loop (for {}) spins and can block the scheduler,,,
-go,SA5003,Defers in infinite loops will never execute,,,
-go,SA5004,for { select { ... with an empty default branch spins,,,
-go,SA5005,"The finalizer references the finalized object, preventing garbage collection",,,
-go,SA5006,Slice index out of bounds,,,
-go,SA5007,Infinite recursive call,,,
-go,SA6???,Performance issues,,,
-go,SA6000,"Using regexp.Match or related in a loop, should use regexp.Compile",,,
-go,SA6001,Missing an optimization opportunity when indexing maps by byte slices,,,
-go,SA6002,Storing non-pointer values in sync.Pool allocates memory,,,
-go,SA6003,Converting a string to a slice of runes before ranging over it,,,
-go,SA6005,Inefficient string comparison with strings.ToLower or strings.ToUpper,,,
-go,SA9???,Dubious code constructs that have a high probability of being wrong,,,
-go,SA9001,defers in for range loops may not run when you expect them to,,,
-go,SA9002,Using a non-octal os.FileMode that looks like it was meant to be in octal.,,,
-go,SA9003,Empty body in an if or else branch,,,
-go,SA9004,Only the first constant has an explicit type,,,
-go,SA9005,Trying to marshal a struct with no public fields nor custom marshaling,,,
-go,ST1???,,,,
-go,ST1000,Incorrect or missing package comment,,,
-go,ST1001,Dot imports are discouraged,,,
-go,ST1003,Poorly chosen identifier,,,
-go,ST1005,Incorrectly formatted error string,,,
-go,ST1006,Poorly chosen receiver name,,,
-go,ST1008,A function's error value should be its last return value,,,
-go,ST1011,Poorly chosen name for variable of type time.Duration,,,
-go,ST1012,Poorly chosen name for error variable,,,
-go,ST1013,"Should use constants for HTTP error codes, not magic numbers",,,
-go,ST1015,A switch's default case should be the first or last case,,,
-go,ST1016,Use consistent method receiver names,,,
-go,ST1017,Don't use Yoda conditions,,,
-go,ST1018,Avoid zero-width and control characters in string literals,,,
-go,U1???,Unused code,,,
-go,U1000,Unused code,,,
+go,SCC-S1027,Unnecessary guard around call to `delete`,major,antipattern,Calling delete on a nil map is a [no-op](https://en.wikipedia.org/wiki/NOP_(code)). The command does nothing. You may safely remove this.
+go,SCC-S1028,Use result of type assertion to simplify cases,major,antipattern,Use result of type assertion to simplify cases.
+go,SCC-S1029,Redundant call to `net/http.CanonicalHeaderKey` in method call on `net/http.Header`,major,antipattern,"The methods on `net/http.Header`, namely `Add`, `Del`, `Get` and `Set`, already canonicalize the given header name. "
+go,SCC-S1030,Invalid regular expression,critical,bug-risk,Invalid regular expression. This poses potential bug/security risk. Validate the regex here -- [https://regex101.com/](https://regex101.com/)
+go,SCC-S1031,Invalid template,critical,bug-risk,Invalid `text` or `html` template. This poses potential bug risk.
+go,SCC-S1032,Invalid format in `time.Parse`,critical,bug-risk,Go won't be able to parse this time format as it is invalid. Cross check the time format.
+go,SCC-S1033,Unsupported argument to functions in `encoding/binary`,major,bug-risk,"The [encoding/binary](https://golang.org/pkg/encoding/binary/) package can only serialize types with known sizes. This precludes the use of the `int` and `uint` types, as their sizes differ on different architectures. Furthermore, it doesn't support serializing maps, channels, strings, or functions.
+
+Before Go 1.8, bool wasn't supported, either."
+go,SCC-S1034,Suspiciously small untyped constant in `time.Sleep`,major,bug-risk,"The `time.Sleep` function takes a `time.Duration` as its only argument. Durations are expressed in nanoseconds. Thus, calling time.Sleep(1) will sleep for 1 nanosecond. This is a common source of bugs, as sleep functions in other languages often accept seconds or milliseconds.
+
+The [time](https://golang.org/pkg/time/) package provides constants such as `time.Second` to express large durations. These can be combined with arithmetic to express arbitrary durations, for example '5 * time.Second' for 5 seconds.
+
+If you truly meant to sleep for a tiny amount of time, use 'n * time.Nanosecond’."
+go,SCC-S1035,Invalid first argument to exec.Command,major,bug-risk,"[os/exec](https://golang.org/pkg/os/exec/) runs programs directly (using variants of the fork and exec system calls on Unix systems). This shouldn't be confused with running a command in a shell. The shell will allow for features such as input redirection, pipes, and general scripting. The shell is also responsible for splitting the user's input into a program name and its arguments. For example, the equivalent to
+
+```
+ls -la /home
+```
+would be 
+
+```
+exec.Command(""ls"", “-la”, “/home”)
+```
+
+If you want to run a command in a shell, consider using something like the following – but be aware that not all systems, particularly Windows, will have a /bin/sh program:
+
+```
+exec.Command(""/bin/sh"", ""-c"", ""ls -la /home”)
+```
+"
+go,SCC-S1036,Printf with dynamic first argument and no further arguments,major,bug-risk,"Using `fmt.Printf` with a dynamic first argument can lead to unexpected output. The first argument is a format string, where certain character combinations have special meaning. If, for example, a user were to enter a string such as
+
+```
+Interest rate: 5%
+```
+
+and you printed it with
+
+```
+fmt.Printf(s)
+```
+
+.. it would lead to the following output: 
+```
+Interest rate: 5%!(NOVERB).
+```
+
+Similarly, forming the first parameter via string concatenation with user input should be avoided for the same reason. When printing user input, either use a variant of `fmt.Print`, or use the `%s` Printf verb and pass the string as an argument. 
+"
+go,SCC-S1037,Invalid URL in `net/url.Parse`,major,bug-risk,Invalid URL format. [net/URL](https://golang.org/pkg/net/url/#URL.Parse) will fail to parse this URL. Fix this by updating a valid URL.
+go,SCC-S1038,Non-canonical key in `http.Header` map,major,bug-risk,"Keys in `http.Header` maps are canonical, meaning they follow a specific combination of uppercase and lowercase letters. Methods such as `http.Header.Add` and `http.Header.Del` convert inputs into this canonical form before manipulating the map.
+
+When manipulating `http.Header` maps directly, as opposed to using the provided methods, care should be taken to stick to canonical form in order to avoid inconsistencies. The following piece of code demonstrates one such inconsistency:
+
+```
+h := http.Header{}
+h[""etag""] = []string{""1234""}
+h.Add(""etag"", ""5678"")
+fmt.Println(h)
+```
+
+.. results in,
+
+```
+// Output:
+// map[Etag:[5678] etag:[1234]]
+```
+
+The easiest way of obtaining the canonical form of a key is to use [http.CanonicalHeaderKey](https://golang.org/pkg/net/http/#CanonicalHeaderKey)"
+go,SCC-S1039,"(*regexp.Regexp).FindAll called with n == 0, which will always return zero results",major,bug-risk,"If n >= 0, the function returns at most n matches/submatches. To return all results, specify a negative number. 
+"
+go,SCC-S1040,Invalid `UTF-8` value provided,major,bug-risk,"Various methods in the [strings](https://golang.org/pkg/strings/) package expect valid UTF-8, but invalid input is provided"
+go,SCC-S1041,Nil `context.Context` passed to function,major,bug-risk,"A nil `context.Context` is being passed to a function, consider using [context.TODO](https://golang.org/pkg/context/#TODO) instead."
+go,SCC-S1042,"io.Seeker.Seek is being called with the whence constant as the first argument, but it should be the second",major,bug-risk,"Mispositioned `whence` constant in `io.Seeker.Seek` call
+
+[io.Seeker.Seek](https://golang.org/pkg/io/#Seeker) is being called with the `whence` constant as the first argument, but it should be the second.
+
+```
+type Seeker interface {
+        Seek(offset int64, whence int) (int64, error)
+}
+```
+"
+go,SCC-S1043,Non-pointer value passed to Unmarshal or Decode,major,bug-risk,`Unmarshal` and `Decode` methods accept pointer value. Passing non-pointer value causes an error.
+go,SCC-S1044,`time.Tick` used in leaky way,major,performance,"Using `time.Tick` in a way that will leak. Consider using time.NewTicker, and only use time.Tick in tests, commands and endless functions."
+go,SCC-S1045,Trapping a signal that cannot be trapped,minor,antipattern,"Not all signals can be intercepted by a process. Speficially, on UNIX-like systems, the `syscall.SIGKILL` and `syscall.SIGSTOP` signals are never passed to the process, but instead handled directly by the kernel. It is therefore pointless to try and handle these signals."
+go,SCC-S1046,Channels used with `signal.Notify` should be buffered,major,bug-risk,"The [os/signal](https://golang.org/pkg/os/signal/) package uses non-blocking channel sends when delivering signals. If the receiving end of the channel isn't ready and the channel is either unbuffered or full, the signal will be dropped.
+
+To avoid missing signals, the channel should be buffered and of the appropriate size. For a channel used for notification of just one signal value, a buffer of size 1 is sufficient.
+"
+go,SCC-S1047,"`strings.Replace` called with `n == 0`, which does nothing",major,bug-risk,"With `n == 0`, zero instances will be replaced. To replace all instances, use a negative number, or use `strings.ReplaceAll`."
+go,SCC-S1048,"Using a deprecated function, variable, constant or field",major,bug-risk,
+go,SCC-S1049,Using an invalid host:port pair with a net.Listen-related function,,,
+go,SCC-S1050,Using bytes.Equal to compare two net.IP,,,
+go,SCC-S1051,Modifying the buffer in an io.Writer implementation,,,
+go,SCC-S1052,"A string cutset contains duplicate characters, suggesting TrimPrefix or TrimSuffix should be used instead of TrimLeft or TrimRight",,,
+go,SCC-S1053,it is not possible to use Reset's return value correctly,,,
+go,SCC-S1054,Concurrency issues,,,
+go,SCC-S1055,"sync.WaitGroup.Add called inside the goroutine, leading to a race condition",,,
+go,SCC-S1056,"Empty critical section, did you mean to defer the unlock?",,,
+go,SCC-S1057,"Called testing.T.FailNow or SkipNow in a goroutine, which isn't allowed",,,
+go,SCC-S1058,"Deferred Lock right after locking, likely meant to defer Unlock instead",,,
+go,SCC-S1059,Testing issues,,,
+go,SCC-S1060,"TestMain doesn't call os.Exit, hiding test failures",,,
+go,SCC-S1061,Assigning to b.N in benchmarks distorts the results,,,
+go,SCC-S1062,Code that isn't really doing anything,,,
+go,SCC-S1063,Boolean expression has identical expressions on both sides,,,
+go,SCC-S1064,"&*x gets simplified to x, it does not copy x",,,
+go,SCC-S1065,Comparing strings with known different sizes has predictable results,,,
+go,SCC-S1066,Comparing unsigned values against negative values is pointless,,,
+go,SCC-S1067,The loop exits unconditionally after one iteration,,,
+go,SCC-S1068,Field assignment that will never be observed. Did you mean to use a pointer receiver?,,,
+go,SCC-S1069,A value assigned to a variable is never read before being overwritten. Forgotten error check or dead code?,,,
+go,SCC-S1070,"The variable in the loop condition never changes, are you incrementing the wrong variable?",,,
+go,SCC-S1071,A function argument is overwritten before its first use,,,
+go,SCC-S1072,The result of append will never be observed anywhere,,,
+go,SCC-S1073,Break statement with no effect. Did you mean to break out of an outer loop?,,,
+go,SCC-S1074,Comparing a value against NaN even though no value is equal to NaN,,,
+go,SCC-S1075,"Negating a boolean twice (!!b) is the same as writing b. This is either redundant, or a typo.",,,
+go,SCC-S1076,"An if/else if chain has repeated conditions and no side-effects; if the condition didn't match the first time, it won't match the second time, either",,,
+go,SCC-S1077,Calling functions like math.Ceil on floats converted from integers doesn't do anything useful,,,
+go,SCC-S1078,"Certain bitwise operations, such as x ^ 0, do not do anything useful",,,
+go,SCC-S1079,"A pure function's return value is discarded, making the call pointless",,,
+go,SCC-S1080,Self-assignment of variables,,,
+go,SCC-S1081,"Multiple, identical build constraints in the same file",,,
+go,SCC-S1082,Unreachable case clause in a type switch,,,
+go,SCC-S1083,x = append(y) is equivalent to x = y,,,
+go,SCC-S1084,Correctness issues,,,
+go,SCC-S1085,Assignment to nil map,,,
+go,SCC-S1086,Defering Close before checking for a possible error,,,
+go,SCC-S1087,The empty for loop (for {}) spins and can block the scheduler,,,
+go,SCC-S1088,Defers in infinite loops will never execute,,,
+go,SCC-S1089,for { select { ... with an empty default branch spins,,,
+go,SCC-S1090,"The finalizer references the finalized object, preventing garbage collection",,,
+go,SCC-S1091,Slice index out of bounds,,,
+go,SCC-S1092,Infinite recursive call,,,
+go,SCC-S1093,Performance issues,,,
+go,SCC-S1094,"Using regexp.Match or related in a loop, should use regexp.Compile",,,
+go,SCC-S1095,Missing an optimization opportunity when indexing maps by byte slices,,,
+go,SCC-S1096,Storing non-pointer values in sync.Pool allocates memory,,,
+go,SCC-S1097,Converting a string to a slice of runes before ranging over it,,,
+go,SCC-S1098,Inefficient string comparison with strings.ToLower or strings.ToUpper,,,
+go,SCC-S1099,Dubious code constructs that have a high probability of being wrong,,,
+go,SCC-S1100,defers in for range loops may not run when you expect them to,,,
+go,SCC-S1101,Using a non-octal os.FileMode that looks like it was meant to be in octal.,,,
+go,SCC-S1102,Empty body in an if or else branch,,,
+go,SCC-S1103,Only the first constant has an explicit type,,,
+go,SCC-S1104,Trying to marshal a struct with no public fields nor custom marshaling,,,
+go,SCC-S1105,,,,
+go,SCC-S1106,Incorrect or missing package comment,,,
+go,SCC-S1107,Dot imports are discouraged,,,
+go,SCC-S1108,Poorly chosen identifier,,,
+go,SCC-S1109,Incorrectly formatted error string,,,
+go,SCC-S1110,Poorly chosen receiver name,,,
+go,SCC-S1111,A function's error value should be its last return value,,,
+go,SCC-S1112,Poorly chosen name for variable of type time.Duration,,,
+go,SCC-S1113,Poorly chosen name for error variable,,,
+go,SCC-S1114,"Should use constants for HTTP error codes, not magic numbers",,,
+go,SCC-S1115,A switch's default case should be the first or last case,,,
+go,SCC-S1116,Use consistent method receiver names,,,
+go,SCC-S1117,Don't use Yoda conditions,,,
+go,SCC-S1118,Avoid zero-width and control characters in string literals,,,
+go,SCC-S1119,Unused code,,,
+go,SCC-S1120,Unused code,,,
