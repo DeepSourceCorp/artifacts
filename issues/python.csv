@@ -56,7 +56,7 @@ Correct way:
 # Validate URL before opening it
 if url.lower().startswith('http'):
   req = urllib.Request.request(url)
-else
+else:
   raise ValueError from None
 
 with urllib.request.urlopen(req) as resp:
@@ -74,15 +74,15 @@ python,BAN-B319,Use of an insecure method from `xml.dom.pulldom` detected,major,
 python,BAN-B320,Use of an insecure method from `lxml.etree`,major,security,Using various XML methods to parse untrusted XML data is known to be vulnerable to XML attacks. Using the [defusedxml](https://pypi.org/project/defusedxml) module is recommended. Methods should be replaced with their `defusedxml` equivalents.
 python,BAN-B321,Detected calls to FTP-related functions,major,security,FTP-related functions are being called. FTP is considered insecure. Use SSH/SFTP/SCP or some other encrypted protocol.
 python,BAN-B322,Use of `input` function detected for Python 2,major,security,"The input method in Python 2 will read from standard input, evaluate and run the resulting string as python source code. This is similar, though in many ways worse, then using `eval`. On Python 2, use `raw_input` instead, `input` is safe in Python 3."
-python,BAN-B323,use of `_create_unverified_context` detected,major,security,"By default, Python will create a secure, verified ssl context for use in such classes as `HTTPSConnection`. However, it still allows using an insecure context via the `_create_unverified_context` that reverts to the previous behavior that does not validate certificates or perform hostname checks."
+python,BAN-B323,Use of `_create_unverified_context` detected,major,security,"By default, Python will create a secure, verified ssl context for use in such classes as `HTTPSConnection`. However, it still allows using an insecure context via the `_create_unverified_context` that reverts to the previous behavior that does not validate certificates or perform hostname checks."
 python,BAN-B324,Insecure function used from `hashlib.new()`,major,security,"Use of insecure MD2, MD4, MD5, or SHA1 hash functions should be avoided. Using more secure algorithms like SHA256 or SHA512."
 python,BAN-B325,Use of `tempnam` detected,major,security,Use of `os.tempnam()` and `os.tmpnam()` is vulnerable to symlink attacks. Consider using `tmpfile()` instead.
-python,BAN-B401,telnet-related module imported,major,security,A telnet-related module is being imported. Telnet is considered insecure. Use SSH or some other encrypted protocol.
-python,BAN-B402,FTP-related module imported,major,security,A FTP-related module is being imported. FTP is considered insecure. Use SSH/SFTP/SCP or some other encrypted protocol.
-python,BAN-B403,`pickle` module imported,minor,security,"Consider possible security implications associated with these modules: `pickle`, `cPickle`, `dill`."
-python,BAN-B404,`subprocess` module imported,minor,security,Consider possible security implications associated with the `subprocess` module.
+python,BAN-B401,Telnet related module imported,major,security,A telnet-related module is being imported. Telnet is considered insecure. Use SSH or some other encrypted protocol.
+python,BAN-B402,File Transfer Protocol (FTP) related module imported,major,security,A FTP-related module is being imported. FTP is considered insecure. Use SSH/SFTP/SCP or some other encrypted protocol.
+python,BAN-B403,Import of `pickle` module detected,minor,security,"Consider possible security implications associated with these modules: `pickle`, `cPickle`, `dill`."
+python,BAN-B404,Import of `subprocess` module detected,minor,security,Consider possible security implications associated with the `subprocess` module.
 python,BAN-B405,Import of method(s) from `xml.etree` detected,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called."
-python,BAN-B406,`xml.sax` imported,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called."
+python,BAN-B406,Import of `xml.sax` detected,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called."
 python,BAN-B407,`expatuilder` from `xml` module imported,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called."
 python,BAN-B408,`minidom` from `xml` module imported,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called."
 python,BAN-B409,`pulldom` from xml module imported,minor,security,"Using various methods to parse untrusted XML data is known to be vulnerable to XML attacks. Replace vulnerable imports with the equivalent [defusedxml](https://pypi.org/project/defusedxml) package, or make sure `defusedxml.defuse_stdlib()` is called."
@@ -554,7 +554,7 @@ python,PYL-W0612,Unused variable found,major,antipattern,"An unused variable tak
 python,PYL-W0613,Function contains unused argument,major,antipattern,"An unused argument can lead to confusions. It should be removed. If this variable is necessary, name the variable `_` or start the name with `unused` or `_unused`."
 python,PYL-W0614,Unused import from wildcard import found,major,antipattern,"In a wildcard import, all public names defined in the module are imported. It is advised to explicitly import the values needed or modify the module being imported from and define __all__ to restrict the names to be imported. "
 python,PYL-W0621,Re-defined variable from outer scope,major,antipattern,"Local variable name hides the variable defined in the outer space, making it inaccesible. It may cause confusion."
-python,PYL-W0622,Re-definition found for builtin function,critical,antipattern,Defining a local variable or function with the same name as a built-in object makes the built-in object unusable within the current scope and makes the code more difficult to read.
+python,PYL-W0622,Re-definition found for builtin function,minor,antipattern,Defining a local variable or function with the same name as a built-in object makes the built-in object unusable within the current scope and makes the code prone to bugs.
 python,PYL-W0623,redefine-in-handler,,,
 python,PYL-W0631,Loop variable used outside the loop,critical,bug-risk, Do not use a loop variable (i.e. defined by a for loop or a list comprehension or a generator expression) outside the loop. It can induce wrong results.
 python,PYL-W0632,Unbalanced tuple unpacking,major,bug-risk,Possible unbalanced tuple unpacking detected: either left or right side of the statement has more labels. This can raise `ValueError` while unpacking.
