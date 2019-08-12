@@ -1,1 +1,0 @@
-test-coverage,TCV-001,Lines not covered in tests,warning,major,bug-risk,A source line is considered covered when at least one instruction that is assigned to this line has been executed by a test case. These lines were not executed during any of the test cases.
