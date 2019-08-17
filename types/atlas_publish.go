@@ -55,8 +55,8 @@ type AnalysisReport struct {
 			Value float64 `json:"value"`
 		} `json:"namespaces"`
 	} `json:"metrics,omitempty"`
-	IsPassed bool `json:"is_passed"`
-	Errors   []struct {
+	Status string `json:"status"`
+	Errors []struct {
 		HMessage string `json:"hmessage"`
 		Level    int    `json:"level"`
 	} `json:"errors"`
