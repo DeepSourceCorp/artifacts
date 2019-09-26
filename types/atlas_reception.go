@@ -11,6 +11,15 @@ type RepoRun struct {
 	} `json:"vcs_meta"`
 }
 
+// Artifact is data sent via CLI and stored in s3
+type Artifact struct {
+	Key      string `json:"key"`
+	URL      string `json:"url"`
+	Metadata struct {
+		WorkDir string `json:"workDir"`
+	} `json:"metadata"`
+}
+
 // AnalysisRun type is the expected structure of a analysis run task
 // to be received
 type AnalysisRun struct {
@@ -31,8 +40,8 @@ type AnalysisRun struct {
 		} `json:"ssh,omitempty"`
 	} `json:"keys"`
 	Checks []struct {
-		CheckSeq     string  `json:"check_seq"`
-		Artifacts    []int64 `json:"artifacts"`
+		CheckSeq     string     `json:"check_seq"`
+		Artifacts    []Artifact `json:"artifacts"`
 		AnalyzerMeta struct {
 			Shortcode   string `json:"name"`
 			Command     string `json:"command"`
