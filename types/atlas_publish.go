@@ -25,37 +25,41 @@ type DiffMeta struct {
 	Deletions [][]int `json:"deletions"`
 }
 
+type Issue struct {
+	IssueCode string `json:"issue_code"`
+	IssueText string `json:"issue_text"`
+	Location  struct {
+		Path     string `json:"path"`
+		Position struct {
+			Begin struct {
+				Line   int `json:"line"`
+				Column int `json:"column"`
+			} `json:"begin"`
+			End struct {
+				Line   int `json:"line"`
+				Column int `json:"column"`
+			} `json:"end"`
+		} `json:"position"`
+	} `json:"location"`
+	ProcessedData struct {
+		SourceCode struct {
+			Rendered string `json:"rendered"`
+		} `json:"source_code,omitempty"`
+	} `json:"processed_data,omitempty"`
+}
+
+type Metric struct {
+	MetricCode string `json:"metric_code"`
+	Namespaces []struct {
+		Key   string  `json:"key"`
+		Value float64 `json:"value"`
+	} `json:"namespaces"`
+}
+
 type AnalysisReport struct {
-	Issues []struct {
-		IssueCode string `json:"issue_code"`
-		IssueText string `json:"issue_text"`
-		Location  struct {
-			Path     string `json:"path"`
-			Position struct {
-				Begin struct {
-					Line   int `json:"line"`
-					Column int `json:"column"`
-				} `json:"begin"`
-				End struct {
-					Line   int `json:"line"`
-					Column int `json:"column"`
-				} `json:"end"`
-			} `json:"position"`
-		} `json:"location"`
-		ProcessedData struct {
-			SourceCode struct {
-				Rendered string `json:"rendered"`
-			} `json:"source_code,omitempty"`
-		} `json:"processed_data,omitempty"`
-	} `json:"issues"`
-	Metrics []struct {
-		MetricCode string `json:"metric_code"`
-		Namespaces []struct {
-			Key   string  `json:"key"`
-			Value float64 `json:"value"`
-		} `json:"namespaces"`
-	} `json:"metrics,omitempty"`
-	IsPassed bool `json:"is_passed"`
+	Issues   []Issue  `json:"issues"`
+	Metrics  []Metric `json:"metrics,omitempty"`
+	IsPassed bool     `json:"is_passed"`
 	Errors   []struct {
 		HMessage string `json:"hmessage"`
 		Level    int    `json:"level"`
