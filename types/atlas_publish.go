@@ -46,6 +46,7 @@ type Issue struct {
 			Rendered string `json:"rendered"`
 		} `json:"source_code,omitempty"`
 	} `json:"processed_data,omitempty"`
+	Patch string `json:"patch"`
 }
 
 type Metric struct {

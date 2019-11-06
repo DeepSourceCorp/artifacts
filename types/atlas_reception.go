@@ -26,6 +26,7 @@ type AnalysisRun struct {
 	RunID           string `json:"run_id"`
 	RunSerial       string `json:"run_serial"`
 	DSConfigUpdated bool   `json:"ds_config_updated"`
+	AutofixEnabled  bool   `json:"autofix_enabled"`
 	VCSMeta         struct {
 		RemoteURL       string `json:"remote_url"`
 		BaseBranch      string `json:"base_branch"`
