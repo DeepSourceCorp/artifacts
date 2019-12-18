@@ -53,6 +53,33 @@ type AnalysisRun struct {
 	} `json:"checks"`
 }
 
+type AutofixRun struct {
+	RunID     string `json:"run_id"`
+	RunSerial string `json:"run_serial"`
+	VCSMeta   struct {
+		RemoteURL       string `json:"remote_url"`
+		BaseBranch      string `json:"base_branch"`
+		CheckoutOID     string `json:"checkout_oid"`
+		CloneSubmodules bool   `json:"clone_submodules"`
+	} `json:"vcs_meta"`
+	Keys struct {
+		SSH struct {
+			Public  string `json:"public"`
+			Private string `json:"private"`
+		} `json:"ssh,omitempty"`
+	} `json:"keys"`
+	Autofixer struct {
+		AutofixMeta struct {
+			Shortcode   string `json:"name"`
+			Command     string `json:"command"`
+			Version     string `json:"version"`
+			CPULimit    string `json:"cpu_limit"`
+			MemoryLimit string `json:"memory_limit"`
+		} `json:"autofix_meta"`
+		Autofixes []AutofixIssue `json:"autofixes"`
+	} `json:"autofixer"`
+}
+
 // CancelCheckRun type is the expected structure of a check cancellation
 // task to be recieved
 type CancelCheckRun struct {
