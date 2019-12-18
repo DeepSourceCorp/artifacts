@@ -52,6 +52,21 @@ type Issue struct {
 	} `json:"processed_data,omitempty"`
 }
 
+// Location of an issue
+type IssueLocation struct {
+	Path     string `json:"path"`
+	Position struct {
+		Begin struct {
+			Line   int `json:"line"`
+			Column int `json:"column"`
+		} `json:"begin"`
+		End struct {
+			Line   int `json:"line"`
+			Column int `json:"column"`
+		} `json:"end"`
+	} `json:"position"`
+}
+
 type Namespace struct {
 	Key   string  `json:"key"`
 	Value float64 `json:"value"`
@@ -82,6 +97,29 @@ type AnalysisReport struct {
 	ExtraData interface{} `json:"extra_data"`
 }
 
+type Change struct {
+	BeforeHTML string `json:"before_html"`
+	AfterHTML  string `json:"after_html"`
+	Changeset  string `json:"changeset"`
+}
+
+type Patch struct {
+	Filename string   `json:"filename"`
+	Changes  []Change `json:"changes"`
+}
+
+type AutofixReport struct {
+	CodeDir     string   `json:"code_directory"`
+	IssuesFixed int      `json:"issues_fixed"`
+	Metrics     []Metric `json:"metrics,omitempty"`
+	Patches     []Patch  `json:"patches"`
+	Errors      []struct {
+		HMessage string `json:"hmessage"`
+		Level    int    `json:"level"`
+	} `json:"errors"`
+	ExtraData interface{} `json:"extra_data"`
+}
+
 type AnalysisResult struct {
 	RunID    string         `json:"run_id"`
 	Status   Status         `json:"status"`
@@ -89,11 +127,25 @@ type AnalysisResult struct {
 	Report   AnalysisReport `json:"report"`
 }
 
+type AutofixResult struct {
+	RunID    string        `json:"run_id"`
+	Status   Status        `json:"status"`
+	CheckSeq string        `json:"check_seq"`
+	Report   AutofixReport `json:"report"`
+}
+
 type AnalysisResultCeleryTask struct {
 	ID      string         `json:"id"`
 	Task    string         `json:"task"`
 	KWArgs  AnalysisResult `json:"kwargs"`
 	Retries int            `json:"retries"`
+}
+
+type AutofixResultCeleryTask struct {
+	ID      string        `json:"id"`
+	Task    string        `json:"task"`
+	KWArgs  AutofixResult `json:"kwargs"`
+	Retries int           `json:"retries"`
 }
 
 type CancelCheckResult struct {

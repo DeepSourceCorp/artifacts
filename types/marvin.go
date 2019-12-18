@@ -1,6 +1,6 @@
 package types
 
-type MarvinConfig struct {
+type MarvinAnalysisConfig struct {
 	RunID             string   `toml:"runID"`
 	CheckSeq          string   `toml:"checkSeq"`
 	AnalyzerShortcode string   `toml:"analyzerShortcode"`
@@ -9,6 +9,14 @@ type MarvinConfig struct {
 	CheckoutOID       string   `toml:"checkoutOID"`
 	DSConfigUpdated   bool     `toml:"dsConfigUpdated"`
 	Processors        []string `toml:"processors"`
+}
+
+type MarvinAutofixConfig struct {
+	RunID             string `toml:"runID"`
+	AnalyzerShortcode string `toml:"analyzerShortcode"`
+	AutofixerCommand  string `toml:"autofixerCommand"`
+	CheckoutOID       string `toml:"checkoutOID"`
+	AutofixIssues     string `toml:"autofix_issues"`
 }
 
 type AnalysisConfig struct {
@@ -22,4 +30,14 @@ type AnalysisConfig struct {
 
 type AnalysisStateInfo struct {
 	IfAllFiles bool `json:"if_all_files"`
+}
+
+// Issues to be autofixed
+type AutofixIssue struct {
+	IssueCode   string          `json:"issue_code"`
+	Occurrences []IssueLocation `json:"occurrences"`
+}
+
+type AutofixConfig struct {
+	Issues []AutofixIssue `json:"issues"`
 }
