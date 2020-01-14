@@ -25,22 +25,26 @@ type DiffMeta struct {
 	Deletions [][]int `json:"deletions"`
 }
 
+type Position struct {
+	Begin struct {
+		Line   int `json:"line"`
+		Column int `json:"column"`
+	} `json:"begin"`
+	End struct {
+		Line   int `json:"line"`
+		Column int `json:"column"`
+	} `json:"end"`
+}
+
+type Location struct {
+	Path     string   `json:"path"`
+	Position Position `json:"position"`
+}
+
 type Issue struct {
-	IssueCode string `json:"issue_code"`
-	IssueText string `json:"issue_text"`
-	Location  struct {
-		Path     string `json:"path"`
-		Position struct {
-			Begin struct {
-				Line   int `json:"line"`
-				Column int `json:"column"`
-			} `json:"begin"`
-			End struct {
-				Line   int `json:"line"`
-				Column int `json:"column"`
-			} `json:"end"`
-		} `json:"position"`
-	} `json:"location"`
+	IssueCode     string   `json:"issue_code"`
+	IssueText     string   `json:"issue_text"`
+	Location      Location `json:"location"`
 	ProcessedData struct {
 		SourceCode struct {
 			Rendered string `json:"rendered"`
@@ -48,22 +52,26 @@ type Issue struct {
 	} `json:"processed_data,omitempty"`
 }
 
+type Namespace struct {
+	Key   string  `json:"key"`
+	Value float64 `json:"value"`
+}
+
 type Metric struct {
-	MetricCode string `json:"metric_code"`
-	Namespaces []struct {
-		Key   string  `json:"key"`
-		Value float64 `json:"value"`
-	} `json:"namespaces"`
+	MetricCode string      `json:"metric_code"`
+	Namespaces []Namespace `json:"namespaces"`
+}
+
+type AnalysisError struct {
+	HMessage string `json:"hmessage"`
+	Level    int    `json:"level"`
 }
 
 type AnalysisReport struct {
-	Issues   []Issue  `json:"issues"`
-	Metrics  []Metric `json:"metrics,omitempty"`
-	IsPassed bool     `json:"is_passed"`
-	Errors   []struct {
-		HMessage string `json:"hmessage"`
-		Level    int    `json:"level"`
-	} `json:"errors"`
+	Issues   []Issue         `json:"issues"`
+	Metrics  []Metric        `json:"metrics,omitempty"`
+	IsPassed bool            `json:"is_passed"`
+	Errors   []AnalysisError `json:"errors"`
 	FileMeta struct {
 		IfAll    bool                `json:"if_all"`
 		Deleted  []string            `json:"deleted"`
