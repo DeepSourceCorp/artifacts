@@ -109,11 +109,12 @@ type Patch struct {
 }
 
 type AutofixReport struct {
-	CodeDir     string   `json:"code_directory"`
-	IssuesFixed int      `json:"issues_fixed"`
-	Metrics     []Metric `json:"metrics,omitempty"`
-	Patches     []Patch  `json:"patches"`
-	Errors      []struct {
+	CodeDir       string   `json:"code_directory"`
+	ModifiedFiles []string `json:"modified_files"`
+	IssuesFixed   int      `json:"issues_fixed"`
+	Metrics       []Metric `json:"metrics,omitempty"`
+	Patches       []Patch  `json:"patches"`
+	Errors        []struct {
 		HMessage string `json:"hmessage"`
 		Level    int    `json:"level"`
 	} `json:"errors"`
