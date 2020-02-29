@@ -20,6 +20,19 @@ type Artifact struct {
 	} `json:"metadata"`
 }
 
+type Check struct {
+	CheckSeq     string     `json:"check_seq"`
+	Artifacts    []Artifact `json:"artifacts"`
+	AnalyzerMeta struct {
+		Shortcode   string `json:"name"`
+		Command     string `json:"command"`
+		Version     string `json:"version"`
+		CPULimit    string `json:"cpu_limit"`
+		MemoryLimit string `json:"memory_limit"`
+	} `json:"analyzer_meta"`
+	Processors []string `json:"processors"`
+}
+
 // AnalysisRun type is the expected structure of a analysis run task
 // to be received
 type AnalysisRun struct {
@@ -39,18 +52,7 @@ type AnalysisRun struct {
 			Private string `json:"private"`
 		} `json:"ssh,omitempty"`
 	} `json:"keys"`
-	Checks []struct {
-		CheckSeq     string     `json:"check_seq"`
-		Artifacts    []Artifact `json:"artifacts"`
-		AnalyzerMeta struct {
-			Shortcode   string `json:"name"`
-			Command     string `json:"command"`
-			Version     string `json:"version"`
-			CPULimit    string `json:"cpu_limit"`
-			MemoryLimit string `json:"memory_limit"`
-		} `json:"analyzer_meta"`
-		Processors []string `json:"processors"`
-	} `json:"checks"`
+	Checks []Check `json:"checks"`
 }
 
 // CancelCheckRun type is the expected structure of a check cancellation
