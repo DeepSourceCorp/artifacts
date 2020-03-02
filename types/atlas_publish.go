@@ -25,15 +25,14 @@ type DiffMeta struct {
 	Deletions [][]int `json:"deletions"`
 }
 
+type Coordinate struct {
+	Line   int `json:"line"`
+	Column int `json:"column"`
+}
+
 type Position struct {
-	Begin struct {
-		Line   int `json:"line"`
-		Column int `json:"column"`
-	} `json:"begin"`
-	End struct {
-		Line   int `json:"line"`
-		Column int `json:"column"`
-	} `json:"end"`
+	Begin Coordinate `json:"begin"`
+	End   Coordinate `json:"end"`
 }
 
 type Location struct {
@@ -41,30 +40,25 @@ type Location struct {
 	Position Position `json:"position"`
 }
 
+type SourceCode struct {
+	Rendered string `json:"rendered"`
+}
+
+type ProcessedData struct {
+	SourceCode SourceCode `json:"source_code,omitempty"`
+}
+
 type Issue struct {
-	IssueCode     string   `json:"issue_code"`
-	IssueText     string   `json:"issue_text"`
-	Location      Location `json:"location"`
-	ProcessedData struct {
-		SourceCode struct {
-			Rendered string `json:"rendered"`
-		} `json:"source_code,omitempty"`
-	} `json:"processed_data,omitempty"`
+	IssueCode     string        `json:"issue_code"`
+	IssueText     string        `json:"issue_text"`
+	Location      Location      `json:"location"`
+	ProcessedData ProcessedData `json:"processed_data,omitempty"`
 }
 
 // Location of an issue
 type IssueLocation struct {
-	Path     string `json:"path"`
-	Position struct {
-		Begin struct {
-			Line   int `json:"line"`
-			Column int `json:"column"`
-		} `json:"begin"`
-		End struct {
-			Line   int `json:"line"`
-			Column int `json:"column"`
-		} `json:"end"`
-	} `json:"position"`
+	Path     string   `json:"path"`
+	Position Position `json:"position"`
 }
 
 type Namespace struct {
@@ -82,19 +76,21 @@ type AnalysisError struct {
 	Level    int    `json:"level"`
 }
 
+type FileMeta struct {
+	IfAll    bool                `json:"if_all"`
+	Deleted  []string            `json:"deleted"`
+	Renamed  []string            `json:"renamed"`
+	Modified []string            `json:"modified"`
+	DiffMeta map[string]DiffMeta `json:"diff_meta,omitempty"`
+}
+
 type AnalysisReport struct {
-	Issues   []Issue         `json:"issues"`
-	Metrics  []Metric        `json:"metrics,omitempty"`
-	IsPassed bool            `json:"is_passed"`
-	Errors   []AnalysisError `json:"errors"`
-	FileMeta struct {
-		IfAll    bool                `json:"if_all"`
-		Deleted  []string            `json:"deleted"`
-		Renamed  []string            `json:"renamed"`
-		Modified []string            `json:"modified"`
-		DiffMeta map[string]DiffMeta `json:"diff_meta,omitempty"`
-	} `json:"file_meta"`
-	ExtraData interface{} `json:"extra_data"`
+	Issues    []Issue         `json:"issues"`
+	Metrics   []Metric        `json:"metrics,omitempty"`
+	IsPassed  bool            `json:"is_passed"`
+	Errors    []AnalysisError `json:"errors"`
+	FileMeta  FileMeta        `json:"file_meta"`
+	ExtraData interface{}     `json:"extra_data"`
 }
 
 type Change struct {
@@ -108,17 +104,19 @@ type Patch struct {
 	Changes  []Change `json:"changes"`
 }
 
+type Error struct {
+	HMessage string `json:"hmessage"`
+	Level    int    `json:"level"`
+}
+
 type AutofixReport struct {
-	CodeDir       string   `json:"code_directory"`
-	ModifiedFiles []string `json:"modified_files"`
-	IssuesFixed   int      `json:"issues_fixed"`
-	Metrics       []Metric `json:"metrics,omitempty"`
-	Patches       []Patch  `json:"patches"`
-	Errors        []struct {
-		HMessage string `json:"hmessage"`
-		Level    int    `json:"level"`
-	} `json:"errors"`
-	ExtraData interface{} `json:"extra_data"`
+	CodeDir       string      `json:"code_directory"`
+	ModifiedFiles []string    `json:"modified_files"`
+	IssuesFixed   int         `json:"issues_fixed"`
+	Metrics       []Metric    `json:"metrics,omitempty"`
+	Patches       []Patch     `json:"patches"`
+	Errors        []Error     `json:"errors"`
+	ExtraData     interface{} `json:"extra_data"`
 }
 
 type AnalysisResult struct {
@@ -161,17 +159,19 @@ type CancelCheckResultCeleryTask struct {
 	Retries int               `json:"retries"`
 }
 
+type File struct {
+	Path int8 `json:"path"`
+	Q1   int8 `json:"q1"`
+	Q3   int8 `json:"q2"`
+	Q7   int8 `json:"q7"`
+	Q15  int8 `json:"q15"`
+	Q30  int8 `json:"q30"`
+	Q60  int8 `json:"q60"`
+	Q180 int8 `json:"a180"`
+}
+
 type BeaconResult struct {
-	Files []struct {
-		Path int8 `json:"path"`
-		Q1   int8 `json:"q1"`
-		Q3   int8 `json:"q2"`
-		Q7   int8 `json:"q7"`
-		Q15  int8 `json:"q15"`
-		Q30  int8 `json:"q30"`
-		Q60  int8 `json:"q60"`
-		Q180 int8 `json:"a180"`
-	} `json:"files"`
+	Files []File `json:"files"`
 }
 
 type BeaconStatusMsg struct {

@@ -1,5 +1,6 @@
 package types
 
+//proteus:generate
 type MarvinAnalysisConfig struct {
 	RunID             string   `toml:"runID"`
 	CheckSeq          string   `toml:"checkSeq"`
@@ -11,6 +12,7 @@ type MarvinAnalysisConfig struct {
 	Processors        []string `toml:"processors"`
 }
 
+//proteus:generate
 type MarvinAutofixConfig struct {
 	RunID             string `toml:"runID"`
 	AnalyzerShortcode string `toml:"analyzerShortcode"`
@@ -19,6 +21,7 @@ type MarvinAutofixConfig struct {
 	AutofixIssues     string `toml:"autofix_issues"`
 }
 
+//proteus:generate
 type AnalysisConfig struct {
 	Files           []string    `json:"files"`
 	ExcludePatterns []string    `json:"exclude_patterns"`
@@ -28,16 +31,19 @@ type AnalysisConfig struct {
 	AnalyzerMeta    interface{} `json:"analyzer_meta"`
 }
 
+//proteus:generate
 type AnalysisStateInfo struct {
 	IfAllFiles bool `json:"if_all_files"`
 }
 
 // Issues to be autofixed
+//proteus:generate
 type AutofixIssue struct {
 	IssueCode   string          `json:"issue_code"`
 	Occurrences []IssueLocation `json:"occurrences"`
 }
 
+//proteus:generate
 type AutofixConfig struct {
 	Issues []AutofixIssue `json:"issues"`
 }
