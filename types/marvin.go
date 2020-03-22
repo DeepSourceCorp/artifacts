@@ -46,4 +46,5 @@ type AutofixIssue struct {
 //proteus:generate
 type AutofixConfig struct {
 	Issues []AutofixIssue `json:"issues"`
+	Meta   interface{}    `json:"meta"`
 }
