@@ -71,6 +71,7 @@ type Check struct {
 type AnalysisRun struct {
 	RunID           string             `json:"run_id"`
 	RunSerial       string             `json:"run_serial"`
+	Config          DSConfig           `json:"config"`
 	DSConfigUpdated bool               `json:"ds_config_updated"`
 	VCSMeta         AnalysisRunVCSMeta `json:"vcs_meta"`
 	Keys            Keys               `json:"keys"`
@@ -104,6 +105,7 @@ type Autofixer struct {
 type AutofixRun struct {
 	RunID     string         `json:"run_id"`
 	RunSerial string         `json:"run_serial"`
+	Config    DSConfig       `json:"config"`
 	VCSMeta   AutofixVCSMeta `json:"vcs_meta"`
 	Keys      Keys           `json:"keys"`
 	Autofixer Autofixer      `json:"autofixer"`
