@@ -102,6 +102,7 @@ type Change struct {
 type Patch struct {
 	Filename string   `json:"filename"`
 	Changes  []Change `json:"changes"`
+	Action   string   `json:"action"`
 }
 
 type Error struct {
@@ -110,13 +111,13 @@ type Error struct {
 }
 
 type AutofixReport struct {
-	CodeDir       string      `json:"code_directory"`
-	ModifiedFiles []string    `json:"modified_files"`
-	IssuesFixed   int         `json:"issues_fixed"`
-	Metrics       []Metric    `json:"metrics,omitempty"`
-	Patches       []Patch     `json:"patches"`
-	Errors        []Error     `json:"errors"`
-	ExtraData     interface{} `json:"extra_data"`
+	CodeDir      string      `json:"code_directory,omitempty"`
+	ChangedFiles []string    `json:"changed_files,omitempty"`
+	IssuesFixed  int         `json:"issues_fixed"`
+	Metrics      []Metric    `json:"metrics,omitempty"`
+	Patches      []Patch     `json:"patches"`
+	Errors       []Error     `json:"errors"`
+	ExtraData    interface{} `json:"extra_data"`
 }
 
 type AnalysisResult struct {
