@@ -111,6 +111,35 @@ type AutofixRun struct {
 	Autofixer Autofixer      `json:"autofixer"`
 }
 
+type TransformerVCSMeta struct {
+	RemoteURL       string `json:"remote_url"`
+	BaseBranch      string `json:"base_branch"`
+	BaseOID         string `json:"base_oid"`
+	CheckoutOID     string `json:"checkout_oid"`
+	CloneSubmodules bool   `json:"clone_submodules"`
+}
+
+type TransformerMeta struct {
+	Version     string `json:"version"`
+	CPULimit    string `json:"cpu_limit"`
+	MemoryLimit string `json:"memory_limit"`
+}
+
+type TransformerInfo struct {
+	Command string          `json:"command"`
+	Tools   []string        `json:"tools"`
+	Meta    TransformerMeta `json:"meta"`
+}
+
+type TransformerRun struct {
+	RunID           string             `json:"run_id"`
+	RunSerial       string             `json:"run_serial"`
+	Config          DSConfig           `json:"config"`
+	VCSMeta         TransformerVCSMeta `json:"vcs_meta"`
+	DSConfigUpdated bool               `json:"ds_config_updated"`
+	Transformer     TransformerInfo    `json:"transformer"`
+}
+
 // CancelCheckRun type is the expected structure of a check cancellation
 // task to be recieved
 //proteus:generate
