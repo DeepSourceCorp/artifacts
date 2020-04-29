@@ -21,6 +21,15 @@ type MarvinAutofixConfig struct {
 	AutofixIssues     string `toml:"autofix_issues"`
 }
 
+type MarvinTransformerConfig struct {
+	RunID              string   `toml:"runID"`
+	BaseOID            string   `toml:"baseOID"`
+	CheckoutOID        string   `toml:"checkoutOID"`
+	TransformerCommand string   `toml:"transformerCommand"`
+	TransformerTools   []string `toml:"transformerTools"`
+	DSConfigUpdated    bool     `toml:"dsConfigUpdated"`
+}
+
 //proteus:generate
 type AnalysisConfig struct {
 	Files           []string    `json:"files"`
@@ -47,4 +56,11 @@ type AutofixIssue struct {
 type AutofixConfig struct {
 	Issues []AutofixIssue `json:"issues"`
 	Meta   interface{}    `json:"meta"`
+}
+
+type TransformerConfig struct {
+	ExcludePatterns []string `json:"exclude_patterns"`
+	ExcludeFiles    []string `json:"exclude_files"`
+	Files           []string `json:"files"`
+	Tools           []string `json:"tools"`
 }
