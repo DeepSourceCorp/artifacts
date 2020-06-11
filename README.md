@@ -2,6 +2,13 @@
 
 Contract definitions for services in DeepSource.
 
+### Error codes
+
+| Level   | Code |
+|---------|------|
+| ERROR   | 0    |
+| WARNING | 1    |
+
 ### Running tests
  - Install [uber/prototool](https://github.com/uber/prototool) and make sure it's available in your path.
  - Run `make test`.
