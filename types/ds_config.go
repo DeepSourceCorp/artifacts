@@ -10,9 +10,15 @@ type Analyzer struct {
 	Thresholds          interface{} `toml:"thresholds,omitempty" json:"thresholds,omitempty"`
 }
 
+type Transformer struct {
+	Name    string `toml:"name" json:"name"`
+	Enabled bool   `toml:"enabled" json:"enabled"`
+}
+
 type DSConfig struct {
-	Version         int        `toml:"version" json:"version"`
-	ExcludePatterns []string   `toml:"exclude_patterns,omitempty" json:"exclude_patterns,omitempty"`
-	TestPatterns    []string   `toml:"test_patterns,omitempty" json:"test_patterns,omitempty"`
-	Analyzers       []Analyzer `toml:"analyzers,omitempty" json:"analyzers,omitempty"`
+	Version         int           `toml:"version" json:"version"`
+	ExcludePatterns []string      `toml:"exclude_patterns,omitempty" json:"exclude_patterns,omitempty"`
+	TestPatterns    []string      `toml:"test_patterns,omitempty" json:"test_patterns,omitempty"`
+	Analyzers       []Analyzer    `toml:"analyzers,omitempty" json:"analyzers,omitempty"`
+	Transformers    []Transformer `toml:"transformers,omitempty" json:"transformers,omitempty"`
 }
