@@ -81,7 +81,7 @@ type FileMeta struct {
 	Deleted  []string            `json:"deleted"`
 	Renamed  []string            `json:"renamed"`
 	Modified []string            `json:"modified"`
-	Added    []string            `json:"addded"`
+	Added    []string            `json:"added"`
 	DiffMeta map[string]DiffMeta `json:"diff_meta,omitempty"`
 }
 
