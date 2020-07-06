@@ -111,14 +111,24 @@ type Error struct {
 	Level    int    `json:"level"`
 }
 
+type FixedIssue struct {
+	IssueCode string `json:"issue_code"`
+	Count     int    `json:"count"`
+}
+
+type IssuesFixed struct {
+	Filename    string       `json:"filename"`
+	FixedIssues []FixedIssue `json:"fixed_issues"`
+}
+
 type AutofixReport struct {
-	CodeDir      string      `json:"code_directory,omitempty"`
-	ChangedFiles []string    `json:"changed_files,omitempty"`
-	IssuesFixed  int         `json:"issues_fixed"`
-	Metrics      []Metric    `json:"metrics,omitempty"`
-	Patches      []Patch     `json:"patches"`
-	Errors       []Error     `json:"errors"`
-	ExtraData    interface{} `json:"extra_data"`
+	CodeDir      string        `json:"code_directory,omitempty"`
+	ChangedFiles []string      `json:"changed_files,omitempty"`
+	IssuesFixed  []IssuesFixed `json:"issues_fixed"`
+	Metrics      []Metric      `json:"metrics,omitempty"`
+	Patches      []Patch       `json:"patches"`
+	Errors       []Error       `json:"errors"`
+	ExtraData    interface{}   `json:"extra_data"`
 }
 
 type AnalysisResult struct {
