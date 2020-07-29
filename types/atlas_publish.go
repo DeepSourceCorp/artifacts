@@ -41,7 +41,7 @@ type Location struct {
 }
 
 type SourceCode struct {
-	Rendered []byte `json:"rendered"`
+	Identifier string `json:"identifier"`
 }
 
 type ProcessedData struct {
