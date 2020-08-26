@@ -61,10 +61,16 @@ type AnalyzerMeta struct {
 
 //proteus:generate
 type Check struct {
-	CheckSeq     string       `json:"check_seq"`
-	Artifacts    []Artifact   `json:"artifacts"`
-	AnalyzerMeta AnalyzerMeta `json:"analyzer_meta"`
-	Processors   []string     `json:"processors"`
+	CheckSeq        string           `json:"check_seq"`
+	Artifacts       []Artifact       `json:"artifacts"`
+	AnalyzerMeta    AnalyzerMeta     `json:"analyzer_meta"`
+	Processors      []string         `json:"processors"`
+	DiffMetaCommits []DiffMetaCommit `json:"diff_meta_commits"`
+}
+
+type DiffMetaCommit struct {
+	CommitOID string   `json:"commit_oid" toml:"commitOID"`
+	Paths     []string `json:"paths" toml:"paths"`
 }
 
 //proteus:generate

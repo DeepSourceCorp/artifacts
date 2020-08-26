@@ -2,14 +2,15 @@ package types
 
 //proteus:generate
 type MarvinAnalysisConfig struct {
-	RunID             string   `toml:"runID"`
-	CheckSeq          string   `toml:"checkSeq"`
-	AnalyzerShortcode string   `toml:"analyzerShortcode"`
-	AnalyzerCommand   string   `toml:"analyzerCommand"`
-	BaseOID           string   `toml:"baseOID"`
-	CheckoutOID       string   `toml:"checkoutOID"`
-	DSConfigUpdated   bool     `toml:"dsConfigUpdated"`
-	Processors        []string `toml:"processors"`
+	RunID             string           `toml:"runID"`
+	CheckSeq          string           `toml:"checkSeq"`
+	AnalyzerShortcode string           `toml:"analyzerShortcode"`
+	AnalyzerCommand   string           `toml:"analyzerCommand"`
+	BaseOID           string           `toml:"baseOID"`
+	CheckoutOID       string           `toml:"checkoutOID"`
+	DSConfigUpdated   bool             `toml:"dsConfigUpdated"`
+	Processors        []string         `toml:"processors"`
+	DiffMetaCommits   []DiffMetaCommit `toml:"diffMetaCommits"`
 }
 
 //proteus:generate
