@@ -16,6 +16,7 @@ type MarvinAnalysisConfig struct {
 //proteus:generate
 type MarvinInstantRunConfig struct {
 	RunID             string `toml:"runID"`
+	CheckSeq          string `toml:"checkSeq"`
 	AnalyzerShortcode string `toml:"analyzerShortcode"`
 	AnalyzerCommand   string `toml:"analyzerCommand"`
 	SourceCode        string `toml:"sourceCode"`
