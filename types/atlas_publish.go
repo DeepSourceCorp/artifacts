@@ -148,9 +148,10 @@ type AnalysisResult struct {
 }
 
 type InstantRunResult struct {
-	RunID  string           `json:"run_id"`
-	Status Status           `json:"status"`
-	Report InstantRunReport `json:"report"`
+	RunID    string           `json:"run_id"`
+	Status   Status           `json:"status"`
+	Checkseq string           `json:"check_seq"`
+	Report   InstantRunReport `json:"report"`
 }
 
 type AutofixResult struct {

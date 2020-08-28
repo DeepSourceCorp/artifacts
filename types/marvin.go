@@ -19,6 +19,7 @@ type MarvinInstantRunConfig struct {
 	AnalyzerShortcode string `toml:"analyzerShortcode"`
 	AnalyzerCommand   string `toml:"analyzerCommand"`
 	SourceCode        string `toml:"sourceCode"`
+	FileExt           string `toml:"file_ext"`
 }
 
 //proteus:generate

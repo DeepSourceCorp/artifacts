@@ -89,6 +89,7 @@ type InstantRun struct {
 	RunID        string       `json:"run_id"`
 	AnalyzerMeta AnalyzerMeta `json:"analyzer_meta"`
 	SourceCode   string       `json:"source_code"`
+	FileExt      string       `json:"file_ext"`
 }
 
 //proteus:generate
