@@ -97,6 +97,12 @@ type AnalysisReport struct {
 	ExtraData interface{}     `json:"extra_data"`
 }
 
+type InstantRunReport struct {
+	Issues   []Issue         `json:"issue"`
+	Errors   []AnalysisError `json:"errors"`
+	IsPassed bool            `json:"is_passed"`
+}
+
 type Change struct {
 	BeforeHTML string `json:"before_html"`
 	AfterHTML  string `json:"after_html"`
@@ -141,6 +147,12 @@ type AnalysisResult struct {
 	Report   AnalysisReport `json:"report"`
 }
 
+type InstantRunResult struct {
+	RunID  string           `json:"run_id"`
+	Status Status           `json:"status"`
+	Report InstantRunReport `json:"report"`
+}
+
 type AutofixResult struct {
 	RunID    string        `json:"run_id"`
 	Status   Status        `json:"status"`
@@ -166,6 +178,13 @@ type AnalysisResultCeleryTask struct {
 	Task    string         `json:"task"`
 	KWArgs  AnalysisResult `json:"kwargs"`
 	Retries int            `json:"retries"`
+}
+
+type InstantRunResultCeleryTask struct {
+	ID      string        `json:"id"`
+	Task    string        `json:"task"`
+	KWArgs  AutofixResult `json:"kwargs"`
+	Retries int           `json:"retries"`
 }
 
 type AutofixResultCeleryTask struct {

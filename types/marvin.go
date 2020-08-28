@@ -14,6 +14,14 @@ type MarvinAnalysisConfig struct {
 }
 
 //proteus:generate
+type MarvinInstantRunConfig struct {
+	RunID             string `toml:"runID"`
+	AnalyzerShortcode string `toml:"analyzerShortcode"`
+	AnalyzerCommand   string `toml:"analyzerCommand"`
+	SourceCode        string `toml:"sourceCode"`
+}
+
+//proteus:generate
 type MarvinAutofixConfig struct {
 	RunID             string `toml:"runID"`
 	AnalyzerShortcode string `toml:"analyzerShortcode"`
