@@ -84,6 +84,15 @@ type AnalysisRun struct {
 	Checks          []Check            `json:"checks"`
 }
 
+//proto:generate
+type InstantRun struct {
+	RunID        string       `json:"run_id"`
+	Config       DSConfig     `json:"config"`
+	AnalyzerMeta AnalyzerMeta `json:"analyzer_meta"`
+	SourceCode   string       `json:"source_code"`
+	FileExt      string       `json:"file_ext"`
+}
+
 //proteus:generate
 type AutofixVCSMeta struct {
 	RemoteURL       string `json:"remote_url"`
