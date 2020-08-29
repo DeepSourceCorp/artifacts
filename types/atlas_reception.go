@@ -162,6 +162,18 @@ type CancelCheckRun struct {
 	RunSerial    string                  `json:"run_serial"`
 }
 
+type LocalRunAnalyzer struct {
+	Command   string `json:"command"`
+	Shortcode string `json:"shortcode"`
+}
+
+type LocalRun struct {
+	RunID    string           `json:"run_id"`
+	Config   DSConfig         `json:"config"`
+	FilesURL string           `json:"files_url"`
+	Analyzer LocalRunAnalyzer `json:"analyzer"`
+}
+
 // Beacon type is the expected structure of a beacon task
 // to be received
 //proteus:generate

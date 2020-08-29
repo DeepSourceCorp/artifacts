@@ -31,6 +31,13 @@ type MarvinTransformerConfig struct {
 	DSConfigUpdated    bool     `toml:"dsConfigUpdated"`
 }
 
+type MarvinLocalRunConfig struct {
+	RunID             string `toml:"runID"`
+	AnalyzerCommand   string `toml:"analyzerCommand"`
+	AnalyzerShortcode string `toml:"analyzerShortcode"`
+	FilesURL          string `toml:"filesURL"`
+}
+
 //proteus:generate
 type AnalysisConfig struct {
 	Files           []string    `json:"files"`
