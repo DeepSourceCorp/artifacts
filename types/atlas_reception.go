@@ -15,17 +15,11 @@ type RepoRun struct {
 	VCSMeta   RepoRunVCSMeta `json:"vcs_meta"`
 }
 
-// Artifact is data sent via CLI and stored in s3
-//proteus:generate
-type Metadata struct {
-	WorkDir string `json:"workDir"`
-}
-
 //proteus:generate
 type Artifact struct {
-	Key      string   `json:"key"`
-	URL      string   `json:"url"`
-	Metadata Metadata `json:"metadata"`
+	Key      string            `json:"key"`
+	URL      string            `json:"url"`
+	Metadata map[string]string `json:"metadata"`
 }
 
 // AnalysisRun type is the expected structure of a analysis run task
