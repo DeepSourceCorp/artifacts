@@ -8,6 +8,7 @@ Contract definitions for services in DeepSource.
 |---------|------|
 | ERROR   | 0    |
 | WARNING | 1    |
+| INFO    | 2    |
 
 ### Running tests
  - Install [uber/prototool](https://github.com/uber/prototool) and make sure it's available in your path.
