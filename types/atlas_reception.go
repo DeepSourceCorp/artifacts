@@ -46,11 +46,12 @@ type Keys struct {
 
 //proteus:generate
 type AnalyzerMeta struct {
-	Shortcode   string `json:"name"`
-	Command     string `json:"command"`
-	Version     string `json:"version"`
-	CPULimit    string `json:"cpu_limit"`
-	MemoryLimit string `json:"memory_limit"`
+	Shortcode    string `json:"name"`
+	AnalyzerType string `json:"analyzer_type"`
+	Command      string `json:"command"`
+	Version      string `json:"version"`
+	CPULimit     string `json:"cpu_limit"`
+	MemoryLimit  string `json:"memory_limit"`
 }
 
 //proteus:generate
