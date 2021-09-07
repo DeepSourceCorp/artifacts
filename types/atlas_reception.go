@@ -77,6 +77,7 @@ type AnalysisRun struct {
 	VCSMeta         AnalysisRunVCSMeta `json:"vcs_meta"`
 	Keys            Keys               `json:"keys"`
 	Checks          []Check            `json:"checks"`
+	Meta            map[string]string  `json:"_meta"`
 }
 
 //proteus:generate
@@ -104,12 +105,13 @@ type Autofixer struct {
 
 //proteus:generate
 type AutofixRun struct {
-	RunID     string         `json:"run_id"`
-	RunSerial string         `json:"run_serial"`
-	Config    DSConfig       `json:"config"`
-	VCSMeta   AutofixVCSMeta `json:"vcs_meta"`
-	Keys      Keys           `json:"keys"`
-	Autofixer Autofixer      `json:"autofixer"`
+	RunID     string            `json:"run_id"`
+	RunSerial string            `json:"run_serial"`
+	Config    DSConfig          `json:"config"`
+	VCSMeta   AutofixVCSMeta    `json:"vcs_meta"`
+	Keys      Keys              `json:"keys"`
+	Autofixer Autofixer         `json:"autofixer"`
+	Meta      map[string]string `json:"_meta"`
 }
 
 type TransformerVCSMeta struct {
@@ -139,6 +141,7 @@ type TransformerRun struct {
 	VCSMeta         TransformerVCSMeta `json:"vcs_meta"`
 	DSConfigUpdated bool               `json:"ds_config_updated"`
 	Transformer     TransformerInfo    `json:"transformer"`
+	Meta            map[string]string  `json:"_meta"`
 }
 
 // CancelCheckRun type is the expected structure of a check cancellation
