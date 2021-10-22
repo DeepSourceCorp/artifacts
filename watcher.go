@@ -10,7 +10,7 @@ import (
 
 // Watches the broker config for any "WRITE" events
 // Exits with status code 1 after any changes to config
-func watchBrokerConfigForChanges(filePath string, reloadFunc func() error) {
+func WatchBrokerConfigForChanges(filePath string, reloadFunc func() error) {
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
 		log.Println(err)
