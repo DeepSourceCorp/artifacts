@@ -12,6 +12,18 @@ import (
 	"github.com/getsentry/sentry-go"
 )
 
+// Returns bearer token that is used to authenticate while
+// interacting with the k8s REST API
+// Utilized by janus and atlas.
+func GetNewBearerToken(tokenFilePath string) (string, error) {
+	authToken, err := ioutil.ReadFile(tokenFilePath)
+	if err != nil {
+		return "", err
+	}
+	bearer := "Bearer " + string(authToken)
+	return bearer, nil
+}
+
 // Utility function to retry any routine
 func Retry(attempts int, sleep time.Duration, f func() error) (err error) {
 	for i := 0; ; i++ {
