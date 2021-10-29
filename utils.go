@@ -1,8 +1,10 @@
 package artifacts
 
 import (
+	"bytes"
 	"crypto/tls"
 	"crypto/x509"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -142,4 +144,42 @@ func WatchBrokerConfigForChanges(filePath string, reloadFunc func() error) {
 		sentry.CaptureException(err)
 	}
 	<-done
+}
+
+// Utility to do a rolling restart deployment of a kubernetes pod
+func TriggerDeploymentRestart(auth bool, podName, patchData, baseURL, tokenPath string, httpClient *http.Client) error {
+	// Configuring the request
+	restartDeploymentRequest, _ := http.NewRequest("PATCH", baseURL+"/apis/apps/v1/namespaces/default/deployments/"+podName, bytes.NewBuffer([]byte(patchData)))
+	restartDeploymentRequest.Header.Set("Content-Type", "application/strategic-merge-patch+json")
+
+	// If auth is true, set Authorization header
+	if auth {
+		bearer, err := GetNewBearerToken(tokenPath)
+		if err != nil {
+			log.Println(err)
+			return err
+		}
+		restartDeploymentRequest.Header.Add("Authorization", bearer)
+	}
+
+	// If not, try anyways without the Bearer Token in the Header
+	err := Retry(5, 2*time.Second, func() (err error) {
+		restartDeploymentResponse, err := httpClient.Do(restartDeploymentRequest)
+		if err != nil {
+			log.Println(err)
+			return err
+		}
+		if restartDeploymentResponse.StatusCode != 200 && restartDeploymentResponse.StatusCode != 201 {
+			responseBody, _ := ioutil.ReadAll(restartDeploymentResponse.Body)
+			log.Println(string(responseBody))
+			return errors.New("Unable to create a kubernetes job")
+		}
+		defer restartDeploymentResponse.Body.Close()
+		return nil
+	})
+	if err != nil {
+		log.Print(err.Error())
+		return err
+	}
+	return nil
 }
