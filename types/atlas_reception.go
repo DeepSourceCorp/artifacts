@@ -144,6 +144,18 @@ type TransformerRun struct {
 	Meta            map[string]string  `json:"_meta"`
 }
 
+type GSRMeta struct {
+	RemoteURL string `json:"remote_url"`
+	Port      string `json:"port"`
+}
+
+type GSRVerifyRun struct {
+	RunID     string  `json:"run_id"`
+	RunSerial string  `json:"run_serial"`
+	Keys      Keys    `json:"keys"`
+	Meta      GSRMeta `json:"gsr_meta"`
+}
+
 // CancelCheckRun type is the expected structure of a check cancellation
 // task to be recieved
 //proteus:generate
