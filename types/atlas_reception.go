@@ -165,7 +165,7 @@ type GSRVerifyResult struct {
 type GSRVerifyResultCeleryTask struct {
 	ID      string          `json:"id"`
 	Task    string          `json:"task"`
-	Kwargs  GSRVerifyResult `json:"kwargs"`
+	KWargs  GSRVerifyResult `json:"kwargs"`
 	Retries int             `json:"retries"`
 }
 
