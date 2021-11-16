@@ -145,6 +145,7 @@ type TransformerRun struct {
 }
 
 type GSRMeta struct {
+	User      string `json:"user"`
 	RemoteURL string `json:"remote_url"`
 	Port      string `json:"port"`
 }
