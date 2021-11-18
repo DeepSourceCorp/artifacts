@@ -151,15 +151,14 @@ type GSRMeta struct {
 }
 
 type GSRVerifyRun struct {
-	RunID     string  `json:"run_id"`
-	RunSerial string  `json:"run_serial"`
-	Keys      Keys    `json:"keys"`
-	Meta      GSRMeta `json:"gsr_meta"`
+	RunID  string  `json:"run_id"`
+	SSHKey string  `json:"ssh_key"`
+	Meta   GSRMeta `json:"gsr_meta"`
 }
 
 type GSRVerifyResult struct {
 	RunID  string `json:"run_id"`
-	Status Status `json:"status"`
+	Status int    `json:"status"`
 }
 
 type GSRVerifyResultCeleryTask struct {
