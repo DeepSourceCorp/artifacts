@@ -150,22 +150,22 @@ type SSHMeta struct {
 	Port      string `json:"port"`
 }
 
-type SSHKeyVerifyRun struct {
+type SSHVerifyRun struct {
 	RunID  string  `json:"run_id"`
 	SSHKey string  `json:"ssh_key"`
 	Meta   SSHMeta `json:"ssh_meta"`
 }
 
-type SSHKeyVerifyResult struct {
+type SSHVerifyResult struct {
 	RunID  string `json:"run_id"`
 	Status int    `json:"status"`
 }
 
-type SSHKeyVerifyResultCeleryTask struct {
-	ID      string             `json:"id"`
-	Task    string             `json:"task"`
-	KWArgs  SSHKeyVerifyResult `json:"kwargs"`
-	Retries int                `json:"retries"`
+type SSHVerifyResultCeleryTask struct {
+	ID      string          `json:"id"`
+	Task    string          `json:"task"`
+	KWArgs  SSHVerifyResult `json:"kwargs"`
+	Retries int             `json:"retries"`
 }
 
 // CancelCheckRun type is the expected structure of a check cancellation
