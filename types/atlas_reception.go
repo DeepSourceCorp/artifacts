@@ -144,28 +144,28 @@ type TransformerRun struct {
 	Meta            map[string]string  `json:"_meta"`
 }
 
-type GSRMeta struct {
+type SSHMeta struct {
 	User      string `json:"user"`
 	RemoteURL string `json:"remote_url"`
 	Port      string `json:"port"`
 }
 
-type GSRVerifyRun struct {
+type SSHKeyVerifyRun struct {
 	RunID  string  `json:"run_id"`
 	SSHKey string  `json:"ssh_key"`
-	Meta   GSRMeta `json:"gsr_meta"`
+	Meta   SSHMeta `json:"ssh_meta"`
 }
 
-type GSRVerifyResult struct {
+type SSHKeyVerifyResult struct {
 	RunID  string `json:"run_id"`
 	Status int    `json:"status"`
 }
 
-type GSRVerifyResultCeleryTask struct {
-	ID      string          `json:"id"`
-	Task    string          `json:"task"`
-	KWArgs  GSRVerifyResult `json:"kwargs"`
-	Retries int             `json:"retries"`
+type SSHKeyVerifyResultCeleryTask struct {
+	ID      string             `json:"id"`
+	Task    string             `json:"task"`
+	KWArgs  SSHKeyVerifyResult `json:"kwargs"`
+	Retries int                `json:"retries"`
 }
 
 // CancelCheckRun type is the expected structure of a check cancellation
