@@ -146,8 +146,9 @@ type TransformerRun struct {
 
 type SSHMeta struct {
 	User      string `json:"user"`
-	RemoteURL string `json:"remote_url"`
 	Port      string `json:"port"`
+	HostKey   string `json:"host_key"`
+	RemoteURL string `json:"remote_url"`
 }
 
 type SSHVerifyRun struct {
