@@ -144,6 +144,30 @@ type TransformerRun struct {
 	Meta            map[string]string  `json:"_meta"`
 }
 
+type SSHMeta struct {
+	User      string `json:"user"`
+	Port      string `json:"port"`
+	RemoteURL string `json:"remote_url"`
+}
+
+type SSHVerifyRun struct {
+	RunID string  `json:"run_id"`
+	Keys  Keys    `json:"keys"`
+	Meta  SSHMeta `json:"ssh_meta"`
+}
+
+type SSHVerifyResult struct {
+	RunID  string `json:"run_id"`
+	Status int    `json:"status"`
+}
+
+type SSHVerifyResultCeleryTask struct {
+	ID      string          `json:"id"`
+	Task    string          `json:"task"`
+	KWArgs  SSHVerifyResult `json:"kwargs"`
+	Retries int             `json:"retries"`
+}
+
 // CancelCheckRun type is the expected structure of a check cancellation
 // task to be recieved
 //proteus:generate
