@@ -42,8 +42,9 @@ type IssueLocation struct {
 }
 
 type Namespace struct {
-	Key   string  `json:"key"`
-	Value float64 `json:"value"`
+	Key       string      `json:"key"`
+	Value     float64     `json:"value"`
+	ExtraData interface{} `json:"extra_data,omitempty"`
 }
 
 type Metric struct {
