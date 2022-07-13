@@ -47,6 +47,7 @@ type Keys struct {
 //proteus:generate
 type AnalyzerMeta struct {
 	Shortcode    string `json:"name"`
+	ImagePath    string `json:"image_path"`
 	AnalyzerType string `json:"analyzer_type"`
 	Command      string `json:"command"`
 	Version      string `json:"version"`
