@@ -110,6 +110,7 @@ type MarvinAnalysisConfig struct {
 	CheckSeq          string           `toml:"checkSeq"`
 	AnalyzerShortcode string           `toml:"analyzerShortcode"`
 	AnalyzerCommand   string           `toml:"analyzerCommand"`
+	AnalyzerType      string           `toml:"analyzerType"`
 	BaseOID           string           `toml:"baseOID"`
 	CheckoutOID       string           `toml:"checkoutOID"`
 	DSConfigUpdated   bool             `toml:"dsConfigUpdated"`
