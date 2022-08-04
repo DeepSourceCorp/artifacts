@@ -4,9 +4,14 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/getsentry/sentry-go"
 	"github.com/streadway/amqp"
 )
 
+var ConsumerChannelActive = true
+
+// SetupRMQConnection sets up the RabbitMQ connection and channels. It also spawns a goroutine that listens for any
+// "Close" events from the broker.
 func SetupRMQConnection(retryFunc func() error, exchangeName, exchangeType string) (*amqp.Connection, *amqp.Channel, error) {
 	// Establish connection with RabbitMQ
 	rmqConn, err := dialRMQ()
@@ -14,7 +19,7 @@ func SetupRMQConnection(retryFunc func() error, exchangeName, exchangeType strin
 		return nil, nil, err
 	}
 
-	// Spawn a goroutine to handle any RabbitMQ related errors
+	// Spawn a goroutine to handle any RabbitMQ related errors.
 	go handleRabbitMQErrors(rmqConn, retryFunc)
 
 	// Create Channel
@@ -26,7 +31,7 @@ func SetupRMQConnection(retryFunc func() error, exchangeName, exchangeType strin
 	return rmqConn, rmqChannel, declareRealtimeExchange(rmqChannel, exchangeName, exchangeType)
 }
 
-// Open channel with janus virtualhost connection
+// createChannel opens channel with janus virtualhost connection.
 func createChannel(rmqConn *amqp.Connection) (*amqp.Channel, error) {
 	rmqChan, err := rmqConn.Channel()
 	return rmqChan, err
@@ -34,9 +39,7 @@ func createChannel(rmqConn *amqp.Connection) (*amqp.Channel, error) {
 
 // Declare exchange `janus-realtime-notifications` to listen for realtime notification pushes from asgard
 func declareRealtimeExchange(rmqChan *amqp.Channel, exchangeName, exchangeType string) (err error) {
-	err = rmqChan.ExchangeDeclare(
-		// viper.GetString("rmq.realtimeExchange"),     // name of the exchange
-		// viper.GetString("rmq.realtimeExchangeType"), // type
+	if err = rmqChan.ExchangeDeclare(
 		exchangeName, // name of the exchange
 		exchangeType, // type
 		true,         // durable
@@ -44,27 +47,28 @@ func declareRealtimeExchange(rmqChan *amqp.Channel, exchangeName, exchangeType s
 		false,        // internal
 		false,        // noWait
 		nil,          // arguments
-	)
-	if err != nil {
+	); err != nil {
 		return fmt.Errorf("Error declaring exchange: janus-realtime-notifications on vhost: janus. Error: %s", err)
 	}
 	return nil
 }
 
-// Looks out for any RabbitMQ errors/closure and re-establishes connection
-// and initializes the realtime consumer
+// handleRabbitMQErrors looks out for any RabbitMQ errors/closure and re-establishes connection
+// and initializes the realtime consumer.
 func handleRabbitMQErrors(rmqConn *amqp.Connection, consumerInitFn func() error) {
 	rmqError := <-rmqConn.NotifyClose(make(chan *amqp.Error))
-	if rmqError == nil {
-		return
+	rmqCloseErr := fmt.Errorf("RabbitMQ connection closed")
+
+	// RabbitMQ connection closure triggered. Log and send a sentry alert.
+	if rmqError != nil {
+		rmqCloseErr = fmt.Errorf("RMQ Connection closed. Code: %d: Reason: %s", rmqError.Code, rmqError.Reason)
 	}
-	// RabbitMQ connection closure triggered. Log and send a sentry alert
-	rmqCloseErr := fmt.Errorf("RMQ Connection closed. Code: %d: Reason: %s", rmqError.Code, rmqError.Reason)
 	log.Println(rmqCloseErr)
+	sentry.CaptureException(rmqCloseErr)
 
 	// Check if the error is a "ConnectionError" or a "ChannelError".
-	// Other error codes don't trigger retrial
-	if isBrokerError(rmqError.Code) {
+	// Other error codes don't trigger retrial.
+	if !ConsumerChannelActive || rmqError != nil && isBrokerError(rmqError.Code) {
 		for {
 			if retryError := retryBrokerConnections(consumerInitFn); retryError == nil {
 				break
@@ -73,6 +77,7 @@ func handleRabbitMQErrors(rmqConn *amqp.Connection, consumerInitFn func() error)
 	}
 }
 
+// retryBrokerConnections retries broker connection function once the broker error/closure is detected.
 func retryBrokerConnections(consumerSetupFn func() error) error {
 	// Setup consumers
 	if reloadErr := consumerSetupFn(); reloadErr != nil {
@@ -83,6 +88,7 @@ func retryBrokerConnections(consumerSetupFn func() error) error {
 	return nil
 }
 
+// isBrokerError checks if the error code is a signifact broker error to re-establish connection and channel.
 func isBrokerError(code int) bool {
 	switch code {
 	case
@@ -109,7 +115,6 @@ func isBrokerError(code int) bool {
 		540, // amqp.NotImplemented
 		541: // amqp.InternalError
 		return true
-
 	default:
 		return false
 	}
