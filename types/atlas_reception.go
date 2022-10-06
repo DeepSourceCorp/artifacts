@@ -72,6 +72,11 @@ type DiffMetaCommit struct {
 	Paths     []string `json:"paths" toml:"paths"`
 }
 
+type Meta struct {
+	RepositoryID int    `json:"repository_id"`
+	OwnerPlan    string `json:"owner_plan"`
+}
+
 //proteus:generate
 type AnalysisRun struct {
 	RunID           string             `json:"run_id"`
@@ -81,7 +86,7 @@ type AnalysisRun struct {
 	VCSMeta         AnalysisRunVCSMeta `json:"vcs_meta"`
 	Keys            Keys               `json:"keys"`
 	Checks          []Check            `json:"checks"`
-	Meta            map[string]string  `json:"_meta"`
+	Meta            Meta               `json:"_meta"`
 }
 
 //proteus:generate
