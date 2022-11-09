@@ -2,6 +2,7 @@ package types
 
 // RepoRun type is the expected structure of a repo run task
 // to be received
+//
 //proteus:generate
 type RepoRunVCSMeta struct {
 	RemoteURL   string `json:"remote_url"`
@@ -24,13 +25,15 @@ type Artifact struct {
 
 // AnalysisRun type is the expected structure of a analysis run task
 // to be received
+//
 //proteus:generate
 type AnalysisRunVCSMeta struct {
-	RemoteURL       string `json:"remote_url"`
-	BaseBranch      string `json:"base_branch"`
-	BaseOID         string `json:"base_oid"`
-	CheckoutOID     string `json:"checkout_oid"`
-	CloneSubmodules bool   `json:"clone_submodules"`
+	RemoteURL                  string `json:"remote_url"`
+	BaseBranch                 string `json:"base_branch"`
+	BaseOID                    string `json:"base_oid"`
+	CheckoutOID                string `json:"checkout_oid"`
+	IsForDefaultAnalysisBranch bool   `json:"is_for_default_analysis_branch"`
+	CloneSubmodules            bool   `json:"clone_submodules"`
 }
 
 //proteus:generate
@@ -171,6 +174,7 @@ type SSHVerifyResultCeleryTask struct {
 
 // CancelCheckRun type is the expected structure of a check cancellation
 // task to be recieved
+//
 //proteus:generate
 type CancelCheckAnalysisMeta struct {
 	RunID     string `json:"run_id"`
@@ -187,6 +191,7 @@ type CancelCheckRun struct {
 
 // Beacon type is the expected structure of a beacon task
 // to be received
+//
 //proteus:generate
 type BeaconRun struct {
 	RunID        string `json:"run_id"`
