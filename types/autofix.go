@@ -47,6 +47,7 @@ type AutofixResultCeleryTask struct {
 }
 
 // Issues to be autofixed
+//
 //proteus:generate
 type AutofixIssue struct {
 	IssueCode   string          `json:"issue_code"`
