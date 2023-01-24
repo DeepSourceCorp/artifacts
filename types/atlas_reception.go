@@ -73,8 +73,7 @@ type DiffMetaCommit struct {
 }
 
 type Meta struct {
-	RepositoryID int    `json:"repository_id"`
-	OwnerPlan    string `json:"owner_plan"`
+	ResourcePool string `json:"resource_pool"`
 }
 
 //proteus:generate
