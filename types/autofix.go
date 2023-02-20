@@ -67,6 +67,7 @@ type MarvinAutofixConfig struct {
 	AutofixerCommand  string `toml:"autofixerCommand"`
 	CheckoutOID       string `toml:"checkoutOID"`
 	AutofixIssues     string `toml:"autofix_issues"`
+	BaseBranch        string `toml:"baseBranch"`
 }
 
 // Transformers
