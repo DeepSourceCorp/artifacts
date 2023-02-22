@@ -56,6 +56,7 @@ type AnalyzerMeta struct {
 	Version      string `json:"version"`
 	CPULimit     string `json:"cpu_limit"`
 	MemoryLimit  string `json:"memory_limit"`
+	CacheVersion int    `json:"cache_version"`
 }
 
 //proteus:generate
