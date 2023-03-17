@@ -27,12 +27,14 @@ type RabbitMQOpts struct {
 	URL        string
 	Exchange   string
 	RoutingKey string
+	Compress   bool
 }
 
 type RabbitMQ struct {
 	publisher  rabbitroutine.Publisher
 	exchange   string
 	routingKey string
+	compress   bool
 }
 
 var connector = rabbitroutine.NewConnector(rabbitroutine.Config{
@@ -54,6 +56,7 @@ func NewRabbitMQPublisher(ctx context.Context, opts *RabbitMQOpts) Publisher {
 		publisher:  rabbitroutinePublisher,
 		exchange:   opts.Exchange,
 		routingKey: opts.RoutingKey,
+		compress:   opts.Compress,
 	}
 }
 
@@ -63,15 +66,23 @@ func (r *RabbitMQ) Publish(ctx context.Context, payload Payload) error {
 		log.Println("error while compressing payload before publishing to RabbitMQ", err)
 		return err
 	}
+
+	message := amqp.Publishing{
+		DeliveryMode: amqp.Transient,
+		ContentType:  RabbitMQContentType,
+		Body:         body,
+	}
+
+	if r.compress {
+		message.Headers = amqp.Table{
+			RabbitMQCompressionHeader: RabbitMQCompressionZstd,
+		}
+	}
+
 	if err := r.publisher.Publish(ctx,
 		r.exchange,   // Exchange
 		r.routingKey, // Routing key
-		amqp.Publishing{
-			Headers:      amqp.Table{RabbitMQCompressionHeader: RabbitMQCompressionZstd},
-			DeliveryMode: amqp.Transient,
-			ContentType:  RabbitMQContentType,
-			Body:         body,
-		},
+		message,
 	); err != nil {
 		log.Println("error while publishing to RabbitMQ", err)
 		return err
