@@ -115,6 +115,7 @@ type MarvinAnalysisConfig struct {
 	CheckoutOID                string           `toml:"checkoutOID"`
 	IsForDefaultAnalysisBranch bool             `toml:"isForDefaultAnalysisBranch"`
 	DSConfigUpdated            bool             `toml:"dsConfigUpdated"`
+	IsIDE                      bool             `toml:"is_ide"`
 	Processors                 []string         `toml:"processors"`
 	DiffMetaCommits            []DiffMetaCommit `toml:"diffMetaCommits"`
 }
