@@ -31,4 +31,5 @@ type AnalysisConfig struct {
 	TestFiles       []string    `json:"test_files"`
 	TestPatterns    []string    `json:"test_patterns"`
 	AnalyzerMeta    interface{} `json:"analyzer_meta"`
+	IsIDE           bool        `json:"is_ide"`
 }
