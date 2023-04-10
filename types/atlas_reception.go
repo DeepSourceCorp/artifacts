@@ -34,6 +34,10 @@ type AnalysisRunVCSMeta struct {
 	CheckoutOID                string `json:"checkout_oid"`
 	IsForDefaultAnalysisBranch bool   `json:"is_for_default_analysis_branch"`
 	CloneSubmodules            bool   `json:"clone_submodules"`
+
+	// IDE
+	GitPatch string `json:"git_patch"`
+	IsIDE    bool   `json:"is_ide"`
 }
 
 //proteus:generate
