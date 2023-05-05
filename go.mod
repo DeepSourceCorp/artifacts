@@ -3,6 +3,7 @@ module github.com/deepsourcelabs/artifacts
 go 1.13
 
 require (
+	cloud.google.com/go/storage v1.30.1
 	github.com/fsnotify/fsnotify v1.6.0
 	github.com/furdarius/rabbitroutine v0.8.0
 	github.com/getsentry/sentry-go v0.20.0
@@ -12,4 +13,5 @@ require (
 	golang.org/x/exp v0.0.0-20230425010034-47ecfdc1ba53
 	golang.org/x/sys v0.8.0 // indirect
 	golang.org/x/text v0.9.0 // indirect
+	google.golang.org/api v0.114.0
 )

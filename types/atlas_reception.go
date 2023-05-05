@@ -126,6 +126,11 @@ type TransformerVCSMeta struct {
 	BaseOID         string `json:"base_oid"`
 	CheckoutOID     string `json:"checkout_oid"`
 	CloneSubmodules bool   `json:"clone_submodules"`
+
+	// Runner related data to help marvin push Transformer commit.
+	PushBranchName    string `json:"commit_branch"`
+	CommitAuthor      string `json:"commit_author"`
+	CommitAuthorEmail string `json:"commit_author_email"`
 }
 
 type TransformerMeta struct {
@@ -141,13 +146,14 @@ type TransformerInfo struct {
 }
 
 type TransformerRun struct {
-	RunID           string             `json:"run_id"`
-	RunSerial       string             `json:"run_serial"`
-	Config          DSConfig           `json:"config"`
-	VCSMeta         TransformerVCSMeta `json:"vcs_meta"`
-	DSConfigUpdated bool               `json:"ds_config_updated"`
-	Transformer     TransformerInfo    `json:"transformer"`
-	Meta            map[string]string  `json:"_meta"`
+	RunID               string             `json:"run_id"`
+	RunSerial           string             `json:"run_serial"`
+	Config              DSConfig           `json:"config"`
+	VCSMeta             TransformerVCSMeta `json:"vcs_meta"`
+	DSConfigUpdated     bool               `json:"ds_config_updated"`
+	IsTriggeredByRunner bool               `json:"is_triggered_by_runner"`
+	Transformer         TransformerInfo    `json:"transformer"`
+	Meta                map[string]string  `json:"_meta"`
 }
 
 type SSHMeta struct {
@@ -189,6 +195,59 @@ type CancelCheckRun struct {
 	AnalysisMeta CancelCheckAnalysisMeta `json:"analysis_meta"`
 	RunID        string                  `json:"run_id"`
 	RunSerial    string                  `json:"run_serial"`
+}
+
+// PatcherRun type is the contract of a patching job that is used
+// by the runner to apply and commit the patches of Autofix.
+type PatcherRun struct {
+	RunID     string         `json:"run_id"`
+	RunSerial string         `json:"run_serial"`
+	Keys      Keys           `json:"keys"`
+	VCSMeta   PatcherVCSMeta `json:"patcher_vcs_meta"`
+	PatchMeta PatchMeta      `json:"patch_meta"`
+}
+
+type PatchMeta struct {
+	Patches     []PatchData `json:"patches"`
+	PatchCommit PatchCommit `json:"patch_commit"`
+}
+
+type PatcherVCSMeta struct {
+	Repository      string `json:"repository"`
+	RemoteURL       string `json:"remote_url"`
+	BaseBranch      string `json:"base_branch"`
+	BaseOID         string `json:"base_oid"`
+	CheckoutOID     string `json:"checkout_oid"`
+	CloneSubmodules bool   `json:"clone_submodules"`
+}
+
+type PatchData struct {
+	Filename  string   `json:"filename"`
+	ChangeIDs []string `json:"change_ids"`
+	Action    string   `json:"action"`
+}
+
+type PatchCommit struct {
+	Commit Commit `json:"commit"`
+	Author Author `json:"author"`
+	Remote Remote `json:"remote"`
+}
+
+type Commit struct {
+	Title             string `json:"title"`
+	Message           string `json:"message"`
+	DestinationBranch string `json:"destination_branch"`
+	CommitSHA         string `json:"commit_sha"`
+}
+
+type Author struct {
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+
+type Remote struct {
+	Name string `json:"name"`
+	URL  string `json:"url"`
 }
 
 // Beacon type is the expected structure of a beacon task

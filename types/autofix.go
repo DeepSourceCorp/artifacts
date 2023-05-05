@@ -4,6 +4,7 @@ type Change struct {
 	BeforeHTML string `json:"before_html"`
 	AfterHTML  string `json:"after_html"`
 	Changeset  string `json:"changeset"`
+	Identifier string `json:"identifier"`
 }
 
 type Patch struct {
@@ -69,7 +70,7 @@ type MarvinAutofixConfig struct {
 	AutofixIssues     string `toml:"autofix_issues"`
 }
 
-// Transformers
+// Transformers types.
 type TransformerReport struct {
 	CodeDir      string   `json:"code_directory,omitempty"`
 	ChangedFiles []string `json:"changed_files,omitempty"`
@@ -90,13 +91,22 @@ type TransformerResultCeleryTask struct {
 	Retries int               `json:"retries"`
 }
 
+type TransformerCommitData struct {
+	Branch  string `toml:"branch"`
+	Author  string `toml:"author"`
+	Email   string `toml:"email"`
+	Message string `toml:"message"`
+}
+
 type MarvinTransformerConfig struct {
-	RunID              string   `toml:"runID"`
-	BaseOID            string   `toml:"baseOID"`
-	CheckoutOID        string   `toml:"checkoutOID"`
-	TransformerCommand string   `toml:"transformerCommand"`
-	TransformerTools   []string `toml:"transformerTools"`
-	DSConfigUpdated    bool     `toml:"dsConfigUpdated"`
+	RunID                 string                `toml:"runID"`
+	BaseOID               string                `toml:"baseOID"`
+	CheckoutOID           string                `toml:"checkoutOID"`
+	IsTriggeredByRunner   bool                  `toml:"is_triggered_by_runner"`
+	TransformerCommand    string                `toml:"transformerCommand"`
+	TransformerTools      []string              `toml:"transformerTools"`
+	DSConfigUpdated       bool                  `toml:"dsConfigUpdated"`
+	TransformerCommitMeta TransformerCommitData `toml:"transformer_commit_meta"`
 }
 
 type TransformerConfig struct {
