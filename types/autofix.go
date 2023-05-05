@@ -4,6 +4,7 @@ type Change struct {
 	BeforeHTML string `json:"before_html"`
 	AfterHTML  string `json:"after_html"`
 	Changeset  string `json:"changeset"`
+	Identifier string `json:"identifier"`
 }
 
 type Patch struct {
