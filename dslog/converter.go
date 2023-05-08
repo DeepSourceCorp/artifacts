@@ -17,9 +17,10 @@ func DefaultConverter(loggerAttr []slog.Attr, record *slog.Record) map[string]in
 	log["message"] = record.Message
 
 	recordValues := make(map[string]interface{}, record.NumAttrs())
-	record.Attrs(func(attr slog.Attr) {
+	record.Attrs(func(attr slog.Attr) bool {
 		k, v := attrToValue(attr)
 		recordValues[k] = v
+		return true
 	})
 
 	loggerValues := attrsToValue(loggerAttr)
