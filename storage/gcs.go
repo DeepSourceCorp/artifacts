@@ -62,7 +62,7 @@ func (s *GoogleCloudStorageClient) UploadObjects(bucket string, paths ...string)
 				return
 			}
 
-			obj := s.client.Bucket(bucket).Object(filepath.Base(path))
+			obj := s.client.Bucket(bucket).Object(path)
 			w := obj.NewWriter(context.Background())
 			if _, err := w.Write(file); err != nil {
 				log.Printf("error uploading file %q: %v", path, err)
