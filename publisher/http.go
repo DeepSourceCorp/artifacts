@@ -23,12 +23,14 @@ const (
 type HTTPPublisher struct {
 	URL         string
 	MaskingMode string
+	Token       string
 	HTTPClient  *http.Client
 }
 
 type HTTPOpts struct {
 	URL         string
 	MaskingMode string
+	Token       string
 	Timeout     time.Duration
 }
 
@@ -43,6 +45,7 @@ func NewHTTPPublisher(opts *HTTPOpts) Publisher {
 	return &HTTPPublisher{
 		URL:         opts.URL,
 		MaskingMode: opts.MaskingMode,
+		Token:       opts.Token,
 		HTTPClient: &http.Client{
 			Timeout: opts.Timeout,
 		},
@@ -60,6 +63,11 @@ func (h *HTTPPublisher) Publish(ctx context.Context, payload Payload) error {
 	if err != nil {
 		return err
 	}
+
+	if h.Token != "" {
+		req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", h.Token))
+	}
+
 	res, err := h.HTTPClient.Do(req)
 	if err != nil {
 		return err

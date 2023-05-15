@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 	"time"
 )
@@ -96,6 +97,7 @@ func TestHTTPPublisher_Publish(t *testing.T) {
 	type fields struct {
 		MaskingMode string
 		URL         string
+		Token       string
 		HTTPClient  *http.Client
 	}
 	type args struct {
@@ -116,6 +118,32 @@ func TestHTTPPublisher_Publish(t *testing.T) {
 				HTTPClient:  http.DefaultClient,
 			},
 			server: httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusOK)
+			})),
+			args: args{
+				ctx: context.Background(),
+				payload: &MockPayload{
+					payload: []byte("test"),
+				},
+			},
+			wantErr: false,
+		},
+		{
+			name: "HTTPPublisher with token",
+			fields: fields{
+				MaskingMode: MaskingModeNone,
+				HTTPClient:  http.DefaultClient,
+				Token:       "test-token",
+			},
+			server: httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				token := r.Header.Get("Authorization")
+				parts := strings.Split(token, " ")
+				if len(parts) != 2 {
+					t.Error("HTTPPublisher with token: token is not in the correct format")
+				}
+				if parts[1] != "test-token" {
+					t.Error("HTTPPublisher with token: token is not correct")
+				}
 				w.WriteHeader(http.StatusOK)
 			})),
 			args: args{
@@ -205,6 +233,7 @@ func TestHTTPPublisher_Publish(t *testing.T) {
 			h := &HTTPPublisher{
 				URL:         tt.fields.URL,
 				MaskingMode: tt.fields.MaskingMode,
+				Token:       tt.fields.Token,
 				HTTPClient:  tt.fields.HTTPClient,
 			}
 			if err := h.Publish(tt.args.ctx, tt.args.payload); (err != nil) != tt.wantErr {
