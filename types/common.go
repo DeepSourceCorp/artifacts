@@ -39,9 +39,3 @@ type Status struct {
 	HMessage string `json:"hmessage"`
 	Err      string `json:"err"`
 }
-
-type SourceStoreURLs struct {
-	AnalysisCodeSnippetURL string
-	AutofixPatchURL        string
-	AutofixDiffURL         string
-}
