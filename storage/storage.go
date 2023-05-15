@@ -14,7 +14,7 @@ type StorageClient interface {
 
 func NewStorageClient(ctx context.Context, storageType string, credentials []byte) (StorageClient, error) {
 	if storageType == "gcs" {
-		return NewGoogleCloudStorageClient(ctx, credentials), nil
+		return NewGoogleCloudStorageClient(ctx, credentials)
 	}
 
 	return &GoogleCloudStorageClient{}, fmt.Errorf("Expected storageType to be 'gcs'. Received %s", storageType)

@@ -9,6 +9,7 @@ import (
 
 	"cloud.google.com/go/storage"
 	"google.golang.org/api/iterator"
+	"google.golang.org/api/option"
 )
 
 type GoogleCloudStorageClient struct {
@@ -16,7 +17,7 @@ type GoogleCloudStorageClient struct {
 }
 
 func NewGoogleCloudStorageClient(ctx context.Context, credentialsJSON []byte) (*GoogleCloudStorageClient, error) {
-	client, err := storage.NewClient(ctx, storage.WithCredentialsJSON(credentialsJSON))
+	client, err := storage.NewClient(ctx, option.WithCredentialsJSON(credentialsJSON))
 	if err != nil {
 		return nil, err
 	}
