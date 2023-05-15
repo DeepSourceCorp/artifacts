@@ -23,6 +23,7 @@ const (
 type HTTPPublisher struct {
 	URL         string
 	MaskingMode string
+	Token       string
 	HTTPClient  *http.Client
 }
 
@@ -51,7 +52,7 @@ func NewHTTPPublisher(opts *HTTPOpts) Publisher {
 
 // Publish sends the payload to the configured URL.
 // TODO: Add backoff and retry logic.
-func (h *HTTPPublisher) Publish(ctx context.Context, payload Payload) error {
+func (h *HTTPPublisher) Publish(ctx context.Context, payload Payload, extra *Extra) error {
 	body, err := payload.Bytes()
 	if err != nil {
 		return err
@@ -60,6 +61,13 @@ func (h *HTTPPublisher) Publish(ctx context.Context, payload Payload) error {
 	if err != nil {
 		return err
 	}
+
+	if extra != nil {
+		if extra.Token != "" {
+			req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", extra.Token))
+		}
+	}
+
 	res, err := h.HTTPClient.Do(req)
 	if err != nil {
 		return err

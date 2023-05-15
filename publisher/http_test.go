@@ -207,7 +207,7 @@ func TestHTTPPublisher_Publish(t *testing.T) {
 				MaskingMode: tt.fields.MaskingMode,
 				HTTPClient:  tt.fields.HTTPClient,
 			}
-			if err := h.Publish(tt.args.ctx, tt.args.payload); (err != nil) != tt.wantErr {
+			if err := h.Publish(tt.args.ctx, tt.args.payload, nil); (err != nil) != tt.wantErr {
 				t.Errorf("HTTPPublisher.Publish() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})

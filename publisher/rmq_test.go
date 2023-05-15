@@ -142,7 +142,7 @@ func TestRabbitMQ_Publish(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			r := tt.fields.publisher
-			if err := r.Publish(tt.args.ctx, tt.args.payload); (err != nil) != tt.wantErr {
+			if err := r.Publish(tt.args.ctx, tt.args.payload, nil); (err != nil) != tt.wantErr {
 				t.Errorf("RabbitMQ.Publish() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
