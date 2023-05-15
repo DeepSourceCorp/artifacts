@@ -30,6 +30,7 @@ type HTTPPublisher struct {
 type HTTPOpts struct {
 	URL         string
 	MaskingMode string
+	Token       string
 	Timeout     time.Duration
 }
 
@@ -44,6 +45,7 @@ func NewHTTPPublisher(opts *HTTPOpts) Publisher {
 	return &HTTPPublisher{
 		URL:         opts.URL,
 		MaskingMode: opts.MaskingMode,
+		Token:       opts.Token,
 		HTTPClient: &http.Client{
 			Timeout: opts.Timeout,
 		},
@@ -52,7 +54,7 @@ func NewHTTPPublisher(opts *HTTPOpts) Publisher {
 
 // Publish sends the payload to the configured URL.
 // TODO: Add backoff and retry logic.
-func (h *HTTPPublisher) Publish(ctx context.Context, payload Payload, extra *Extra) error {
+func (h *HTTPPublisher) Publish(ctx context.Context, payload Payload) error {
 	body, err := payload.Bytes()
 	if err != nil {
 		return err
@@ -62,10 +64,8 @@ func (h *HTTPPublisher) Publish(ctx context.Context, payload Payload, extra *Ext
 		return err
 	}
 
-	if extra != nil {
-		if extra.Token != "" {
-			req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", extra.Token))
-		}
+	if h.Token != "" {
+		req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", h.Token))
 	}
 
 	res, err := h.HTTPClient.Do(req)

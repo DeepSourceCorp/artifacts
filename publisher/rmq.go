@@ -60,7 +60,7 @@ func NewRabbitMQPublisher(ctx context.Context, opts *RabbitMQOpts) Publisher {
 	}
 }
 
-func (r *RabbitMQ) Publish(ctx context.Context, payload Payload, extra *Extra) error {
+func (r *RabbitMQ) Publish(ctx context.Context, payload Payload) error {
 	body, err := payload.Bytes()
 	if err != nil {
 		log.Println("error while compressing payload before publishing to RabbitMQ", err)
