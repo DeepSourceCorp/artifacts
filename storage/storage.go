@@ -6,8 +6,8 @@ import (
 )
 
 type StorageClient interface {
-	UploadDir(string, string) error
-	UploadObjects(string, ...string) error
+	UploadDir(string, string, string) error
+	UploadObjects(string, string, ...string) error
 	GetDir(string, string) error
 	GetObjects(string, ...string) error
 }

@@ -25,7 +25,7 @@ func NewGoogleCloudStorageClient(ctx context.Context, credentialsJSON []byte) (*
 	return &GoogleCloudStorageClient{client}, nil
 }
 
-func (s *GoogleCloudStorageClient) UploadDir(bucket, path string) error {
+func (s *GoogleCloudStorageClient) UploadDir(bucket, basePath, path string) error {
 	files, err := ioutil.ReadDir(path)
 	if err != nil {
 		return err
@@ -33,12 +33,12 @@ func (s *GoogleCloudStorageClient) UploadDir(bucket, path string) error {
 
 	for _, file := range files {
 		if file.IsDir() {
-			err = s.UploadDir(bucket, filepath.Join(path, file.Name()))
+			err = s.UploadDir(bucket, basePath, filepath.Join(path, file.Name()))
 			if err != nil {
 				return err
 			}
 		} else {
-			err = s.UploadObjects(bucket, filepath.Join(path, file.Name()))
+			err = s.UploadObjects(bucket, basePath, filepath.Join(path, file.Name()))
 			if err != nil {
 				return err
 			}
@@ -48,7 +48,7 @@ func (s *GoogleCloudStorageClient) UploadDir(bucket, path string) error {
 	return nil
 }
 
-func (s *GoogleCloudStorageClient) UploadObjects(bucket string, paths ...string) error {
+func (s *GoogleCloudStorageClient) UploadObjects(bucket, basePath string, paths ...string) error {
 	var wg sync.WaitGroup
 	wg.Add(len(paths))
 
@@ -62,7 +62,7 @@ func (s *GoogleCloudStorageClient) UploadObjects(bucket string, paths ...string)
 				return
 			}
 
-			obj := s.client.Bucket(bucket).Object(path)
+			obj := s.client.Bucket(bucket).Object(filepath.Join(basePath, filepath.Base(path)))
 			w := obj.NewWriter(context.Background())
 			if _, err := w.Write(file); err != nil {
 				log.Printf("error uploading file %q: %v", path, err)
