@@ -81,6 +81,8 @@ type AnalysisRun struct {
 	DSConfigUpdated bool               `json:"ds_config_updated"`
 	VCSMeta         AnalysisRunVCSMeta `json:"vcs_meta"`
 	Keys            Keys               `json:"keys"`
+	IsIDE           bool               `json:"is_ide"`
+	GitDiff         string             `json:"git_diff"`
 	Checks          []Check            `json:"checks"`
 	Meta            map[string]string  `json:"_meta"`
 }
