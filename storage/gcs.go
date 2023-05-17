@@ -2,6 +2,7 @@ package storage
 
 import (
 	"context"
+	"io"
 	"io/ioutil"
 	"log"
 	"path/filepath"
@@ -128,4 +129,9 @@ func (s *GoogleCloudStorageClient) GetObjects(bucket string, destinationPath str
 	}
 
 	return nil
+}
+
+func (s *GoogleCloudStorageClient) NewReader(ctx context.Context, bucket string, path string) (io.Reader, error) {
+	obj := s.client.Bucket(bucket).Object(path)
+	return obj.NewReader(ctx)
 }
