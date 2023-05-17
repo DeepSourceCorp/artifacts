@@ -204,6 +204,7 @@ type PatcherRun struct {
 	RunSerial string         `json:"run_serial"`
 	Keys      Keys           `json:"keys"`
 	VCSMeta   PatcherVCSMeta `json:"patcher_vcs_meta"`
+	Artifact  Artifact       `json:"artifact"`
 	PatchMeta string         `json:"patch_meta"`
 }
 
