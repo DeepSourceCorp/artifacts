@@ -200,12 +200,14 @@ type CancelCheckRun struct {
 // PatcherRun type is the contract of a patching job that is used
 // by the runner to apply and commit the patches of Autofix.
 type PatcherRun struct {
-	RunID     string         `json:"run_id"`
-	RunSerial string         `json:"run_serial"`
-	Keys      Keys           `json:"keys"`
-	VCSMeta   PatcherVCSMeta `json:"patcher_vcs_meta"`
-	Artifact  Artifact       `json:"artifact"`
-	PatchMeta string         `json:"patch_meta"`
+	RunID                string         `json:"run_id"`
+	RunSerial            string         `json:"run_serial"`
+	Keys                 Keys           `json:"keys"`
+	VCSMeta              PatcherVCSMeta `json:"patcher_vcs_meta"`
+	Artifact             Artifact       `json:"artifacts"`
+	PatchMeta            string         `json:"patch_meta"`
+	SnippetStorageType   string         `json:"snippet_storage_type"`
+	SnippetStorageBucket string         `json:"snippet_storage_bucket"`
 }
 
 type PatchMeta struct {
