@@ -166,7 +166,7 @@ func (g *GitClient) Push() error {
 		RemoteCallbacks: git.RemoteCallbacks{
 			CredentialsCallback: func(url string, username string, allowedTypes git.CredentialType) (*git.Credential, error) {
 				if allowedTypes&(git.CredentialTypeUserpassPlaintext|git.CredentialTypeDefault) != 0 {
-					cred, err := git.NewCredentialUserpassPlaintext("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", "x-oauth-basic")
+					cred, err := git.NewCredentialUserpassPlaintext("auth-token", "x-oauth-basic")
 					if err != nil {
 						return nil, err
 					}
