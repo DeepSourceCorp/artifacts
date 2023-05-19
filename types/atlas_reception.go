@@ -203,8 +203,8 @@ type PatcherRun struct {
 	RunID                string         `json:"run_id"`
 	RunSerial            string         `json:"run_serial"`
 	Keys                 Keys           `json:"keys"`
-	VCSMeta              PatcherVCSMeta `json:"patcher_vcs_meta"`
-	Artifact             Artifact       `json:"artifacts"`
+	VCSMeta              PatcherVCSMeta `json:"vcs_meta"`
+	Artifact             Artifact       `json:"artifact"`
 	PatchMeta            string         `json:"patch_meta"`
 	SnippetStorageType   string         `json:"snippet_storage_type"`
 	SnippetStorageBucket string         `json:"snippet_storage_bucket"`
