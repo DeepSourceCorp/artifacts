@@ -5,6 +5,7 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+	"os"
 	"path/filepath"
 	"sync"
 
@@ -39,7 +40,7 @@ func (s *GoogleCloudStorageClient) UploadDir(bucket, src, dst string) error {
 				return err
 			}
 		} else {
-			err = s.UploadObjects(bucket, filepath.Join(src, file.Name()), filepath.Join(dst, file.Name()))
+			err = s.UploadObject(bucket, filepath.Join(src, file.Name()), filepath.Join(dst, file.Name()))
 			if err != nil {
 				return err
 			}
@@ -47,6 +48,25 @@ func (s *GoogleCloudStorageClient) UploadDir(bucket, src, dst string) error {
 	}
 
 	return nil
+}
+
+func (s *GoogleCloudStorageClient) UploadObject(bucket, src, dst string) (err error) {
+	file, err := os.ReadFile(src)
+	if err != nil {
+		return err
+	}
+
+	obj := s.client.Bucket(bucket).Object(dst)
+	w := obj.NewWriter(context.Background())
+	if _, err = w.Write(file); err != nil {
+		log.Printf("error uploading file %q: %v", dst, err)
+		return
+	}
+	if err = w.Close(); err != nil {
+		log.Printf("error closing writer for file %q: %v", dst, err)
+		return
+	}
+	return
 }
 
 func (s *GoogleCloudStorageClient) UploadObjects(bucket string, paths ...string) error {

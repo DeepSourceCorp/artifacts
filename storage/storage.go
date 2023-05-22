@@ -9,6 +9,7 @@ import (
 type StorageClient interface {
 	UploadDir(string, string, string) error
 	UploadObjects(string, ...string) error
+	UploadObject(string, string, string) error
 	GetDir(string, string) error
 	GetObjects(string, string, ...string) error
 	NewReader(context.Context, string, string) (io.ReadCloser, error)
