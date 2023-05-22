@@ -26,20 +26,20 @@ func NewGoogleCloudStorageClient(ctx context.Context, credentialsJSON []byte) (*
 	return &GoogleCloudStorageClient{client}, nil
 }
 
-func (s *GoogleCloudStorageClient) UploadDir(bucket, path string) error {
-	files, err := ioutil.ReadDir(path)
+func (s *GoogleCloudStorageClient) UploadDir(bucket, src, dst string) error {
+	files, err := ioutil.ReadDir(src)
 	if err != nil {
 		return err
 	}
 
 	for _, file := range files {
 		if file.IsDir() {
-			err = s.UploadDir(bucket, filepath.Join(path, file.Name()))
+			err = s.UploadDir(bucket, filepath.Join(src, file.Name()), filepath.Join(dst, file.Name()))
 			if err != nil {
 				return err
 			}
 		} else {
-			err = s.UploadObjects(bucket, filepath.Join(path, file.Name()))
+			err = s.UploadObjects(bucket, filepath.Join(src, file.Name()), filepath.Join(dst, file.Name()))
 			if err != nil {
 				return err
 			}
