@@ -200,14 +200,17 @@ type CancelCheckRun struct {
 // PatcherRun type is the contract of a patching job that is used
 // by the runner to apply and commit the patches of Autofix.
 type PatcherRun struct {
-	RunID                string         `json:"run_id"`
-	RunSerial            string         `json:"run_serial"`
-	Keys                 Keys           `json:"keys"`
-	VCSMeta              PatcherVCSMeta `json:"vcs_meta"`
-	Artifacts            Artifact       `json:"artifacts"`
-	PatchMeta            string         `json:"patch_meta"`
-	SnippetStorageType   string         `json:"snippet_storage_type"`
-	SnippetStorageBucket string         `json:"snippet_storage_bucket"`
+	RunID     string           `json:"run_id"`
+	RunSerial string           `json:"run_serial"`
+	Keys      Keys             `json:"keys"`
+	VCSMeta   PatcherVCSMeta   `json:"vcs_meta"`
+	Artifacts PatcherArtifacts `json:"artifacts"`
+	PatchMeta string           `json:"patch_meta"`
+}
+
+type PatcherArtifacts struct {
+	Key      string              `json:"key"`
+	PatchIDs map[string][]string `json:"patch_ids"`
 }
 
 type PatchMeta struct {
@@ -216,7 +219,6 @@ type PatchMeta struct {
 }
 
 type PatcherVCSMeta struct {
-	Repository      string `json:"repository"`
 	RemoteURL       string `json:"remote_url"`
 	BaseBranch      string `json:"base_branch"`
 	BaseOID         string `json:"base_oid"`
@@ -225,32 +227,25 @@ type PatcherVCSMeta struct {
 }
 
 type PatchData struct {
-	Filename  string   `json:"filename"`
-	ChangeIDs []string `json:"change_ids"`
-	Action    string   `json:"action"`
+	Filename string   `json:"filename"`
+	PatchIDs []string `json:"patch_ids"`
+	Action   string   `json:"action"`
 }
 
 type PatchCommit struct {
 	Commit Commit `json:"commit"`
 	Author Author `json:"author"`
-	Remote Remote `json:"remote"`
 }
 
 type Commit struct {
 	Title             string `json:"title"`
 	Message           string `json:"message"`
 	DestinationBranch string `json:"destination_branch"`
-	CommitSHA         string `json:"commit_sha"`
 }
 
 type Author struct {
 	Name  string `json:"name"`
 	Email string `json:"email"`
-}
-
-type Remote struct {
-	Name string `json:"name"`
-	URL  string `json:"url"`
 }
 
 // Beacon type is the expected structure of a beacon task
