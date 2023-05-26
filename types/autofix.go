@@ -70,7 +70,7 @@ type MarvinAutofixConfig struct {
 	AutofixIssues     string `toml:"autofix_issues"`
 }
 
-// Transformers types.
+// Transformers
 type TransformerReport struct {
 	CodeDir      string   `json:"code_directory,omitempty"`
 	ChangedFiles []string `json:"changed_files,omitempty"`
