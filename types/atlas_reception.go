@@ -145,8 +145,9 @@ type TransformerRun struct {
 	RunSerial       string             `json:"run_serial"`
 	Config          DSConfig           `json:"config"`
 	VCSMeta         TransformerVCSMeta `json:"vcs_meta"`
-	DSConfigUpdated bool               `json:"ds_config_updated"`
 	Transformer     TransformerInfo    `json:"transformer"`
+	DSConfigUpdated bool               `json:"ds_config_updated"`
+	PatchCommit     PatchCommit        `json:"patch_commit"`
 	Meta            map[string]string  `json:"_meta"`
 }
 
