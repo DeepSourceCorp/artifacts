@@ -91,22 +91,13 @@ type TransformerResultCeleryTask struct {
 	Retries int               `json:"retries"`
 }
 
-type TransformerCommitData struct {
-	Branch  string `toml:"branch"`
-	Author  string `toml:"author"`
-	Email   string `toml:"email"`
-	Message string `toml:"message"`
-}
-
 type MarvinTransformerConfig struct {
-	RunID                 string                `toml:"runID"`
-	BaseOID               string                `toml:"baseOID"`
-	CheckoutOID           string                `toml:"checkoutOID"`
-	IsTriggeredByRunner   bool                  `toml:"is_triggered_by_runner"`
-	TransformerCommand    string                `toml:"transformerCommand"`
-	TransformerTools      []string              `toml:"transformerTools"`
-	DSConfigUpdated       bool                  `toml:"dsConfigUpdated"`
-	TransformerCommitMeta TransformerCommitData `toml:"transformer_commit_meta"`
+	RunID              string   `toml:"runID"`
+	BaseOID            string   `toml:"baseOID"`
+	CheckoutOID        string   `toml:"checkoutOID"`
+	TransformerCommand string   `toml:"transformerCommand"`
+	TransformerTools   []string `toml:"transformerTools"`
+	DSConfigUpdated    bool     `toml:"dsConfigUpdated"`
 }
 
 type TransformerConfig struct {

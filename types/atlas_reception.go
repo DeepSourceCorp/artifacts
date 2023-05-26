@@ -126,11 +126,6 @@ type TransformerVCSMeta struct {
 	BaseOID         string `json:"base_oid"`
 	CheckoutOID     string `json:"checkout_oid"`
 	CloneSubmodules bool   `json:"clone_submodules"`
-
-	// Runner related data to help marvin push Transformer commit.
-	PushBranchName    string `json:"commit_branch"`
-	CommitAuthor      string `json:"commit_author"`
-	CommitAuthorEmail string `json:"commit_author_email"`
 }
 
 type TransformerMeta struct {
@@ -146,14 +141,13 @@ type TransformerInfo struct {
 }
 
 type TransformerRun struct {
-	RunID               string             `json:"run_id"`
-	RunSerial           string             `json:"run_serial"`
-	Config              DSConfig           `json:"config"`
-	VCSMeta             TransformerVCSMeta `json:"vcs_meta"`
-	DSConfigUpdated     bool               `json:"ds_config_updated"`
-	IsTriggeredByRunner bool               `json:"is_triggered_by_runner"`
-	Transformer         TransformerInfo    `json:"transformer"`
-	Meta                map[string]string  `json:"_meta"`
+	RunID           string             `json:"run_id"`
+	RunSerial       string             `json:"run_serial"`
+	Config          DSConfig           `json:"config"`
+	VCSMeta         TransformerVCSMeta `json:"vcs_meta"`
+	DSConfigUpdated bool               `json:"ds_config_updated"`
+	Transformer     TransformerInfo    `json:"transformer"`
+	Meta            map[string]string  `json:"_meta"`
 }
 
 type SSHMeta struct {
