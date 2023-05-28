@@ -3,7 +3,6 @@ package storage
 import (
 	"context"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -28,7 +27,7 @@ func NewGoogleCloudStorageClient(ctx context.Context, credentialsJSON []byte) (*
 }
 
 func (s *GoogleCloudStorageClient) UploadDir(bucket, src, dst string) error {
-	files, err := ioutil.ReadDir(src)
+	files, err := os.ReadDir(src)
 	if err != nil {
 		return err
 	}
@@ -77,7 +76,7 @@ func (s *GoogleCloudStorageClient) UploadObjects(bucket string, paths ...string)
 		go func(path string) {
 			defer wg.Done()
 
-			file, err := ioutil.ReadFile(path)
+			file, err := os.ReadFile(path)
 			if err != nil {
 				log.Printf("error reading file %q: %v", path, err)
 				return
@@ -137,12 +136,12 @@ func (s *GoogleCloudStorageClient) GetObjects(bucket string, destinationPath str
 
 		defer r.Close()
 
-		data, err := ioutil.ReadAll(r)
+		data, err := io.ReadAll(r)
 		if err != nil {
 			return err
 		}
 
-		err = ioutil.WriteFile(destinationPath, data, 0o644)
+		err = os.WriteFile(destinationPath, data, 0o644)
 		if err != nil {
 			return err
 		}
