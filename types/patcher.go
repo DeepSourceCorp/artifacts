@@ -12,6 +12,7 @@ type PatcherResultCeleryTask struct {
 // PatcherResult represents the patcher run result containing the run id and status of the
 // patcher run.
 type PatcherResult struct {
-	RunID  string `json:"run_id"`
-	Status Status `json:"status"`
+	RunID     string `json:"run_id"`
+	CommitSHA string `json:"commit_sha"`
+	Status    Status `json:"status"`
 }
