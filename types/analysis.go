@@ -33,6 +33,7 @@ type Issue struct {
 	IssueText     string        `json:"issue_text"`
 	Location      Location      `json:"location"`
 	ProcessedData ProcessedData `json:"processed_data,omitempty"`
+	Identifier    string        `json:"identifier"`
 }
 
 // Location of an issue

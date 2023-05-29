@@ -145,8 +145,9 @@ type TransformerRun struct {
 	RunSerial       string             `json:"run_serial"`
 	Config          DSConfig           `json:"config"`
 	VCSMeta         TransformerVCSMeta `json:"vcs_meta"`
-	DSConfigUpdated bool               `json:"ds_config_updated"`
 	Transformer     TransformerInfo    `json:"transformer"`
+	DSConfigUpdated bool               `json:"ds_config_updated"`
+	PatchCommit     PatchCommit        `json:"patch_commit"`
 	Meta            map[string]string  `json:"_meta"`
 }
 
@@ -189,6 +190,57 @@ type CancelCheckRun struct {
 	AnalysisMeta CancelCheckAnalysisMeta `json:"analysis_meta"`
 	RunID        string                  `json:"run_id"`
 	RunSerial    string                  `json:"run_serial"`
+}
+
+// PatcherRun type is the contract of a patching job that is used
+// by the runner to apply and commit the patches of Autofix.
+type PatcherRun struct {
+	RunID     string           `json:"run_id"`
+	RunSerial string           `json:"run_serial"`
+	Keys      Keys             `json:"keys"`
+	VCSMeta   PatcherVCSMeta   `json:"vcs_meta"`
+	Artifacts PatcherArtifacts `json:"artifacts"`
+	PatchMeta string           `json:"patch_meta"`
+}
+
+type PatcherArtifacts struct {
+	Key      string              `json:"key"`
+	PatchIDs map[string][]string `json:"patch_ids"`
+}
+
+type PatchMeta struct {
+	Patches     []PatchData `json:"patches"`
+	PatchCommit PatchCommit `json:"patch_commit"`
+}
+
+type PatcherVCSMeta struct {
+	RemoteURL       string `json:"remote_url"`
+	BaseBranch      string `json:"base_branch"`
+	BaseOID         string `json:"base_oid"`
+	CheckoutOID     string `json:"checkout_oid"`
+	CloneSubmodules bool   `json:"clone_submodules"`
+}
+
+type PatchData struct {
+	Filename string   `json:"filename"`
+	PatchIDs []string `json:"patch_ids"`
+	Action   string   `json:"action"`
+}
+
+type PatchCommit struct {
+	Commit Commit `json:"commit"`
+	Author Author `json:"author"`
+}
+
+type Commit struct {
+	Title             string `json:"title"`
+	Message           string `json:"message"`
+	DestinationBranch string `json:"destination_branch"`
+}
+
+type Author struct {
+	Name  string `json:"name"`
+	Email string `json:"email"`
 }
 
 // Beacon type is the expected structure of a beacon task
