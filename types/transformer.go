@@ -2,11 +2,12 @@ package types
 
 // Transformers types.
 type TransformerReport struct {
-	CodeDir      string   `json:"code_directory,omitempty"`
-	ChangedFiles []string `json:"changed_files,omitempty"`
-	CommitSHA    string   `json:"commit_sha"`
-	Errors       []Error  `json:"errors"`
-	Patches      []Patch  `json:"patches"`
+	CodeDir       string   `json:"code_directory,omitempty"`
+	ChangedFiles  []string `json:"changed_files,omitempty"`
+	CommitSHA     string   `json:"commit_sha"`
+	CommitCreated bool     `json:"commit_created"`
+	Errors        []Error  `json:"errors"`
+	Patches       []Patch  `json:"patches"`
 }
 
 type TransformerResult struct {
