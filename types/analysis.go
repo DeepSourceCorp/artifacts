@@ -117,6 +117,7 @@ type MarvinAnalysisConfig struct {
 	DSConfigUpdated            bool             `toml:"dsConfigUpdated"`
 	Processors                 []string         `toml:"processors"`
 	DiffMetaCommits            []DiffMetaCommit `toml:"diffMetaCommits"`
+	IsIDE                      string           `toml:"is_ide"`
 }
 
 //proteus:generate
