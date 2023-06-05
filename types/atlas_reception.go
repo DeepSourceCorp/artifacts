@@ -32,6 +32,7 @@ type AnalysisRunVCSMeta struct {
 	BaseBranch                 string `json:"base_branch"`
 	BaseOID                    string `json:"base_oid"`
 	CheckoutOID                string `json:"checkout_oid"`
+	RepositoryName             string `json:"repository_name"`
 	IsForDefaultAnalysisBranch bool   `json:"is_for_default_analysis_branch"`
 	CloneSubmodules            bool   `json:"clone_submodules"`
 }
@@ -79,6 +80,7 @@ type AnalysisRun struct {
 	RunSerial       string             `json:"run_serial"`
 	Config          DSConfig           `json:"config"`
 	DSConfigUpdated bool               `json:"ds_config_updated"`
+	IsFullRun       bool               `json:"is_full_run"`
 	VCSMeta         AnalysisRunVCSMeta `json:"vcs_meta"`
 	Keys            Keys               `json:"keys"`
 	Checks          []Check            `json:"checks"`
