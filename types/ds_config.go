@@ -31,5 +31,9 @@ type AnalysisConfig struct {
 	TestFiles       []string    `json:"test_files"`
 	TestPatterns    []string    `json:"test_patterns"`
 	AnalyzerMeta    interface{} `json:"analyzer_meta"`
+}
+
+//proteus:generate
+type IDEConfig struct {
 	IsIDE           bool        `json:"is_ide"`
 }
