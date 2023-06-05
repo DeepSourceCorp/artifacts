@@ -16,6 +16,8 @@ import (
 	"github.com/getsentry/sentry-go"
 )
 
+var analysisEventsLogFmt = "%s,%s,%s,%s,%s,%s,%s,%s,%s,%d"
+
 // Returns bearer token that is used to authenticate while
 // interacting with the k8s REST API
 // Utilized by janus and atlas.
@@ -182,4 +184,32 @@ func TriggerDeploymentRestart(auth bool, podName, patchData, baseURL, tokenPath 
 		return err
 	}
 	return nil
+}
+
+// AnalysisEventsLog represents the struct that contains the fields
+// that need to be logged for tracking analysis pipeline's performance.
+type AnalysisEventsLog struct {
+	RunID         string
+	RunSerial     string
+	CheckSequence string
+	Repository    string
+	Shortcode     string
+	CommitSHA     string
+	IsFullRun     string
+}
+
+// logAnalysisEventTimestamp logs the timestamp at various analysis stages.
+func (a *AnalysisEventsLog) LogAnalysisEventTimestamp(runType, stage string) {
+	log.Printf(analysisEventsLogFmt,
+		runType,
+		a.RunID,
+		a.RunSerial,
+		a.CheckSequence,
+		a.Shortcode,
+		a.Repository,
+		a.CommitSHA,
+		a.IsFullRun,
+		stage,
+		time.Now().Unix(),
+	)
 }

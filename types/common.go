@@ -39,15 +39,3 @@ type Status struct {
 	HMessage string `json:"hmessage"`
 	Err      string `json:"err"`
 }
-
-// AnalysisEventsLog represents the struct that contains the fields
-// that need to be logged for tracking analysis pipeline's performance.
-type AnalysisEventsLog struct {
-	RunID         string
-	RunSerial     string
-	CheckSequence string
-	Repository    string
-	Shortcode     string
-	CommitSHA     string
-	IsFullRun     string
-}
