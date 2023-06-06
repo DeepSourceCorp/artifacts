@@ -9,6 +9,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 
@@ -195,7 +196,7 @@ type AnalysisEventsLog struct {
 	Repository    string
 	Shortcode     string
 	CommitSHA     string
-	IsFullRun     string
+	IsFullRun     bool
 }
 
 // logAnalysisEventTimestamp logs the timestamp at various analysis stages.
@@ -208,7 +209,7 @@ func (a *AnalysisEventsLog) LogAnalysisEventTimestamp(runType, stage string) {
 		a.Shortcode,
 		a.Repository,
 		a.CommitSHA,
-		a.IsFullRun,
+		strconv.FormatBool(a.IsFullRun),
 		stage,
 		time.Now().Unix(),
 	)
