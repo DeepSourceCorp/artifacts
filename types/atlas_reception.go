@@ -86,6 +86,17 @@ type AnalysisRun struct {
 }
 
 //proteus:generate
+type IDERun struct {
+	RunID           string             `json:"run_id"`
+	Config          DSConfig           `json:"config"`
+	VCSMeta         AnalysisRunVCSMeta `json:"vcs_meta"`
+	Checks          []Check            `json:"checks"`
+	IsIDE           bool               `json:"is_ide"`
+	GitDiff         string             `json:"git_diff"`
+	Meta            map[string]string  `json:"_meta"`
+}
+	
+//proteus:generate
 type AutofixVCSMeta struct {
 	RemoteURL       string `json:"remote_url"`
 	BaseBranch      string `json:"base_branch"`
