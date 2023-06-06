@@ -116,7 +116,7 @@ type MarvinAnalysisConfig struct {
 	BaseOID                    string           `toml:"baseOID"`
 	CheckoutOID                string           `toml:"checkoutOID"`
 	Repository                 string           `toml:"repository"`
-	IsFullRun                  string           `toml:"is_full_run"`
+	IsFullRun                  bool             `toml:"is_full_run"`
 	IsForDefaultAnalysisBranch bool             `toml:"isForDefaultAnalysisBranch"`
 	DSConfigUpdated            bool             `toml:"dsConfigUpdated"`
 	Processors                 []string         `toml:"processors"`
