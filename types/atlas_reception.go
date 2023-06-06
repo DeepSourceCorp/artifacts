@@ -37,6 +37,16 @@ type AnalysisRunVCSMeta struct {
 }
 
 //proteus:generate
+type IDERunVCSMeta struct {
+	RemoteURL                  string `json:"remote_url"`
+	BaseBranch                 string `json:"base_branch"`
+	BaseOID                    string `json:"base_oid"`
+	CheckoutOID                string `json:"checkout_oid"`
+	CloneSubmodules            bool   `json:"clone_submodules"`
+	GitPatch                   string `json:"git_patch"`
+}
+
+//proteus:generate
 type SSH struct {
 	Public  string `json:"public"`
 	Private string `json:"private"`
@@ -89,7 +99,8 @@ type AnalysisRun struct {
 type IDERun struct {
 	RunID           string             `json:"run_id"`
 	Config          DSConfig           `json:"config"`
-	VCSMeta         AnalysisRunVCSMeta `json:"vcs_meta"`
+	VCSMeta         IDERunVCSMeta      `json:"vcs_meta"`
+	Keys            Keys               `json:"keys"`
 	Checks          []Check            `json:"checks"`
 	IsIDE           bool               `json:"is_ide"`
 	GitDiff         string             `json:"git_diff"`
