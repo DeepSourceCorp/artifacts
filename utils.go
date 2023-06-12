@@ -16,7 +16,7 @@ import (
 	"github.com/getsentry/sentry-go"
 )
 
-var analysisEventsLogFmt = "%s,%s,%s,%s,%s,%s,%s,%s,%s,%d"
+var analysisEventsLogFmt = "%s,%s,%s,%s,%s,%s,%s,%s,%s,%d\n"
 
 // Returns bearer token that is used to authenticate while
 // interacting with the k8s REST API
