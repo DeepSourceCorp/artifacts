@@ -200,7 +200,7 @@ type AnalysisEventsLog struct {
 
 // logAnalysisEventTimestamp logs the timestamp at various analysis stages.
 func (a *AnalysisEventsLog) LogAnalysisEventTimestamp(runType, stage string) {
-	log.Printf(analysisEventsLogFmt,
+	fmt.Printf(analysisEventsLogFmt,
 		runType,
 		a.RunID,
 		a.RunSerial,
