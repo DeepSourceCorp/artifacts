@@ -108,12 +108,15 @@ type CancelCheckResultCeleryTask struct {
 //proteus:generate
 type MarvinAnalysisConfig struct {
 	RunID                      string           `toml:"runID"`
+	RunSerial                  string           `toml:"runSerial"`
 	CheckSeq                   string           `toml:"checkSeq"`
 	AnalyzerShortcode          string           `toml:"analyzerShortcode"`
 	AnalyzerCommand            string           `toml:"analyzerCommand"`
 	AnalyzerType               string           `toml:"analyzerType"`
 	BaseOID                    string           `toml:"baseOID"`
 	CheckoutOID                string           `toml:"checkoutOID"`
+	Repository                 string           `toml:"repository"`
+	IsFullRun                  bool             `toml:"is_full_run"`
 	IsForDefaultAnalysisBranch bool             `toml:"isForDefaultAnalysisBranch"`
 	DSConfigUpdated            bool             `toml:"dsConfigUpdated"`
 	Processors                 []string         `toml:"processors"`
