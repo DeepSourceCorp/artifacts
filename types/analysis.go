@@ -119,6 +119,7 @@ type MarvinAnalysisConfig struct {
 	IsFullRun                  bool             `toml:"is_full_run"`
 	IsForDefaultAnalysisBranch bool             `toml:"isForDefaultAnalysisBranch"`
 	DSConfigUpdated            bool             `toml:"dsConfigUpdated"`
+	IsIDE                      bool             `toml:"is_ide"`
 	Processors                 []string         `toml:"processors"`
 	DiffMetaCommits            []DiffMetaCommit `toml:"diffMetaCommits"`
 }
