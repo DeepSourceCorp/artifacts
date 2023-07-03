@@ -8,14 +8,15 @@ import (
 	"path/filepath"
 
 	"cloud.google.com/go/storage"
+	"google.golang.org/api/option"
 )
 
 type MockCloudStorageClient struct {
 	client *storage.Client
 }
 
-func NewMockCloudStorageClient(ctx context.Context, _ []byte) (*MockCloudStorageClient, error) {
-	client, err := storage.NewClient(ctx)
+func NewMockCloudStorageClient(ctx context.Context, credentialsJSON []byte) (*MockCloudStorageClient, error) {
+	client, err := storage.NewClient(ctx, option.WithCredentialsJSON(credentialsJSON))
 	if err != nil {
 		return nil, err
 	}
