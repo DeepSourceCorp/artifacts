@@ -36,11 +36,13 @@ func (s *GoogleCloudStorageClient) UploadDir(bucket, src, dst string) error {
 		if file.IsDir() {
 			err = s.UploadDir(bucket, filepath.Join(src, file.Name()), filepath.Join(dst, file.Name()))
 			if err != nil {
+				log.Println(err)
 				return err
 			}
 		} else {
 			err = s.UploadObject(bucket, filepath.Join(src, file.Name()), filepath.Join(dst, file.Name()))
 			if err != nil {
+				log.Println(err)
 				return err
 			}
 		}
@@ -52,6 +54,7 @@ func (s *GoogleCloudStorageClient) UploadDir(bucket, src, dst string) error {
 func (s *GoogleCloudStorageClient) UploadObject(bucket, src, dst string) (err error) {
 	file, err := os.ReadFile(src)
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 
