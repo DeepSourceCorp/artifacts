@@ -1,4 +1,4 @@
-module github.com/deepsourcelabs/artifacts
+module github.com/DeepSourceCorp/artifacts
 
 go 1.13
 
