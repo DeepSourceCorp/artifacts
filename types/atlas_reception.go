@@ -35,7 +35,7 @@ type AnalysisRunVCSMeta struct {
 	RepositoryName             string `json:"repository_name"`
 	IsForDefaultAnalysisBranch bool   `json:"is_for_default_analysis_branch"`
 	CloneSubmodules            bool   `json:"clone_submodules"`
-	sparseCheckoutPath         string `json:"sparse_checkout_path"`
+	SparseCheckoutPath         string `json:"sparse_checkout_path"`
 }
 
 //proteus:generate
@@ -46,7 +46,7 @@ type IDERunVCSMeta struct {
 	CheckoutOID     string `json:"checkout_oid"`
 	CloneSubmodules bool   `json:"clone_submodules"`
 	GitPatch        string `json:"git_patch"`
-	sparseCheckoutPath string `json:"sparse_checkout_path"`
+	SparseCheckoutPath string `json:"sparse_checkout_path"`
 }
 
 //proteus:generate
@@ -117,6 +117,7 @@ type AutofixVCSMeta struct {
 	BaseBranch      string `json:"base_branch"`
 	CheckoutOID     string `json:"checkout_oid"`
 	CloneSubmodules bool   `json:"clone_submodules"`
+	SparseCheckoutPath string `json:"sparse_checkout_path"`
 }
 
 //proteus:generate
@@ -152,6 +153,7 @@ type TransformerVCSMeta struct {
 	BaseOID         string `json:"base_oid"`
 	CheckoutOID     string `json:"checkout_oid"`
 	CloneSubmodules bool   `json:"clone_submodules"`
+	SparseCheckoutPath string `json:"sparse_checkout_path"`
 }
 
 type TransformerMeta struct {
