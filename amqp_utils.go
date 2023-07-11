@@ -9,18 +9,18 @@ import (
 )
 
 
+				
 
 
+			
 
-
-
-var ConsumerChannelActive = true
+var ConsumerChannelActive = true			
 
 // SetupRMQConnection sets up the RabbitMQ connection and channels. It also spawns a goroutine that listens for any
 // "Close" events from the broker.
 func SetupRMQConnection(retryFunc func() error, exchangeName, exchangeType string) (*amqp.Connection, *amqp.Channel, error) {
 	// Establish connection with RabbitMQ
-	rmqConn, err := dialRMQ()
+		rmqConn, err := dialRMQ()
 	if err != nil {
 		return nil, nil, err
 	}
