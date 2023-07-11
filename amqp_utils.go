@@ -8,6 +8,12 @@ import (
 	"github.com/streadway/amqp"
 )
 
+
+
+
+
+
+
 var ConsumerChannelActive = true
 
 // SetupRMQConnection sets up the RabbitMQ connection and channels. It also spawns a goroutine that listens for any
