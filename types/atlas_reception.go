@@ -1,9 +1,5 @@
 package types
 
-
-
-
-
 // RepoRun type is the expected structure of a repo run task
 // to be received
 //
