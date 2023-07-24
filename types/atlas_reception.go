@@ -40,12 +40,13 @@ type AnalysisRunVCSMeta struct {
 
 //proteus:generate
 type IDERunVCSMeta struct {
-	RemoteURL       string `json:"remote_url"`
-	BaseBranch      string `json:"base_branch"`
-	BaseOID         string `json:"base_oid"`
-	CheckoutOID     string `json:"checkout_oid"`
-	CloneSubmodules bool   `json:"clone_submodules"`
-	GitPatch        string `json:"git_patch"`
+	RemoteURL          string `json:"remote_url"`
+	BaseBranch         string `json:"base_branch"`
+	BaseOID            string `json:"base_oid"`
+	CheckoutOID        string `json:"checkout_oid"`
+	RepositoryName     string `json:"repository_name"`
+	CloneSubmodules    bool   `json:"clone_submodules"`
+	GitPatch           string `json:"git_patch"`
 	SparseCheckoutPath string `json:"sparse_checkout_path"`
 }
 
@@ -113,10 +114,10 @@ type IDERun struct {
 
 //proteus:generate
 type AutofixVCSMeta struct {
-	RemoteURL       string `json:"remote_url"`
-	BaseBranch      string `json:"base_branch"`
-	CheckoutOID     string `json:"checkout_oid"`
-	CloneSubmodules bool   `json:"clone_submodules"`
+	RemoteURL          string `json:"remote_url"`
+	BaseBranch         string `json:"base_branch"`
+	CheckoutOID        string `json:"checkout_oid"`
+	CloneSubmodules    bool   `json:"clone_submodules"`
 	SparseCheckoutPath string `json:"sparse_checkout_path"`
 }
 
@@ -148,11 +149,11 @@ type AutofixRun struct {
 }
 
 type TransformerVCSMeta struct {
-	RemoteURL       string `json:"remote_url"`
-	BaseBranch      string `json:"base_branch"`
-	BaseOID         string `json:"base_oid"`
-	CheckoutOID     string `json:"checkout_oid"`
-	CloneSubmodules bool   `json:"clone_submodules"`
+	RemoteURL          string `json:"remote_url"`
+	BaseBranch         string `json:"base_branch"`
+	BaseOID            string `json:"base_oid"`
+	CheckoutOID        string `json:"checkout_oid"`
+	CloneSubmodules    bool   `json:"clone_submodules"`
 	SparseCheckoutPath string `json:"sparse_checkout_path"`
 }
 
