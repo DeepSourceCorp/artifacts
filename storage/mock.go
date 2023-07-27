@@ -21,17 +21,17 @@ func NewMockCloudStorageClient(ctx context.Context, credentialsJSON []byte) (*Mo
 	return &MockCloudStorageClient{client}, nil
 }
 
-func (s *MockCloudStorageClient) UploadDir(bucket, src, dst string) error {
+func (*MockCloudStorageClient) UploadDir(_, _, _ string) error {
 	log.Println("not uploading object to upstream since the client is being run in tests")
 	return nil
 }
 
-func (s *MockCloudStorageClient) UploadObject(bucket, src, dst string) (err error) {
+func (*MockCloudStorageClient) UploadObject(_, _, _ string) (err error) {
 	log.Println("not uploading object to upstream since the client is being run in tests")
 	return
 }
 
-func (s *MockCloudStorageClient) GetObjects(bucket string, destinationPath string, paths ...string) error {
+func (*MockCloudStorageClient) GetObjects(_ string, _ string, _ ...string) error {
 	log.Println("mock GetObjects() called, returning successful response")
 	return nil
 }
