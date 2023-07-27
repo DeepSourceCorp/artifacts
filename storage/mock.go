@@ -4,8 +4,6 @@ import (
 	"context"
 	"io"
 	"log"
-	"os"
-	"path/filepath"
 
 	"cloud.google.com/go/storage"
 	"google.golang.org/api/option"
@@ -24,26 +22,7 @@ func NewMockCloudStorageClient(ctx context.Context, credentialsJSON []byte) (*Mo
 }
 
 func (s *MockCloudStorageClient) UploadDir(bucket, src, dst string) error {
-	files, err := os.ReadDir(src)
-	if err != nil {
-		return err
-	}
-
-	for _, file := range files {
-		if file.IsDir() {
-			err = s.UploadDir(bucket, filepath.Join(src, file.Name()), filepath.Join(dst, file.Name()))
-			if err != nil {
-				log.Println(err)
-				return err
-			}
-		} else {
-			err = s.UploadObject(bucket, filepath.Join(src, file.Name()), filepath.Join(dst, file.Name()))
-			if err != nil {
-				log.Println(err)
-				return err
-			}
-		}
-	}
+	log.Println("not uploading object to upstream since the client is being run in tests")
 	return nil
 }
 
@@ -53,26 +32,7 @@ func (s *MockCloudStorageClient) UploadObject(bucket, src, dst string) (err erro
 }
 
 func (s *MockCloudStorageClient) GetObjects(bucket string, destinationPath string, paths ...string) error {
-	for _, path := range paths {
-		obj := s.client.Bucket(bucket).Object(path)
-		r, err := obj.NewReader(context.Background())
-		if err != nil {
-			return err
-		}
-
-		defer r.Close()
-
-		data, err := io.ReadAll(r)
-		if err != nil {
-			return err
-		}
-
-		err = os.WriteFile(destinationPath, data, 0o644)
-		if err != nil {
-			return err
-		}
-	}
-
+	log.Println("mock GetObjects() called, returning successful response")
 	return nil
 }
 
