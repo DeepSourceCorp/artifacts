@@ -61,5 +61,3 @@ func TestS3StorageClient_UploadObject(t *testing.T) {
 		})
 	}
 }
-
-
