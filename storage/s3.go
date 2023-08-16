@@ -23,7 +23,7 @@ type S3StorageClient struct {
 }
 
 // NewS3StorageClient initializes a new S3StorageClient.
-func NewS3StorageClient(ctx context.Context, endpoint, accessKeyID, secretAccessKey string, useSSL bool) (*S3StorageClient, error) {
+func NewS3StorageClient(endpoint, accessKeyID, secretAccessKey string, useSSL bool) (*S3StorageClient, error) {
 	minioClient, err := minio.New(endpoint, &minio.Options{
 		Creds:  credentials.NewStaticV4(accessKeyID, secretAccessKey, ""),
 		Secure: useSSL,
