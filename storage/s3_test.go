@@ -17,7 +17,7 @@ func TestMain(m *testing.M) {
 
 func initS3Client() {
 	if testS3Client == nil {
-		testS3Client, _ = NewS3StorageClient("localhost:9000", "minioadmin", "minioadmin", false)
+		testS3Client, _ = NewS3StorageClient(context.Background(), "localhost:9000", "minioadmin", "minioadmin", false)
 	}
 
 	testS3Client.minioClient.MakeBucket(context.Background(), "testbucket", minio.MakeBucketOptions{})
@@ -61,3 +61,5 @@ func TestS3StorageClient_UploadObject(t *testing.T) {
 		})
 	}
 }
+
+
