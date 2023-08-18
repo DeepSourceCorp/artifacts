@@ -2,6 +2,7 @@ package storage
 
 import (
 	"context"
+	"log"
 	"testing"
 
 	"github.com/minio/minio-go/v7"
@@ -16,10 +17,18 @@ func TestMain(m *testing.M) {
 }
 
 func initS3Client() {
-	if testS3Client == nil {
-		testS3Client, _ = NewS3StorageClient(context.Background(), "localhost:9000", "minioadmin", "minioadmin", false)
-	}
+	var err error
+	sampleCredentials := `endpoint: localhost:9000
+accessKeyID: minioadmin
+secretAccessKey: minioadmin
+useSSL: false`
 
+	if testS3Client == nil {
+		testS3Client, err = NewS3StorageClient(context.Background(), []byte(sampleCredentials))
+		if err != nil {
+			log.Fatalln(err)
+		}
+	}
 	testS3Client.minioClient.MakeBucket(context.Background(), "testbucket", minio.MakeBucketOptions{})
 }
 
