@@ -9,24 +9,31 @@ import (
 
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
+	"gopkg.in/yaml.v2"
 )
 
 type S3ClientOpts struct {
-	Endpoint        string
-	AccessKeyID     string
-	SecretAccessKey string
-	UseSSL          bool
+	Endpoint        string `yaml:"endpoint"`
+	AccessKeyID     string `yaml:"accessKeyID"`
+	SecretAccessKey string `yaml:"secretAccessKey"`
+	UseSSL          bool   `yaml:"useSSL"`
 }
 
 type S3StorageClient struct {
 	minioClient *minio.Client
 }
 
-// NewS3StorageClient initializes a new S3StorageClient.
-func NewS3StorageClient(_ context.Context, endpoint, accessKeyID, secretAccessKey string, useSSL bool) (*S3StorageClient, error) {
-	minioClient, err := minio.New(endpoint, &minio.Options{
-		Creds:  credentials.NewStaticV4(accessKeyID, secretAccessKey, ""),
-		Secure: useSSL,
+var s3StorageCredentials = &S3ClientOpts{}
+
+// NewS3StorageClient unmarshals the S3 storage credentials and then initializes a new S3StorageClient.
+func NewS3StorageClient(_ context.Context, storageCredentials []byte) (*S3StorageClient, error) {
+	if err := yaml.Unmarshal(storageCredentials, s3StorageCredentials); err != nil {
+		return nil, err
+	}
+
+	minioClient, err := minio.New(s3StorageCredentials.Endpoint, &minio.Options{
+		Creds:  credentials.NewStaticV4(s3StorageCredentials.AccessKeyID, s3StorageCredentials.SecretAccessKey, ""),
+		Secure: s3StorageCredentials.UseSSL,
 	})
 	if err != nil {
 		return nil, err
