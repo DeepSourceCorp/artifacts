@@ -18,22 +18,23 @@ func TestMain(m *testing.M) {
 
 func initS3Client() {
 	var err error
-	sampleCredentials := `endpoint: localhost:9000
-accessKeyID: minioadmin
-secretAccessKey: minioadmin
-useSSL: false`
-
+	sampleCredentials := `{
+	"endpoint": "localhost:9000",
+	"accessKeyID": "minioadmin",
+	"secretAccessKey": "minioadmin",
+	"useSSL": false
+}`
 	if testS3Client == nil {
 		testS3Client, err = NewS3StorageClient(context.Background(), []byte(sampleCredentials))
 		if err != nil {
 			log.Fatalln(err)
 		}
 	}
-	testS3Client.minioClient.MakeBucket(context.Background(), "testbucket", minio.MakeBucketOptions{})
+	testS3Client.minioClient.MakeBucket(context.Background(), "test-artifacts-runner", minio.MakeBucketOptions{})
 }
 
 func cleanup() {
-	testS3Client.minioClient.RemoveBucketWithOptions(context.Background(), "testbucket", minio.RemoveBucketOptions{ForceDelete: true})
+	testS3Client.minioClient.RemoveBucketWithOptions(context.Background(), "test-artifacts-runner", minio.RemoveBucketOptions{ForceDelete: true})
 	testS3Client = nil
 }
 
@@ -55,7 +56,7 @@ func TestS3StorageClient_UploadObject(t *testing.T) {
 		{
 			"No error",
 			fields{testS3Client.minioClient},
-			args{"testbucket", "storage.go", "testdata"},
+			args{"test-artifacts-runner", "storage.go", "testdata"},
 			false,
 		},
 	}

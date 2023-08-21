@@ -2,6 +2,7 @@ package storage
 
 import (
 	"context"
+	"encoding/json"
 	"io"
 	"os"
 	"path/filepath"
@@ -9,25 +10,23 @@ import (
 
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
-	"gopkg.in/yaml.v2"
 )
 
 type S3ClientOpts struct {
-	Endpoint        string `yaml:"endpoint"`
-	AccessKeyID     string `yaml:"accessKeyID"`
-	SecretAccessKey string `yaml:"secretAccessKey"`
-	UseSSL          bool   `yaml:"useSSL"`
+	Endpoint        string `json:"endpoint"`
+	AccessKeyID     string `json:"accessKeyID"`
+	SecretAccessKey string `json:"secretAccessKey"`
+	UseSSL          bool   `json:"useSSL"`
 }
 
 type S3StorageClient struct {
 	minioClient *minio.Client
 }
 
-var s3StorageCredentials = &S3ClientOpts{}
-
 // NewS3StorageClient unmarshals the S3 storage credentials and then initializes a new S3StorageClient.
-func NewS3StorageClient(_ context.Context, storageCredentials []byte) (*S3StorageClient, error) {
-	if err := yaml.Unmarshal(storageCredentials, s3StorageCredentials); err != nil {
+func NewS3StorageClient(_ context.Context, credentialsJSON []byte) (*S3StorageClient, error) {
+	s3StorageCredentials := &S3ClientOpts{}
+	if err := json.Unmarshal(credentialsJSON, s3StorageCredentials); err != nil {
 		return nil, err
 	}
 
