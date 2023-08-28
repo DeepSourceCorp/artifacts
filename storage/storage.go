@@ -17,7 +17,7 @@ func NewStorageClient(ctx context.Context, storageType string, credentials []byt
 	switch storageType {
 	case "gcs":
 		return NewGoogleCloudStorageClient(ctx, credentials)
-  case "s3":
+	case "s3":
 		return NewS3StorageClient(ctx, credentials)
 	case "test":
 		return NewMockCloudStorageClient(ctx, credentials)
