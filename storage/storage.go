@@ -17,9 +17,11 @@ func NewStorageClient(ctx context.Context, storageType string, credentials []byt
 	switch storageType {
 	case "gcs":
 		return NewGoogleCloudStorageClient(ctx, credentials)
+  case "s3":
+		return NewS3StorageClient(ctx, credentials)
 	case "test":
 		return NewMockCloudStorageClient(ctx, credentials)
 	default:
-		return &GoogleCloudStorageClient{}, fmt.Errorf("expected storageType to be 'gcs'. Received %s", storageType)
+		return &GoogleCloudStorageClient{}, fmt.Errorf("expected storageType to be 'gcs' or 's3'. Received %s", storageType)
 	}
 }
