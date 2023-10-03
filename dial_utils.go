@@ -2,7 +2,6 @@ package artifacts
 
 import (
 	"log"
-	"os"
 	"time"
 
 	"github.com/streadway/amqp"
@@ -12,13 +11,13 @@ var maxRetryCount = 12
 
 // dialRMQ creates a connection with RabbiMQ and stores the amqp connection
 // object for usage by other functions
-func dialRMQ() (rmqConn *amqp.Connection, err error) {
+func dialRMQ(brokerUrl string) (rmqConn *amqp.Connection, err error) {
 	retryTimeout := 1
 	retryCount := 0
 	var retryDuration time.Duration
 
 	for {
-		if rmqConn, err = amqp.Dial(os.Getenv("BROKER_URL")); err == nil {
+		if rmqConn, err = amqp.Dial(brokerUrl); err == nil {
 			log.Println("Successfully reconnected to RabbitMQ")
 			return rmqConn, nil
 		}
