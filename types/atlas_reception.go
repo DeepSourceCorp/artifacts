@@ -100,6 +100,19 @@ type AnalysisRun struct {
 	Meta            map[string]string  `json:"_meta"`
 }
 
+// CheckRun represents a single check run.
+type CheckRun struct {
+	RunID           string             `json:"run_id"`
+	RunSerial       string             `json:"run_serial"`
+	Config          string             `json:"config"`
+	DSConfigUpdated bool               `json:"ds_config_updated"`
+	IsFullRun       bool               `json:"is_full_run"`
+	VCSMeta         AnalysisRunVCSMeta `json:"vcs_meta"`
+	Keys            Keys               `json:"keys"`
+	Check           Check              `json:"check"`
+	Meta            map[string]string  `json:"_meta"`
+}
+
 //proteus:generate
 type IDERun struct {
 	RunID   string            `json:"run_id"`
