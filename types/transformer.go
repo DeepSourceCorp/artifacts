@@ -37,7 +37,7 @@ type TransformerConfig struct {
 	ExcludePatterns []string `json:"exclude_patterns"`
 	ExcludeFiles    []string `json:"exclude_files"`
 	Files           []string `json:"files"`
-	Tools           []string `json:"tools"`
+	Tools           []TransformerTool `json:"tools"`
 }
 
 type TransformerTool struct {
