@@ -24,13 +24,13 @@ type TransformerResultCeleryTask struct {
 }
 
 type MarvinTransformerConfig struct {
-	RunID              string            `toml:"runID"`
-	BaseOID            string            `toml:"baseOID"`
-	CheckoutOID        string            `toml:"checkoutOID"`
-	TransformerCommand string            `toml:"transformerCommand"`
-	TransformerTools   []string `toml:"transformerTools"`
-	DSConfigUpdated    bool              `toml:"dsConfigUpdated"`
-	PatchCommit        PatchCommit       `toml:"patch_commit"`
+	RunID              string      `toml:"runID"`
+	BaseOID            string      `toml:"baseOID"`
+	CheckoutOID        string      `toml:"checkoutOID"`
+	TransformerCommand string      `toml:"transformerCommand"`
+	TransformerTools   []string    `toml:"transformerTools"`
+	DSConfigUpdated    bool        `toml:"dsConfigUpdated"`
+	PatchCommit        PatchCommit `toml:"patch_commit"`
 }
 
 type TransformerConfig struct {
