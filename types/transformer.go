@@ -28,7 +28,7 @@ type MarvinTransformerConfig struct {
 	BaseOID            string            `toml:"baseOID"`
 	CheckoutOID        string            `toml:"checkoutOID"`
 	TransformerCommand string            `toml:"transformerCommand"`
-	TransformerTools   []TransformerTool `toml:"transformerTools"`
+	TransformerTools   []string `toml:"transformerTools"`
 	DSConfigUpdated    bool              `toml:"dsConfigUpdated"`
 	PatchCommit        PatchCommit       `toml:"patch_commit"`
 }
