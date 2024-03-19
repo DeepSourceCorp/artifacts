@@ -39,3 +39,12 @@ type TransformerConfig struct {
 	Files           []string `json:"files"`
 	Tools           []string `json:"tools"`
 }
+
+type TransformerTool struct {
+	Name string              `json:"name"`
+	Meta TransformerToolMeta `json:"meta"`
+}
+
+type TransformerToolMeta struct {
+	Version string `json:"version"`
+}
