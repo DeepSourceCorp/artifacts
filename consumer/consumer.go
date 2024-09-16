@@ -5,8 +5,8 @@ import (
 	"log"
 
 	"github.com/getsentry/sentry-go"
+	amqp "github.com/rabbitmq/amqp091-go"
 	"github.com/spf13/viper"
-	"github.com/streadway/amqp"
 )
 
 // Single function for all the consumer related operations

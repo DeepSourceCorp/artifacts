@@ -5,7 +5,7 @@ import (
 	"log"
 
 	"github.com/getsentry/sentry-go"
-	"github.com/streadway/amqp"
+	amqp "github.com/rabbitmq/amqp091-go"
 )
 
 var ConsumerChannelActive = true
