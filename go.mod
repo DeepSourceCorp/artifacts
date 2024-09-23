@@ -7,9 +7,8 @@ require (
 	github.com/fsnotify/fsnotify v1.6.0
 	github.com/furdarius/rabbitroutine v0.8.0
 	github.com/getsentry/sentry-go v0.20.0
-	github.com/rabbitmq/amqp091-go v1.8.0
+	github.com/rabbitmq/amqp091-go v1.10.0
 	github.com/spf13/viper v1.9.0
-	github.com/streadway/amqp v1.0.0
 	golang.org/x/exp v0.0.0-20230425010034-47ecfdc1ba53
 	google.golang.org/api v0.114.0
 )
