@@ -129,3 +129,46 @@ type SCAResultCeleryTask struct {
 	KWArgs  SCAResult `json:"kwargs"`
 	Retries int       `json:"retries"`
 }
+
+///////////////////////////////
+// Vulnerability remediation //
+///////////////////////////////
+
+type RemediationResult struct {
+	RunID     string               `json:"run_id"`
+	RunSerial int                  `json:"run_serial"`
+	CheckSeq  int                  `json:"check_seq"`
+	Status    Status               `json:"status"`
+	Target    SCATarget            `json:"target"`
+	Packages  []PackageRemediation `json:"packages"`
+}
+
+type PackageRemediation struct {
+	Package         string                     `json:"package"`
+	Version         string                     `json:"version"`
+	Ecosystem       string                     `json:"ecosystem"`
+	Vulnerabilities []VulnerabilityRemediation `json:"vulnerabilities"`
+}
+
+type VulnerabilityRemediation struct {
+	VulnerabilityID string    `json:"vulnerability_id"`
+	FixPaths        []FixPath `json:"fix_paths"`
+}
+
+type FixPath struct {
+	Updates []PackageUpdate `json:"updates"`
+}
+
+type PackageUpdate struct {
+	Package string `json:"package"`
+	From    string `json:"from"`
+	To      string `json:"to"`
+	Risk    string `json:"risk"`
+}
+
+type RemediationResultCeleryTask struct {
+	ID      string            `json:"id"`
+	Task    string            `json:"task"`
+	KWArgs  RemediationResult `json:"kwargs"`
+	Retries int               `json:"retries"`
+}
