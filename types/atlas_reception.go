@@ -244,11 +244,12 @@ type PatchMeta struct {
 }
 
 type PatcherVCSMeta struct {
-	RemoteURL       string `json:"remote_url"`
-	BaseBranch      string `json:"base_branch"`
-	BaseOID         string `json:"base_oid"`
-	CheckoutOID     string `json:"checkout_oid"`
-	CloneSubmodules bool   `json:"clone_submodules"`
+	RemoteURL          string `json:"remote_url"`
+	BaseBranch         string `json:"base_branch"`
+	BaseOID            string `json:"base_oid"`
+	CheckoutOID        string `json:"checkout_oid"`
+	SparseCheckoutPath string `json:"sparse_checkout_path"`
+	CloneSubmodules    bool   `json:"clone_submodules"`
 }
 
 type PatchData struct {

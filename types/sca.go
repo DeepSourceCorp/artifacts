@@ -5,8 +5,9 @@ package types
 /////////////////////
 
 type SCATarget struct {
-	Lockfile string `json:"lockfile"`
-	Manifest string `json:"manifest"`
+	Lockfile  string `json:"lockfile"`
+	Manifest  string `json:"manifest"`
+	Ecosystem string `json:"ecosystem"`
 }
 
 type SCARun struct {
@@ -29,6 +30,9 @@ type MarvinSCAConfig struct {
 	RunSerial                  int    `toml:"runSerial"`
 	CheckSeq                   int    `toml:"checkSeq"`
 	AnalyzerCommand            string `toml:"analyzerCommand"`
+	AnalysisTaskName           string `toml:"analysisTaskName"`
+	RemediationCommand         string `toml:"remediationCommand"`
+	RemediationTaskName        string `toml:"remediationTaskName"`
 	BaseOID                    string `toml:"baseOID"`
 	CheckoutOID                string `toml:"checkoutOID"`
 	Repository                 string `toml:"repository"`
@@ -54,13 +58,31 @@ type SCATargetResult struct {
 }
 
 type Dependency struct {
-	Name      string `json:"name"`
-	Version   string `json:"version"`
-	IsDirect  bool   `json:"is_direct"`
-	IsDev     bool   `json:"is_dev"`
-	Ecosystem string `json:"ecosystem"`
-	Purl      string `json:"purl"`
+	Name         string       `json:"name"`
+	Version      string       `json:"version"`
+	PackageGroup PackageGroup `json:"package_group"`
+	PackageType  PackageType  `json:"package_type"`
+	Ecosystem    string       `json:"ecosystem"`
+	Purl         string       `json:"purl"`
 }
+
+type PackageGroup string
+
+const (
+	DEV           PackageGroup = "dev"
+	PROD          PackageGroup = "pro"
+	TEST          PackageGroup = "tes"
+	DOCUMENTATION PackageGroup = "doc"
+	UNKNOWN_GROUP PackageGroup = "unk"
+)
+
+type PackageType string
+
+const (
+	DIRECT       PackageType = "dir"
+	TRANSITIVE   PackageType = "tra"
+	UNKNOWN_TYPE PackageType = "unk"
+)
 
 type Vulnerability struct {
 	Id      string   `json:"id"`
@@ -95,14 +117,20 @@ type Vulnerability struct {
 	DatabaseSpecific  map[string]interface{} `json:"database_specific"`
 	EcosystemSpecific map[string]interface{} `json:"ecosystem_specific"`
 
-	IsReachable        bool `json:"is_reachable"`
-	IsFixAvailable     bool `json:"is_fix_available"`
-	IsAutofixAvailable bool `json:"is_autofix_available"`
+	Reachability Reachability `json:"reachability"`
 
 	FixedVersions     []string         `json:"fixed_versions"`
 	IntroducedThrough [][]string       `json:"introduced_through"`
 	ReferenceStack    []ReferenceStack `json:"reference_stack"`
 }
+
+type Reachability string
+
+const (
+	REACHABLE            Reachability = "rea"
+	UNREACHABLE          Reachability = "unr"
+	UNKNOWN_REACHABILITY Reachability = "unk"
+)
 
 type ReferenceStack struct {
 	Filepath string   `json:"filepath"`
@@ -134,16 +162,20 @@ type SCAResultCeleryTask struct {
 // Vulnerability remediation //
 ///////////////////////////////
 
-type RemediationResult struct {
-	RunID     string               `json:"run_id"`
-	RunSerial int                  `json:"run_serial"`
-	CheckSeq  int                  `json:"check_seq"`
-	Status    Status               `json:"status"`
-	Target    SCATarget            `json:"target"`
-	Packages  []PackageRemediation `json:"packages"`
+type SCARemediationResult struct {
+	RunID     string                 `json:"run_id"`
+	RunSerial int                    `json:"run_serial"`
+	CheckSeq  int                    `json:"check_seq"`
+	Status    Status                 `json:"status"`
+	Targets   []SCATargetRemediation `json:"targets"`
 }
 
-type PackageRemediation struct {
+type SCATargetRemediation struct {
+	SCATarget SCATarget               `json:"target"`
+	Packages  []SCAPackageRemediation `json:"packages"`
+}
+
+type SCAPackageRemediation struct {
 	Package         string                     `json:"package"`
 	Version         string                     `json:"version"`
 	Ecosystem       string                     `json:"ecosystem"`
@@ -156,19 +188,67 @@ type VulnerabilityRemediation struct {
 }
 
 type FixPath struct {
-	Updates []PackageUpdate `json:"updates"`
+	Updates []SCAPackageUpdate `json:"updates"`
 }
 
-type PackageUpdate struct {
+type SCAPackageUpdate struct {
 	Package string `json:"package"`
 	From    string `json:"from"`
 	To      string `json:"to"`
-	Risk    string `json:"risk"`
+	Risk    int    `json:"risk"`
 }
 
-type RemediationResultCeleryTask struct {
-	ID      string            `json:"id"`
-	Task    string            `json:"task"`
-	KWArgs  RemediationResult `json:"kwargs"`
-	Retries int               `json:"retries"`
+type SCARemediationResultCeleryTask struct {
+	ID      string               `json:"id"`
+	Task    string               `json:"task"`
+	KWArgs  SCARemediationResult `json:"kwargs"`
+	Retries int                  `json:"retries"`
+}
+
+//////////////
+// Patching //
+//////////////
+
+type SCAPatchRun struct {
+	RunID       string         `json:"run_id"`
+	RunSerial   int            `json:"run_serial"`
+	VCSMeta     PatcherVCSMeta `json:"vcs_meta"`
+	PatchConfig SCAPatchConfig `json:"patch_config"`
+	PatchCommit PatchCommit    `json:"patch_commit"`
+}
+
+type MarvinSCAPatchConfig struct {
+	RunID         string `toml:"runID"`
+	RunSerial     int    `toml:"runSerial"`
+	BaseOID       string `toml:"baseOID"`
+	CheckoutOID   string `toml:"checkoutOID"`
+	PatchCommand  string `toml:"patchCommand"`
+	PatchTaskName string `toml:"patchTaskName"`
+}
+
+type SCAPatchConfig struct {
+	Targets []SCAPatchTarget `json:"targets"`
+}
+
+type SCAPatchTarget struct {
+	SCATarget SCATarget  `json:"sca_target"`
+	Patches   []SCAPatch `json:"patches"`
+}
+
+type SCAPatch struct {
+	Vulnerability Vulnerability      `json:"vulnerability"`
+	Updates       []SCAPackageUpdate `json:"updates"`
+}
+
+type SCAPatchResult struct {
+	RunID     string `json:"run_id"`
+	RunSerial int    `json:"run_serial"`
+	Status    Status `json:"status"`
+}
+
+type PatchResultCeleryTask struct {
+	ID      string         `json:"id"`
+	Task    string         `json:"task"`
+	KWArgs  SCAPatchResult `json:"kwargs"`
+	Retries int            `json:"retries"`
 }
