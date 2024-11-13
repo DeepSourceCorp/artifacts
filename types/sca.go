@@ -110,7 +110,7 @@ type Vulnerability struct {
 
 	Package string `json:"package"`
 	Version string `json:"version"`
-	//TODO: move it to Dependency struct
+	// TODO: move it to Dependency struct
 	Ecosystem string `json:"ecosystem"`
 	Purl      string `json:"purl"`
 
@@ -195,17 +195,18 @@ type SCAPackageUpdate struct {
 	Package string `json:"package"`
 	From    string `json:"from"`
 	To      string `json:"to"`
-	Risk    Risk    `json:"risk"`
+	Risk    Risk   `json:"risk"`
 }
 
 type Risk struct {
 	VersionRiskScore       VersionRiskScore       `json:"version_risk_score"`
 	DependencyRiskScore    DependencyRiskScore    `json:"dependency_risk_score"`
 	CompatibilityRiskScore CompatibilityRiskScore `json:"compatibility_risk_score"`
-	OverallRiskScore       OverallRiskScore      `json:"overall_risk_score"`
+	OverallRiskScore       OverallRiskScore       `json:"overall_risk_score"`
 }
 
 type VersionRiskScore int
+
 const (
 	UNKNOWN_VERSION_RISK_SCORE VersionRiskScore = iota
 	PATCH
@@ -214,6 +215,7 @@ const (
 )
 
 type DependencyRiskScore int
+
 const (
 	UNKNOWN_DEPENDENCY_RISK_SCORE DependencyRiskScore = iota
 	VULNERABLE
@@ -222,6 +224,7 @@ const (
 )
 
 type CompatibilityRiskScore int
+
 const (
 	UNKNOWN_COMPATIBILITY_RISK_SCORE CompatibilityRiskScore = iota
 	MEETS_CONSTRAINT
@@ -229,6 +232,7 @@ const (
 )
 
 type OverallRiskScore int
+
 const (
 	UNKNOWN_OVERALL_RISK_SCORE OverallRiskScore = iota
 	LOW
