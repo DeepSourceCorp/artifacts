@@ -219,9 +219,9 @@ type DependencyRiskScore int
 
 const (
 	UNKNOWN_DEPENDENCY_RISK_SCORE DependencyRiskScore = iota
-	VULNERABLE
-	TRANSITIVE
-	DIRECT
+	VULNERABLE_DEP
+	TRANSITIVE_DEP
+	DIRECT_DEP
 )
 
 type CompatibilityRiskScore int
