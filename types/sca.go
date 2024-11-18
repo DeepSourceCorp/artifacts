@@ -8,6 +8,7 @@ type SCATarget struct {
 	Lockfile  string `json:"lockfile"`
 	Manifest  string `json:"manifest"`
 	Ecosystem string `json:"ecosystem"`
+	PackageManager string `json:"package_manager"`
 }
 
 type SCARun struct {
