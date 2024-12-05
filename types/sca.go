@@ -120,9 +120,10 @@ type Vulnerability struct {
 
 	Reachability Reachability `json:"reachability"`
 
-	FixedVersions     []string         `json:"fixed_versions"`
-	IntroducedThrough [][]string       `json:"introduced_through"`
-	ReferenceStack    []ReferenceStack `json:"reference_stack"`
+	FixedVersions      []string         `json:"fixed_versions"`
+	IntroducedVersions []string         `json:"introduced_versions"`
+	IntroducedThrough  [][]string       `json:"introduced_through"`
+	ReferenceStack     []ReferenceStack `json:"reference_stack"`
 }
 
 type Reachability string
