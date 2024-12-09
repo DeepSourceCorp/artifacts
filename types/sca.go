@@ -11,15 +11,19 @@ type SCATarget struct {
 	PackageManager string `json:"package_manager"`
 }
 
+type SCACheck struct {
+	SCATarget SCATarget `json:"sca_target"`
+	CheckSeq  int       `json:"check_seq"`
+}
+
 type SCARun struct {
-	RunID      string             `json:"run_id"`
-	RunSerial  int                `json:"run_serial"`
-	CheckSeq   int                `json:"check_seq"`
-	IsFullRun  bool               `json:"is_full_run"`
-	VCSMeta    AnalysisRunVCSMeta `json:"vcs_meta"`
-	SCATargets []SCATarget        `json:"sca_targets"`
-	Keys       Keys               `json:"keys"`
-	Meta       map[string]string  `json:"_meta"`
+	RunID     string             `json:"run_id"`
+	RunSerial int                `json:"run_serial"`
+	IsFullRun bool               `json:"is_full_run"`
+	VCSMeta   AnalysisRunVCSMeta `json:"vcs_meta"`
+	SCAChecks []SCACheck         `json:"sca_checks"`
+	Keys      Keys               `json:"keys"`
+	Meta      map[string]string  `json:"_meta"`
 }
 
 /////////////////////
