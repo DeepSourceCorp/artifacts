@@ -124,10 +124,10 @@ type Vulnerability struct {
 
 	Reachability Reachability `json:"reachability"`
 
-	FixedVersions      []string         `json:"fixed_versions"`
-	IntroducedVersions []string         `json:"introduced_versions"`
-	IntroducedThrough  [][]string       `json:"introduced_through"`
-	ReferenceStack     []ReferenceStack `json:"reference_stack"`
+	FixedVersions      []string   `json:"fixed_versions"`
+	IntroducedVersions []string   `json:"introduced_versions"`
+	IntroducedThrough  [][]string `json:"introduced_through"`
+	CallPaths          []CallPath `json:"call_paths"`
 }
 
 type Reachability string
@@ -138,7 +138,11 @@ const (
 	UNKNOWN_REACHABILITY Reachability = "unk"
 )
 
-type ReferenceStack struct {
+type CallPath struct {
+	CallFrames []CallFrame `json:"call_frames"`
+}
+
+type CallFrame struct {
 	Filepath string   `json:"filepath"`
 	Code     string   `json:"code"`
 	Name     string   `json:"name"`
