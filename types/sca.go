@@ -142,11 +142,11 @@ const (
 type Fixability string
 
 const (
-	UNFIXABLE      Reachability = "unf"
-	GENERATING_FIX Reachability = "gen"
-	POSSIBLE_FIX   Reachability = "pos"
-	MANUAL_FIX     Reachability = "man"
-	AUTO_FIX       Reachability = "aut"
+	UNFIXABLE      Fixability = "unf"
+	GENERATING_FIX Fixability = "gen"
+	POSSIBLE_FIX   Fixability = "pos"
+	MANUAL_FIX     Fixability = "man"
+	AUTO_FIX       Fixability = "aut"
 )
 
 type CallPath struct {
