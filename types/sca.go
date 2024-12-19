@@ -123,6 +123,7 @@ type Vulnerability struct {
 	EcosystemSpecific map[string]interface{} `json:"ecosystem_specific"`
 
 	Reachability Reachability `json:"reachability"`
+	Fixability   Fixability   `json:"fixability"`
 
 	FixedVersions      []string   `json:"fixed_versions"`
 	IntroducedVersions []string   `json:"introduced_versions"`
@@ -136,6 +137,16 @@ const (
 	REACHABLE            Reachability = "rea"
 	UNREACHABLE          Reachability = "unr"
 	UNKNOWN_REACHABILITY Reachability = "unk"
+)
+
+type Fixability string
+
+const (
+	UNFIXABLE      Reachability = "unf"
+	GENERATING_FIX Reachability = "gen"
+	POSSIBLE_FIX   Reachability = "pos"
+	MANUAL_FIX     Reachability = "man"
+	AUTO_FIX       Reachability = "aut"
 )
 
 type CallPath struct {
@@ -193,8 +204,9 @@ type SCAPackageRemediation struct {
 }
 
 type VulnerabilityRemediation struct {
-	VulnerabilityID string    `json:"vulnerability_id"`
-	FixPaths        []FixPath `json:"fix_paths"`
+	VulnerabilityID string     `json:"vulnerability_id"`
+	Fixability      Fixability `json:"fixability"`
+	FixPaths        []FixPath  `json:"fix_paths"`
 }
 
 type FixPath struct {
