@@ -40,8 +40,16 @@ type SCARemediationConfig struct {
 }
 
 type SCARemediationTarget struct {
-	SCATarget       SCATarget                `json:"sca_target"`
-	Vulnerabilities map[string]Vulnerability `json:"vulnerabilities"`
+	SCATarget       SCATarget                      `json:"sca_target"`
+	Vulnerabilities map[string][]VulnerabilityInfo `json:"vulnerabilities"`
+}
+
+type VulnerabilityInfo struct {
+	Package            string   `json:"package_name"`
+	Version            string   `json:"package_version"`
+	Ecosystem          string   `json:"ecosystem"`
+	FixedVersions      []string `json:"fixed_versions"`
+	IntroducedVersions []string `json:"introduced_versions"`
 }
 
 /////////////////////
