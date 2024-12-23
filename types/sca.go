@@ -29,6 +29,7 @@ type SCARun struct {
 type SCARemediationRun struct {
 	RunID         string               `json:"run_id"`
 	RunSerial     int                  `json:"run_serial"`
+	CheckSeq      int                  `json:"check_seq"`
 	VCSMeta       AnalysisRunVCSMeta   `json:"vcs_meta"`
 	Keys          Keys                 `json:"keys"`
 	AutofixConfig SCARemediationConfig `json:"autofix_config"`
