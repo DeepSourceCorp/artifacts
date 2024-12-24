@@ -26,6 +26,33 @@ type SCARun struct {
 	Meta      map[string]string  `json:"_meta"`
 }
 
+type SCARemediationRun struct {
+	RunID         string               `json:"run_id"`
+	RunSerial     int                  `json:"run_serial"`
+	CheckSeq      int                  `json:"check_seq"`
+	VCSMeta       AnalysisRunVCSMeta   `json:"vcs_meta"`
+	Keys          Keys                 `json:"keys"`
+	AutofixConfig SCARemediationConfig `json:"autofix_config"`
+	Meta          map[string]string    `json:"_meta"`
+}
+
+type SCARemediationConfig struct {
+	Targets []SCARemediationTarget `json:"targets"`
+}
+
+type SCARemediationTarget struct {
+	SCATarget       SCATarget                      `json:"sca_target"`
+	Vulnerabilities map[string][]VulnerabilityInfo `json:"vulnerabilities"`
+}
+
+type VulnerabilityInfo struct {
+	Package            string   `json:"package_name"`
+	Version            string   `json:"package_version"`
+	Ecosystem          string   `json:"ecosystem"`
+	FixedVersions      []string `json:"fixed_versions"`
+	IntroducedVersions []string `json:"introduced_versions"`
+}
+
 /////////////////////
 // Atlas -> Marvin //
 /////////////////////
@@ -43,6 +70,17 @@ type MarvinSCAConfig struct {
 	Repository                 string `toml:"repository"`
 	IsFullRun                  bool   `toml:"isFullRun"`
 	IsForDefaultAnalysisBranch bool   `toml:"isForDefaultAnalysisBranch"`
+}
+
+type MarvinSCARemediationConfig struct {
+	RunID               string `toml:"runID"`
+	RunSerial           int    `toml:"runSerial"`
+	CheckSeq            int    `toml:"checkSeq"`
+	BaseOID             string `toml:"baseOID"`
+	CheckoutOID         string `toml:"checkoutOID"`
+	RemediationCommand  string `toml:"remediationCommand"`
+	RemediationTaskName string `toml:"remediationTaskName"`
+	Repository          string `toml:"repository"`
 }
 
 //////////////////////////////////
