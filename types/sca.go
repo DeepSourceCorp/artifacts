@@ -253,10 +253,11 @@ type FixPath struct {
 }
 
 type SCAPackageUpdate struct {
-	Package string `json:"package"`
-	From    string `json:"from"`
-	To      string `json:"to"`
-	Risk    Risk   `json:"risk"`
+	Package   string `json:"package"`
+	Ecosystem string `json:"ecosystem"`
+	From      string `json:"from"`
+	To        string `json:"to"`
+	Risk      Risk   `json:"risk"`
 }
 
 type Risk struct {
