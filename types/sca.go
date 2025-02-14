@@ -248,9 +248,9 @@ type VulnerabilityRemediation struct {
 }
 
 type FixPath struct {
-	Updates       []SCAPackageUpdate `json:"updates"`
-	ExtraData     map[string]interface{}        `json:"extra_data"`
-	IsRecommended bool               `json:"is_recommended"`
+	Updates       []SCAPackageUpdate     `json:"updates"`
+	ExtraData     map[string]interface{} `json:"extra_data"`
+	IsRecommended bool                   `json:"is_recommended"`
 }
 
 type SCAPackageUpdate struct {
