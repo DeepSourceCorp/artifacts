@@ -107,6 +107,7 @@ type Dependency struct {
 	PackageType  PackageType  `json:"package_type"`
 	Ecosystem    string       `json:"ecosystem"`
 	Purl         string       `json:"purl"`
+	Licenses     []string     `json:"licenses"`
 }
 
 type PackageGroup string
