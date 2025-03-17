@@ -207,6 +207,21 @@ type SCAResult struct {
 	Targets   []SCATargetResult `json:"targets"`
 }
 
+type LogStreamEntryLevel string
+
+const (
+	INFO    LogStreamEntryLevel = "info"
+	WARNING LogStreamEntryLevel = "warning"
+	ERROR   LogStreamEntryLevel = "error"
+	DEBUG   LogStreamEntryLevel = "debug"
+)
+
+type LogStreamEntry struct {
+	Level     LogStreamEntryLevel `json:"level"`
+	Message   string              `json:"message"`
+	Timestamp string              `json:"timestamp"`
+}
+
 //////////////////////
 // Marvin -> Asgard //
 //////////////////////
