@@ -1,5 +1,7 @@
 package types
 
+import "time"
+
 /////////////////////
 // Asgard -> Atlas //
 /////////////////////
@@ -219,7 +221,7 @@ const (
 type LogStreamEntry struct {
 	Level     LogStreamEntryLevel `json:"level"`
 	Message   string              `json:"message"`
-	Timestamp string              `json:"timestamp"`
+	Timestamp time.Time           `json:"timestamp"`
 }
 
 //////////////////////
