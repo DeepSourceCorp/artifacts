@@ -221,6 +221,7 @@ type LogStreamEntry struct {
 	Level     LogStreamEntryLevel `json:"level"`
 	Message   string              `json:"message"`
 	Timestamp string              `json:"timestamp"`
+	StreamKey string              `json:"stream_key"`
 }
 
 //////////////////////
