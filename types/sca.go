@@ -217,6 +217,7 @@ const (
 )
 
 type LogStreamEntry struct {
+	GUID      string              `json:"guid"`
 	Level     LogStreamEntryLevel `json:"level"`
 	Message   string              `json:"message"`
 	Timestamp string              `json:"timestamp"`
