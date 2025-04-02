@@ -12,6 +12,7 @@ type SCATarget struct {
 }
 
 type SCACheck struct {
+	StreamKey string    `json:"stream_key"`
 	SCATarget SCATarget `json:"sca_target"`
 	CheckSeq  int       `json:"check_seq"`
 }
@@ -221,7 +222,6 @@ type LogStreamEntry struct {
 	Level     LogStreamEntryLevel `json:"level"`
 	Message   string              `json:"message"`
 	Timestamp string              `json:"timestamp"`
-	StreamKey string              `json:"stream_key"`
 }
 
 //////////////////////
