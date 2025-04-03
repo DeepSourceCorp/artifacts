@@ -224,6 +224,16 @@ type LogStreamEntry struct {
 	Timestamp string              `json:"timestamp"`
 }
 
+// LogStreamEvent is the messaged published by Marvin to the
+// log stream processors.
+type LogStreamEvent struct {
+	ID      string                 `json:"id"`
+	Task    string                 `json:"task"`
+	Args    []LogStreamEntry       `json:"args"`
+	KWargs  map[string]interface{} `json:"kwargs"`
+	Retries int                    `json:"retries"`
+}
+
 //////////////////////
 // Marvin -> Asgard //
 //////////////////////
