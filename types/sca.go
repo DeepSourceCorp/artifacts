@@ -99,6 +99,7 @@ type SCATargetResult struct {
 	Dependencies    []Dependency    `json:"dependencies"`
 	ExtraData       interface{}     `json:"extra_data"`
 	Errors          []AnalysisError `json:"errors"`
+	SpdxSbom        string          `json:"spdx_sbom"`
 }
 
 type Dependency struct {
