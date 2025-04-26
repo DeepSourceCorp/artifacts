@@ -35,5 +35,5 @@ type AnalysisConfig struct {
 
 //proteus:generate
 type IDEConfig struct {
-	IsIDE           bool        `json:"is_ide"`
+	IsIDE bool `json:"is_ide"`
 }
