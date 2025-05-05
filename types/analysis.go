@@ -83,7 +83,7 @@ type AnalysisResult struct {
 	RunID    string         `json:"run_id"`
 	Status   Status         `json:"status"`
 	CheckSeq string         `json:"check_seq"`
-	Report   AnalysisReport `json:"report"`
+	ReportObject   string `json:"report_object"`
 }
 
 type AnalysisResultCeleryTask struct {
