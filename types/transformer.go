@@ -11,9 +11,9 @@ type TransformerReport struct {
 }
 
 type TransformerResult struct {
-	RunID        string `json:"run_id"`
-	Status       Status `json:"status"`
-	ReportObject string `json:"report_object"`
+	RunID  string            `json:"run_id"`
+	Status Status            `json:"status"`
+	Report TransformerReport `json:"report"`
 }
 
 type TransformerResultCeleryTask struct {
