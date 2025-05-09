@@ -202,11 +202,12 @@ type CallFrame struct {
 }
 
 type SCAResult struct {
-	RunID     string            `json:"run_id"`
-	RunSerial int               `json:"run_serial"`
-	CheckSeq  int               `json:"check_seq"`
-	Status    Status            `json:"status"`
-	Targets   []SCATargetResult `json:"targets"`
+	RunID        string            `json:"run_id"`
+	RunSerial    int               `json:"run_serial"`
+	CheckSeq     int               `json:"check_seq"`
+	Status       Status            `json:"status"`
+	Targets      []SCATargetResult `json:"targets"`
+	TargetObject string            `json:"target_object"`
 }
 
 type LogStreamEntryLevel string
@@ -251,11 +252,12 @@ type SCAResultCeleryTask struct {
 ///////////////////////////////
 
 type SCARemediationResult struct {
-	RunID     string                 `json:"run_id"`
-	RunSerial int                    `json:"run_serial"`
-	CheckSeq  int                    `json:"check_seq"`
-	Status    Status                 `json:"status"`
-	Targets   []SCATargetRemediation `json:"targets"`
+	RunID        string                 `json:"run_id"`
+	RunSerial    int                    `json:"run_serial"`
+	CheckSeq     int                    `json:"check_seq"`
+	Status       Status                 `json:"status"`
+	Targets      []SCATargetRemediation `json:"targets"`
+	TargetObject string                 `json:"target_object"`
 }
 
 type SCATargetRemediation struct {
