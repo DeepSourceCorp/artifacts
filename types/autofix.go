@@ -34,10 +34,11 @@ type AutofixReport struct {
 }
 
 type AutofixResult struct {
-	RunID    string        `json:"run_id"`
-	Status   Status        `json:"status"`
-	CheckSeq string        `json:"check_seq"`
-	Report   AutofixReport `json:"report"`
+	RunID        string        `json:"run_id"`
+	Status       Status        `json:"status"`
+	CheckSeq     string        `json:"check_seq"`
+	Report       AutofixReport `json:"report"`
+	ReportObject string        `json:"report_object"`
 }
 
 type AutofixResultCeleryTask struct {
