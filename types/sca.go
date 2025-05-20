@@ -378,9 +378,10 @@ type SCAPatch struct {
 }
 
 type SCAPatchResult struct {
-	RunID     string `json:"run_id"`
-	RunSerial int    `json:"run_serial"`
-	Status    Status `json:"status"`
+	RunID         string `json:"run_id"`
+	RunSerial     int    `json:"run_serial"`
+	HeadCommitSHA string `json:"head_commit_sha"`
+	Status        Status `json:"status"`
 }
 
 type PatchResultCeleryTask struct {
