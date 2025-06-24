@@ -8,4 +8,6 @@ type MarvinCacheURLs struct {
 	MetadataUpload   string `toml:"metadataUL"`
 	CacheDownload    string `toml:"cacheDL"`
 	CacheUpload      string `toml:"cacheUL"`
+	PlaintextCacheDownload string `toml:"plaintextCacheDL"`
+	PlaintextCacheUpload string `toml:"plaintextCacheUL"`
 }
