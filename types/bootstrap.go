@@ -10,9 +10,10 @@ type SourceMetadataGCS struct {
 }
 
 type BootstrapConfig struct {
-	RepositoryID   string          `json:"repository_id"`
-	SourceType     string          `json:"source_type"`
-	SourceMetadata json.RawMessage `json:"source_metadata"`
-	CodePath       string          `json:"code_path"`
-	PVCName        string          `json:"pvc_name"`
+	RepositoryID       string          `json:"repository_id"`
+	SourceType         string          `json:"source_type"`
+	SourceMetadata     json.RawMessage `json:"source_metadata"`
+	SnapshotServiceURL string          `json:"snapshot_service_url"`
+	CodePath           string          `json:"code_path"`
+	PVCName            string          `json:"pvc_name"`
 }
