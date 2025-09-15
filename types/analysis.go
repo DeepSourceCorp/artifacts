@@ -29,11 +29,12 @@ type ProcessedData struct {
 }
 
 type Issue struct {
-	IssueCode     string        `json:"issue_code"`
-	IssueText     string        `json:"issue_text"`
-	Location      Location      `json:"location"`
-	ProcessedData ProcessedData `json:"processed_data,omitempty"`
-	Identifier    string        `json:"identifier"`
+	IssueCode     string                 `json:"issue_code"`
+	IssueText     string                 `json:"issue_text"`
+	Location      Location               `json:"location"`
+	ProcessedData ProcessedData          `json:"processed_data,omitempty"`
+	Identifier    string                 `json:"identifier"`
+	Meta          map[string]interface{} `json:"meta"`
 }
 
 // Location of an issue
