@@ -34,6 +34,7 @@ type Issue struct {
 	Location      Location      `json:"location"`
 	ProcessedData ProcessedData `json:"processed_data,omitempty"`
 	Identifier    string        `json:"identifier"`
+	Meta 		  map[string]interface{} `json:"meta"`
 }
 
 // Location of an issue
