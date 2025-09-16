@@ -115,6 +115,16 @@ func (r *RedisLockManager) GetLockTTL(ctx context.Context, key string) (time.Dur
 	return ttl, nil
 }
 
+// ForceRelease forcefully releases a lock by key without needing the Lock object
+// This is useful for cleanup scenarios where you know the lock key but don't have the Lock object
+func (r *RedisLockManager) ForceRelease(ctx context.Context, key string) error {
+	result := r.client.Del(ctx, key)
+	if result.Err() != nil {
+		return fmt.Errorf("failed to force release lock %s: %w", key, result.Err())
+	}
+	return nil
+}
+
 // ListLocks returns all keys matching the given pattern
 func (r *RedisLockManager) ListLocks(ctx context.Context, pattern string) ([]string, error) {
 	result := r.client.Keys(ctx, pattern)
