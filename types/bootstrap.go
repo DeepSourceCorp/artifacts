@@ -16,4 +16,5 @@ type BootstrapConfig struct {
 	SnapshotServiceURL string          `json:"snapshot_service_url"`
 	CodePath           string          `json:"code_path"`
 	PVCName            string          `json:"pvc_name"`
+	PatchRepository    bool            `json:"patch_repository,omitempty"`
 }
