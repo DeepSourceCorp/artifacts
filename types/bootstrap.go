@@ -18,3 +18,12 @@ type BootstrapConfig struct {
 	PVCName            string          `json:"pvc_name"`
 	PatchRepository    bool            `json:"patch_repository,omitempty"`
 }
+
+type BootstrapResult struct {
+	FlowID       string `json:"flow_id"`
+	FlowType     string `json:"flow_type"`
+	RepositoryID string `json:"repository_id"`
+	Status       string `json:"status"`
+	Success      bool   `json:"success"`
+	ErrorMessage string `json:"error_message,omitempty"`
+}
