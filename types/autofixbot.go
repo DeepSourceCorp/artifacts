@@ -17,7 +17,7 @@ type SourceMetadataGit struct {
 	CommitSHA     string `json:"commit_sha,omitempty"`
 }
 
-type BootstrapConfig struct {
+type SessionStartConfig struct {
 	RepositoryID       string          `json:"repository_id"`
 	SourceType         string          `json:"source_type"`
 	Size               string          `json:"size,omitempty"`
@@ -45,11 +45,11 @@ type BootstrapResult struct {
 }
 
 type SessionStartPayload struct {
-	ID              string           `json:"id"`
-	Type            string           `json:"type"`
-	BootstrapConfig *BootstrapConfig `json:"config,omitempty"`
-	BootstrapResult *BootstrapResult `json:"bootstrap_result,omitempty"`
-	EnkiGRPCConfig  *EnkiGRPCConfig  `json:"enki_grpc_config,omitempty"`
+	ID              string              `json:"id"`
+	Type            string              `json:"type"`
+	BootstrapConfig *SessionStartConfig `json:"config,omitempty"`
+	BootstrapResult *BootstrapResult    `json:"bootstrap_result,omitempty"`
+	EnkiGRPCConfig  *EnkiGRPCConfig     `json:"enki_grpc_config,omitempty"`
 }
 
 type AutofixBotAnalysisConfig struct {
