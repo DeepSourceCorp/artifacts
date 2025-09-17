@@ -21,9 +21,9 @@ type SessionStartConfig struct {
 	Size               string          `json:"size,omitempty"`
 	Recreate           bool            `json:"recreate,omitempty"`
 	SourceMetadata     json.RawMessage `json:"source_metadata"`
-	SnapshotServiceURL string          `json:"snapshot_service_url"`
-	CodePath           string          `json:"code_path"`
-	PVCName            string          `json:"pvc_name"`
+	SnapshotServiceURL string          `json:"snapshot_service_url,omitempty"`
+	CodePath           string          `json:"code_path,omitempty"`
+	PVCName            string          `json:"pvc_name,omitempty"`
 	PatchRepository    bool            `json:"patch_repository,omitempty"`
 }
 
