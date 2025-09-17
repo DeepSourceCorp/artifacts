@@ -1,9 +1,7 @@
 package types
 
-type SourceMetadata struct {
-	GCS *SourceMetadataGCS `json:"gcs,omitempty"`
-	Git *SourceMetadataGit `json:"git,omitempty"`
-}
+import "encoding/json"
+
 type SourceMetadataGCS struct {
 	ObjectName          string `json:"object_name,omitempty"`
 	BucketName          string `json:"bucket_name,omitempty"`
@@ -22,7 +20,7 @@ type SessionStartConfig struct {
 	SourceType         string          `json:"source_type"`
 	Size               string          `json:"size,omitempty"`
 	Recreate           bool            `json:"recreate,omitempty"`
-	SourceMetadata     *SourceMetadata `json:"source_metadata"`
+	SourceMetadata     json.RawMessage `json:"source_metadata"`
 	SnapshotServiceURL string          `json:"snapshot_service_url"`
 	CodePath           string          `json:"code_path"`
 	PVCName            string          `json:"pvc_name"`
