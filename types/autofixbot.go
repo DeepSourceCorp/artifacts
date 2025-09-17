@@ -2,12 +2,19 @@ package types
 
 type SourceMetadata struct {
 	GCS *SourceMetadataGCS `json:"gcs,omitempty"`
+	Git *SourceMetadataGit `json:"git,omitempty"`
 }
 type SourceMetadataGCS struct {
 	ObjectName          string `json:"object_name,omitempty"`
 	BucketName          string `json:"bucket_name,omitempty"`
 	UseWorkloadIdentity bool   `json:"use_workload_identity,omitempty"`
 	CredentialsJSON     string `json:"credentials_json,omitempty"`
+}
+
+type SourceMetadataGit struct {
+	RepositoryURL string `json:"repository_url,omitempty"`
+	Branch        string `json:"branch,omitempty"`
+	CommitSHA     string `json:"commit_sha,omitempty"`
 }
 
 type BootstrapConfig struct {
