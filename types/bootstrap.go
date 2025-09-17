@@ -19,11 +19,15 @@ type BootstrapConfig struct {
 	PatchRepository    bool            `json:"patch_repository,omitempty"`
 }
 
-type BootstrapResult struct {
+type EnkiGRPCConfig struct {
 	FlowID       string `json:"flow_id"`
 	FlowType     string `json:"flow_type"`
 	RepositoryID string `json:"repository_id"`
-	Status       string `json:"status"`
-	Success      bool   `json:"success"`
-	ErrorMessage string `json:"error_message,omitempty"`
+}
+
+type BootstrapResult struct {
+	Status         string          `json:"status"`
+	Success        bool            `json:"success"`
+	ErrorMessage   string          `json:"error_message,omitempty"`
+	EnkiGRPCConfig *EnkiGRPCConfig `json:"enki_grpc_config,omitempty"`
 }
