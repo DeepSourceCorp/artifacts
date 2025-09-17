@@ -45,11 +45,11 @@ type BootstrapResult struct {
 }
 
 type SessionStartPayload struct {
-	ID              string              `json:"id"`
-	Type            string              `json:"type"`
-	BootstrapConfig *SessionStartConfig `json:"config,omitempty"`
-	BootstrapResult *BootstrapResult    `json:"bootstrap_result,omitempty"`
-	EnkiGRPCConfig  *EnkiGRPCConfig     `json:"enki_grpc_config,omitempty"`
+	ID                 string              `json:"id"`
+	Type               string              `json:"type"`
+	SessionStartConfig *SessionStartConfig `json:"config,omitempty"`
+	BootstrapResult    *BootstrapResult    `json:"bootstrap_result,omitempty"`
+	EnkiGRPCConfig     *EnkiGRPCConfig     `json:"enki_grpc_config,omitempty"`
 }
 
 type AutofixBotAnalysisConfig struct {
