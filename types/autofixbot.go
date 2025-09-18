@@ -28,14 +28,14 @@ type SessionStartConfig struct {
 }
 
 type EnkiGRPCConfig struct {
-	ID           string `json:"id"`
-	Type         string `json:"type"`
+	FlowID           string `json:"flow_id"`
+	FlowType         string `json:"flow_type"`
 	RepositoryID string `json:"repository_id"`
 }
 
 type BootstrapResult struct {
-	ID           string `json:"id"`
-	Type         string `json:"type"`
+	FlowID           string `json:"flow_id"`
+	FlowType         string `json:"flow_type"`
 	RepositoryID string `json:"repository_id"`
 	Status       string `json:"status"`
 	Success      bool   `json:"success"`
@@ -43,8 +43,8 @@ type BootstrapResult struct {
 }
 
 type SessionStartPayload struct {
-	ID                 string             `json:"id"`
-	Type               string             `json:"type"`
+	FlowID                 string             `json:"flow_id"`
+	FlowType               string             `json:"flow_type"`
 	SessionStartConfig SessionStartConfig `json:"config,omitempty"`
 	BootstrapResult    BootstrapResult    `json:"bootstrap_result,omitempty"`
 	EnkiGRPCConfig     EnkiGRPCConfig     `json:"enki_grpc_config,omitempty"`
@@ -55,8 +55,8 @@ type AutofixBotAnalysisConfig struct {
 }
 
 type AutofixBotAnalysis struct {
-	ID           string `json:"id"`
-	Type         string `json:"type"`
+	FlowID           string `json:"flow_id"`
+	FlowType         string `json:"flow_type"`
 	RepositoryID string `json:"repository_id"`
 	Diff         struct {
 		AnalysisID     string
