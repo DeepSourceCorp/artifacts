@@ -51,7 +51,7 @@ type SessionStartPayload struct {
 }
 
 type AutofixBotAnalysisConfig struct {
-	Languages []string `json:"languages"`
+	Analyzers []string `json:"analyzers"`
 }
 
 type AutofixBotAnalysis struct {
@@ -59,9 +59,9 @@ type AutofixBotAnalysis struct {
 	FlowType     string `json:"flow_type"`
 	RepositoryID string `json:"repository_id"`
 	Diff         struct {
-		AnalysisID     string
-		SourceType     string
-		SourceMetadata json.RawMessage
-	}
+		AnalysisID     string          `json:"analysis_id"`
+		SourceType     string          `json:"source_type"`
+		SourceMetadata json.RawMessage `json:"source_metadata"`
+	} `json:"diff"`
 	Config AutofixBotAnalysisConfig `json:"config"`
 }
