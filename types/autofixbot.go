@@ -63,5 +63,5 @@ type AutofixBotAnalysis struct {
 		SourceType     string          `json:"source_type"`
 		SourceMetadata json.RawMessage `json:"source_metadata"`
 	} `json:"diff"`
-	Config AutofixBotAnalysisConfig `json:"config"`
+	DSConfig DSConfig `json:"ds_config"`
 }
