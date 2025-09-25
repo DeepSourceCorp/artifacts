@@ -65,3 +65,16 @@ type AutofixBotAnalysis struct {
 	} `json:"diff"`
 	DSConfig DSConfig `json:"ds_config"`
 }
+
+type DetachedRunResult struct {
+	FlowID   string `json:"flow_id"`
+	FlowType string `json:"flow_type"`
+	Status   Status `json:"status"`
+}
+
+type DetachedRunResultCeleryTask struct {
+	ID      string            `json:"id"`
+	Task    string            `json:"task"`
+	KWArgs  DetachedRunResult `json:"kwargs"`
+	Retries int               `json:"retries"`
+}
