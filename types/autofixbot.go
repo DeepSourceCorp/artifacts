@@ -54,6 +54,16 @@ type AutofixBotAnalysisConfig struct {
 	Analyzers []string `json:"analyzers"`
 }
 
+type MarvinAnalyzerData struct {
+	ImageName      string `json:"image_name"`
+	ImageTag       string `json:"image_tag"`
+	Command        string `json:"command"`
+	MinCPULimit    string `json:"cpu_limit"`
+	MaxCPULimit    string `json:"max_cpu_limit"`
+	MinMemoryLimit string `json:"min_memory_limit"`
+	MaxMemoryLimit string `json:"max_memory_limit"`
+}
+
 type AutofixBotAnalysis struct {
 	FlowID       string `json:"flow_id"`
 	FlowType     string `json:"flow_type"`
@@ -63,7 +73,8 @@ type AutofixBotAnalysis struct {
 		SourceType     string          `json:"source_type"`
 		SourceMetadata json.RawMessage `json:"source_metadata"`
 	} `json:"diff"`
-	DSConfig DSConfig `json:"ds_config"`
+	DSConfig              DSConfig                      `json:"ds_config"`
+	MarvinAnalyzerDataMap map[string]MarvinAnalyzerData `json:"marvin_analyzer_data_map,omitempty"`
 }
 
 type DetachedRunResult struct {
