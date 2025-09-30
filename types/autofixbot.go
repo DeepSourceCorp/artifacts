@@ -89,3 +89,15 @@ type DetachedRunResultCeleryTask struct {
 	KWArgs  DetachedRunResult `json:"kwargs"`
 	Retries int               `json:"retries"`
 }
+
+type MarvinAutofixBotAnalysisConfig struct {
+	RunID             string   `toml:"runID"`
+	AnalyzerShortcode string   `toml:"analyzerShortcode"`
+	AnalyzerCommand   string   `toml:"analyzerCommand"`
+	AnalyzerType      string   `toml:"analyzerType"`
+	BaseOID           string   `toml:"baseOID"`
+	CheckoutOID       string   `toml:"checkoutOID"`
+	Repository        string   `toml:"repository"`
+	IsFullRun         bool     `toml:"isFullRun"`
+	Processors        []string `toml:"processors"`
+}
