@@ -58,10 +58,10 @@ type MarvinAnalyzerData struct {
 	ImageName      string `json:"image_name"`
 	ImageTag       string `json:"image_tag"`
 	Command        string `json:"command"`
-	MinCPULimit    string `json:"cpu_limit"`
-	MaxCPULimit    string `json:"max_cpu_limit"`
-	MinMemoryLimit string `json:"min_memory_limit"`
-	MaxMemoryLimit string `json:"max_memory_limit"`
+	MinCPULimit    int    `json:"cpu_limit"`
+	MaxCPULimit    int    `json:"max_cpu_limit"`
+	MinMemoryLimit int    `json:"min_memory_limit"`
+	MaxMemoryLimit int    `json:"max_memory_limit"`
 }
 
 type AutofixBotAnalysis struct {
