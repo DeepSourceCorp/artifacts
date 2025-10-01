@@ -20,7 +20,7 @@ const (
 	RabbitMQReconnectAttempts      = 5               // How many times to attempt reconnecting
 	RabbitMQReconnectWait          = 1 * time.Second // How long to wait before another reconnect attempt
 	RabbitMQPublishBaseDelay       = 2 * time.Second // Base duration for every retry
-	RabbitMQMaxPublishRetries uint = 7               // Max number of retries
+	RabbitMQMaxPublishRetries uint = 8               // Max number of retries
 )
 
 type RabbitMQOpts struct {
