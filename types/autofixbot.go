@@ -72,6 +72,10 @@ type AutofixBotAnalysis struct {
 		AnalysisID     string          `json:"analysis_id"`
 		SourceType     string          `json:"source_type"`
 		SourceMetadata json.RawMessage `json:"source_metadata"`
+		CommitRange    struct {
+			FromCommitOID string `json:"from_commit_oid"`
+			ToCommitOID   string `json:"to_commit_oid"`
+		} `json:"commit_range"`
 	} `json:"diff"`
 	DSConfig              DSConfig                      `json:"ds_config"`
 	MarvinAnalyzerDataMap map[string]MarvinAnalyzerData `json:"marvin_analyzer_data_map,omitempty"`
