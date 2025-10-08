@@ -15,6 +15,11 @@ type SourceMetadataGit struct {
 	CommitSHA     string `json:"commit_sha,omitempty"`
 }
 
+type SourceMetadataSignedURL struct {
+	RepositorySignedURL string `json:"repository_signed_url"`
+	DiffSignedURL       string `json:"diff_signed_url"`
+}
+
 type SessionStartConfig struct {
 	RepositoryID       string          `json:"repository_id"`
 	SourceType         string          `json:"source_type"`
@@ -68,16 +73,37 @@ type AutofixBotAnalysis struct {
 	FlowID       string `json:"flow_id"`
 	FlowType     string `json:"flow_type"`
 	RepositoryID string `json:"repository_id"`
-	Diff         struct {
-		AnalysisID     string          `json:"analysis_id"`
-		SourceType     string          `json:"source_type"`
+
+	// Detectors are an optional user supplied list of detectors to use for the
+	// analysis.  Only the enabled detectors will be triggered for the analysis.
+	Detectors []string `json:"detectors"`
+
+	// Languages supplied by the user.  We will still auto detect the languages
+	// however, we will exclude any languages that are not in the user supplied
+	// list.  If not supplied, we will run all the auto detected languages.
+	Languages []string `json:"languages"`
+
+	Diff struct {
+		AnalysisID string `json:"analysis_id"`
+
+		SourceType string `json:"source_type"`
+
+		// TODO(Vishnu): Remove this and replace with concrete types.
 		SourceMetadata json.RawMessage `json:"source_metadata"`
-		CommitRange    struct {
+
+		CommitRange struct {
 			FromCommitOID string `json:"from_commit_oid"`
 			ToCommitOID   string `json:"to_commit_oid"`
 		} `json:"commit_range"`
 	} `json:"diff"`
-	DSConfig              DSConfig                      `json:"ds_config"`
+
+	// These are generated after the config generation step.
+
+	// DSConfig is the generated DSConfig for the analysis.
+	DSConfig DSConfig `json:"ds_config"`
+
+	// MarvinAnalyzerDataMap is generated with the analyzer container
+	// metadata based on the config generation step.
 	MarvinAnalyzerDataMap map[string]MarvinAnalyzerData `json:"marvin_analyzer_data_map,omitempty"`
 }
 
