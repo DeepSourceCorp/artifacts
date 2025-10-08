@@ -69,8 +69,10 @@ type MarvinAnalyzerData struct {
 	MaxMemoryLimit int    `json:"max_memory_limit"`
 }
 
-const FlowTypeTUI = "tui"
-const FlowTypeVendor = "vendor"
+const (
+	FlowTypeTUI    = "tui"
+	FlowTypeVendor = "vendor"
+)
 
 type AutofixBotAnalysis struct {
 	FlowID       string `json:"flow_id"`
