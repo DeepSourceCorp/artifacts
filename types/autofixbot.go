@@ -83,6 +83,8 @@ type AutofixBotAnalysis struct {
 	// analysis.  Only the enabled detectors will be triggered for the analysis.
 	Detectors []string `json:"detectors"`
 
+	Fixers []string `json:"fixers"`
+
 	// Languages supplied by the user.  We will still auto detect the languages
 	// however, we will exclude any languages that are not in the user supplied
 	// list.  If not supplied, we will run all the auto detected languages.
@@ -106,6 +108,10 @@ type AutofixBotAnalysis struct {
 
 	// DSConfig is the generated DSConfig for the analysis.
 	DSConfig DSConfig `json:"ds_config"`
+
+	// ExpectedAnalyzers are the final list of analyzers that will be run
+	// based on the config.
+	ExpectedAnalyzers []string `json:"expected_analyzers"`
 
 	// MarvinAnalyzerDataMap is generated with the analyzer container
 	// metadata based on the config generation step.
