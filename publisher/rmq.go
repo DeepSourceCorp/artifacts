@@ -20,7 +20,7 @@ const (
 	RabbitMQReconnectAttempts      = 5               // How many times to attempt reconnecting
 	RabbitMQReconnectWait          = 1 * time.Second // How long to wait before another reconnect attempt
 	RabbitMQPublishBaseDelay       = 2 * time.Second // Base duration for every retry
-	RabbitMQMaxPublishRetries uint = 5               // Max number of retries
+	RabbitMQMaxPublishRetries uint = 8               // Max number of retries
 )
 
 type RabbitMQOpts struct {
@@ -46,9 +46,19 @@ var rabbitroutinePublisher = rabbitroutine.NewRetryPublisher(
 	rabbitroutine.NewEnsurePublisher(rabbitroutine.NewPool(connector)),
 	rabbitroutine.PublishMaxAttemptsSetup(RabbitMQMaxPublishRetries),
 	rabbitroutine.PublishDelaySetup(
-		rabbitroutine.LinearDelay(RabbitMQPublishBaseDelay), // time.Duration(attempt) * delay
+		// rabbitroutine.LinearDelay(RabbitMQPublishBaseDelay), // time.Duration(attempt) * delay
+		ExponentialDelay(RabbitMQPublishBaseDelay),
 	),
 )
+
+func ExponentialDelay(base time.Duration) rabbitroutine.RetryDelayFunc {
+	return func(attempt uint) time.Duration {
+		if attempt == 0 {
+			return base
+		}
+		return base * (1 << (attempt - 1)) // 2^(attempt-1)
+	}
+}
 
 func NewRabbitMQPublisher(ctx context.Context, opts *RabbitMQOpts) Publisher {
 	go connector.Dial(ctx, opts.URL)
