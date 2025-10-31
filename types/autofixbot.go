@@ -90,6 +90,9 @@ type AutofixBotAnalysis struct {
 	// list.  If not supplied, we will run all the auto detected languages.
 	Languages []string `json:"languages"`
 
+	TestPatterns    []string `json:"test_patterns"`
+	ExcludePatterns []string `json:"exclude_patterns"`
+
 	Diff struct {
 		AnalysisID string `json:"analysis_id"`
 
