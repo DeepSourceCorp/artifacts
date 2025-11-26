@@ -31,6 +31,9 @@ type ProcessedData struct {
 type Issue struct {
 	IssueCode     string                 `json:"issue_code"`
 	IssueText     string                 `json:"issue_text"`
+	IssueSource   string                 `json:"issue_source"`
+	IssueCategory string                 `json:"issue_category"`
+	IssueSeverity string                 `json:"issue_severity"`
 	Location      Location               `json:"location"`
 	ProcessedData ProcessedData          `json:"processed_data,omitempty"`
 	Identifier    string                 `json:"identifier"`
