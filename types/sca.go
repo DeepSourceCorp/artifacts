@@ -84,13 +84,20 @@ type MarvinSCARemediationConfig struct {
 	Repository          string `toml:"repository"`
 }
 
-//////////////////////////////////
+// ////////////////////////////////
 // Marvin -> Analyzer -> Marvin //
-//////////////////////////////////
+// ////////////////////////////////
+type DependencyChange struct {
+	Package string    `json:"package"`
+	Version string    `json:"version"`
+	Target  SCATarget `json:"sca_target"`
+}
 
 type SCAConfig struct {
-	SCATargets []SCATarget `json:"sca_targets"`
-	Files      []string    `json:"files"`
+	SCATargets           []SCATarget        `json:"sca_targets"`
+	Files                []string           `json:"files"`
+	DependenciesModified []DependencyChange `json:"dependencies_modified"`
+	TargetsModified      []SCATarget        `json:"targets_modified"`
 }
 
 type SCATargetResult struct {
