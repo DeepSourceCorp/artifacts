@@ -116,6 +116,10 @@ type AutofixBotAnalysis struct {
 	// based on the config.
 	ExpectedAnalyzers []string `json:"expected_analyzers"`
 
+	// ExpectedTargets are the final list of SCA targets that will be run
+	// based on the config.
+	ExpectedTargets []SCATarget `json:"expected_targets"`
+
 	// MarvinAnalyzerDataMap is generated with the analyzer container
 	// metadata based on the config generation step.
 	MarvinAnalyzerDataMap map[string]MarvinAnalyzerData `json:"marvin_analyzer_data_map,omitempty"`
