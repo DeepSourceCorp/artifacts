@@ -75,6 +75,11 @@ const (
 )
 
 type AutofixBotAnalysis struct {
+	// Set by the config gen engine to denote whether the config has been passed through config gen.
+	// This ensures that we do not retry config gen if the number of analyzers and targets detected
+	// are zero.
+	IsGenerated bool `json:"is_generated"`
+
 	FlowID       string `json:"flow_id"`
 	FlowType     string `json:"flow_type"`
 	RepositoryID string `json:"repository_id"`
