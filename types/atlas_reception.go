@@ -82,6 +82,7 @@ type Check struct {
 	AnalyzerMeta    AnalyzerMeta     `json:"analyzer_meta"`
 	Processors      []string         `json:"processors"`
 	DiffMetaCommits []DiffMetaCommit `json:"diff_meta_commits"`
+	AIIssuesURL     string           `json:"ai_issues_url"` // Previous AI issues for deduplication.
 }
 
 type DiffMetaCommit struct {
