@@ -67,12 +67,12 @@ type AnalysisError struct {
 type CommitDiffMeta map[string]DiffMeta
 
 type FileMeta struct {
-	IfAll       bool                      `json:"if_all"`
-	Deleted     []string                  `json:"deleted"`
-	Renamed     []string                  `json:"renamed"`
-	Modified    []string                  `json:"modified"`
-	Added       []string                  `json:"added"`
-	DiffMeta    map[string]DiffMeta       `json:"diff_meta,omitempty"`
+	IfAll          bool                      `json:"if_all"`
+	Deleted        []string                  `json:"deleted"`
+	Renamed        []string                  `json:"renamed"`
+	Modified       []string                  `json:"modified"`
+	Added          []string                  `json:"added"`
+	DiffMeta       map[string]DiffMeta       `json:"diff_meta,omitempty"`
 	PRDiffMeta     map[string]CommitDiffMeta `json:"pr_diff_meta,omitempty"`
 	BranchDiffMeta map[string]CommitDiffMeta `json:"branch_diff_meta,omitempty"`
 }
