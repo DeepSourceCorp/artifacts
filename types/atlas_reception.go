@@ -32,6 +32,7 @@ type AnalysisRunVCSMeta struct {
 	BaseBranch                 string `json:"base_branch"`
 	BaseOID                    string `json:"base_oid"`
 	CheckoutOID                string `json:"checkout_oid"`
+	PreviousCheckoutOID        string `json:"previous_checkout_oid"`
 	RepositoryName             string `json:"repository_name"`
 	IsForDefaultAnalysisBranch bool   `json:"is_for_default_analysis_branch"`
 	CloneSubmodules            bool   `json:"clone_submodules"`
