@@ -28,14 +28,15 @@ type Artifact struct {
 //
 //proteus:generate
 type AnalysisRunVCSMeta struct {
-	RemoteURL                  string `json:"remote_url"`
-	BaseBranch                 string `json:"base_branch"`
-	BaseOID                    string `json:"base_oid"`
-	CheckoutOID                string `json:"checkout_oid"`
-	RepositoryName             string `json:"repository_name"`
-	IsForDefaultAnalysisBranch bool   `json:"is_for_default_analysis_branch"`
-	CloneSubmodules            bool   `json:"clone_submodules"`
-	SparseCheckoutPath         string `json:"sparse_checkout_path"`
+	RemoteURL                     string `json:"remote_url"`
+	BaseBranch                    string `json:"base_branch"`
+	BaseOID                       string `json:"base_oid"`
+	CheckoutOID                   string `json:"checkout_oid"`
+	RepositoryName                string `json:"repository_name"`
+	IsForDefaultAnalysisBranch    bool   `json:"is_for_default_analysis_branch"`
+	CloneSubmodules               bool   `json:"clone_submodules"`
+	SparseCheckoutPath            string `json:"sparse_checkout_path"`
+	PreviousCompletedRunCommitOID string `json:"previous_completed_run_commit_oid"` // Previous completed run commit OID.
 }
 
 //proteus:generate
@@ -77,12 +78,12 @@ type AnalyzerMeta struct {
 
 //proteus:generate
 type Check struct {
-	CheckSeq        string           `json:"check_seq"`
-	Artifacts       []Artifact       `json:"artifacts"`
-	AnalyzerMeta    AnalyzerMeta     `json:"analyzer_meta"`
-	Processors      []string         `json:"processors"`
-	DiffMetaCommits []DiffMetaCommit `json:"diff_meta_commits"`
-	AIIssuesURL     string           `json:"ai_issues_url"` // Previous AI issues for deduplication.
+	CheckSeq            string           `json:"check_seq"`
+	Artifacts           []Artifact       `json:"artifacts"`
+	AnalyzerMeta        AnalyzerMeta     `json:"analyzer_meta"`
+	Processors          []string         `json:"processors"`
+	DiffMetaCommits     []DiffMetaCommit `json:"diff_meta_commits"`
+	ExistingAIIssuesURL string           `json:"existing_ai_issues_url"` // Previous AI issues for deduplication.
 }
 
 type DiffMetaCommit struct {
@@ -92,15 +93,16 @@ type DiffMetaCommit struct {
 
 //proteus:generate
 type AnalysisRun struct {
-	RunID           string             `json:"run_id"`
-	RunSerial       string             `json:"run_serial"`
-	Config          DSConfig           `json:"config"`
-	DSConfigUpdated bool               `json:"ds_config_updated"`
-	IsFullRun       bool               `json:"is_full_run"`
-	VCSMeta         AnalysisRunVCSMeta `json:"vcs_meta"`
-	Keys            Keys               `json:"keys"`
-	Checks          []Check            `json:"checks"`
-	Meta            map[string]string  `json:"_meta"`
+	RunID                         string             `json:"run_id"`
+	RunSerial                     string             `json:"run_serial"`
+	Config                        DSConfig           `json:"config"`
+	DSConfigUpdated               bool               `json:"ds_config_updated"`
+	IsFullRun                     bool               `json:"is_full_run"`
+	VCSMeta                       AnalysisRunVCSMeta `json:"vcs_meta"`
+	Keys                          Keys               `json:"keys"`
+	Checks                        []Check            `json:"checks"`
+	Meta                          map[string]string  `json:"_meta"`
+	PreviousCompletedRunCommitOID string             `json:"previous_completed_run_commit_oid"` // Previous completed run commit OID for deduplication.
 }
 
 //proteus:generate

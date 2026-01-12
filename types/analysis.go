@@ -78,12 +78,13 @@ type FileMeta struct {
 }
 
 type AnalysisReport struct {
-	Issues    []Issue         `json:"issues"`
-	Metrics   []Metric        `json:"metrics,omitempty"`
-	IsPassed  bool            `json:"is_passed"`
-	Errors    []AnalysisError `json:"errors"`
-	FileMeta  FileMeta        `json:"file_meta"`
-	ExtraData interface{}     `json:"extra_data"`
+	Issues         []Issue         `json:"issues"`
+	Metrics        []Metric        `json:"metrics,omitempty"`
+	IsPassed       bool            `json:"is_passed"`
+	Errors         []AnalysisError `json:"errors"`
+	FileMeta       FileMeta        `json:"file_meta"`
+	BranchFileMeta FileMeta        `json:"branch_file_meta"` // File meta for the branch against previous completed run commit.
+	ExtraData      interface{}     `json:"extra_data"`
 }
 
 type AnalysisResult struct {
