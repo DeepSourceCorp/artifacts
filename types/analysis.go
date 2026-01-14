@@ -34,6 +34,7 @@ type Issue struct {
 	IssueSource   string                 `json:"issue_source"`
 	IssueCategory string                 `json:"issue_category"`
 	IssueSeverity string                 `json:"issue_severity"`
+	IssueDimension string 				 `json:"issue_dimension"`
 	Location      Location               `json:"location"`
 	Explanation   string                 `json:"explanation,omitempty"`
 	AiText        string                 `json:"ai_text,omitempty"`
