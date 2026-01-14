@@ -20,6 +20,7 @@ type DSConfig struct {
 	ExcludePatterns []string      `toml:"exclude_patterns,omitempty" json:"exclude_patterns,omitempty"`
 	TestPatterns    []string      `toml:"test_patterns,omitempty" json:"test_patterns,omitempty"`
 	Analyzers       []Analyzer    `toml:"analyzers,omitempty" json:"analyzers,omitempty"`
+	SCATargets      []SCATarget   `toml:"sca_targets,omitempty" json:"sca_targets,omitempty"`
 	Transformers    []Transformer `toml:"transformers,omitempty" json:"transformers,omitempty"`
 }
 
@@ -35,5 +36,5 @@ type AnalysisConfig struct {
 
 //proteus:generate
 type IDEConfig struct {
-	IsIDE           bool        `json:"is_ide"`
+	IsIDE bool `json:"is_ide"`
 }
