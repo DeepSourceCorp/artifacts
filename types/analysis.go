@@ -79,12 +79,13 @@ type FileMeta struct {
 }
 
 type AnalysisReport struct {
-	Issues    []Issue         `json:"issues"`
-	Metrics   []Metric        `json:"metrics,omitempty"`
-	IsPassed  bool            `json:"is_passed"`
-	Errors    []AnalysisError `json:"errors"`
-	FileMeta  FileMeta        `json:"file_meta"`
-	ExtraData interface{}     `json:"extra_data"`
+	Issues         []Issue         `json:"issues"`
+	Metrics        []Metric        `json:"metrics,omitempty"`
+	IsPassed       bool            `json:"is_passed"`
+	Errors         []AnalysisError `json:"errors"`
+	FileMeta       FileMeta        `json:"file_meta"`
+	BranchFileMeta FileMeta        `json:"branch_file_meta"` // File meta for the branch against previous completed run commit.
+	ExtraData      interface{}     `json:"extra_data"`
 }
 
 type AnalysisResult struct {
@@ -116,20 +117,21 @@ type CancelCheckResultCeleryTask struct {
 
 //proteus:generate
 type MarvinAnalysisConfig struct {
-	RunID                      string           `toml:"runID"`
-	RunSerial                  string           `toml:"runSerial"`
-	CheckSeq                   string           `toml:"checkSeq"`
-	AnalyzerShortcode          string           `toml:"analyzerShortcode"`
-	AnalyzerCommand            string           `toml:"analyzerCommand"`
-	AnalyzerType               string           `toml:"analyzerType"`
-	BaseOID                    string           `toml:"baseOID"`
-	CheckoutOID                string           `toml:"checkoutOID"`
-	Repository                 string           `toml:"repository"`
-	IsFullRun                  bool             `toml:"is_full_run"`
-	IsForDefaultAnalysisBranch bool             `toml:"isForDefaultAnalysisBranch"`
-	DSConfigUpdated            bool             `toml:"dsConfigUpdated"`
-	Processors                 []string         `toml:"processors"`
-	DiffMetaCommits            []DiffMetaCommit `toml:"diffMetaCommits"`
+	RunID                         string           `toml:"runID"`
+	RunSerial                     string           `toml:"runSerial"`
+	CheckSeq                      string           `toml:"checkSeq"`
+	AnalyzerShortcode             string           `toml:"analyzerShortcode"`
+	AnalyzerCommand               string           `toml:"analyzerCommand"`
+	AnalyzerType                  string           `toml:"analyzerType"`
+	BaseOID                       string           `toml:"baseOID"`
+	CheckoutOID                   string           `toml:"checkoutOID"`
+	Repository                    string           `toml:"repository"`
+	IsFullRun                     bool             `toml:"is_full_run"`
+	IsForDefaultAnalysisBranch    bool             `toml:"isForDefaultAnalysisBranch"`
+	DSConfigUpdated               bool             `toml:"dsConfigUpdated"`
+	Processors                    []string         `toml:"processors"`
+	DiffMetaCommits               []DiffMetaCommit `toml:"diffMetaCommits"`
+	PreviousCompletedRunCommitOID string           `toml:"previousCompletedRunCommitOID"`
 }
 
 //proteus:generate
