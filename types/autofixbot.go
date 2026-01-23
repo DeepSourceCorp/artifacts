@@ -75,6 +75,11 @@ const (
 )
 
 type AutofixBotAnalysis struct {
+	// Set by the config gen engine to denote whether the config has been passed through config gen.
+	// This ensures that we do not retry config gen if the number of analyzers and targets detected
+	// are zero.
+	IsGenerated bool `json:"is_generated"`
+
 	FlowID       string `json:"flow_id"`
 	FlowType     string `json:"flow_type"`
 	RepositoryID string `json:"repository_id"`
@@ -115,6 +120,10 @@ type AutofixBotAnalysis struct {
 	// ExpectedAnalyzers are the final list of analyzers that will be run
 	// based on the config.
 	ExpectedAnalyzers []string `json:"expected_analyzers"`
+
+	// ExpectedTargets are the final list of SCA targets that will be run
+	// based on the config.
+	ExpectedTargets []SCATarget `json:"expected_targets"`
 
 	// MarvinAnalyzerDataMap is generated with the analyzer container
 	// metadata based on the config generation step.
