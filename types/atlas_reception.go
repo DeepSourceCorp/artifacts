@@ -287,12 +287,12 @@ type BeaconRun struct {
 	RepositoryID int64  `json:"repository_id"`
 }
 
-type GenerateConfigRun struct {
+type ConfigGenerationRun struct {
 	RunID   string                `json:"run_id"`
-	VCSMeta GenerateConfigVCSMeta `json:"vcs_meta"`
+	VCSMeta ConfigGenerationVCSMeta `json:"vcs_meta"`
 }
 
-type GenerateConfigVCSMeta struct {
+type ConfigGenerationVCSMeta struct {
 	RepositoryName     string `json:"repository_name"`
 	RemoteURL          string `json:"remote_url"`
 	BaseBranch         string `json:"base_branch"`
