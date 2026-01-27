@@ -35,8 +35,17 @@ type MarvinTransformerConfig struct {
 }
 
 type TransformerConfig struct {
-	ExcludePatterns []string `json:"exclude_patterns"`
-	ExcludeFiles    []string `json:"exclude_files"`
-	Files           []string `json:"files"`
-	Tools           []string `json:"tools"`
+	ExcludePatterns []string          `json:"exclude_patterns"`
+	ExcludeFiles    []string          `json:"exclude_files"`
+	Files           []string          `json:"files"`
+	Tools           []TransformerTool `json:"tools"`
+}
+
+type TransformerTool struct {
+	Name string              `json:"name"`
+	Meta TransformerToolMeta `json:"meta"`
+}
+
+type TransformerToolMeta struct {
+	Version string `json:"version"`
 }
