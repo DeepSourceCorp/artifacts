@@ -286,3 +286,18 @@ type BeaconRun struct {
 	RunID        string `json:"run_id"`
 	RepositoryID int64  `json:"repository_id"`
 }
+
+type ConfigGenerationRun struct {
+	RunID   string                  `json:"run_id"`
+	VCSMeta ConfigGenerationVCSMeta `json:"vcs_meta"`
+}
+
+type ConfigGenerationVCSMeta struct {
+	RepositoryName     string `json:"repository_name"`
+	RemoteURL          string `json:"remote_url"`
+	BaseBranch         string `json:"base_branch"`
+	BaseOID            string `json:"base_oid"`
+	CheckoutOID        string `json:"checkout_oid"`
+	SparseCheckoutPath string `json:"sparse_checkout_path"`
+	CloneSubmodules    bool   `json:"clone_submodules"`
+}
