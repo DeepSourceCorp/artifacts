@@ -36,6 +36,7 @@ type Issue struct {
 	IssueSeverity  string                 `json:"issue_severity"`
 	IssueDimension string                 `json:"issue_dimension"`
 	Location       Location               `json:"location"`
+	ShortExplanation string 			`json:"short_explanation,omitempty"`
 	Explanation    string                 `json:"explanation,omitempty"`
 	AiText         string                 `json:"ai_text,omitempty"`
 	ProcessedData  ProcessedData          `json:"processed_data,omitempty"`
