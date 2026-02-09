@@ -29,19 +29,19 @@ type ProcessedData struct {
 }
 
 type Issue struct {
-	IssueCode      string                 `json:"issue_code"`
-	IssueText      string                 `json:"issue_text"`
-	IssueSource    string                 `json:"issue_source"`
-	IssueCategory  string                 `json:"issue_category"`
-	IssueSeverity  string                 `json:"issue_severity"`
-	IssueDimension string                 `json:"issue_dimension"`
-	Location       Location               `json:"location"`
-	ShortExplanation string 			`json:"short_explanation,omitempty"`
-	Explanation    string                 `json:"explanation,omitempty"`
-	AiText         string                 `json:"ai_text,omitempty"`
-	ProcessedData  ProcessedData          `json:"processed_data,omitempty"`
-	Identifier     string                 `json:"identifier"`
-	Meta           map[string]interface{} `json:"meta"`
+	IssueCode        string                 `json:"issue_code"`
+	IssueText        string                 `json:"issue_text"`
+	IssueSource      string                 `json:"issue_source"`
+	IssueCategory    string                 `json:"issue_category"`
+	IssueSeverity    string                 `json:"issue_severity"`
+	IssueDimension   string                 `json:"issue_dimension"`
+	Location         Location               `json:"location"`
+	ShortExplanation string                 `json:"short_explanation,omitempty"`
+	Explanation      string                 `json:"explanation,omitempty"`
+	AiText           string                 `json:"ai_text,omitempty"`
+	ProcessedData    ProcessedData          `json:"processed_data,omitempty"`
+	Identifier       string                 `json:"identifier"`
+	Meta             map[string]interface{} `json:"meta"`
 }
 
 // Location of an issue
