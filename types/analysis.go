@@ -39,7 +39,7 @@ type Issue struct {
 	ShortExplanation string                 `json:"short_explanation,omitempty"`
 	Explanation      string                 `json:"explanation,omitempty"`
 	AiText           string                 `json:"ai_text,omitempty"`
-	FixPatches		 []string 				`json:"fix_patches,omitempty"`
+	FixPatches       []string               `json:"fix_patches,omitempty"`
 	FixTitle         string                 `json:"fix_title,omitempty"`
 	FixExplanation   string                 `json:"fix_explanation,omitempty"`
 	AiText           string                 `json:"ai_text,omitempty"`
