@@ -42,6 +42,7 @@ type Issue struct {
 	FixPatches       []string               `json:"fix_patches,omitempty"`
 	FixTitle         string                 `json:"fix_title,omitempty"`
 	FixExplanation   string                 `json:"fix_explanation,omitempty"`
+	FixReplacementText   string                 `json:"fix_replacement_text,omitempty"`
 	ProcessedData    ProcessedData          `json:"processed_data,omitempty"`
 	Identifier       string                 `json:"identifier"`
 	Meta             map[string]interface{} `json:"meta"`
