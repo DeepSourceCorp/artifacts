@@ -29,23 +29,23 @@ type ProcessedData struct {
 }
 
 type Issue struct {
-	IssueCode          string                 `json:"issue_code"`
-	IssueText          string                 `json:"issue_text"`
-	IssueSource        string                 `json:"issue_source"`
-	IssueCategory      string                 `json:"issue_category"`
-	IssueSeverity      string                 `json:"issue_severity"`
-	IssueDimension     string                 `json:"issue_dimension"`
-	Location           Location               `json:"location"`
-	ShortExplanation   string                 `json:"short_explanation,omitempty"`
-	Explanation        string                 `json:"explanation,omitempty"`
-	AiText             string                 `json:"ai_text,omitempty"`
-	FixPatches         []string               `json:"fix_patches,omitempty"`
-	FixTitle           string                 `json:"fix_title,omitempty"`
-	FixExplanation     string                 `json:"fix_explanation,omitempty"`
+	IssueCode           string                 `json:"issue_code"`
+	IssueText           string                 `json:"issue_text"`
+	IssueSource         string                 `json:"issue_source"`
+	IssueCategory       string                 `json:"issue_category"`
+	IssueSeverity       string                 `json:"issue_severity"`
+	IssueDimension      string                 `json:"issue_dimension"`
+	Location            Location               `json:"location"`
+	ShortExplanation    string                 `json:"short_explanation,omitempty"`
+	Explanation         string                 `json:"explanation,omitempty"`
+	AiText              string                 `json:"ai_text,omitempty"`
+	FixPatches          []string               `json:"fix_patches,omitempty"`
+	FixTitle            string                 `json:"fix_title,omitempty"`
+	FixExplanation      string                 `json:"fix_explanation,omitempty"`
 	FixReplacementTexts []string               `json:"fix_replacement_texts,omitempty"`
-	ProcessedData      ProcessedData          `json:"processed_data,omitempty"`
-	Identifier         string                 `json:"identifier"`
-	Meta               map[string]interface{} `json:"meta"`
+	ProcessedData       ProcessedData          `json:"processed_data,omitempty"`
+	Identifier          string                 `json:"identifier"`
+	Meta                map[string]interface{} `json:"meta"`
 }
 
 // Location of an issue
