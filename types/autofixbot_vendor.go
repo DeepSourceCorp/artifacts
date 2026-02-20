@@ -48,11 +48,11 @@ type VendorAnalysisRunFix struct {
 
 // VendorAnalysisRunDetectionResult aggregates all detection findings for a run.
 type VendorAnalysisRunDetectionResult struct {
-	Object                   string         `json:"object"`
+	Object                   string                   `json:"object"`
 	Issues                   []VendorAnalysisRunIssue `json:"issues"`
-	IssuesDetectedByCategory map[string]int `json:"issues_detected_by_category"`
-	IssuesDetectedByLanguage map[string]int `json:"issues_detected_by_language"`
-	IssuesDetectedCount      int            `json:"issues_detected_count"`
+	IssuesDetectedByCategory map[string]int           `json:"issues_detected_by_category"`
+	IssuesDetectedByLanguage map[string]int           `json:"issues_detected_by_language"`
+	IssuesDetectedCount      int                      `json:"issues_detected_count"`
 }
 
 // VendorAnalysisRunFixResult aggregates all fixes produced for a run.
