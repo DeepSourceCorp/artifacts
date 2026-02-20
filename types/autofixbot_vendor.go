@@ -73,11 +73,17 @@ type VendorAnalysisRunResult struct {
 	FixResult       VendorAnalysisRunFixResult       `json:"fix_result"`
 }
 
+// VendorAnalysisRunResultKWArgs is the kwargs payload of the Celery task envelope.
+type VendorAnalysisRunResultKWArgs struct {
+	AnalysisID string                  `json:"analysis_id"`
+	Data       VendorAnalysisRunResult `json:"data"`
+}
+
 // VendorAnalysisRunResultCeleryTask is the Celery task envelope used to deliver a
 // VendorAnalysisRunResult back to asgard via RabbitMQ.
 type VendorAnalysisRunResultCeleryTask struct {
-	ID      string                  `json:"id"`
-	Task    string                  `json:"task"`
-	KWArgs  VendorAnalysisRunResult `json:"kwargs"`
-	Retries int                     `json:"retries"`
+	ID      string                        `json:"id"`
+	Task    string                        `json:"task"`
+	KWArgs  VendorAnalysisRunResultKWArgs `json:"kwargs"`
+	Retries int                           `json:"retries"`
 }
