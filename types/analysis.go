@@ -90,7 +90,7 @@ type AnalysisReport struct {
 	Errors         []AnalysisError `json:"errors"`
 	FileMeta       FileMeta        `json:"file_meta"`
 	BranchFileMeta FileMeta        `json:"branch_file_meta"` // File meta for the branch against previous completed run commit.
-	AIOverview     string          `json:"ai_overview"
+	AIOverview     string          `json:"ai_overview"`
 	ExtraData      interface{}     `json:"extra_data"`
 }
 
