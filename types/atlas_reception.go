@@ -37,6 +37,7 @@ type AnalysisRunVCSMeta struct {
 	CloneSubmodules               bool   `json:"clone_submodules"`
 	SparseCheckoutPath            string `json:"sparse_checkout_path"`
 	PreviousCompletedRunCommitOID string `json:"previous_completed_run_commit_oid"` // Previous completed run commit OID.
+	BranchName                    string `json:"branch_name,omitempty"`             // Source/PR branch name.
 }
 
 //proteus:generate
