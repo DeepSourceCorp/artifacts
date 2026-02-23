@@ -79,11 +79,11 @@ type AnalyzerMeta struct {
 
 //proteus:generate
 type Check struct {
-	CheckSeq            string           `json:"check_seq"`
-	Artifacts           []Artifact       `json:"artifacts"`
-	AnalyzerMeta        AnalyzerMeta     `json:"analyzer_meta"`
-	Processors          []string         `json:"processors"`
-	DiffMetaCommits     []DiffMetaCommit `json:"diff_meta_commits"`
+	CheckSeq           string           `json:"check_seq"`
+	Artifacts          []Artifact       `json:"artifacts"`
+	AnalyzerMeta       AnalyzerMeta     `json:"analyzer_meta"`
+	Processors         []string         `json:"processors"`
+	DiffMetaCommits    []DiffMetaCommit `json:"diff_meta_commits"`
 	AnalysisContextURL string           `json:"analysis_context_url"` // Previous analysis context (PR metadata + issues) for deduplication.
 }
 
