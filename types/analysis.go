@@ -83,6 +83,7 @@ type FileMeta struct {
 	FileLineCounts map[string]int            `json:"file_line_counts,omitempty"`
 }
 
+
 type AnalysisReport struct {
 	Issues         []Issue         `json:"issues"`
 	Metrics        []Metric        `json:"metrics,omitempty"`
@@ -91,6 +92,7 @@ type AnalysisReport struct {
 	FileMeta       FileMeta        `json:"file_meta"`
 	BranchFileMeta FileMeta        `json:"branch_file_meta"` // File meta for the branch against previous completed run commit.
 	AIOverview     string          `json:"ai_overview"`
+	DiffSummaries  map[string]string `json:"diff_summaries`
 	ExtraData      interface{}     `json:"extra_data"`
 }
 
