@@ -2,7 +2,7 @@ package types
 
 // AIAutofixIssueResult represents autofix patches for a single issue, linked by UUID.
 type AIAutofixIssueResult struct {
-	IssueID           string   `json:"issue_id"`
+	IssueID             string   `json:"issue_id"`
 	FixPatches          []string `json:"fix_patches,omitempty"`
 	FixTitle            string   `json:"fix_title,omitempty"`
 	FixExplanation      string   `json:"fix_explanation,omitempty"`
