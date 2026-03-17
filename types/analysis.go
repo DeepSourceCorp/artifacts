@@ -29,6 +29,7 @@ type ProcessedData struct {
 }
 
 type Issue struct {
+	IssueID             string                 `json:"issue_id"`
 	IssueCode           string                 `json:"issue_code"`
 	IssueText           string                 `json:"issue_text"`
 	IssueSource         string                 `json:"issue_source"`
