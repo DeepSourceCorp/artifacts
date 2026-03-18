@@ -104,6 +104,7 @@ type AnalysisRun struct {
 	Checks                        []Check            `json:"checks"`
 	Meta                          map[string]string  `json:"_meta"`
 	PreviousCompletedRunCommitOID string             `json:"previous_completed_run_commit_oid"` // Previous completed run commit OID for deduplication.
+	RepoID                        int64              `json:"repo_id"`                           // Repository database ID, used by Enki to query/ingest memories.
 }
 
 //proteus:generate

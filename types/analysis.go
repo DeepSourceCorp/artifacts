@@ -140,6 +140,7 @@ type MarvinAnalysisConfig struct {
 	Processors                    []string         `toml:"processors"`
 	DiffMetaCommits               []DiffMetaCommit `toml:"diffMetaCommits"`
 	PreviousCompletedRunCommitOID string           `toml:"previousCompletedRunCommitOID"`
+	RepoID                        int64            `toml:"repoID"` // Repository database ID, used by Enki to query/ingest memories.
 }
 
 //proteus:generate
