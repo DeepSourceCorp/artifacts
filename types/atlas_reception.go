@@ -74,8 +74,7 @@ type AnalyzerMeta struct {
 	MemoryLimit  string `json:"memory_limit"`
 	CacheVersion int    `json:"cache_version"`
 	Trigger      string `json:"trigger,omitempty"`
-	IsAIEnabled                    bool   `json:"is_ai_enabled"`
-	IsCommitSuggestionsEnabled     bool   `json:"is_commit_suggestions_enabled"`
+	IsAIEnabled  bool   `json:"is_ai_enabled"`
 }
 
 //proteus:generate
@@ -85,7 +84,8 @@ type Check struct {
 	AnalyzerMeta       AnalyzerMeta     `json:"analyzer_meta"`
 	Processors         []string         `json:"processors"`
 	DiffMetaCommits    []DiffMetaCommit `json:"diff_meta_commits"`
-	AnalysisContextURL string           `json:"analysis_context_url"` // Previous analysis context (PR metadata + issues) for deduplication.
+	AnalysisContextURL             string           `json:"analysis_context_url"` // Previous analysis context (PR metadata + issues) for deduplication.
+	IsCommitSuggestionsEnabled     bool             `json:"is_commit_suggestions_enabled"`
 }
 
 type DiffMetaCommit struct {
