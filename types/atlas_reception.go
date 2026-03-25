@@ -74,7 +74,8 @@ type AnalyzerMeta struct {
 	MemoryLimit  string `json:"memory_limit"`
 	CacheVersion int    `json:"cache_version"`
 	Trigger      string `json:"trigger,omitempty"`
-	IsAIEnabled  bool   `json:"is_ai_enabled"`
+	IsAIEnabled                    bool   `json:"is_ai_enabled"`
+	IsCommitSuggestionsEnabled     bool   `json:"is_commit_suggestions_enabled"`
 }
 
 //proteus:generate
