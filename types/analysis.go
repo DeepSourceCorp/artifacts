@@ -91,7 +91,7 @@ type AnalysisReport struct {
 	FileMeta       FileMeta          `json:"file_meta"`
 	BranchFileMeta FileMeta          `json:"branch_file_meta"` // File meta for the branch against previous completed run commit.
 	AIOverview     string            `json:"ai_overview"`
-	DiffSummaries  map[string]string `json:"diff_summaries"`
+	DiffSummaries  map[string]string `json:"diff_summaries,omitempty"`
 	ExtraData      interface{}       `json:"extra_data"`
 }
 
