@@ -110,7 +110,7 @@ type Dependency struct {
 	Ecosystem    string       `json:"ecosystem"`
 	Purl         string       `json:"purl"`
 	Licenses     []string     `json:"licenses"`
-	IsPinned	 *bool		  `json:"is_pinned,omitempty"`
+	IsPinned     *bool        `json:"is_pinned,omitempty"`
 }
 
 type PackageGroup string
