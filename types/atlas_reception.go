@@ -36,8 +36,9 @@ type AnalysisRunVCSMeta struct {
 	IsForDefaultAnalysisBranch    bool   `json:"is_for_default_analysis_branch"`
 	CloneSubmodules               bool   `json:"clone_submodules"`
 	SparseCheckoutPath            string `json:"sparse_checkout_path"`
-	PreviousCompletedRunCommitOID string `json:"previous_completed_run_commit_oid"` // Previous completed run commit OID.
-	BranchName                    string `json:"branch_name,omitempty"`             // Source/PR branch name.
+	PreviousCompletedRunCommitOID   string `json:"previous_completed_run_commit_oid"`    // Previous completed run commit OID.
+	PreviousCompletedAIRunCommitOID string `json:"previous_completed_ai_run_commit_oid"` // Previous completed AI review run commit OID.
+	BranchName                      string `json:"branch_name,omitempty"`                // Source/PR branch name.
 }
 
 //proteus:generate
