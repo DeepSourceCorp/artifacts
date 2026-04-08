@@ -106,6 +106,7 @@ type AnalysisRun struct {
 	Meta                          map[string]string  `json:"_meta"`
 	PreviousCompletedRunCommitOID string             `json:"previous_completed_run_commit_oid"` // Previous completed run commit OID for deduplication.
 	RepoID                        int64              `json:"repo_id"`
+	InternalToken                 string             `json:"internal_token"`
 }
 
 //proteus:generate
