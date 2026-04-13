@@ -292,8 +292,9 @@ type BeaconRun struct {
 }
 
 type ConfigGenerationRun struct {
-	RunID   string                  `json:"run_id"`
-	VCSMeta ConfigGenerationVCSMeta `json:"vcs_meta"`
+	RunID         string                  `json:"run_id"`
+	InternalToken string                  `json:"internal_token"`
+	VCSMeta       ConfigGenerationVCSMeta `json:"vcs_meta"`
 }
 
 type ConfigGenerationVCSMeta struct {
