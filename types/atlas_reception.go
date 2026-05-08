@@ -66,16 +66,17 @@ type Keys struct {
 
 //proteus:generate
 type AnalyzerMeta struct {
-	Shortcode    string `json:"name"`
-	ImagePath    string `json:"image_path"`
-	AnalyzerType string `json:"analyzer_type"`
-	Command      string `json:"command"`
-	Version      string `json:"version"`
-	CPULimit     string `json:"cpu_limit"`
-	MemoryLimit  string `json:"memory_limit"`
-	CacheVersion int    `json:"cache_version"`
-	Trigger      string `json:"trigger,omitempty"`
-	IsAIEnabled  bool   `json:"is_ai_enabled"`
+	Shortcode        string `json:"name"`
+	ImagePath        string `json:"image_path"`
+	AnalyzerType     string `json:"analyzer_type"`
+	Command          string `json:"command"`
+	Version          string `json:"version"`
+	CPULimit         string `json:"cpu_limit"`
+	MemoryLimit      string `json:"memory_limit"`
+	CacheVersion     int    `json:"cache_version"`
+	Trigger          string `json:"trigger,omitempty"`
+	IsAIEnabled      bool   `json:"is_ai_enabled"`
+	IsAIOnlyAnalyzer bool   `json:"is_ai_only_analyzer"`
 }
 
 //proteus:generate
